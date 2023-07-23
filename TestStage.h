@@ -1,15 +1,15 @@
 #pragma once
 #include "Engine/GameObject.h"
-
-//テストシーンを管理するクラス
-class TestScene : public GameObject
+class TestStage	: public GameObject
 {
+private:
+	int hModel_;
 public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
 	/// <param name="parent">親オブジェクト</param>
-	TestScene(GameObject* parent);
+	TestStage(GameObject* parent);
 
 	//GameObject継承メソッド
 	void Initialize() override;
@@ -17,3 +17,4 @@ public:
 	void Draw() override;
 	void Release() override;
 };
+

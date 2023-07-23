@@ -1,5 +1,6 @@
 #include "Global.h"
 #include "Model.h"
+#include "Input.h"
 
 //3Dモデル（FBXファイル）を管理する
 namespace Model
@@ -191,5 +192,17 @@ namespace Model
 			XMStoreFloat3(&data->dir, vecDir);
 
 			_datas[handle]->pFbx->RayCast(data); 
+	}
+
+
+	void DebugMove(Transform* _transform)
+	{
+		if (Input::IsKeyDown(DIK_W))_transform->position_.y++;
+		if (Input::IsKeyDown(DIK_A))_transform->position_.x--;
+		if (Input::IsKeyDown(DIK_S))_transform->position_.y--;
+		if (Input::IsKeyDown(DIK_D))_transform->position_.x++;
+		if (Input::IsKey(DIK_E))_transform->rotate_.y++;
+		if (Input::IsKey(DIK_Q))_transform->rotate_.y--;
+
 	}
 }

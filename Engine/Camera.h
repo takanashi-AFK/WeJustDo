@@ -14,9 +14,11 @@ namespace Camera
 
 	//視点（カメラの位置）を設定
 	void SetPosition(XMFLOAT3 position);
-
+	void SetPosition(float _x,float _y,float _z);
+	
 	//焦点（見る位置）を設定
 	void SetTarget(XMFLOAT3 target);
+	void SetTarget(float _x, float _y, float _z);
 
 	//位置を取得
 	XMFLOAT3 GetPosition();
