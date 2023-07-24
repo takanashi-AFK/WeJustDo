@@ -104,5 +104,5 @@ namespace Model
 	/// ƒ‚ƒfƒ‹‚ğ“®‚©‚µ‚Ä‚İ‚½‚¢‚É‚Æ‚è‚ ‚¦‚¸“®‚©‚µ‚Ä‚İ‚é‚â‚Â
 	/// </summary>
 	/// <param name="_transform">•ÏŠ·s—ñ</param>
-	void DebugMove(Transform* _transform);
+	void DebugMove(Transform* _transform,float _Speed);
 };

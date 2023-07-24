@@ -195,14 +195,13 @@ namespace Model
 	}
 
 
-	void DebugMove(Transform* _transform)
+	void DebugMove(Transform* _transform,float _Speed)
 	{
-		if (Input::IsKey(DIK_W))_transform->position_.y+=0.02;
-		if (Input::IsKey(DIK_A))_transform->position_.x-= 0.02;
-		if (Input::IsKey(DIK_S))_transform->position_.y-= 0.02;
-		if (Input::IsKey(DIK_D))_transform->position_.x+= 0.02;
+		if (Input::IsKey(DIK_W))_transform->position_.y+= _Speed;
+		if (Input::IsKey(DIK_A))_transform->position_.x -= _Speed;
+		if (Input::IsKey(DIK_S))_transform->position_.y-= _Speed;
+		if (Input::IsKey(DIK_D))_transform->position_.x+= _Speed;
 		if (Input::IsKey(DIK_E))_transform->rotate_.y++;
 		if (Input::IsKey(DIK_Q))_transform->rotate_.y--;
-
 	}
 }

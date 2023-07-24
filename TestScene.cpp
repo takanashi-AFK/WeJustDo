@@ -15,8 +15,8 @@ void TestScene::Initialize()
 	Instantiate<TestStage>(this);
 	Instantiate<TestPlayer>(this);
 
-	Camera::SetPosition(0, 3, -10);
-	Camera::SetTarget(0,3.5f,0);
+	/*Camera::SetPosition(0, 3, -10);
+	Camera::SetTarget(0,3.5f,0);*/
 }
 
 //XV
