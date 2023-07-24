@@ -28,7 +28,7 @@ void TestPlayer::Update()
 	Model::RayCast((*(TestStage*)FindObject("TestStage")).GetModelHandle(), &data); //レイを発射
 
 	if (data.hit){
-		//オブジェクトの足元にオブジェクトが存在する場合の処理
+		//オブジェクトの下にオブジェクトが存在する場合の処理
 		if (true);//オブジェクト同士が接触している場合の処理
 		else;	//オブジェクト同士が接触していない場合の処理
 	}
