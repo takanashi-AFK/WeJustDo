@@ -197,10 +197,10 @@ namespace Model
 
 	void DebugMove(Transform* _transform)
 	{
-		if (Input::IsKeyDown(DIK_W))_transform->position_.y++;
-		if (Input::IsKeyDown(DIK_A))_transform->position_.x--;
-		if (Input::IsKeyDown(DIK_S))_transform->position_.y--;
-		if (Input::IsKeyDown(DIK_D))_transform->position_.x++;
+		if (Input::IsKey(DIK_W))_transform->position_.y+=0.02;
+		if (Input::IsKey(DIK_A))_transform->position_.x-= 0.02;
+		if (Input::IsKey(DIK_S))_transform->position_.y-= 0.02;
+		if (Input::IsKey(DIK_D))_transform->position_.x+= 0.02;
 		if (Input::IsKey(DIK_E))_transform->rotate_.y++;
 		if (Input::IsKey(DIK_Q))_transform->rotate_.y--;
 

@@ -16,6 +16,5 @@ public:
 	void Update() override;
 	void Draw() override;
 	void Release() override;
-
 };
 
