@@ -613,7 +613,7 @@ void FbxParts::RayCast(RayCastData * data)
 			{
 				data->hit = TRUE;
 				data->dist = dist;
-				data->pNormal = polygonNormal;
+				data->normal = polygonNormal;
 			}
 		}
 	}

@@ -35,19 +35,25 @@ void TestPlayer::Update()
 
 	if (data.hit) {
 		//オブジェクトの下にオブジェクトが存在する場合の処理
+
+		//着地させる
 		transform_.position_.y -= (data.dist - 0.5f) ;
 
-		//プレイヤーの下に伸びる法線ベクトルと、ポリゴンの法線ベクトルの内積をとる
-		XMVECTOR dot = XMVector3Dot(XMLoadFloat3(&underNormal),-data.pNormal);
+		//２つのベクトルから内積を取得する
+		XMVECTOR dot = XMVector3Dot(XMLoadFloat3(&underNormal),data.normal);
 		
-		//内積の結果から角度を取得
-		float angle = acos(XMVectorGetX(dot));
+		//ベクトルの長さを取得する
+		float length1 = XMVectorGetX(XMVector3Length(XMLoadFloat3(&underNormal)));
+		float length2 = XMVectorGetX(XMVector3Length(data.normal));
 
-		//ラジアン->度
+		//角度(Radian)を計算する
+		float angle = acos(XMVectorGetX(dot) / (length1 * length2));
+		
+		//ラジアン角からディグリー角に変換する
 		float Deg = XMConvertToDegrees(angle);
 
 		//角度分、ｚ回転させる
-		//transform_.rotate_.z = Deg;
+		transform_.rotate_.z = Deg;
 	}
 	else {
 		//オブジェクトの足元にオブジェクトが存在しない場合の処理
