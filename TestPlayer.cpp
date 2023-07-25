@@ -38,16 +38,23 @@ void TestPlayer::Update()
 		transform_.position_.y -= (data.dist - 0.5f) ;
 
 		//プレイヤーの下に伸びる法線ベクトルと、ポリゴンの法線ベクトルの内積をとる
-		XMVECTOR dot = XMVector3Dot(XMLoadFloat3(&underNormal),-data.pNormal);
+		XMVECTOR dot = XMVector3Dot(XMLoadFloat3(&underNormal),data.pNormal);
 		
+		// 2つのベクトルの大きさ（長さ）を計算します
+		float length1 = XMVectorGetX(XMVector3Length(data.pNormal));
+		float length2 = XMVectorGetX(XMVector3Length(XMLoadFloat3(&underNormal)));
+
+		// 角度を計算します（ラジアンから度に変換）
+		float angle = acos(XMVectorGetX(dot) / (length1 * length2));
+
 		//内積の結果から角度を取得
-		float angle = acos(XMVectorGetX(dot));
+		//float angle = acos(XMVectorGetX(dot));
 
 		//ラジアン->度
 		float Deg = XMConvertToDegrees(angle);
 
 		//角度分、ｚ回転させる
-		//transform_.rotate_.z = Deg;
+		transform_.rotate_.z = Deg;
 	}
 	else {
 		//オブジェクトの足元にオブジェクトが存在しない場合の処理
