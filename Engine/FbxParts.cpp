@@ -607,7 +607,7 @@ void FbxParts::RayCast(RayCastData * data)
 			
 			//３頂点から外積を取得し、ポリゴンに垂直な法線を取得
 			XMVECTOR polygonNormal =
-			XMVector3Cross(XMVectorSubtract(vec[0], vec[1]), XMVectorSubtract(vec[0], vec[2]));
+			XMVector3Cross(XMVectorSubtract(vec[1], vec[0]), XMVectorSubtract(vec[2], vec[0]));
 
 			if (hit && dist < data->dist)
 			{

@@ -40,14 +40,10 @@ void TestPlayer::Update()
 		transform_.position_.y -= (data.dist - 0.5f) ;
 
 		//２つのベクトルから内積を取得する
-		XMVECTOR dot = XMVector3Dot(XMLoadFloat3(&underNormal),data.normal);
-		
-		//ベクトルの長さを取得する
-		float length1 = XMVectorGetX(XMVector3Length(XMLoadFloat3(&underNormal)));
-		float length2 = XMVectorGetX(XMVector3Length(data.normal));
+		XMVECTOR dot = XMVector3Dot(XMVector3Normalize(XMLoadFloat3(&underNormal)),XMVector3Normalize(data.normal));
 
 		//角度(Radian)を計算する
-		float angle = acos(XMVectorGetX(dot) / (length1 * length2));
+		float angle = acos(XMVectorGetX(dot));
 		
 		//ラジアン角からディグリー角に変換する
 		float Deg = XMConvertToDegrees(angle);
