@@ -42,11 +42,17 @@ void TestPlayer::Update()
 		//２つのベクトルから内積を取得する
 		XMVECTOR dot = XMVector3Dot(XMVector3Normalize(XMLoadFloat3(&underNormal)),XMVector3Normalize(data.normal));
 
-		//角度(Radian)を計算する
+		//角度(Radian)を計算する(狭い方の角度を取得)
 		float angle = acos(XMVectorGetX(dot));
-		
+
 		//ラジアン角からディグリー角に変換する
 		float Deg = XMConvertToDegrees(angle);
+		
+		//二つのベクトルの外積の結果が０以下の時
+		if (XMConvertToDegrees(XMVectorGetX(XMVector3Cross(XMLoadFloat3(&underNormal),data.normal))) < 0) {
+			//Degに -1 をかける
+			Deg *= -1;
+		}
 
 		//角度分、ｚ回転させる
 		transform_.rotate_.z = Deg;
