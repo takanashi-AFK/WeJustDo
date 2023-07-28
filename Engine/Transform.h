@@ -16,8 +16,11 @@ public:
 	XMFLOAT3 position_;		//位置
 	XMFLOAT3 rotate_;		//向き
 	XMFLOAT3 scale_;		//拡大率
-	Transform * pParent_;	//親オブジェクトの情報
 
+	XMVECTOR axis_;			//回転軸
+	float angle_;			//角度
+
+	Transform * pParent_;	//親オブジェクトの情報
 	//コンストラクタ
 	Transform();
 
@@ -33,6 +36,7 @@ public:
 	//引数：なし
 	//戻値：その時点でのワールド行列
 	XMMATRIX GetWorldMatrix();
+
 
 
 	static XMFLOAT3 Float3Add(XMFLOAT3 a, XMFLOAT3 b)

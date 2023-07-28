@@ -10,6 +10,8 @@ Transform::Transform(): pParent_(nullptr)
 	matTranslate_ = XMMatrixIdentity();
 	matRotate_ = XMMatrixIdentity();
 	matScale_ = XMMatrixIdentity();
+	axis_ = XMVectorSet(0, 0, 0, 0);
+	angle_ = 0.0f;
 }
 
 
@@ -24,9 +26,13 @@ void Transform::Calclation()
 
 	//âÒì]çsóÒ
 	XMMATRIX rotateX, rotateY, rotateZ;
-	rotateX = XMMatrixRotationX(XMConvertToRadians(rotate_.x));
-	rotateY = XMMatrixRotationY(XMConvertToRadians(rotate_.y));
-	rotateZ = XMMatrixRotationZ(XMConvertToRadians(rotate_.z));
+
+	//XYZé≤ÇíÜêSÇ…âÒì]Ç∑ÇÈ
+	rotateX = XMMatrixRotationAxis(XMVectorSet(1.0f, 0.0f, 0.0f, 0.0f), XMConvertToRadians(rotate_.x));
+	rotateY = XMMatrixRotationAxis(XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f), XMConvertToRadians(rotate_.y));	
+	rotateZ = XMMatrixRotationAxis(XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f), XMConvertToRadians(rotate_.z));
+	//rotateAny = XMMatrixRotationAxis(axis_, XMConvertToRadians(angle_));
+
 	matRotate_ = rotateZ * rotateX * rotateY;
 
 	//ägëÂèkè¨

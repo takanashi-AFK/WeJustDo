@@ -58,6 +58,16 @@ void TestPlayer::Update()
 
 		//角度分、ｚ回転させる
 		transform_.rotate_.z = (Deg);
+
+		//transform_.axis_ = XMVector3Cross(data.normal, XMLoadFloat3(&playerNormal));
+		//transform_.angle_ = angle;
+
+		//理想
+		{
+		//atransform_.Axis_ = XMVectorSet(0, 0, 0, 0);
+		//transform_.rotate_.Any = (Deg);
+		}
+		
 	}
 	else {
 		//オブジェクトの足元にオブジェクトが存在しない場合の処理

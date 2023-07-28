@@ -9,7 +9,7 @@ TestStage::TestStage(GameObject* parent)
 
 void TestStage::Initialize()
 {
-	hModel_ = Model::Load("Models/TestStageProvisional2.fbx");
+	hModel_ = Model::Load("Models/TestStageProvisional3.fbx");
 	assert(hModel_ >= 0);
 }
 
