@@ -188,3 +188,15 @@ T* Instantiate(GameObject* pParent)
 	return pNewObject;
 }
 
+//オブジェクトを作成するテンプレート(看板用)
+template <class T>
+T* Instantiate(GameObject* pParent, std::string fileName)
+{
+	T* pNewObject = new T(pParent, fileName);
+	if (pParent != nullptr)
+	{
+		pParent->PushBackChild(pNewObject);
+	}
+	pNewObject->Initialize();
+	return pNewObject;
+}

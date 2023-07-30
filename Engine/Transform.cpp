@@ -10,8 +10,7 @@ Transform::Transform(): pParent_(nullptr)
 	matTranslate_ = XMMatrixIdentity();
 	matRotate_ = XMMatrixIdentity();
 	matScale_ = XMMatrixIdentity();
-	axis_ = XMVectorSet(0, 0, 0, 0);
-	angle_ = 0.0f;
+	
 }
 
 
@@ -48,5 +47,11 @@ XMMATRIX Transform::GetWorldMatrix()
 	}
 
 	return  matScale_ * matRotate_ * matTranslate_;
+}
+
+XMMATRIX Transform::GetParentWorldMatrix()
+{
+	if (!pParent_) return XMMatrixIdentity();
+	return pParent_->GetWorldMatrix();
 }
 

@@ -11,16 +11,17 @@ class Transform
 {
 public:
 	XMMATRIX matTranslate_;	//移動行列
-	XMMATRIX matRotate_;	//回転行列	
+	XMMATRIX matRotate_;	//回転行列：通常
 	XMMATRIX matScale_;		//拡大行列
 	XMFLOAT3 position_;		//位置
 	XMFLOAT3 rotate_;		//向き
 	XMFLOAT3 scale_;		//拡大率
-
-	XMVECTOR axis_;			//回転軸
-	float angle_;			//角度
+	
+	bool useExistingMatRotate_;	//通常の回転行列を使うかどうか
+	XMMATRIX freeMatRotate_;
 
 	Transform * pParent_;	//親オブジェクトの情報
+
 	//コンストラクタ
 	Transform();
 
@@ -37,11 +38,15 @@ public:
 	//戻値：その時点でのワールド行列
 	XMMATRIX GetWorldMatrix();
 
+	/// <summary>
+	/// 親のワールド行列を取得
+	/// </summary>
+	/// <returns>親のワールド行列</returns>
+	XMMATRIX GetParentWorldMatrix();
 
-
-	static XMFLOAT3 Float3Add(XMFLOAT3 a, XMFLOAT3 b)
-	{
+	static XMFLOAT3 Float3Add(XMFLOAT3 a, XMFLOAT3 b) {
 		return XMFLOAT3(a.x + b.x, a.y + b.y, a.z + b.z);
 	}
+	
 };
 
