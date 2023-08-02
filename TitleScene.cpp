@@ -15,7 +15,7 @@ void TitleScene::Update()
 {
 	if (Input::IsKeyDown(DIK_SPACE)) {
 		SceneManager* sm = (SceneManager*)FindObject("SceneManager");
-		sm->ChangeScene(SCENE_ID_PLAY);
+		sm->ChangeScene(SCENE_ID_PLAY,TID_BLACKOUT);
 	}
 }
 
