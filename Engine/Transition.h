@@ -33,4 +33,17 @@ namespace Transition
 	/// </summary>
 	/// <returns>差し掛かったらtrue</returns>
 	bool IsChangePoint();
+
+	////////// Toransition pattern //////////////////////////////
+	
+	/// <summary>
+	/// 暗転
+	/// </summary>
+	void BlackOut();
+
+	/// <summary>
+	/// ホワイトアウト
+	/// </summary>
+	void WhiteOut();
+
 };
