@@ -1,6 +1,10 @@
 #include "sceneManager.h"
 
 #include "../TestScene.h"
+
+#include "../TitleScene.h"
+#include "../PlayScene.h"
+#include "../EndScene.h"
 #include "Model.h"
 #include "Image.h"
 #include "Audio.h"
@@ -16,14 +20,17 @@ SceneManager::SceneManager(GameObject * parent)
 void SceneManager::Initialize()
 {
 	//最初のシーンを準備
-	currentSceneID_ = SCENE_ID_TEST;
+	currentSceneID_ = SCENE_ID_TITLE;
 	nextSceneID_ = currentSceneID_;
-	Instantiate<TestScene>(this);
+	Instantiate<TitleScene>(this);
 }
 
 //更新
 void SceneManager::Update()
 {
+	//トランジション実行時、シーン切替のタイミングでシーンを変更する
+	if (Transition::IsChangePoint())nextSceneID_ = tmpID_;
+
 	//次のシーンが現在のシーンと違う　＝　シーンを切り替えなければならない
 	if (currentSceneID_ != nextSceneID_)
 	{
@@ -39,8 +46,11 @@ void SceneManager::Update()
 		switch (nextSceneID_)
 		{
 		case SCENE_ID_TEST: Instantiate<TestScene>(this); break;
-
+		case SCENE_ID_TITLE: Instantiate<TitleScene>(this); break;
+		case SCENE_ID_PLAY: Instantiate<PlayScene>(this); break;
+		case SCENE_ID_END: Instantiate<EndScene>(this); break;
 		}
+
 		Audio::Initialize();
 		currentSceneID_ = nextSceneID_;
 	}
@@ -60,4 +70,11 @@ void SceneManager::Release()
 void SceneManager::ChangeScene(SCENE_ID next)
 {
 	nextSceneID_ = next;
+}
+
+void SceneManager::ChangeScene(SCENE_ID next, TRANSITION_ID _type)
+{
+	if(!Transition::SetTransition(TID_BLACKOUT))nextSceneID_ = next;
+	Transition::Start();
+	tmpID_ = next;
 }

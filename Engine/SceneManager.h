@@ -1,11 +1,15 @@
 #pragma once
 #include "global.h"
 #include "GameObject.h"
+#include "Transition.h"
 
 //ゲームに登場するシーン
 enum SCENE_ID
 {
 	SCENE_ID_TEST = 0,
+	SCENE_ID_TITLE,
+	SCENE_ID_PLAY,
+	SCENE_ID_END
 };
 
 //-----------------------------------------------------------
@@ -14,7 +18,6 @@ enum SCENE_ID
 class SceneManager : public GameObject
 {
 public:
-
 	//コンストラクタ
 	//引数：parent	親オブジェクト（基本的にゲームマネージャー）
 	SceneManager(GameObject* parent);
@@ -27,9 +30,11 @@ public:
 	//シーン切り替え（実際に切り替わるのはこの次のフレーム）
 	//引数：next	次のシーンのID
 	void ChangeScene(SCENE_ID next);
+	void ChangeScene(SCENE_ID next,TRANSITION_ID _type);
 
 private:
+
 	SCENE_ID currentSceneID_;	//現在のシーン
 	SCENE_ID nextSceneID_;		//次のシーン
-
+	SCENE_ID tmpID_;
 };
