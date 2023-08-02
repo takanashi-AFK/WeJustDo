@@ -8,6 +8,7 @@ namespace Transition
 	Sprite* pSprite_ = nullptr;
 
 	bool isActive_ = false;
+	bool isChange_ = false;
 	float time_ = 0;
 	float EndTime_ = 0;
 }
@@ -20,14 +21,13 @@ void Transition::Initialize()
 
 void Transition::Update()
 {
-	switch (type_)
-	{
-	case TID_NONE:
-		break;
-	case TID_BLACKOUT:
-		break;
-	case TID_WHITEOUT:
-		break;
+	if (isActive_) {switch (type_) {
+	case TID_NONE:isChange_ = true; break;
+		case TID_BLACKOUT:
+			break;
+		case TID_WHITEOUT:
+			break;
+		}
 	}
 }
 
@@ -58,5 +58,5 @@ void Transition::Start()
 
 bool Transition::IsChangePoint()
 {
-	return time_ == (EndTime_/2.0f);
+	return isChange_;
 }
