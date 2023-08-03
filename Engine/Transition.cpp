@@ -9,6 +9,7 @@ namespace Transition
 
 	bool isActive_ = false;	//実行中か否か
 	bool isChange_ = false;	//シーンを変更して良いか
+	bool isFlag = false;
 	float time_ = 0;		//トランジションの再生時間
 	float EndTime_ = 0;		//トランジションの終了時間
 	
@@ -33,7 +34,10 @@ void Transition::Update()
 	case TID_WHITEOUT:WhiteOut();break;
 	
 	}}else {
+		//初期化
 		time_ = 0;
+		isFlag = false;
+		alpha_ = 0;
 	}
 }
 
@@ -72,10 +76,17 @@ void Transition::BlackOut()
 
 	if (alpha_ >= 255) {
 		isChange_ = true;
-		alpha_--;
+		isFlag = true;
 	}
-	else {
-		alpha_++;
+
+	if (isFlag){
+		alpha_-= 10;
+		if (alpha_ <= 0) {
+			isActive_ = false;
+		}
+	}
+	else	{
+		alpha_+=10;
 	}
 }
 

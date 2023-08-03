@@ -78,3 +78,5 @@ void SceneManager::ChangeScene(SCENE_ID next, TRANSITION_ID _type)
 	Transition::Start();
 	tmpID_ = next;
 }
+
+
