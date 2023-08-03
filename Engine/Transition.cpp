@@ -39,7 +39,6 @@ void Transition::Update()
 
 void Transition::Draw()
 {
-	
 	static float a = 255;
 	pSprite_->Draw(transform_, rect_, (alpha_/255.0f));
 }
