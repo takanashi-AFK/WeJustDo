@@ -25,15 +25,18 @@ void Transition::Initialize()
 	{
 		pSprite_[i] = new Sprite;
 	}
+	pSprite_[TID_NONE]->Load("BlackOut.png");
+	pSprite_[TID_BLACKOUT]->Load("BlackOut.png");
+	pSprite_[TID_WHITEOUT]->Load("WhiteOut.png");
 }
 
 void Transition::Update()
 {
 	if (isActive_) {switch (type_) 
 	{
-	case TID_NONE:pSprite_[TID_NONE]->Load("BlackOut.png"); isChange_ = true; break;
-	case TID_BLACKOUT:pSprite_[TID_BLACKOUT]->Load("BlackOut.png"); BlackOut();break;
-	case TID_WHITEOUT:pSprite_[TID_WHITEOUT]->Load("WhiteOut.png"); WhiteOut();break;
+	case TID_NONE:	isChange_ = true; break;
+	case TID_BLACKOUT:BlackOut();break;
+	case TID_WHITEOUT:WhiteOut();break;
 	
 	}}else {
 		//‰Šú‰»
