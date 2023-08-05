@@ -74,7 +74,7 @@ void SceneManager::ChangeScene(SCENE_ID next)
 
 void SceneManager::ChangeScene(SCENE_ID next, TRANSITION_ID _type)
 {
-	if(!Transition::SetTransition(TID_BLACKOUT))nextSceneID_ = next;
+	if(!Transition::SetTransition(_type))nextSceneID_ = next;
 	Transition::Start();
 	tmpID_ = next;
 }

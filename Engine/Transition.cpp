@@ -5,7 +5,7 @@
 namespace Transition 
 {
 	TRANSITION_ID type_ = TID_NONE;
-	Sprite* pSprite_ = nullptr;
+	Sprite* pSprite_[TID_MAX] = { nullptr };
 
 	bool isActive_ = false;	//実行中か否か
 	bool isChange_ = false;	//シーンを変更して良いか
@@ -21,17 +21,19 @@ namespace Transition
 
 void Transition::Initialize()
 {
-	pSprite_ = new Sprite;
-	pSprite_->Load("BlackOut.png");
+	for (int i = 0; i < TID_MAX; i++)
+	{
+		pSprite_[i] = new Sprite;
+	}
 }
 
 void Transition::Update()
 {
 	if (isActive_) {switch (type_) 
 	{
-	case TID_NONE:isChange_ = true; break;
-	case TID_BLACKOUT:BlackOut();break;
-	case TID_WHITEOUT:WhiteOut();break;
+	case TID_NONE:pSprite_[TID_NONE]->Load("BlackOut.png"); isChange_ = true; break;
+	case TID_BLACKOUT:pSprite_[TID_BLACKOUT]->Load("BlackOut.png"); BlackOut();break;
+	case TID_WHITEOUT:pSprite_[TID_WHITEOUT]->Load("WhiteOut.png"); WhiteOut();break;
 	
 	}}else {
 		//初期化
@@ -43,13 +45,16 @@ void Transition::Update()
 
 void Transition::Draw()
 {
-	static float a = 255;
-	pSprite_->Draw(transform_, rect_, (alpha_/255.0f));
+	pSprite_[type_]->Draw(transform_, rect_, (alpha_ / 255.0f));
 }
 
 void Transition::Release()
 {
-	SAFE_DELETE(pSprite_);
+	for (int i = 0; i < TID_MAX; i++)
+	{
+		SAFE_DELETE(pSprite_[i]);
+	}
+	
 }
 
 bool Transition::SetTransition(TRANSITION_ID _type)
@@ -71,8 +76,8 @@ bool Transition::IsChangePoint()
 void Transition::BlackOut()
 {
 	//Rectの初期化
-	rect_.left = 0; rect_.right = pSprite_->GetTextureSize().x;
-	rect_.top = 0; rect_.bottom = pSprite_->GetTextureSize().y;
+	rect_.left = 0; rect_.right = pSprite_[TID_BLACKOUT]->GetTextureSize().x;
+	rect_.top = 0; rect_.bottom = pSprite_[TID_BLACKOUT]->GetTextureSize().y;
 
 	if (alpha_ >= 255) {
 		isChange_ = true;
@@ -92,5 +97,22 @@ void Transition::BlackOut()
 
 void Transition::WhiteOut()
 {
+	//Rectの初期化
+	rect_.left = 0; rect_.right = pSprite_[TID_WHITEOUT]->GetTextureSize().x;
+	rect_.top = 0; rect_.bottom = pSprite_[TID_WHITEOUT]->GetTextureSize().y;
 
+	if (alpha_ >= 255) {
+		isChange_ = true;
+		isFlag = true;
+	}
+
+	if (isFlag) {
+		alpha_ -= 10;
+		if (alpha_ <= 0) {
+			isActive_ = false;
+		}
+	}
+	else {
+		alpha_ += 10;
+	}
 }

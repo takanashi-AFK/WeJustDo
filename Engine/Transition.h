@@ -4,6 +4,8 @@ enum TRANSITION_ID {
 	TID_NONE,
 	TID_BLACKOUT,
 	TID_WHITEOUT,
+	TID_SLIDEOUT,
+	TID_MAX,
 };
 
 class Sprite;
@@ -45,5 +47,7 @@ namespace Transition
 	/// ホワイトアウト
 	/// </summary>
 	void WhiteOut();
+
+	void SlideOut();
 
 };
