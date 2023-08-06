@@ -125,6 +125,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="backGround.cpp" />
     <ClCompile Include="EndScene.cpp" />
     <ClCompile Include="Engine\Audio.cpp" />
     <ClCompile Include="Engine\BillBoard.cpp" />
@@ -153,10 +154,13 @@
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="SkySphere.cpp" />
     <ClCompile Include="SplashScene.cpp" />
+    <ClCompile Include="TestPlayer.cpp" />
     <ClCompile Include="TestScene.cpp" />
+    <ClCompile Include="TestStage.cpp" />
     <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="backGround.h" />
     <ClInclude Include="EndScene.h" />
     <ClInclude Include="Engine\Audio.h" />
     <ClInclude Include="Engine\BillBoard.h" />
@@ -185,7 +189,9 @@
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="SkySphere.h" />
     <ClInclude Include="SplashScene.h" />
+    <ClInclude Include="TestPlayer.h" />
     <ClInclude Include="TestScene.h" />
+    <ClInclude Include="TestStage.h" />
     <ClInclude Include="TitleScene.h" />
   </ItemGroup>
   <ItemGroup>
