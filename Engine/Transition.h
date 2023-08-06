@@ -36,6 +36,11 @@ namespace Transition
 	/// <returns>·‚µŠ|‚©‚Á‚½‚çtrue</returns>
 	bool IsChangePoint();
 
+	/// <summary>
+	/// ƒgƒ‰ƒ“ƒWƒVƒ‡ƒ“‚ª“®‚¢‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ğ•Ô‚·
+	/// </summary>
+	/// <returns>“®ì’†‚È‚çtrue</returns>
+	bool IsActive();
 	////////// Toransition pattern //////////////////////////////
 	
 	/// <summary>

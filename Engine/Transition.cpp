@@ -66,6 +66,11 @@ bool Transition::SetTransition(TRANSITION_ID _type)
 	return _type != TID_NONE;
 }
 
+bool Transition::IsActive()
+{
+	return isActive_;
+}
+
 void Transition::Start()
 {
 	isActive_ = true;
