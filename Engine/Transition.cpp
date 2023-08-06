@@ -41,6 +41,7 @@ void Transition::Update()
 	}}else {
 		//èâä˙âª
 		time_ = 0;
+		isChange_ = false;
 		isFlag = false;
 		alpha_ = 0;
 	}
@@ -93,13 +94,13 @@ void Transition::BlackOut()
 	}
 
 	if (isFlag){
-		alpha_-= 10;
+		alpha_-= 5;
 		if (alpha_ <= 0) {
 			isActive_ = false;
 		}
 	}
 	else	{
-		alpha_+=10;
+		alpha_+=5;
 	}
 }
 
@@ -115,12 +116,12 @@ void Transition::WhiteOut()
 	}
 
 	if (isFlag) {
-		alpha_ -= 10;
+		alpha_ -= 5;
 		if (alpha_ <= 0) {
 			isActive_ = false;
 		}
 	}
 	else {
-		alpha_ += 10;
+		alpha_ += 5;
 	}
 }

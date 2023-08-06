@@ -2,6 +2,7 @@
 
 #include "../TestScene.h"
 
+#include "../SplashScene.h"
 #include "../TitleScene.h"
 #include "../PlayScene.h"
 #include "../EndScene.h"
@@ -20,9 +21,9 @@ SceneManager::SceneManager(GameObject * parent)
 void SceneManager::Initialize()
 {
 	//最初のシーンを準備
-	currentSceneID_ = SCENE_ID_TITLE;
+	currentSceneID_ = SCENE_ID_SPLASH;
 	nextSceneID_ = currentSceneID_;
-	Instantiate<TitleScene>(this);
+	Instantiate<SplashScene>(this);
 }
 
 //更新
@@ -46,6 +47,7 @@ void SceneManager::Update()
 		switch (nextSceneID_)
 		{
 		case SCENE_ID_TEST: Instantiate<TestScene>(this); break;
+		case SCENE_ID_SPLASH: Instantiate<SplashScene>(this); break;
 		case SCENE_ID_TITLE: Instantiate<TitleScene>(this); break;
 		case SCENE_ID_PLAY: Instantiate<PlayScene>(this); break;
 		case SCENE_ID_END: Instantiate<EndScene>(this); break;

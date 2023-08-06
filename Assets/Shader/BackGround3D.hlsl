@@ -99,7 +99,8 @@ float4 PS(VS_OUT inData) : SV_Target
 	float4 ambient = g_vecAmbient;
 
 	//鏡面反射光（スペキュラー）
-    float4 speculer = float4(0, 0, 0, 0); //とりあえずハイライトは無しにしておいて…
+	float4 speculer = float4(0.4f, 0.4f, 0.4f, 0.0f);	//とりあえずハイライトは無しにしておいて…
+    //float4 speculer = float4(0, 0, 0, 0); //とりあえずハイライトは無しにしておいて…
 	if (g_vecSpeculer.a != 0)	//スペキュラーの情報があれば
 	{
 		float4 R = reflect(lightDir, inData.normal);			//正反射ベクトル
@@ -107,5 +108,6 @@ float4 PS(VS_OUT inData) : SV_Target
 	}
 
 	//最終的な色
-    return diffuse * shade + diffuse * ambient + speculer;
+	return diffuse + diffuse * ambient + speculer;
+    //return diffuse * shade + diffuse * ambient + speculer;
 }
