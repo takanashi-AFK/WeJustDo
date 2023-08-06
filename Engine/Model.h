@@ -100,4 +100,9 @@ namespace Model
 	//引数：data	必要なものをまとめたデータ
 	void RayCast(int handle, RayCastData *data);
 
+	/// <summary>
+	/// モデルを動かしてみたい時にとりあえず動かしてみるやつ
+	/// </summary>
+	/// <param name="_transform">変換行列</param>
+	void DebugMove(Transform* _transform, float _Speed);
 };

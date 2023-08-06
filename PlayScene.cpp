@@ -21,7 +21,8 @@ void PlayScene::Initialize()
 
 void PlayScene::Update()
 {
-	if (Input::IsKeyDown(DIK_SPACE)) {
+	TestPlayer* Tp = (TestPlayer*)FindObject("TestPlayer");
+	if (Tp->GetPosition().y <= -20.0f) {
 		SceneManager* sm = (SceneManager*)FindObject("SceneManager");
 		sm->ChangeScene(SCENE_ID_END, TID_WHITEOUT);
 	}

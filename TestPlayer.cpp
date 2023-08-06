@@ -22,7 +22,7 @@ void TestPlayer::Initialize()
 
 void TestPlayer::Update()
 {
-	//Model::DebugMove(&transform_,0.15f);
+	Model::DebugMove(&transform_,0.15f);
 
 	Camera::SetPosition(transform_.position_.x+5, 3.5f, -15.0f);
 	Camera::SetTarget(transform_.position_.x + 5,5.5f,0.0f);
