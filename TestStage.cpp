@@ -9,11 +9,9 @@ TestStage::TestStage(GameObject* parent)
 
 void TestStage::Initialize()
 {
-	hModel_ = Model::Load("Models/TestStageProvisional3.fbx");
+
+	hModel_ = Model::Load("kusaStage.fbx");
 	assert(hModel_ >= 0);
-
-	
-
 }
 
 void TestStage::Update()

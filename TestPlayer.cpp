@@ -3,6 +3,7 @@
 #include "TestStage.h"
 #include "Engine/Input.h"
 #include "Engine/Camera.h"
+#include "Engine/Direct3D.h"
 
 TestPlayer::TestPlayer(GameObject* parent)
 	:GameObject(parent, "TestPlayer"),isJumping(false),moveY(0),Deg(0)
@@ -24,7 +25,7 @@ void TestPlayer::Update()
 	//Model::DebugMove(&transform_,0.15f);
 
 	Camera::SetPosition(transform_.position_.x+5, 3.5f, -15.0f);
-	Camera::SetTarget(transform_.position_.x + 5,3.5f,0.0f);
+	Camera::SetTarget(transform_.position_.x + 5,5.5f,0.0f);
 
 	//PlayerObject‚©‚ç‰º•ûŒü‚É‘Î‚µ‚ÄL‚Ñ‚é’¼ü‚ğ—pˆÓ
 	RayCastData data;
@@ -117,6 +118,7 @@ void TestPlayer::Draw()
 {
 	Model::SetTransform(hModel_, transform_);
 	Model::Draw(hModel_);
+
 }
 
 void TestPlayer::Release()
