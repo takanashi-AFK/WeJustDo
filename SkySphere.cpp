@@ -11,7 +11,7 @@ SkySphere::SkySphere(GameObject* parent)
 void SkySphere::Initialize()
 {
 	hPict_ = Image::Load("TitleIMage.png");
-	hModel_ = Model::Load("Models/BackGroundModel.fbx");
+	hModel_ = Model::Load("Models/BackGroundModel.fbx");//‚é‚¢æ”y‚Ìƒ‚ƒfƒ‹Ø‚è‚Ü‚µ‚½TT
 }
 
 void SkySphere::Update()
