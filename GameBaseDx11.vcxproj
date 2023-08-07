@@ -151,6 +151,11 @@
     <ClCompile Include="Engine\Text.cpp" />
     <ClCompile Include="Engine\Texture.cpp" />
     <ClCompile Include="Engine\Transform.cpp" />
+    <ClCompile Include="Player\Player.cpp" />
+    <ClCompile Include="Player\State\PlayerState.cpp" />
+    <ClCompile Include="Player\State\PlayerStateManager.cpp" />
+    <ClCompile Include="Player\State\StandingState.cpp" />
+    <ClCompile Include="Player\State\WalkingState.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="SkySphere.cpp" />
     <ClCompile Include="SplashScene.cpp" />
@@ -186,6 +191,11 @@
     <ClInclude Include="Engine\Text.h" />
     <ClInclude Include="Engine\Texture.h" />
     <ClInclude Include="Engine\Transform.h" />
+    <ClInclude Include="Player\Player.h" />
+    <ClInclude Include="Player\State\PlayerState.h" />
+    <ClInclude Include="Player\State\PlayerStateManager.h" />
+    <ClInclude Include="Player\State\StandingState.h" />
+    <ClInclude Include="Player\State\WalkingState.h" />
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="SkySphere.h" />
     <ClInclude Include="SplashScene.h" />
