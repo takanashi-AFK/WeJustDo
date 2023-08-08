@@ -152,8 +152,13 @@
     <ClCompile Include="Engine\Texture.cpp" />
     <ClCompile Include="Engine\Transform.cpp" />
     <ClCompile Include="Player\Player.cpp" />
+    <ClCompile Include="Player\State\DyingState.cpp" />
+    <ClCompile Include="Player\State\FallingState.cpp" />
+    <ClCompile Include="Player\State\JumpingState.cpp" />
     <ClCompile Include="Player\State\PlayerState.cpp" />
     <ClCompile Include="Player\State\PlayerStateManager.cpp" />
+    <ClCompile Include="Player\State\ReadingState.cpp" />
+    <ClCompile Include="Player\State\RunningState.cpp" />
     <ClCompile Include="Player\State\StandingState.cpp" />
     <ClCompile Include="Player\State\WalkingState.cpp" />
     <ClCompile Include="PlayScene.cpp" />
@@ -192,8 +197,13 @@
     <ClInclude Include="Engine\Texture.h" />
     <ClInclude Include="Engine\Transform.h" />
     <ClInclude Include="Player\Player.h" />
+    <ClInclude Include="Player\State\DyingState.h" />
+    <ClInclude Include="Player\State\FallingState.h" />
+    <ClInclude Include="Player\State\JumpingState.h" />
     <ClInclude Include="Player\State\PlayerState.h" />
     <ClInclude Include="Player\State\PlayerStateManager.h" />
+    <ClInclude Include="Player\State\ReadingState.h" />
+    <ClInclude Include="Player\State\RunningState.h" />
     <ClInclude Include="Player\State\StandingState.h" />
     <ClInclude Include="Player\State\WalkingState.h" />
     <ClInclude Include="PlayScene.h" />
