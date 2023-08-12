@@ -1,4 +1,7 @@
 #include "TestScene.h"
+#include"asiba.h"
+#include"yuka.h"
+#include"player.h"
 
 //コンストラクタ
 TestScene::TestScene(GameObject * parent)
@@ -9,6 +12,9 @@ TestScene::TestScene(GameObject * parent)
 //初期化
 void TestScene::Initialize()
 {
+	Instantiate<asiba>(this);
+	Instantiate<yuka>(this);
+	Instantiate<player>(this);
 }
 
 //更新
