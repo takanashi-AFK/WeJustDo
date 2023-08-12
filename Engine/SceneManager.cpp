@@ -1,11 +1,8 @@
 #include "sceneManager.h"
 
 #include "../TestScene.h"
-
 #include "../SplashScene.h"
-#include "../TitleScene.h"
-#include "../PlayScene.h"
-#include "../EndScene.h"
+
 #include "Model.h"
 #include "Image.h"
 #include "Audio.h"
@@ -48,9 +45,6 @@ void SceneManager::Update()
 		{
 		case SCENE_ID_TEST: Instantiate<TestScene>(this); break;
 		case SCENE_ID_SPLASH: Instantiate<SplashScene>(this); break;
-		case SCENE_ID_TITLE: Instantiate<TitleScene>(this); break;
-		case SCENE_ID_PLAY: Instantiate<PlayScene>(this); break;
-		case SCENE_ID_END: Instantiate<EndScene>(this); break;
 		}
 
 		Audio::Initialize();
