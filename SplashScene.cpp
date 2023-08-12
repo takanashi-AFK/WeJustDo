@@ -10,7 +10,7 @@ SplashScene::SplashScene(GameObject* parent)
 
 void SplashScene::Initialize()
 {
-	hPict_ = Image::Load("SplashImage.png");
+	hPict_ = Image::Load("Image/Splash.png");
 }
 
 void SplashScene::Update()
@@ -30,3 +30,5 @@ void SplashScene::Draw()
 	Image::SetTransform(hPict_,transform_);
 	Image::Draw(hPict_);
 }
+
+
