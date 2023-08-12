@@ -1,4 +1,6 @@
 #include "TestScene.h"
+#include "PlayerObject.h"
+
 
 //コンストラクタ
 TestScene::TestScene(GameObject * parent)
@@ -9,6 +11,8 @@ TestScene::TestScene(GameObject * parent)
 //初期化
 void TestScene::Initialize()
 {
+	//オブジェクトの実体を作成
+	Instantiate<PlayerObject>(this);
 }
 
 //更新
