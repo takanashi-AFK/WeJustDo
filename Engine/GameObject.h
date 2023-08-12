@@ -138,15 +138,24 @@ public:
 	XMFLOAT3 GetWorldPosition() { return Transform::Float3Add(GetParent()->transform_.position_ , transform_.position_); }
 	XMFLOAT3 GetWorldRotate() { return Transform::Float3Add(GetParent()->transform_.rotate_, transform_.rotate_); }
 	XMFLOAT3 GetWorldScale() { return Transform::Float3Add(GetParent()->transform_.scale_, transform_.scale_); }
+	
 	void SetPosition(XMFLOAT3 position) { transform_.position_ = position; }
 	void SetPosition(float x, float y, float z) { SetPosition(XMFLOAT3( x, y, z )); }
+	void SetPositionX(float x) { SetPosition(x, transform_.position_.y, transform_.position_.z); }
+	void SetPositionY(float y) { SetPosition(transform_.position_.x, y, transform_.position_.z); }
+	void SetPositionZ(float z) { SetPosition(transform_.position_.x, transform_.position_.y, z); }
+
 	void SetRotate(XMFLOAT3 rotate) { transform_.rotate_ = rotate; }
 	void SetRotate(float x, float y, float z) { SetRotate(XMFLOAT3( x, y, z )); }
 	void SetRotateX(float x) { SetRotate(x, transform_.rotate_.y, transform_.rotate_.z); }
 	void SetRotateY(float y) { SetRotate(transform_.rotate_.x, y, transform_.rotate_.z); }
 	void SetRotateZ(float z) { SetRotate(transform_.rotate_.x, transform_.rotate_.y, z); }
+
 	void SetScale(XMFLOAT3 scale) { transform_.scale_ = scale; }
 	void SetScale(float x, float y, float z) { SetScale(XMFLOAT3(x, y, z)); }
+	void SetScaleX(float x) { SetScale(x, transform_.scale_.y, transform_.scale_.z); }
+	void SetScaleY(float y) { SetScale(transform_.scale_.x, y, transform_.scale_.z); }
+	void SetScaleZ(float z) { SetScale(transform_.scale_.x, transform_.scale_.y, z); }
 
 
 private:
