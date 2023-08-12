@@ -8,6 +8,7 @@ Player::Player(GameObject* parent)
 
 void Player::Initialize()
 {
+
 }
 
 void Player::Update()

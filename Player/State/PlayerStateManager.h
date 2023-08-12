@@ -1,5 +1,6 @@
 #pragma once
 #include "PlayerState.h"
+#include "StandingState.h"
 #include <vector>
 class PlayerStateManager : public PlayerState
 {
@@ -23,6 +24,5 @@ public:
 
 	//Šeíó‘Ô
 	static StandingState* playerStanding;		//‘Ò‚¿ó‘Ô
-	static
 };
 
