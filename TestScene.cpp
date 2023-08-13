@@ -10,6 +10,7 @@ TestScene::TestScene(GameObject * parent)
 //‰Šú‰»
 void TestScene::Initialize()
 {
+	CreateSolidObject<TestObject>(this, "defaultModel.fbx");
 	CreateSolidObject<TestObject>(this,"defaultModel.fbx");
 }
 
