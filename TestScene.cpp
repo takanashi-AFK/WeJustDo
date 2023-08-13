@@ -11,7 +11,11 @@ TestScene::TestScene(GameObject * parent)
 void TestScene::Initialize()
 {
 	CreateSolidObject<TestObject>(this, "defaultModel.fbx");
-	CreateSolidObject<TestObject>(this,"defaultModel.fbx");
+	//CreateSolidObject<TestObject>(this,"defaultModel.fbx");
+	/*
+	* 同じオブジェクトを二つ以上作成しようとすると死んじゃう...
+	* Instantiateではできていたことができなくなってる?
+	*/
 }
 
 //更新
