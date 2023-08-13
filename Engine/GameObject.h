@@ -7,7 +7,7 @@
 #include "BoxCollider.h"
 #include "Transform.h"
 
-
+#include "global.h"
 
 
 using namespace DirectX;

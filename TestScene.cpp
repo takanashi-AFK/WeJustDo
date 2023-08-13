@@ -1,4 +1,5 @@
 #include "TestScene.h"
+#include "TestObject.h"
 
 //コンストラクタ
 TestScene::TestScene(GameObject * parent)
@@ -9,6 +10,7 @@ TestScene::TestScene(GameObject * parent)
 //初期化
 void TestScene::Initialize()
 {
+	CreateSolidObject<TestObject>(this,"defaultModel.fbx");
 }
 
 //更新
