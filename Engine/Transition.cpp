@@ -19,6 +19,7 @@ namespace Transition
 
 }
 
+
 void Transition::Initialize()
 {
 	for (int i = 0; i < TID_MAX; i++)

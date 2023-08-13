@@ -15,6 +15,7 @@ enum SCENE_ID
 //-----------------------------------------------------------
 class SceneManager : public GameObject
 {
+
 public:
 	//コンストラクタ
 	//引数：parent	親オブジェクト（基本的にゲームマネージャー）
