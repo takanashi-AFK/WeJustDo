@@ -47,6 +47,12 @@ namespace Transition
 	/// </summary>
 	/// <returns>“®ì’†‚È‚çtrue</returns>
 	bool IsActive();
+
+	/// <summary>
+	/// •K—v‚È•Ï”‚ğ‰Šú‰»‚·‚éˆ—
+	/// </summary>
+	/// <returns>‰Šú‰»‚Å‚«‚½‚çtrue</returns>
+	bool InitParameter();
 	////////// Toransition pattern //////////////////////////////
 	
 	/// <summary>
@@ -60,5 +66,4 @@ namespace Transition
 	void WhiteOut();
 
 	void SlideOut();
-
 };

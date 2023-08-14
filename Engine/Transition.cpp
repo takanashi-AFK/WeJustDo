@@ -44,13 +44,7 @@ void Transition::Update()
 	case TID_BLACKOUT:BlackOut();break;
 	case TID_WHITEOUT:WhiteOut();break;
 	
-	}}else {
-		//èâä˙âª
-		time_ = 0;
-		isChange_ = false;
-		isFlag = false;
-		alpha_ = 0;
-	}
+	}}else InitParameter();
 }
 
 void Transition::Draw()
@@ -60,17 +54,12 @@ void Transition::Draw()
 
 void Transition::Release()
 {
-	for (int i = 0; i < TID_MAX; i++)
-	{
-		SAFE_DELETE(pSprite_[i]);
-	}
-	
+	for (int i = 0; i < TID_MAX; i++)SAFE_DELETE(pSprite_[i]);
 }
 
 bool Transition::SetTransition(TRANSITION_ID _type)
 {
-	type_ = _type;
-	return _type != TID_NONE;
+	type_ = _type;return _type != TID_NONE;
 }
 
 void Transition::SetTime(float _time)
@@ -81,6 +70,16 @@ void Transition::SetTime(float _time)
 bool Transition::IsActive()
 {
 	return isActive_;
+}
+
+bool Transition::InitParameter()
+{
+	isChange_ = false;
+	isFlag = false;
+	time_ = 0;
+	alpha_ = 0;
+
+	return true;
 }
 
 void Transition::Start()
@@ -106,13 +105,9 @@ void Transition::BlackOut()
 
 	if (isFlag){
 		alpha_-= time_;
-		if (alpha_ <= ALPHA_MIN) {
-			isActive_ = false;
-		}
+		if (alpha_ <= ALPHA_MIN) isActive_ = false;
 	}
-	else	{
-		alpha_+= time_;
-	}
+	else alpha_+= time_;
 }
 
 void Transition::WhiteOut()
@@ -128,11 +123,7 @@ void Transition::WhiteOut()
 
 	if (isFlag) {
 		alpha_ -= time_;
-		if (alpha_ <= ALPHA_MIN) {
-			isActive_ = false;
-		}
+		if (alpha_ <= ALPHA_MIN) isActive_ = false;
 	}
-	else {
-		alpha_ += time_;
-	}
+	else alpha_ += time_;
 }

@@ -16,7 +16,7 @@ void SolidObject::Initialize()
 {
 	//ƒ‚ƒfƒ‹‚Ìƒ[ƒh
 	ASSIGN(hModel_, Model::Load(modelFileName_));
-	assert(hModel_ <= 0);
+	assert(hModel_ >= 0);
 
 	//Œp³æ‚Ì‰Šú‰»
 	ChildInitialize();

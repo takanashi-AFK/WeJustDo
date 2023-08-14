@@ -48,7 +48,6 @@ namespace Model
 				pData->fileName = fileName;
 			}
 
-
 			//g‚Á‚Ä‚È‚¢”Ô†‚ª–³‚¢‚©’T‚·
 			for (int i = 0; i < _datas.size(); i++)
 			{
