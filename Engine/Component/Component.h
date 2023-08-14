@@ -9,16 +9,16 @@ class GameObject;
 class Component
 {
 public:
-	GameObject* parent;	//親オブジェクト
+    GameObject* parent;//親オブジェクト
 public:
-	//コンストラクタ
-	Component():parent(nullptr){}
+    //コンストラクタ
+    Component() :parent(nullptr) {}
 
     //デストラクタ
     virtual ~Component() {}
 
-    //初期化(最初の一回だけ呼ばれる)
-    virtual void Initialize() {}
+    //開始(最初の一回だけ呼ばれる)
+    virtual void Start() {}
 
     //更新
     virtual void Update() {}
