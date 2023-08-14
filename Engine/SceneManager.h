@@ -28,8 +28,11 @@ public:
 
 	//シーン切り替え（実際に切り替わるのはこの次のフレーム）
 	//引数：next	次のシーンのID
+	//引数：type	トランジションID
+	//引数：time	時間(秒)
+	void ChangeScene(SCENE_ID next,TRANSITION_ID _type,float _time);
+	void ChangeScene(SCENE_ID next, TRANSITION_ID _type);
 	void ChangeScene(SCENE_ID next);
-	void ChangeScene(SCENE_ID next,TRANSITION_ID _type);
 
 private:
 

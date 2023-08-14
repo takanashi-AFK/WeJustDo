@@ -63,21 +63,21 @@ void SceneManager::Release()
 }
 
 //シーン切り替え（実際に切り替わるのはこの次のフレーム）
-void SceneManager::ChangeScene(SCENE_ID next)
-{
-	nextSceneID_ = next;
-}
-
-void SceneManager::ChangeScene(SCENE_ID next, TRANSITION_ID _type)
+void SceneManager::ChangeScene(SCENE_ID next, TRANSITION_ID _type,float _time)
 {
 	//トランジションが動作中はシーン遷移を行わない
 	if (!Transition::IsActive()) {
 		//トランジションを使わない場合、シーンIDをセット
 		if (!Transition::SetTransition(_type))nextSceneID_ = next;
 		
+		//時間をセット
+		Transition::SetTime(_time);
+
 		//トランジションを開始し、シーンIDをセット
 		Transition::Start();tmpID_ = next;
 	}
 }
+void SceneManager::ChangeScene(SCENE_ID next, TRANSITION_ID _type){ChangeScene(next, _type, 2);}
+void SceneManager::ChangeScene(SCENE_ID next){ChangeScene(next, TID_NONE);}
 
 

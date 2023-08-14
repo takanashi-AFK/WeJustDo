@@ -2,6 +2,8 @@
 #include "Sprite.h"
 #include "Global.h"
 
+
+
 namespace Transition 
 {
 	TRANSITION_ID type_ = TID_NONE;
@@ -11,12 +13,15 @@ namespace Transition
 	bool isChange_ = false;	//シーンを変更して良いか
 	bool isFlag = false;
 	float time_ = 0;		//トランジションの再生時間
-	float EndTime_ = 0;		//トランジションの終了時間
 	
 	Transform transform_;	//変形行列
 	RECT rect_;				//画像サイズ
 	float alpha_;			//画像の透明度
 
+	const float FPS = 60.0f;			//フレームレート
+	const float FINISH_TIME = 510.0f;	//トランジションの終了まで掛かる時間(fps)
+	const float ALPHA_MAX = 255.0f;		//最大alpha値
+	const float ALPHA_MIN = 0.0f;		//最小alpha値
 }
 
 
@@ -50,7 +55,7 @@ void Transition::Update()
 
 void Transition::Draw()
 {
-	pSprite_[type_]->Draw(transform_, rect_, (alpha_ / 255.0f));
+	pSprite_[type_]->Draw(transform_, rect_, (alpha_ / ALPHA_MAX));
 }
 
 void Transition::Release()
@@ -66,6 +71,11 @@ bool Transition::SetTransition(TRANSITION_ID _type)
 {
 	type_ = _type;
 	return _type != TID_NONE;
+}
+
+void Transition::SetTime(float _time)
+{
+	time_  = FINISH_TIME /(FPS *_time);
 }
 
 bool Transition::IsActive()
@@ -89,19 +99,19 @@ void Transition::BlackOut()
 	rect_.left = 0; rect_.right = pSprite_[TID_BLACKOUT]->GetTextureSize().x;
 	rect_.top = 0; rect_.bottom = pSprite_[TID_BLACKOUT]->GetTextureSize().y;
 
-	if (alpha_ >= 255) {
+	if (alpha_ >= ALPHA_MAX) {
 		isChange_ = true;
 		isFlag = true;
 	}
 
 	if (isFlag){
-		alpha_-= 5;
-		if (alpha_ <= 0) {
+		alpha_-= time_;
+		if (alpha_ <= ALPHA_MIN) {
 			isActive_ = false;
 		}
 	}
 	else	{
-		alpha_+=5;
+		alpha_+= time_;
 	}
 }
 
@@ -111,18 +121,18 @@ void Transition::WhiteOut()
 	rect_.left = 0; rect_.right = pSprite_[TID_WHITEOUT]->GetTextureSize().x;
 	rect_.top = 0; rect_.bottom = pSprite_[TID_WHITEOUT]->GetTextureSize().y;
 
-	if (alpha_ >= 255) {
+	if (alpha_ >= ALPHA_MAX) {
 		isChange_ = true;
 		isFlag = true;
 	}
 
 	if (isFlag) {
-		alpha_ -= 5;
-		if (alpha_ <= 0) {
+		alpha_ -= time_;
+		if (alpha_ <= ALPHA_MIN) {
 			isActive_ = false;
 		}
 	}
 	else {
-		alpha_ += 5;
+		alpha_ += time_;
 	}
 }

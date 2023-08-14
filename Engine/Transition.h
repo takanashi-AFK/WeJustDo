@@ -26,6 +26,12 @@ namespace Transition
 	bool SetTransition(TRANSITION_ID _type);
 
 	/// <summary>
+	/// トランジションの総再生時間を設定
+	/// </summary>
+	/// <param name="_time">再生時間(秒)</param>
+	void SetTime(float _time);
+
+	/// <summary>
 	/// トランジションを開始
 	/// </summary>
 	void Start();
