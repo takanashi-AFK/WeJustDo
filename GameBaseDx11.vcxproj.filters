@@ -30,6 +30,9 @@
     <Filter Include="Scene">
       <UniqueIdentifier>{ff2bccf7-1f4e-4295-89be-774408b3da28}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01Engine\Component">
+      <UniqueIdentifier>{d6da072f-736b-46cf-bffd-0560d9fb28cb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\BoxCollider.cpp">
@@ -114,6 +117,9 @@
     <ClCompile Include="Engine\Transition.cpp">
       <Filter>01Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Component\Component.cpp">
+      <Filter>01Engine\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -197,6 +203,9 @@
     </ClInclude>
     <ClInclude Include="Engine\Transition.h">
       <Filter>01Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Component\Component.h">
+      <Filter>01Engine\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
