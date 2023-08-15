@@ -9,10 +9,10 @@ class GameObject;
 class Component
 {
 public:
-    GameObject* parent;//親オブジェクト
+    GameObject* parent_;//親オブジェクト
 public:
     //コンストラクタ
-    Component() :parent(nullptr) {}
+    Component() :parent_(nullptr) {}
 
     //デストラクタ
     virtual ~Component() {}

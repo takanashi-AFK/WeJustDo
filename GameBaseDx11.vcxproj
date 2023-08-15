@@ -150,7 +150,7 @@
     <ClCompile Include="Engine\Sprite.cpp" />
     <ClCompile Include="Engine\Text.cpp" />
     <ClCompile Include="Engine\Texture.cpp" />
-    <ClCompile Include="Engine\Transform.cpp" />
+    <ClCompile Include="Engine\Component\Transform\Transform.cpp" />
     <ClCompile Include="SplashScene.cpp" />
     <ClCompile Include="TestObject.cpp" />
     <ClCompile Include="TestScene.cpp" />
@@ -181,7 +181,7 @@
     <ClInclude Include="Engine\Sprite.h" />
     <ClInclude Include="Engine\Text.h" />
     <ClInclude Include="Engine\Texture.h" />
-    <ClInclude Include="Engine\Transform.h" />
+    <ClInclude Include="Engine\Component\Transform\Transform.h" />
     <ClInclude Include="SplashScene.h" />
     <ClInclude Include="TestObject.h" />
     <ClInclude Include="TestScene.h" />

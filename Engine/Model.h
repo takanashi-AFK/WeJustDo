@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 #include "Fbx.h"
-#include "Transform.h"
+#include "Component/Transform/Transform.h"
 
 //-----------------------------------------------------------
 //3Dモデル（FBXファイル）を管理する

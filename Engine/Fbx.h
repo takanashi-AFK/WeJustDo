@@ -3,7 +3,7 @@
 #include <fbxsdk.h>
 #include <vector>
 #include <string>
-#include "Transform.h"
+#include "Component/Transform/Transform.h"
 
 class FbxParts;
 

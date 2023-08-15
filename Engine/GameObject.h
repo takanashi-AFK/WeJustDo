@@ -5,8 +5,8 @@
 #include <assert.h>
 #include "SphereCollider.h"
 #include "BoxCollider.h"
-#include "Transform.h"
-
+#include "Component/Transform/Transform.h"
+#include "Component/Component.h"
 #include "global.h"
 
 
@@ -181,6 +181,64 @@ private:
 
 	//子オブジェクトリスト
 	std::list<GameObject*> childList_;
+
+	//コンポーネントリスト
+	std::list<Component*> ComponentList_;
+
+public:
+	//コンポーネントを追加するテンプレート
+	template<class T>
+	T* AddComponent() 
+	{
+		T* buff = new T();
+		buff->parent_ = this;
+		ComponentList_.push_back(buff);
+		buff->Start();
+		return buff;
+	}
+
+	//コンポーネントを削除するテンプレート
+	template<class T>
+	T* DeleteComponent()
+	{
+		for (list<Component*>::iterator com = ComponentList_.begin();
+			com != ComponentList_.end())
+		{
+			T* buff = dynamic_cast<T*>(com);
+			//リスト内から見つけたら削除
+			if (buff) {
+				ComponentList_.remove(buff);
+				delete buff;
+			}
+		}
+		return nullptr;
+	}
+
+	//コンポーネントを取得するテンプレート
+	template<class T>
+	T* GetComponent()
+	{
+		list<T*> l;
+		for (list<Component*>::iterator com = ComponentList_.begin();
+			com != ComponentList_.end())
+		{
+			T* buff = dynamic_cast<T*>(com);
+			if (buff != nullptr)return buff;
+		}
+	}
+
+	template<class T*>
+	list<T*> GetComponent()
+	{
+		list<T*> l;
+		for (list<Component*>::iterator com = ComponentList_.begin();
+			com != ComponentList_.end()) 
+		{
+			T* buff = dynamic_cast<T*>(com);
+			if (buff != nullptr)
+			l.push_back(buff);
+		}
+	}
 };
 
 

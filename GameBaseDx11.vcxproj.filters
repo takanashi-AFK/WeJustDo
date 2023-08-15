@@ -33,6 +33,9 @@
     <Filter Include="01Engine\Component">
       <UniqueIdentifier>{d6da072f-736b-46cf-bffd-0560d9fb28cb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01Engine\Component\Transform">
+      <UniqueIdentifier>{979a0ea7-0fde-4855-9c9a-1799ff203359}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\BoxCollider.cpp">
@@ -83,9 +86,6 @@
     <ClCompile Include="Engine\Texture.cpp">
       <Filter>01Engine\DirectX</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Transform.cpp">
-      <Filter>01Engine\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Audio.cpp">
       <Filter>01Engine\ResourceManager</Filter>
     </ClCompile>
@@ -119,6 +119,9 @@
     </ClCompile>
     <ClCompile Include="Engine\SceneManager.cpp">
       <Filter>01Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Component\Transform\Transform.cpp">
+      <Filter>01Engine\Component\Transform</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -173,9 +176,6 @@
     <ClInclude Include="Engine\Texture.h">
       <Filter>01Engine\DirectX</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Transform.h">
-      <Filter>01Engine\GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Audio.h">
       <Filter>01Engine\ResourceManager</Filter>
     </ClInclude>
@@ -206,6 +206,9 @@
     </ClInclude>
     <ClInclude Include="Engine\Component\Component.h">
       <Filter>01Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Component\Transform\Transform.h">
+      <Filter>01Engine\Component\Transform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
