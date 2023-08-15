@@ -222,12 +222,14 @@ public:
 			com = ComponentList_.begin();com != ComponentList_.end();com++)
 		{
 			T* buff = dynamic_cast<T*>(com);
-			if (buff != nullptr)return buff;
+			if (buff != nullptr)
+				return buff;
 		}
 	}
 
+	//コンポーネントリストを取得するテンプレート
 	template<class T*>
-	list<T*> GetComponent()
+	list<T*> GetComponentList()
 	{
 		list<T*> l;
 		for (list<Component*>::iterator 
@@ -237,6 +239,7 @@ public:
 			if (buff != nullptr)
 			l.push_back(buff);
 		}
+		return l;
 	}
 };
 
