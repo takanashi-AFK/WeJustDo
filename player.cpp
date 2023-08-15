@@ -2,7 +2,9 @@
 #include "Engine/Model.h"
 #include"Engine/Input.h"
 #include "yuka.h"
+#include"asiba.h"
 #include"Engine/Camera.h"
+#include"Engine/Debug.h"
 
 
 //コンストラクタ
@@ -28,16 +30,21 @@ void player::Update()
 	Camera::SetTarget(XMFLOAT3(transform_.position_.x + 5, 1.5f, 0.0f));
 
 	//PlayerObjectから下方向に対して伸びる直線を用意
-	RayCastData data;
-	data.start = transform_.position_;
+	RayCastData DownRayData;
+	DownRayData.start = transform_.position_;
+	DownRayData.dir = { 0.0f,-1.0f,0.0f };
+
+	RayCastData UpRayData;
+	UpRayData.start = transform_.position_;
+	UpRayData.dir = { 0.0f,1.0f,0.0f };
 
 	XMFLOAT3 playerNormal = { 0.0f,-1.0f,0.0f };
 	//XMVECTOR wPlayerNormal = XMVector3Transform(XMLoadFloat3(&playerNormal), GetWorldMatrix());
 
-	data.dir = { 0.0f,-1.0f,0.0f };
-	Model::RayCast((*(yuka*)FindObject("yuka")).GetModelHandle(), &data); //レイを発射
+	Model::RayCast((*(yuka*)FindObject("yuka")).GetModelHandle(), &DownRayData); //レイを発射
+	Model::RayCast((*(asiba*)FindObject("asiba")).GetModelHandle(), &UpRayData); //レイを発射
 
-	if (data.hit) {
+	if (DownRayData.hit) {
 		//オブジェクトの下にオブジェクトが存在する場合の処理
 
 		//ジャンプの処理
@@ -66,7 +73,7 @@ void player::Update()
 		}
 
 		//【プレイヤーと地面の位置が一定距離〇〇になったら】
-		if ((data.dist <= 0.4f))
+		if ((DownRayData.dist <= 0.4f))
 		{
 			//【上下方向の加速度は０。】
 			moveY = 0.0f;
@@ -79,7 +86,7 @@ void player::Update()
 		if (isJumping == false)
 		{
 			//【レイの当たった高さに自身を置く】
-			transform_.position_.y -= (data.dist - 0.5f);
+			transform_.position_.y -= (DownRayData.dist - 0.5f);
 		}
 
 		//【プレイヤーのY座標の移動】
@@ -94,6 +101,13 @@ void player::Update()
 		transform_.position_.y += moveY;
 	}
 
+
+	if (UpRayData.hit&&UpRayData.dist<=1.5f)
+	{
+		moveY -= 0.2;
+		//【プレイヤーのY座標の移動】
+		transform_.position_.y += moveY;
+	}
 
 
 	if (Input::IsKey(DIK_A))
