@@ -40,9 +40,16 @@ void player::Update()
 
 	XMFLOAT3 playerNormal = { 0.0f,-1.0f,0.0f };
 	//XMVECTOR wPlayerNormal = XMVector3Transform(XMLoadFloat3(&playerNormal), GetWorldMatrix());
-
-	Model::RayCast((*(yuka*)FindObject("yuka")).GetModelHandle(), &DownRayData); //レイを発射
+	
 	Model::RayCast((*(asiba*)FindObject("asiba")).GetModelHandle(), &UpRayData); //レイを発射
+
+	if (transform_.position_.y >= 2.5f) {
+		Model::RayCast((*(asiba*)FindObject("asiba")).GetModelHandle(), &DownRayData); //レイを発射
+	}
+	else
+	{
+		Model::RayCast((*(yuka*)FindObject("yuka")).GetModelHandle(), &DownRayData); //レイを発射
+	}
 
 	if (DownRayData.hit) {
 		//オブジェクトの下にオブジェクトが存在する場合の処理
@@ -86,7 +93,7 @@ void player::Update()
 		if (isJumping == false)
 		{
 			//【レイの当たった高さに自身を置く】
-			transform_.position_.y -= (DownRayData.dist - 0.5f);
+			transform_.position_.y -= (DownRayData.dist - 1);
 		}
 
 		//【プレイヤーのY座標の移動】
@@ -119,7 +126,10 @@ void player::Update()
 		transform_.position_.x += 0.5;
 	}
 
-	
+	if (Input::IsKeyDown(DIK_V))
+	{
+		Debug::Log(transform_.position_.y);
+	}
 
 }
 
