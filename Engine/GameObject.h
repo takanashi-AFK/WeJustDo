@@ -201,8 +201,8 @@ public:
 	template<class T>
 	T* DeleteComponent()
 	{
-		for (list<Component*>::iterator com = ComponentList_.begin();
-			com != ComponentList_.end())
+		for (list<Component*>::iterator 
+			com = ComponentList_.begin();com != ComponentList_.end();com++)
 		{
 			T* buff = dynamic_cast<T*>(com);
 			//リスト内から見つけたら削除
@@ -215,12 +215,11 @@ public:
 	}
 
 	//コンポーネントを取得するテンプレート
-	template<class T>
-	T* GetComponent()
+	template<class T>T* GetComponent()
 	{
 		list<T*> l;
-		for (list<Component*>::iterator com = ComponentList_.begin();
-			com != ComponentList_.end())
+		for (list<Component*>::iterator 
+			com = ComponentList_.begin();com != ComponentList_.end();com++)
 		{
 			T* buff = dynamic_cast<T*>(com);
 			if (buff != nullptr)return buff;
@@ -231,8 +230,8 @@ public:
 	list<T*> GetComponent()
 	{
 		list<T*> l;
-		for (list<Component*>::iterator com = ComponentList_.begin();
-			com != ComponentList_.end()) 
+		for (list<Component*>::iterator 
+			com = ComponentList_.begin();com != ComponentList_.end();com++) 
 		{
 			T* buff = dynamic_cast<T*>(com);
 			if (buff != nullptr)
