@@ -39,6 +39,12 @@ GameObject::~GameObject()
 		SAFE_DELETE(*it);
 	}
 	colliderList_.clear();
+
+	//コンポーネントリストを解放
+	for (auto it = ComponentList_.begin(); it != ComponentList_.end(); it++) {
+		if ((*it))SAFE_DELETE(*it);
+	}
+	ComponentList_.clear();
 }
 
 // 削除するかどうか
@@ -296,6 +302,13 @@ void GameObject::UpdateSub()
 	Update();
 	Transform();
 
+	//コンポーネントの更新処理
+	for (auto it = ComponentList_.begin(); it != ComponentList_.end(); it++)
+	{
+		(*it)->Update();
+	}
+
+	//子供の更新処理
 	for (auto it = childList_.begin(); it != childList_.end(); it++)
 	{
 		(*it)->UpdateSub();
@@ -313,7 +326,7 @@ void GameObject::UpdateSub()
 		{
 			//当たり判定
 			(*it)->Collision(GetParent());
-			it++;
+			it++;			
 		}
 	}
 }
@@ -332,6 +345,12 @@ void GameObject::DrawSub()
 	}
 #endif
 
+	//コンポーネントの更新処理
+	for (auto it = ComponentList_.begin(); it != ComponentList_.end(); it++)
+	{
+		(*it)->Draw();
+	}
+
 	//その子オブジェクトの描画処理
 	for (auto it = childList_.begin(); it != childList_.end(); it++)
 	{
@@ -344,6 +363,12 @@ void GameObject::ReleaseSub()
 	//コライダーを削除
 	ClearCollider();
 
+	//コンポーネントリストを解放
+	for (auto it = ComponentList_.begin(); it != ComponentList_.end(); it++)
+	{
+		if ((*it))SAFE_DELETE(*it);
+	}
+	ComponentList_.clear();
 
 	for (auto it = childList_.begin(); it != childList_.end(); it++)
 	{
