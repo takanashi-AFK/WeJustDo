@@ -26,6 +26,7 @@ void player::Initialize()
 //更新
 void player::Update()
 {
+	std::vector<Model::DaH> DaHList;
 	Camera::SetPosition(XMFLOAT3(transform_.position_.x + 5, 3.5f, -15.0f));
 	Camera::SetTarget(XMFLOAT3(transform_.position_.x + 5, 1.5f, 0.0f));
 
@@ -33,6 +34,9 @@ void player::Update()
 	RayCastData DownRayData;
 	DownRayData.start = transform_.position_;
 	DownRayData.dir = { 0.0f,-1.0f,0.0f };
+
+	DaHList = Model::GetHitModelList(&DownRayData, hModel_);
+	Model::DaH nearDist = Model::SortList(DaHList);
 
 	RayCastData UpRayData;
 	UpRayData.start = transform_.position_;
@@ -42,7 +46,7 @@ void player::Update()
 	//XMVECTOR wPlayerNormal = XMVector3Transform(XMLoadFloat3(&playerNormal), GetWorldMatrix());
 	
 	Model::RayCast((*(asiba*)FindObject("asiba")).GetModelHandle(), &UpRayData); //レイを発射
-
+/*
 	if (transform_.position_.y >= 2.5f) {
 		Model::RayCast((*(asiba*)FindObject("asiba")).GetModelHandle(), &DownRayData); //レイを発射
 	}
@@ -50,6 +54,8 @@ void player::Update()
 	{
 		Model::RayCast((*(yuka*)FindObject("yuka")).GetModelHandle(), &DownRayData); //レイを発射
 	}
+*/
+
 
 	if (DownRayData.hit) {
 		//オブジェクトの下にオブジェクトが存在する場合の処理
@@ -57,6 +63,7 @@ void player::Update()
 		//ジャンプの処理
 		if (Input::IsKeyDown(DIK_SPACE) && isJumping == false)
 		{
+			flame = 0;
 			//【ジャンプの上方向の加速度＝〇〇】
 			moveY += 0.5f;
 
@@ -67,9 +74,9 @@ void player::Update()
 		//【地に足がついていない時】
 		else if (isJumping == true)
 		{
+			flame++;
 			//【重力加速度＝〇〇】
 			moveY -= 0.02f;
-			transform_.rotate_.z = 0.0f;
 
 			//【もしも下方向の加速度が一定値〇〇以下であれば
 			if (moveY <= -0.3f)
@@ -82,7 +89,7 @@ void player::Update()
 		//【プレイヤーと地面の位置が一定距離〇〇になったら】
 		if ((DownRayData.dist <= 0.4f))
 		{
-			//【上下方向の加速度は０。】
+			//【上下方向の加速度は０】
 			moveY = 0.0f;
 
 			//【地に足がついている】
@@ -93,7 +100,7 @@ void player::Update()
 		if (isJumping == false)
 		{
 			//【レイの当たった高さに自身を置く】
-			transform_.position_.y -= (DownRayData.dist - 1);
+			transform_.position_.y -= (nearDist.Dist - 1);
 		}
 
 		//【プレイヤーのY座標の移動】
@@ -128,7 +135,7 @@ void player::Update()
 
 	if (Input::IsKeyDown(DIK_V))
 	{
-		Debug::Log(transform_.position_.y);
+		Debug::Log(flame);
 	}
 
 }

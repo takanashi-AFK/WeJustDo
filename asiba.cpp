@@ -14,6 +14,7 @@ void asiba::Initialize()
 	assert(hModel_ >= 0);
 
 	transform_.position_.y = 3.0f;
+	transform_.position_.x = 7.0f;
 }
 
 //XV

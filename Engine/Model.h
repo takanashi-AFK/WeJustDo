@@ -46,6 +46,11 @@ namespace Model
 		}
 	};
 
+	struct DaH
+	{
+		float Dist;
+		int handle;
+	};
 
 	//初期化
 	void Initialize();
@@ -100,4 +105,11 @@ namespace Model
 	//引数：data	必要なものをまとめたデータ
 	void RayCast(int handle, RayCastData *data);
 
-};
+	std::vector<ModelData*> GetModelData();
+
+	int GetAllModelHandle();
+
+	std::vector<DaH> GetHitModelList(RayCastData* _Raydata, int hModel);
+
+	DaH SortList(std::vector<DaH> tmpList);
+}

@@ -1,9 +1,11 @@
 #include "Global.h"
 #include "Model.h"
-
+#include <algorithm>
 //3Dモデル（FBXファイル）を管理する
 namespace Model
 {
+
+	
 	//ロード済みのモデルデータ一覧
 	std::vector<ModelData*>	_datas;
 
@@ -192,4 +194,45 @@ namespace Model
 
 			_datas[handle]->pFbx->RayCast(data); 
 	}
+
+	std::vector<ModelData*> GetModelData()
+	{
+		return _datas;
+	}
+
+	int GetAllModelHandle() {
+		return (int)_datas.size();
+	}
+
+	//レイキャストが当たっているモデルをリストとして取得する関数
+	std::vector<DaH> GetHitModelList(RayCastData* _Raydata, int hModel)
+	{
+		std::vector<DaH> tmpList; 
+		for (int i = 0; i <= _datas.size()-1; i++) {
+			
+			if (hModel != i)
+			{
+				RayCast(i, _Raydata);
+				if (_Raydata->hit) {
+					DaH temp = { _Raydata->dist,i };
+					tmpList.push_back(temp);
+				}
+			}
+		}
+		return tmpList;
+	}
+
+	//ソート用の関数だから気にしなくていい
+	bool CompareByDist(const DaH& a, const DaH& b) {
+		return a.Dist < b.Dist;
+	}
+
+	DaH SortList(std::vector<DaH> tmpList)
+	{	
+		std::sort(tmpList.begin(), tmpList.end(), CompareByDist);
+
+		return tmpList.front();
+	}
+
+
 }

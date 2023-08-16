@@ -9,6 +9,7 @@ class player : public GameObject
 	bool isJumping;
 	float moveY;
 	float Deg;
+	int flame;
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）
@@ -25,4 +26,7 @@ public:
 
 	//開放
 	void Release() override;
+
+	int GetModelHandle() { return hModel_; }
+
 };
