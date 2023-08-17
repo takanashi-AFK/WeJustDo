@@ -236,7 +236,9 @@ namespace Model
 		}
 
 		//dist順に昇順ソート
-		std::sort(hitList.begin(), hitList.end(), CompareByDist);
+		if (hitList.empty()) {
+			std::sort(hitList.begin(), hitList.end(), CompareByDist);
+		}
 
 		//ソートされたリストの先頭要素を返す（もしくは、必要に応じて返り値を調整）
 		if (!hitList.empty()) {

@@ -9,7 +9,7 @@ void StandingState::Update(Player* _p)
 
 	//“–‚½‚Á‚½‹——£‚ª0.9f‚æ‚è¬‚³‚¢‚È‚ç
 	if (_p->GetUnderRay().dist <= 0.9f) {
-		_p->SetPositionY((_p->GetPosition().y -0.5f) - _p->GetUnderRay().dist);
+		_p->SetPositionY(_p->GetPosition().y - _p->GetUnderRay().dist);
 	}
 
 	//“ü—Íˆ—
