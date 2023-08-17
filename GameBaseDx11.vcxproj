@@ -151,7 +151,12 @@
     <ClCompile Include="Engine\Text.cpp" />
     <ClCompile Include="Engine\Texture.cpp" />
     <ClCompile Include="Engine\Component\Transform\Transform.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerState.cpp" />
+    <ClCompile Include="PlayerStateManager.cpp" />
+    <ClCompile Include="RunningState.cpp" />
     <ClCompile Include="SplashScene.cpp" />
+    <ClCompile Include="StandingState.cpp" />
     <ClCompile Include="TestObject.cpp" />
     <ClCompile Include="TestScene.cpp" />
   </ItemGroup>
@@ -182,7 +187,12 @@
     <ClInclude Include="Engine\Text.h" />
     <ClInclude Include="Engine\Texture.h" />
     <ClInclude Include="Engine\Component\Transform\Transform.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerState.h" />
+    <ClInclude Include="PlayerStateManager.h" />
+    <ClInclude Include="RunningState.h" />
     <ClInclude Include="SplashScene.h" />
+    <ClInclude Include="StandingState.h" />
     <ClInclude Include="TestObject.h" />
     <ClInclude Include="TestScene.h" />
   </ItemGroup>
