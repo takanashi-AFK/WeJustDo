@@ -13,6 +13,9 @@ void TestScene::Initialize()
 	SolidObject* p1 = CreateSolidObject<TestObject>(this, "defaultModel.fbx");
 	SolidObject* p2 = CreateSolidObject<TestObject>(this, "defaultModel.fbx");
 	dynamic_cast<TestObject*>(p1)->IsMove(false);
+	dynamic_cast<TestObject*>(p1)->SetPositionX(-2.0f);
+
+
 }
 
 //çXêV
