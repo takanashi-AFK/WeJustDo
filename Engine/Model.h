@@ -27,6 +27,9 @@ namespace Model
 		float nowFrame, animSpeed;
 		int startFrame, endFrame;
 
+		//レイ判定flag
+		bool isRay = true;
+
 
 		//初期化
 		ModelData() : pFbx(nullptr), nowFrame(0), startFrame(0), endFrame(0), animSpeed(0)
@@ -89,6 +92,13 @@ namespace Model
 	//引数：matrix	ワールド行列
 	void SetTransform(int handle, Transform& transform);
 
+	/// <summary>
+	/// レイキャスト判定をつけるかを設定する
+	/// </summary>
+	/// <param name="handle">モデル番号</param>
+	/// <param name="flag">判定</param>
+	void SetRayFlag(int handle, bool flag);
+
 	//ワールド行列の取得
 	//引数：handle	知りたいモデルの番号
 	//戻値：ワールド行列
@@ -99,5 +109,11 @@ namespace Model
 	//引数：handle	判定したいモデルの番号
 	//引数：data	必要なものをまとめたデータ
 	void RayCast(int handle, RayCastData *data);
+
+	/// <summary>
+	/// 一番近いレイキャストデータを取得
+	/// </summary>
+	/// <param name="data">必要なレイキャストデータ</param>
+	RayCastData GetNeardistRayData(RayCastData data);
 
 };

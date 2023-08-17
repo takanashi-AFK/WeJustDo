@@ -11,10 +11,13 @@ void PlayerStateManager::Update(Player* _p)
 {
 	//Œ»Ý‚Ìó‘Ô‚ÌXV
 	playerState_->Update(_p);
+
+	
 }
 
 void PlayerStateManager::HandleInput(Player* _p)
 {
+
 }
 
 void PlayerStateManager::Enter(Player* _p)

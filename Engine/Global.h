@@ -21,3 +21,11 @@ using namespace std;
 //‚P‚Å‰Šú‰»
 #define ONE_ASSIGN(p){p = 1;}
 
+//XMVECTOR‚Ì•Ï”‚ğXMFLOAT3‚É•Ï‚¦‚Ä•Ô‚µ‚Ä‚­‚ê‚é
+static XMFLOAT3 VectorToFloat3(XMVECTOR v)
+{
+	XMFLOAT3 a;
+	XMStoreFloat3(&a, v);
+
+	return a;
+}
