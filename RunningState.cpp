@@ -2,8 +2,7 @@
 #include "Engine/Input.h"
 #include "Player.h"
 #include "Engine/Camera.h"
-
-
+#include "Engine/SceneManager.h"
 
 
 void RunningState::Update(Player* _p)
@@ -31,5 +30,10 @@ void RunningState::HandleInput(Player* _p)
 	
 	if (Input::IsKeyDown(DIK_C)) {
 		_p->GetState()->ChangeState(_p->GetState()->pStanding_, _p);
+	}
+
+	if (Input::IsKeyDown(DIK_SPACE)) {
+		SceneManager *toResult = _p->GetSceneData();
+		toResult->ChangeScene(SCENE_ID_RESULT, TID_BLACKOUT);//‚ ‚Æ‚Åƒ^ƒCƒgƒ‹‚É‚·‚é
 	}
 }

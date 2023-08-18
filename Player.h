@@ -2,6 +2,7 @@
 #include "Engine/SolidObject.h"
 #include "PlayerStateManager.h"
 #include "Engine/Model.h"
+#include "Engine/SceneManager.h"
 /// <summary>
 /// Playerの基底クラス
 /// </summary>
@@ -12,6 +13,8 @@ protected:
 	PlayerStateManager* pState_;	//Playerの状態管理
 
 	RayCastData underRay_;	//プレイヤーの下に伸びるレイ
+
+	SceneManager* sm;
 public:
 	//コンストラクタ
 	Player(GameObject* _parent, string _modelFileName);
@@ -39,4 +42,6 @@ public:
 	/// ステージとの接触判定処理を行う
 	/// </summary>
 	void StageRayCast();
+
+	SceneManager* GetSceneData() { return sm; }
 };
