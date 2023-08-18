@@ -131,6 +131,9 @@
     <ClCompile Include="StageManager.cpp" />
     <ClCompile Include="StandingState.cpp" />
     <ClCompile Include="Stage.cpp" />
+    <ClCompile Include="ResultScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -226,6 +229,9 @@
     <ClInclude Include="StageManager.h" />
     <ClInclude Include="StandingState.h" />
     <ClInclude Include="Stage.h" />
+    <ClInclude Include="ResultScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">

@@ -20,6 +20,7 @@ void Player::ChildInitialize()
 	//ó‘Ô‚Ì‰Šú‰»
 	ASSIGN(pState_->playerState_, pState_->pStanding_);
 	pState_->Enter(this);
+	sm = (SceneManager*)GameObject::FindObject("SceneManager");
 }
 
 void Player::ChildUpdate()
