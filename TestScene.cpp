@@ -12,19 +12,20 @@ TestScene::TestScene(GameObject * parent)
 void TestScene::Initialize()
 {
 	///// setting Object1 ///////////////////////////////////////////////////////
-	SolidObject* p1 = CreateSolidObject<TestObject>(this, "defaultModel.fbx");
+	SolidObject* p1 = CreateSolidObject<TestObject>(this, "Models/kusaBlock.fbx");
 	{
 		dynamic_cast<TestObject*>(p1)->IsMove(false);
 		p1->SetPositionX(-2.0f);
 	}
 
 	///// setting Object2 ///////////////////////////////////////////////////////
-	SolidObject* p2 = CreateSolidObject<TestObject>(this, "defaultModel.fbx");
-	{
-
+	for (int i = 0; i < 250; i++) {
+		SolidObject* p2 = CreateSolidObject<TestObject>(this, "Models/rengaBlock.fbx");
+		p2->SetPositionX(i);
 	}
+	
 
-	Player* pPlayer = CreateSolidObject<Player>(this, "defaultModel.fbx");
+	Player* pPlayer = CreateSolidObject<Player>(this, "Models/defaultModel.fbx");
 
 }
 

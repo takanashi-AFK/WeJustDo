@@ -27,9 +27,6 @@ void Player::ChildUpdate()
 	//更新
 	pState_->Update(this);
 
-	
-
-
 	// ロードしたモデルすべてにレイキャストを常に打つ
 	// hit情報がtrueのモノだけをまとめたヒットリストを作成
 	// ヒットリスト内の情報からdistが一番近いRayCastDataを返す
@@ -54,14 +51,14 @@ void Player::StageRayCast()
 	XMFLOAT3 tmpPos = transform_.position_;
 	tmpPos.y += (PLAYER_MODEL_SIZE.y / 2);
 
-	//distが0.9より小さければ
-	if (underRay_.dist <= 0.9f) {
 
-		//地面に位置を合わせる
-		transform_.position_.y = (tmpPos.y - underRay_.dist);
-	}
-	else
-	{
-		transform_.position_.y -= 0.03f;
-	}
+
+	////distが0.9より小さければ
+	//if (underRay_.dist <= 0.9f) {
+	//	//地面に位置を合わせる
+	//	transform_.position_.y = (tmpPos.y - underRay_.dist);
+	//}
+	//else{
+	//	transform_.position_.y -= 0.03f;
+	//}
 }

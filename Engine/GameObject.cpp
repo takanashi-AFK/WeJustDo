@@ -247,11 +247,11 @@ void GameObject::Collision(GameObject * pTarget)
 
 	//自分とpTargetのコリジョン情報を使って当たり判定
 	//1つのオブジェクトが複数のコリジョン情報を持ってる場合もあるので二重ループ
-	for (auto i = this->colliderList_.begin(); i != this->colliderList_.end(); i++)
+	for (auto i : colliderList_)
 	{
-		for (auto j = pTarget->colliderList_.begin(); j != pTarget->colliderList_.end(); j++)
+		for (auto j : pTarget->colliderList_)
 		{
-			if ((*i)->IsHit(*j))
+			if (i->IsHit(j))
 			{
 				//当たった
 				this->OnCollision(pTarget);
@@ -259,14 +259,10 @@ void GameObject::Collision(GameObject * pTarget)
 		}
 	}
 
-	//子供がいないなら終わり
-	if (pTarget->childList_.empty())
-		return;
-
 	//子供も当たり判定
-	for (auto i = pTarget->childList_.begin(); i != pTarget->childList_.end(); i++)
+	for (auto i : pTarget->childList_)
 	{
-		Collision(*i);
+		Collision(i);
 	}
 }
 

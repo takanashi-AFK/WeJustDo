@@ -602,8 +602,9 @@ void FbxParts::RayCast(RayCastData * data)
 
 			BOOL  hit = FALSE;
 			float dist = 0.0f;
+			XMVECTOR pos;
 
-			hit = Direct3D::Intersect(data->start, data->dir, ver[0], ver[1], ver[2], &dist);
+			hit = Direct3D::Intersect(data->start, data->dir, ver[0], ver[1], ver[2], &dist,&pos);
 
 			//３頂点から外積を取得し、ポリゴンに垂直な法線を取得
 			XMVECTOR polygonNormal =
@@ -614,6 +615,7 @@ void FbxParts::RayCast(RayCastData * data)
 				data->hit = TRUE;
 				data->dist = dist;
 				data->normal = polygonNormal;
+				XMStoreFloat3(&data->pos, pos);
 			}
 		}
 	}

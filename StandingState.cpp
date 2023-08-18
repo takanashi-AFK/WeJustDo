@@ -4,14 +4,12 @@
 
 void StandingState::Update(Player* _p)
 {
-	static float angle; angle+=0.1f;
-	_p->SetRotateY(angle);
-
-
-	
 
 	//“ü—Íˆ—
 	HandleInput(_p);
+
+	static float angle; angle += 0.1;
+	_p->SetRotateY(angle);
 }
 
 void StandingState::Enter(Player* _p)

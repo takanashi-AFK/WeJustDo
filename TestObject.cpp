@@ -18,6 +18,9 @@ void TestObject::ChildUpdate()
 	if (isFlag_) {
 		if (Input::IsKey(DIK_D))transform_.position_.x+=0.1f;
 		if (Input::IsKey(DIK_A))transform_.position_.x-=0.1f;
+		if (Input::IsKey(DIK_W))transform_.position_.y += 0.1f;
+		if (Input::IsKey(DIK_S))transform_.position_.y -= 0.1f;
+
 	}
 }
 
