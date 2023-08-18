@@ -14,9 +14,10 @@ TestScene::TestScene(GameObject * parent)
 void TestScene::Initialize()
 {
 	//ステージを作成
-	StageManager::CreateStage(this, "MapTest1.csv");
+	//StageManager::CreateStage(this, "MapTest1.csv");
 
-	
+	//Test
+	TestObject* pt = CreateSolidObject<TestObject>(this, "Models/Stage100.fbx");
 
 	Player* pPlayer = CreateSolidObject<Player>(this, "Models/defaultModel.fbx");
 }
