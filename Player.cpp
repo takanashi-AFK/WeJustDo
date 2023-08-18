@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "StageManager.h"
 
 //’è”éŒ¾
 namespace {
@@ -51,13 +52,11 @@ void Player::StageRayCast()
 	XMFLOAT3 tmpPos = transform_.position_;
 	tmpPos.y += (PLAYER_MODEL_SIZE.y / 2);
 
+	using namespace StageManager;
 
-	////dist‚ª0.9‚æ‚è¬‚³‚¯‚ê‚Î
-	//if (underRay_.dist <= 0.9f) {
-	//	//’n–Ê‚ÉˆÊ’u‚ğ‡‚í‚¹‚é
-	//	transform_.position_.y = (tmpPos.y - underRay_.dist);
-	//}
-	//else{
-	//	transform_.position_.y -= 0.03f;
-	//}
+	if (StageManager::IsBlock(&tmpPos, Right)) {
+		ASSIGN(transform_.position_, tmpPos);
+	}
+
+
 }

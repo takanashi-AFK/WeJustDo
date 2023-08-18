@@ -19,7 +19,6 @@ void StageManager::CreateStage(GameObject* parent)
 
 }
 
-
 bool isPsoitionHits(XMFLOAT3 p,XMFLOAT3 s,XMFLOAT3 *pos) {
 	return p.x + (BLOCK_SIZE * s.x) > pos->x &&
 		p.x - (BLOCK_SIZE * s.x) < pos->x &&
