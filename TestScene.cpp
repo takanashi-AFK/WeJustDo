@@ -14,7 +14,7 @@ TestScene::TestScene(GameObject * parent)
 void TestScene::Initialize()
 {
 	//ステージを作成
-	StageManager::CleateStage(this);
+	StageManager::CreateStage(this, "MapTest1.csv");
 
 	
 

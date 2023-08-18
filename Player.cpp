@@ -27,6 +27,7 @@ void Player::ChildUpdate()
 	//更新
 	pState_->Update(this);
 
+
 	// ロードしたモデルすべてにレイキャストを常に打つ
 	// hit情報がtrueのモノだけをまとめたヒットリストを作成
 	// ヒットリスト内の情報からdistが一番近いRayCastDataを返す

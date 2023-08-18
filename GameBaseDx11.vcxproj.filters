@@ -123,6 +123,14 @@
     <ClCompile Include="Engine\Component\Transform\Transform.cpp">
       <Filter>01Engine\Component\Transform</Filter>
     </ClCompile>
+    <ClCompile Include="Block.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerState.cpp" />
+    <ClCompile Include="PlayerStateManager.cpp" />
+    <ClCompile Include="RunningState.cpp" />
+    <ClCompile Include="StageManager.cpp" />
+    <ClCompile Include="StandingState.cpp" />
+    <ClCompile Include="Stage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -210,6 +218,14 @@
     <ClInclude Include="Engine\Component\Transform\Transform.h">
       <Filter>01Engine\Component\Transform</Filter>
     </ClInclude>
+    <ClInclude Include="Block.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerState.h" />
+    <ClInclude Include="PlayerStateManager.h" />
+    <ClInclude Include="RunningState.h" />
+    <ClInclude Include="StageManager.h" />
+    <ClInclude Include="StandingState.h" />
+    <ClInclude Include="Stage.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">
