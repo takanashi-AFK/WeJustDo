@@ -52,7 +52,6 @@ void Player::StageRayCast()
 	tmpPos.y += (PLAYER_MODEL_SIZE.y / 2);
 
 
-
 	////dist‚ª0.9‚æ‚è¬‚³‚¯‚ê‚Î
 	//if (underRay_.dist <= 0.9f) {
 	//	//’n–Ê‚ÉˆÊ’u‚ğ‡‚í‚¹‚é

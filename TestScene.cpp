@@ -14,9 +14,7 @@ TestScene::TestScene(GameObject * parent)
 void TestScene::Initialize()
 {
 	//ステージを作成
-	StageManager::CleateStage(this);
-
-	
+	StageManager::CreateStage(this);
 
 	Player* pPlayer = CreateSolidObject<Player>(this, "Models/defaultModel.fbx");
 }

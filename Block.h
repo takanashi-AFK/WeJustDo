@@ -6,6 +6,8 @@
 /// </summary>
 class Block : public SolidObject
 {
+protected:
+	bool isHit_;
 public:
 	Block(GameObject* parent,string modelFileName,string name);
 
@@ -18,6 +20,8 @@ public:
 	virtual void BlockChildUpdate(){}
 	virtual void BlockChildDraw(){}
 	virtual void BlockChildRelease(){}
+
+	void SetIsHit(const bool& flag) { isHit_ = flag; }
 
 };
 
