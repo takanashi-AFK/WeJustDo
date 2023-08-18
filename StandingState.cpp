@@ -7,10 +7,8 @@ void StandingState::Update(Player* _p)
 	static float angle; angle+=0.1f;
 	_p->SetRotateY(angle);
 
-	//“–‚½‚Á‚½‹——£‚ª0.9f‚æ‚è¬‚³‚¢‚È‚ç
-	if (_p->GetUnderRay().dist <= 0.9f) {
-		_p->SetPositionY(_p->GetPosition().y - _p->GetUnderRay().dist);
-	}
+
+	
 
 	//“ü—Íˆ—
 	HandleInput(_p);

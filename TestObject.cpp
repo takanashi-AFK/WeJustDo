@@ -1,5 +1,6 @@
 #include "TestObject.h"
 #include "Engine/Input.h"
+#include "Engine/Model.h"
 
 TestObject::TestObject(GameObject* _parent, string _modelFileName)
 	:SolidObject(_parent, _modelFileName, "TestObject"), isFlag_(true)
@@ -8,6 +9,8 @@ TestObject::TestObject(GameObject* _parent, string _modelFileName)
 
 void TestObject::ChildInitialize()
 {
+	//ƒŒƒC‚Ì“–‚½‚è”»’è‚ð—LŒø‚É‚·‚é
+	Model::SetRayFlag(hModel_, true);
 }
 
 void TestObject::ChildUpdate()

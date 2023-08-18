@@ -192,12 +192,10 @@ namespace Model
 	void RayCast(int handle, RayCastData *data)
 	{
 		RayCastData tmp;
-		{
-			tmp.start = data->start;
-			tmp.dir = data->dir;
-			tmp.normal = data->normal;
-			tmp.hit = false;
-		};
+		tmp.start = data->start;
+		tmp.dir = data->dir;
+		tmp.normal = data->normal;
+		tmp.hit = false;
 
 		XMFLOAT3 target = Transform::Float3Add(data->start, data->dir);
 		XMMATRIX matInv = XMMatrixInverse(nullptr, _datas[handle]->transform.GetWorldMatrix());

@@ -28,11 +28,10 @@ namespace Model
 		int startFrame, endFrame;
 
 		//ƒŒƒC”»’èflag
-		bool isRay = true;
-
+		bool isRay;
 
 		//‰Šú‰»
-		ModelData() : pFbx(nullptr), nowFrame(0), startFrame(0), endFrame(0), animSpeed(0)
+		ModelData() : pFbx(nullptr), nowFrame(0), startFrame(0), endFrame(0), animSpeed(0),isRay(false)
 		{
 		}
 

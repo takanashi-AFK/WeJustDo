@@ -34,4 +34,9 @@ public:
 	/// </summary>
 	/// <returns>レイキャスト情報</returns>
 	RayCastData GetUnderRay() { return underRay_; }
+
+	/// <summary>
+	/// ステージとの接触判定処理を行う
+	/// </summary>
+	void StageRayCast();
 };
