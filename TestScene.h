@@ -6,6 +6,7 @@ class Stage;
 //テストシーンを管理するクラス
 class TestScene : public GameObject
 {
+	int hPict_;
 	Player* pPlayer_;
 	Stage* pStage_;
 public:

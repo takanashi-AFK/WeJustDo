@@ -21,7 +21,7 @@ void SplashScene::Update()
 
 	if (time/60 >= changeTime) {
 		SceneManager* sm = (SceneManager*)FindObject("SceneManager");
-		sm->ChangeScene(SCENE_ID_TEST,TID_BLACKOUT);
+		sm->ChangeScene(SCENE_ID_TITLE,TID_BLACKOUT);
 	}
 }
 

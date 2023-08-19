@@ -1,5 +1,8 @@
 #include "TitleScene.h"
 #include "Engine/Image.h"
+#include "SkySphere.h"
+#include "Engine/SceneManager.h"
+#include "Engine/Input.h"
 
 TitleScene::TitleScene(GameObject* parent)
 	:GameObject(parent,"TitleScene")
@@ -8,19 +11,23 @@ TitleScene::TitleScene(GameObject* parent)
 
 void TitleScene::Initialize()
 {
-	//âÊëúÇÃÉçÅ[Éh
-	ASSIGN(hPict_, Image::Load(""));
-	assert(hPict_ <= 0);
+	Instantiate<SkySphere>(this);
+
+	
+
 }
 
 void TitleScene::Update()
 {
+	if (Input::IsKeyDown(DIK_SPACE)) {
+		SceneManager* sm = (SceneManager*)FindObject("SceneManager");
+		sm->ChangeScene(SCENE_ID_TEST, TID_BLACKOUT);
+	}
 }
 
 void TitleScene::Draw()
 {
-	Image::SetTransform(hPict_, transform_);
-	Image::Draw(hPict_);
+	
 }
 
 void TitleScene::Release()
