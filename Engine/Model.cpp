@@ -196,6 +196,7 @@ namespace Model
 		tmp.dir = data->dir;
 		tmp.normal = data->normal;
 		tmp.hit = false;
+		data->dist = 99999.9f;
 
 		XMFLOAT3 target = Transform::Float3Add(data->start, data->dir);
 		XMMATRIX matInv = XMMatrixInverse(nullptr, _datas[handle]->transform.GetWorldMatrix());
