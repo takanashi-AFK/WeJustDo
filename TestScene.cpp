@@ -6,6 +6,7 @@
 #include "Stage.h"
 #include "Engine/Image.h"
 #include "Engine/Input.h"
+#include "Engine/SceneManager.h"
 
 //コンストラクタ
 TestScene::TestScene(GameObject * parent)
@@ -47,8 +48,12 @@ void TestScene::Update()
 	//Camera
 	Camera::SetPosition(pPlayer_->GetPosition().x, 5.4f, -12.7);
 	Camera::SetTarget(pPlayer_->GetPosition().x, 4.0f, 7.3f);
-}
 
+	if (pPlayer_->GetPosition().y <= -20.0f) {
+		SceneManager* sM=(SceneManager*)FindObject("SceneManager");
+		sM->ChangeScene(SCENE_ID_RESULT, TID_WHITEOUT);
+	}
+}
 //描画
 void TestScene::Draw()
 {
