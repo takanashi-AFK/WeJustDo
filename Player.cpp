@@ -34,6 +34,7 @@ void Player::ChildUpdate()
 	}
 
 	{//debug-PlayerJump
+
 		//PlayerObjectから下方向に対して伸びる直線を用意
 		RayCastData data;
 		data.start = transform_.position_;
@@ -118,11 +119,7 @@ void Player::ChildUpdate()
 			moveY -= 0.02f;
 			transform_.position_.y += moveY;
 		}
-
 	}
-
-
-	//StageRayCast();	//ステージとのあたり判定
 
 	//更新
 	//pState_->Update(this);
@@ -136,6 +133,7 @@ void Player::ChildUpdate()
 		ASSIGN(under.dir, VectorToFloat3(XMVectorSet(0, -1, 0, 0)));
 		underRay_ = Model::GetNeardistRayData(under);*/
 	}
+	//StageRayCast();	//ステージとのあたり判定
 
 }
 
