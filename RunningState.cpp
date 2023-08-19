@@ -32,8 +32,5 @@ void RunningState::HandleInput(Player* _p)
 		_p->GetState()->ChangeState(_p->GetState()->pStanding_, _p);
 	}
 
-	if (Input::IsKeyDown(DIK_SPACE)) {
-		SceneManager *toResult = _p->GetSceneData();
-		toResult->ChangeScene(SCENE_ID_RESULT, TID_BLACKOUT);//‚ ‚Æ‚Åƒ^ƒCƒgƒ‹‚É‚·‚é
-	}
+	
 }

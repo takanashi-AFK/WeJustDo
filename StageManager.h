@@ -6,5 +6,7 @@ namespace StageManager	//åpè≥ÇÕÇµÇ»Ç¢
 
 	void CreateStage(GameObject* parent);
 	void CreateStage(GameObject* parent,string _filename);
+	void DeleteStage();
+	void StageTableRelease();
 };
 

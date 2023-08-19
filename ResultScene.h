@@ -6,7 +6,17 @@ class ResultScene : public GameObject
 private:
 	int hPict_;
 	int bgPict_;
-	Text* pText;
+
+	int totalScore=123;
+	int firewoodScore=456;
+	int timeScore=789;
+
+
+	Text* pTotal_;
+	Text* pFirewood_;
+	Text* pTime_;
+
+
 	Transform card_;
 	Transform bg_;
 public:

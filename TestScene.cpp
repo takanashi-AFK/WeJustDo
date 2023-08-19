@@ -1,6 +1,7 @@
 #include "TestScene.h"
 #include "TestObject.h"
 #include "Player.h"
+#include"Engine/Input.h"
 
 #include "StageManager.h"
 
@@ -24,6 +25,12 @@ void TestScene::Initialize()
 //更新
 void TestScene::Update()
 {
+	if (Input::IsKeyDown(DIK_SPACE)) {
+
+		SceneManager* toResult = (SceneManager*)FindObject("SceneManager");
+		toResult->ChangeScene(SCENE_ID_RESULT, TID_BLACKOUT);//あとでタイトルにす
+
+	}
 }
 
 //描画
@@ -34,4 +41,5 @@ void TestScene::Draw()
 //開放
 void TestScene::Release()
 {
+	StageManager::StageTableRelease();
 }

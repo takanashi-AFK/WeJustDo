@@ -56,7 +56,6 @@ bool GameObject::IsDead()
 // ©•ª‚ğíœ‚·‚é
 void GameObject::KillMe()
 {
-	state_.dead = 1;
 }
 
 // Update‚ğ‹–‰Â

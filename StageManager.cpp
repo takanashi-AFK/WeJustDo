@@ -11,6 +11,10 @@ namespace StageManager
 	vector<vector<int>> Table_;
 
 	int YHeight = -7;
+
+	SolidObject* p1;
+	SolidObject* p2;
+	SolidObject* p3;
 }
 
 enum BlockPattern
@@ -24,7 +28,7 @@ void StageManager::CreateStage(GameObject* parent)
 {
 
 	///// setting Object1 ///////////////////////////////////////////////////////
-	SolidObject* p1 = CreateSolidObject<TestObject>(parent, "Models/kusaBlock.fbx");
+	p1 = CreateSolidObject<TestObject>(parent, "Models/kusaBlock.fbx");
 	{
 		dynamic_cast<TestObject*>(p1)->IsMove(false);
 		p1->SetPositionX(-2.0f);
@@ -32,7 +36,7 @@ void StageManager::CreateStage(GameObject* parent)
 
 	///// setting Object2 ///////////////////////////////////////////////////////
 	for (int i = 0; i < 250; i++) {
-		SolidObject* p2 = CreateSolidObject<TestObject>(parent, "Models/kusaBlock.fbx");
+		 p2 = CreateSolidObject<TestObject>(parent, "Models/kusaBlock.fbx");
 		p2->SetPositionX(i);
 	}
 }
@@ -55,35 +59,54 @@ void StageManager::CreateStage(GameObject* parent, string _filename)
 		{
 			if (Table_[x][y] == Block_Grass)
 			{
-				SolidObject* p1 = CreateSolidObject<Stage>(parent, "Models/kusaBlock.fbx");
+				p1 = CreateSolidObject<Stage>(parent, "Models/kusaBlock.fbx");
 				{
 					dynamic_cast<Stage*>(p1);
 					p1->SetPositionX(x);
 					p1->SetPositionY(y + YHeight);
 				}
+				
 			}
 			else if (Table_[x][y] == Block_Soil)
 			{
-				SolidObject* p2 = CreateSolidObject<Stage>(parent, "Models/SoilBlock.fbx");
+				 p2 = CreateSolidObject<Stage>(parent, "Models/SoilBlock.fbx");
 
 				dynamic_cast<Stage*>(p2);
 				p2->SetPositionX(x);
 				p2->SetPositionY(y + YHeight);
+			
 			}
 
 			else if (Table_[x][y] == Block_FireWood)
 			{
-				SolidObject* p3 = CreateSolidObject<Stage>(parent, "Models/rengaBlock.fbx");
+				p3 = CreateSolidObject<Stage>(parent, "Models/rengaBlock.fbx");
 				{
 					dynamic_cast<Stage*>(p3);
 					p3->SetPositionX(x);
 					p3->SetPositionY(y + YHeight);
 				}
+				
+				
 			}
 		}
 	}
 
+}
 
+void StageManager::DeleteStage()
+{
+	 p1->KillMe();
+	 p2->KillMe();
+	 p3->KillMe();
+	
+}
+
+
+
+void StageManager::StageTableRelease()
+{
+	Table_.clear();
+	std::vector<std::vector<int>>().swap(Table_);
 }
 
 
