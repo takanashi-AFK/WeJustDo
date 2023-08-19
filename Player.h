@@ -14,6 +14,11 @@ protected:
 	///// 必要な情報 ////////////////////////////////////////
 	PlayerStateManager* pState_;	//Playerの状態管理
 
+	//debug
+	float moveY;
+	bool isJumping;
+	int Deg;
+
 	///// あたり判定 ////////////////////////////////////////
 	RayCastData underRay_;		//プレイヤーの下に伸びるレイ
 	Stage*		pstage_;		//ステージクラスのポインタ
