@@ -156,6 +156,7 @@
     <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="PlayerStateManager.cpp" />
     <ClCompile Include="RunningState.cpp" />
+    <ClCompile Include="SkySphere.cpp" />
     <ClCompile Include="SplashScene.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="StageManager.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="PlayerStateManager.h" />
     <ClInclude Include="RunningState.h" />
+    <ClInclude Include="SkySphere.h" />
     <ClInclude Include="SplashScene.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="StageManager.h" />
