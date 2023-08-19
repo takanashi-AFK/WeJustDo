@@ -8,13 +8,13 @@ void StandingState::Update(Player* _p)
 	//“ü—Íˆ—
 	HandleInput(_p);
 
-	static float angle; angle += 0.1;
-	_p->SetRotateY(angle);
+	//static float angle; angle += 0.1;
+	//_p->SetRotateY(angle);
 }
 
 void StandingState::Enter(Player* _p)
 {
-	_p->SetPositionY(2);
+	//_p->SetPositionY(2);
 }
 
 void StandingState::HandleInput(Player* _p)

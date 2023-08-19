@@ -18,6 +18,7 @@ namespace StageManager	//継承はしない
 	/// <param name="parent">親オブジェクト</param>
 	void CreateStage(GameObject* parent);
 
+	
 	/// <summary>
 	/// ブロックとの当たり判定に使う
 	/// </summary>

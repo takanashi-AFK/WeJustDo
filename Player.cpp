@@ -45,17 +45,51 @@ void Player::ChildRelease()
 	SAFE_DELETE(pState_);
 }
 
+
+
+//当たり判定
+void Player::HitTest(RayCastData* data, const XMVECTOR& dir)
+{
+	data->start = transform_.position_;       //レイの発射位置  
+	XMStoreFloat3(&data->dir, dir);           //レイの方向
+	Model::RayCast(hGroundModel_, data);      //レイを発射                                      
+}
+
 void Player::StageRayCast()
 {
-	//着地点との当たり判定の為一時的に保存(PlayerPosition)
-	XMFLOAT3 tmpPos = transform_.position_;
-	tmpPos.y += (1.0f / 2);
+	//各方向
+	RayCastData rightData;
+	RayCastData leftData;
+	RayCastData upData;
+	RayCastData downData;
 
-	using namespace StageManager;
+	//当たってるか確認
+	HitTest(&rightData,XMVectorSet(1, 0, 0, 0));
+	HitTest(&leftData, XMVectorSet(-1, 0, 0, 0));
+	HitTest(&upData, XMVectorSet(0, 1, 0, 0));
+	HitTest(&downData, XMVectorSet(0, -1, 0, 0));
 
-	if (StageManager::IsBlock(&tmpPos, Right)) {
-		ASSIGN(transform_.position_, tmpPos);
+	//////////////////////////////はみ出した分下げる//////////////////////////////////////
+
+	if (rightData.dist <= 1){
+		XMVECTOR dis = { rightData.dist,0,0 };
+		XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(1, 0, 0, 0) - dis));
+	}
+	if (leftData.dist <= 1){
+		XMVECTOR dis = { -leftData.dist,0,0 };
+		XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(-1, 0, 0, 0) - dis));
+	}
+	if (upData.dist <= 1){
+		XMVECTOR dis = { 0,upData.dist,0 };
+		XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(0, 1, 0, 0) - dis));
 	}
 
-
+	if (downData.dist >= 0.9){
+		transform_.position_ = Transform::Float3Add(transform_.position_, VectorToFloat3((XMVectorSet(0, -1, 0, 0) / 10) * acceleration_));
+		acceleration_ += GRAVITY_ADDITION;
+	}
+	else {
+		pState_->ChangeState(pState_->pStanding_,this);
+		ONE_ASSIGN(acceleration_);
+	}
 }

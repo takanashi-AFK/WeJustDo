@@ -2,6 +2,9 @@
 #include "Engine/SolidObject.h"
 #include "PlayerStateManager.h"
 #include "Engine/Model.h"
+
+class Stage;
+
 /// <summary>
 /// Playerの基底クラス
 /// </summary>
@@ -11,7 +14,11 @@ protected:
 	///// 必要な情報 ////////////////////////////////////////
 	PlayerStateManager* pState_;	//Playerの状態管理
 
-	RayCastData underRay_;	//プレイヤーの下に伸びるレイ
+	///// あたり判定 ////////////////////////////////////////
+	RayCastData underRay_;		//プレイヤーの下に伸びるレイ
+	Stage*		pstage_;		//ステージクラスのポインタ
+	int			hGroundModel_;	//ステージのモデル番号を入れる変数
+	float		acceleration_;	//重力の加速度
 public:
 	//コンストラクタ
 	Player(GameObject* _parent, string _modelFileName);
@@ -39,4 +46,8 @@ public:
 	/// ステージとの接触判定処理を行う
 	/// </summary>
 	void StageRayCast();
+
+
+	//当たり判定
+	void HitTest(RayCastData* data, const XMVECTOR& dir);
 };
