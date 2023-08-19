@@ -14,7 +14,7 @@ void SkySphere::Initialize()
 	assert(hModel_ <= 0);
 
 	//‰æ‘œ‚Ìƒ[ƒh
-	ASSIGN(hPict_, Image::Load("Image/TitleImage.png"));
+	ASSIGN(hPict_, Image::Load("Image/TitleImage2.png"));
 	assert(hPict_ <= 0);
 
 	Camera::SetPosition(0, 0, -5);
