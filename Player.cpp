@@ -77,7 +77,7 @@ void Player::StageRayCast()
 		XMStoreFloat3(&rightData.dir, XMVectorSet(0, 1, 0, 0));	//”­ŽË•ûŒü‚ÌŽw’è
 		Model::RayCast(hGroundModel_, &rightData);				//ƒŒƒC‚ð”­ŽË
 	}
-	if (rightData.dist <= 0.09){
+	if (rightData.dist <= 0.9f){
 		XMVECTOR length = { rightData.dist,0,0,0 };
 		XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(1, 0, 0, 0) - length));
 	}
