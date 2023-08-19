@@ -6,8 +6,7 @@ namespace {
 	//重力の加算値
 	static const float GRAVITY_ADDITION = 0.03f;
 
-	//Playerのモデルサイズ
-	static const XMFLOAT3 PLAYER_MODEL_SIZE = {1.0f,1.0f,1.0f};
+	
 }
 
 Player::Player(GameObject* _parent, string _modelFileName)
@@ -50,7 +49,7 @@ void Player::StageRayCast()
 {
 	//着地点との当たり判定の為一時的に保存(PlayerPosition)
 	XMFLOAT3 tmpPos = transform_.position_;
-	tmpPos.y += (PLAYER_MODEL_SIZE.y / 2);
+	tmpPos.y += (1.0f / 2);
 
 	using namespace StageManager;
 

@@ -1,5 +1,12 @@
 #include "StageManager.h"
 #include "TestObject.h"
+#include "Player.h"
+
+
+namespace StageManager {
+	//ステージに存在するブロックの情報を格納するリスト
+	std::vector<Block*> tBlock_;
+}
 
 void StageManager::CreateStage(GameObject* parent)
 {

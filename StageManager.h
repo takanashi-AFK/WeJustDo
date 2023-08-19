@@ -12,11 +12,6 @@ namespace
 
 namespace StageManager	//継承はしない
 {
-
-	//ステージに存在するブロックの情報を格納するリスト
-	std::vector<Block*> tBlock_;
-
-
 	/// <summary>
 	/// ステージを作成
 	/// </summary>
