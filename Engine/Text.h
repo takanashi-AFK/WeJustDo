@@ -9,6 +9,12 @@ class Text
 	char fileName_[MAX_PATH];
 	unsigned int rowLength_;
 
+	enum Font {
+		DEFAULT = 0,
+		JIYUU,
+		MAX,
+	};
+
 public:
 	Text();
 	~Text();
@@ -16,6 +22,9 @@ public:
 	//初期化（デフォルトの設定）
 	//戻値：成功／失敗
 	HRESULT Initialize();
+
+	HRESULT Initialize(Font* font);
+
 
 	//初期化（オリジナルの画像を使いたい時）
 	//引数：fileName	画像ファイル名

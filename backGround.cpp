@@ -9,13 +9,13 @@ backGround::backGround(GameObject* parent)
 
 void backGround::Initialize()
 {
-	hPict_ = Image::Load("haikei.png");
+	hPict_ = Image::Load("2.png");
 }
 
 void backGround::Draw()
 {
 	TestPlayer* pP = (TestPlayer*)FindObject("TestPlayer");
-	Image::SetRect(hPict_, 0-((0-pP->GetPosition().x)*10), 720, 1280, 720);
+	Image::SetRect(hPict_, 0-((0-pP->GetPosition().x)*10), 250, 1280, 720);
 	Image::SetTransform(hPict_, transform_);
 	Image::Draw(hPict_);
 }

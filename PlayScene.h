@@ -1,9 +1,12 @@
 #pragma once
 #include "Engine/GameObject.h"
+#include "Engine/Text.h"
 
 //テストシーンを管理するクラス
 class PlayScene : public GameObject
 {
+	Text* pText;
+	
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）

@@ -1,9 +1,11 @@
 #pragma once
 #include "Engine/GameObject.h"
+#include"Engine/Text.h"
 
 //テストシーンを管理するクラス
 class TitleScene : public GameObject
 {
+	Text* pText;
 	int hPict_;
 public:
 	//コンストラクタ

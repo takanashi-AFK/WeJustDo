@@ -12,10 +12,10 @@ TestPlayer::TestPlayer(GameObject* parent)
 
 void TestPlayer::Initialize()
 {
-	//hModel_ = Model::Load("Models/Player.fbx");
-	//assert(hModel_ >= 0);
-	//transform_.position_ = { 0.0f,1.8f,0.0f };
-	//transform_.rotate_.y = 180;
+	hModel_ = Model::Load("Models/Player.fbx");
+	assert(hModel_ >= 0);
+	transform_.position_ = { 0.0f,1.8f,0.0f };
+	transform_.rotate_.y = 180;
 
 	
 }

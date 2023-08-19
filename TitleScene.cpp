@@ -11,8 +11,10 @@ TitleScene::TitleScene(GameObject* parent)
 
 void TitleScene::Initialize()
 {
+	pText = new Text;
 	Camera::SetTarget(XMFLOAT3(0, 1, 0));
 	Instantiate<SkySphere>(this);
+	pText->Initialize("JiyuuFont.png", 32, 64, 92);
 }
 
 void TitleScene::Update()
@@ -25,6 +27,7 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
+	pText->Draw(30, 30, "09182736405AaBbCcDdEeFfGg");
 }
 
 void TitleScene::Release()
