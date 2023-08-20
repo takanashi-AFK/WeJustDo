@@ -123,6 +123,21 @@
     <ClCompile Include="Engine\Component\Transform\Transform.cpp">
       <Filter>01Engine\Component\Transform</Filter>
     </ClCompile>
+    <ClCompile Include="Block.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerStateManager.cpp" />
+    <ClCompile Include="RunningState.cpp" />
+    <ClCompile Include="SkySphere.cpp" />
+    <ClCompile Include="Stage.cpp" />
+    <ClCompile Include="StageManager.cpp" />
+    <ClCompile Include="StandingState.cpp" />
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -209,6 +224,21 @@
     </ClInclude>
     <ClInclude Include="Engine\Component\Transform\Transform.h">
       <Filter>01Engine\Component\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Block.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerState.h" />
+    <ClInclude Include="PlayerStateManager.h" />
+    <ClInclude Include="SkySphere.h" />
+    <ClInclude Include="Stage.h" />
+    <ClInclude Include="StageManager.h" />
+    <ClInclude Include="StandingState.h" />
+    <ClInclude Include="TitleScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="RunningState.h" />
+    <ClInclude Include="ResultScene.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

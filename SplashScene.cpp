@@ -19,8 +19,15 @@ void SplashScene::Update()
 	static float changeTime = 0.7f;
 	time++;
 
+	//debug-SceneMove
+	SceneManager* sm = (SceneManager*)FindObject("SceneManager");
+	if (Input::IsKeyDown(DIK_1))sm->ChangeScene(SCENE_ID_TITLE);
+	if (Input::IsKeyDown(DIK_2))sm->ChangeScene(SCENE_ID_PLAY);
+	if (Input::IsKeyDown(DIK_3))sm->ChangeScene(SCENE_ID_RESULT);
+	if (Input::IsKeyDown(DIK_4))sm->ChangeScene(SCENE_ID_TEST);
+
+
 	if (time/60 >= changeTime) {
-		SceneManager* sm = (SceneManager*)FindObject("SceneManager");
 		sm->ChangeScene(SCENE_ID_TITLE,TID_BLACKOUT);
 	}
 }

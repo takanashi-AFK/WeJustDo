@@ -2,6 +2,7 @@
 #include "Engine/GameObject.h"
 class ResultScene : public GameObject
 {
+	int hPict_;
 public:
 	ResultScene(GameObject* parent);
 	void Initialize() override;

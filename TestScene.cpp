@@ -53,6 +53,13 @@ void TestScene::Update()
 		SceneManager* sM=(SceneManager*)FindObject("SceneManager");
 		sM->ChangeScene(SCENE_ID_RESULT, TID_WHITEOUT);
 	}
+
+	//debug-SceneMove
+	SceneManager* sm = (SceneManager*)FindObject("SceneManager");
+	if (Input::IsKeyDown(DIK_1))sm->ChangeScene(SCENE_ID_TITLE);
+	if (Input::IsKeyDown(DIK_2))sm->ChangeScene(SCENE_ID_PLAY);
+	if (Input::IsKeyDown(DIK_3))sm->ChangeScene(SCENE_ID_RESULT);
+	if (Input::IsKeyDown(DIK_4))sm->ChangeScene(SCENE_ID_TEST);
 }
 //•`‰æ
 void TestScene::Draw()
