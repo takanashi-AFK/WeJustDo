@@ -31,7 +31,10 @@ void Player::ChildUpdate()
 	if (Input::IsKey(DIK_A))transform_.position_.x -= 0.1;
 	if (Input::IsKey(DIK_S))transform_.position_.y -= 0.1;
 	if (Input::IsKey(DIK_D))transform_.position_.x += 0.1;
+	if (Input::IsKey(DIK_RIGHT))transform_.rotate_.y -= 1;
+	if (Input::IsKey(DIK_LEFT))transform_.rotate_.y += 1;
 	}
+
 
 	//{//debug-PlayerJump
 
@@ -164,7 +167,7 @@ void Player::StageRayCast()
 	RayCastData rightData;{
 		//当たっているかを確認
 		rightData.start = transform_.position_;					//発射位置の指定
-		XMStoreFloat3(&rightData.dir, XMVectorSet(0, 1, 0, 0));	//発射方向の指定
+		XMStoreFloat3(&rightData.dir, XMVectorSet(1, 0, 0, 0));	//発射方向の指定
 		Model::RayCast(hGroundModel_, &rightData);				//レイを発射
 	}
 	//レイの長さが0.9以下だったら...
