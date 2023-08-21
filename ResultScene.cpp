@@ -39,11 +39,17 @@ void ResultScene::Draw()
 {
 	//transform_.scale_ = { 0.8,0.8,1 };
 	Image::SetTransform(hPict_, transform_);
-	Image::Draw(hPict_);
+	Image::Draw(hPict_); 
 
-	tTimeScore_->Draw(780, 250, iTimeScore_);
-	tFirewoodScore_->Draw(780, 350, iFirewoodScore_);
-	tTotalScore_->Draw(780, 450, iTotalScore_);
+
+	tTimeScore_->Draw(700, 270, iTimeScore_);
+	tTimeScore_->SetScale(3.0f);
+
+	tFirewoodScore_->Draw(700, 420, iFirewoodScore_);
+	tFirewoodScore_->SetScale(3.0f);
+
+	tTotalScore_->Draw(700, 570, iTotalScore_);
+	tTotalScore_->SetScale(3.0f);
 }
 
 void ResultScene::Release()
