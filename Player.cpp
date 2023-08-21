@@ -167,6 +167,7 @@ void Player::StageRayCast()
 	RayCastData rightData;{
 		//当たっているかを確認
 		rightData.start = transform_.position_;					//発射位置の指定
+		rightData.start.x = transform_.position_.x - (PLAYER_MODEL_SIZE.x / 2);
 		XMStoreFloat3(&rightData.dir, XMVectorSet(1, 0, 0, 0));	//発射方向の指定
 		Model::RayCast(hGroundModel_, &rightData);				//レイを発射
 	}
