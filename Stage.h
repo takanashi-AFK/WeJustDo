@@ -4,6 +4,7 @@ class Stage : public SolidObject
 {
 public:
 	Stage(GameObject* parent, string modelFileName);
+	void ChildUpdate() override;
 	void ChildDraw() override;
 };
 

@@ -20,12 +20,13 @@ void TestScene::Initialize()
 	//Player
 	ASSIGN(pPlayer_,CreateSolidObject<Player>(this, "Models/ziro2.fbx"));
 	{
+		pPlayer_->SetPositionY(5);
 		pPlayer_->SetScale(0.15f, 0.15f, 0.15f);
 		//pPlayer_->SetScale(0.5f, 0.5f, 0.5f);
 		pPlayer_->SetRotateY(90);
 	}
 	//Stage
-	ASSIGN(pStage_,CreateSolidObject<Stage>(this, "Models/Stage100.fbx"));
+	ASSIGN(pStage_,CreateSolidObject<Stage>(this, "Models/first_1.fbx"));
 
 	ASSIGN(hPict_, Image::Load("Image/BackGround4.png"));
 }

@@ -13,7 +13,6 @@ void RunningState::Update(Player* _p)
 
 void RunningState::Enter(Player* _p)
 {
-	//_p->SetPositionY(-2);
 }
 
 void RunningState::HandleInput(Player* _p)

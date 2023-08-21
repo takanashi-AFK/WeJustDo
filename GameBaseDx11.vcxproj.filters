@@ -36,6 +36,9 @@
     <Filter Include="01Engine\Component\Transform">
       <UniqueIdentifier>{979a0ea7-0fde-4855-9c9a-1799ff203359}</UniqueIdentifier>
     </Filter>
+    <Filter Include="State">
+      <UniqueIdentifier>{044c7c29-63b4-490a-b14e-a77098cda496}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\BoxCollider.cpp">
@@ -125,19 +128,27 @@
     </ClCompile>
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlayerStateManager.cpp" />
-    <ClCompile Include="RunningState.cpp" />
     <ClCompile Include="SkySphere.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="StageManager.cpp" />
-    <ClCompile Include="StandingState.cpp" />
     <ClCompile Include="TitleScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="ResultScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerState.cpp" />
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStateManager.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="RunningState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="StandingState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -227,18 +238,26 @@
     </ClInclude>
     <ClInclude Include="Block.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayerState.h" />
-    <ClInclude Include="PlayerStateManager.h" />
     <ClInclude Include="SkySphere.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="StageManager.h" />
-    <ClInclude Include="StandingState.h" />
     <ClInclude Include="TitleScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="RunningState.h" />
     <ClInclude Include="ResultScene.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStateManager.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="RunningState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="StandingState.h">
+      <Filter>State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

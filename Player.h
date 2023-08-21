@@ -37,6 +37,12 @@ public:
 	///// 必要な関数 //////////////////////////////////////// 
 
 	/// <summary>
+	/// プレイヤーが判定するステージのモデル番号を取得
+	/// </summary>
+	/// <returns>ステージのモデル番号</returns>
+	int GetPlayerOnGround() { return hGroundModel_; }
+
+	/// <summary>
 	/// 状態を取得
 	/// </summary>
 	/// <returns>状態</returns>
