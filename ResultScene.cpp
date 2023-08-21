@@ -47,7 +47,7 @@ void ResultScene::Draw()
 
 
 	if (frameCount_ >= 30){
-	if(frameCount_==30)
+		if(frameCount_==30)
 	AudioManager::PlayDonSound();
 		
 	tTimeScore_->SetScale(3.0f);

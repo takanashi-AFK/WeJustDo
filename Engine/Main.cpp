@@ -19,6 +19,7 @@
 #include "Input.h"
 #include "Audio.h"
 #include "VFX.h"
+#include "../AudioManager.h"
 
 #pragma comment(lib,"Winmm.lib")
 
@@ -64,6 +65,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	//オーディオ（効果音）の準備
 	Audio::Initialize();
+
+	AudioManager::Initialize();
 
 	//トランジションの準備
 	Transition::Initialize();
