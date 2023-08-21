@@ -32,6 +32,7 @@ public:
 	void ChildInitialize() override;
 	void ChildUpdate() override;
 	void ChildRelease() override;
+	void ChildDraw() override;
 
 	///// 必要な関数 //////////////////////////////////////// 
 
@@ -51,8 +52,4 @@ public:
 	/// ステージとの接触判定処理を行う
 	/// </summary>
 	void StageRayCast();
-
-
-	//当たり判定
-	void HitTest(RayCastData* data, const XMVECTOR& dir);
 };

@@ -18,11 +18,11 @@ TestScene::TestScene(GameObject * parent)
 void TestScene::Initialize()
 {
 	//Player
-	ASSIGN(pPlayer_,CreateSolidObject<Player>(this, "Models/defaultModel.fbx"));
+	ASSIGN(pPlayer_,CreateSolidObject<Player>(this, "Models/ziro2.fbx"));
 	{
-		//pPlayer_->SetScale(0.15f, 0.15f, 0.15f);
+		pPlayer_->SetScale(0.15f, 0.15f, 0.15f);
 		//pPlayer_->SetScale(0.5f, 0.5f, 0.5f);
-		//pPlayer_->SetRotateY(90);
+		pPlayer_->SetRotateY(90);
 	}
 	//Stage
 	ASSIGN(pStage_,CreateSolidObject<Stage>(this, "Models/Stage100.fbx"));

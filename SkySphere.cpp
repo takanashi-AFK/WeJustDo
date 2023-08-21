@@ -28,10 +28,14 @@ void SkySphere::Update()
 
 void SkySphere::Draw()
 {
+	Direct3D::SetShader(Direct3D::SHADER_NOSHADE);
+
 	Model::SetTransform(hModel_, transform_);
 	Model::Draw(hModel_);
 
 	Transform t;
 	Image::SetTransform(hPict_, t);
 	Image::Draw(hPict_);
+
+	Direct3D::SetShader(Direct3D::SHADER_3D);
 }

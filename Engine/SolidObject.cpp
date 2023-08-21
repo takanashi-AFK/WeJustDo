@@ -30,12 +30,15 @@ void SolidObject::Update()
 
 void SolidObject::Draw()
 {
+	//継承先の描画
+	ChildDraw();
+
 	//モデルの描画
 	Model::SetTransform(hModel_,transform_);
 	Model::Draw(hModel_);
 
-	//継承先の描画
-	ChildDraw();
+	//シェーダーのリセット
+	Direct3D::SetShader(Direct3D::SHADER_3D);
 }
 
 void SolidObject::Release()
