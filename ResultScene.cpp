@@ -2,6 +2,7 @@
 #include "Engine/Image.h"
 #include "Engine/SceneManager.h"
 #include "Engine/Input.h"
+#include "AudioManager.h"
 
 ResultScene::ResultScene(GameObject* parent)
 	:GameObject(parent,"ResultScene")
@@ -12,6 +13,8 @@ void ResultScene::Initialize()
 {
 	ASSIGN(hPict_, Image::Load("Image/ResultImage.png"));
 	assert(hPict_ <= 0);
+
+	AudioManager::Initialize();
 
 	//Text•Ï”‚Ì‰Šú‰»
 	
@@ -33,6 +36,7 @@ void ResultScene::Update()
 	if (Input::IsKeyDown(DIK_3))sm->ChangeScene(SCENE_ID_RESULT);
 	if (Input::IsKeyDown(DIK_4))sm->ChangeScene(SCENE_ID_TEST);
 
+	frameCount_++;
 }
 
 void ResultScene::Draw()
@@ -42,14 +46,32 @@ void ResultScene::Draw()
 	Image::Draw(hPict_); 
 
 
-	tTimeScore_->Draw(700, 270, iTimeScore_);
+	if (frameCount_ >= 30){
+	if(frameCount_==30)
+	AudioManager::PlayDonSound();
+		
 	tTimeScore_->SetScale(3.0f);
+	tTimeScore_->Draw(700, 270, iTimeScore_);
+	}
+	if (frameCount_ >= 90) {
+		if (frameCount_ == 90)
+	AudioManager::PlayDonSound();
 
-	tFirewoodScore_->Draw(700, 420, iFirewoodScore_);
 	tFirewoodScore_->SetScale(3.0f);
+	tFirewoodScore_->Draw(700, 420, iFirewoodScore_);
+	}
+	if (frameCount_ >= 150) {
+		if(frameCount_==150)
+	AudioManager::PlayDonSound();
 
-	tTotalScore_->Draw(700, 570, iTotalScore_);
 	tTotalScore_->SetScale(3.0f);
+	tTotalScore_->Draw(700, 570, iTotalScore_);
+	}
+
+	if (frameCount_ >= 200)
+	{
+		AudioManager::StopDonSound();
+	}
 }
 
 void ResultScene::Release()

@@ -4,6 +4,8 @@
 class ResultScene : public GameObject
 {
 	int hPict_;
+	int frameCount_;
+	
 
 	int iTimeScore_=123;
 	int iFirewoodScore_=456;
