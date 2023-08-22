@@ -19,9 +19,7 @@ void StandingState::Update(Player* _p)
 	//レイの長さが1.0fより小さいなら...
 	if (downData.dist < 1.0f){
 		//着地点に位置を合わせる
-		_p->SetPositionY(0.5);
-
-
+		_p->SetPositionY(_p->GetPosition().y - downData.dist);
 	}
 
 }

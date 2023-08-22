@@ -58,4 +58,9 @@ public:
 	/// ステージとの接触判定処理を行う
 	/// </summary>
 	void StageRayCast();
+
+	/// 重力をセット
+	/// </summary>
+	/// <param name="acceleration">セットしたい重力の値</param>
+	void SetAcceleration(const float& acceleration) { acceleration_ = acceleration; }
 };

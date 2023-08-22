@@ -29,19 +29,19 @@ void Player::ChildInitialize()
 
 void Player::ChildUpdate()
 {
-	//{//debug-PlayerMove
-	//if (Input::IsKey(DIK_W))transform_.position_.y += 0.1;
-	//if (Input::IsKey(DIK_A))transform_.position_.x -= 0.1;
-	//if (Input::IsKey(DIK_S))transform_.position_.y -= 0.1;
-	//if (Input::IsKey(DIK_D))transform_.position_.x += 0.1;
-	//if (Input::IsKey(DIK_RIGHT))transform_.rotate_.y -= 1;
-	//if (Input::IsKey(DIK_LEFT))transform_.rotate_.y += 1;
-	//}
+	{//debug-PlayerMove
+	if (Input::IsKey(DIK_W))transform_.position_.y += 0.1;
+	if (Input::IsKey(DIK_A))transform_.position_.x -= 0.1;
+	if (Input::IsKey(DIK_S))transform_.position_.y -= 0.1;
+	if (Input::IsKey(DIK_D))transform_.position_.x += 0.1;
+	if (Input::IsKey(DIK_RIGHT))transform_.rotate_.y -= 1;
+	if (Input::IsKey(DIK_LEFT))transform_.rotate_.y += 1;
+	}
 
-	StageRayCast();	//ステージとのあたり判定
 	
 	//更新
 	pState_->Update(this);
+	StageRayCast();	//ステージとのあたり判定
 
 	if (Input::IsKeyDown(DIK_R))transform_.position_.y = 10;;
 
@@ -122,18 +122,17 @@ void Player::StageRayCast()
 			XMStoreFloat3(&downData.dir, XMVectorSet(0, -1, 0, 0));
 			Model::RayCast(hGroundModel_,&downData);
 		}
-		//レイの長さが0.9以上だったら...
+		//レイの長さが1.0以上だったら...
 		if (downData.dist >= 1.0f) {
 			//位置を重力分
-			transform_.position_.y -= 0.03f;
+			//transform_.position_.y -= 0.03f;
 
-			/*transform_.position_ = Transform::Float3Add(transform_.position_, VectorToFloat3((XMVectorSet(0, -1, 0, 0) / 10) * acceleration_));
-			acceleration_ += GRAVITY_ADDITION;*/
+			transform_.position_ = Transform::Float3Add(transform_.position_, VectorToFloat3((XMVectorSet(0, -1, 0, 0) / 10) * acceleration_));
+			acceleration_ += GRAVITY_ADDITION;
 		}
 		else {
 			pState_->ChangeState(pState_->pStanding_, this);
 			ONE_ASSIGN(acceleration_);
 		}
 	}
-
 }
