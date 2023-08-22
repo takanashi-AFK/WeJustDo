@@ -68,6 +68,9 @@ void TestScene::Update()
 	if (Input::IsKeyDown(DIK_2))sm->ChangeScene(SCENE_ID_PLAY);
 	if (Input::IsKeyDown(DIK_3))sm->ChangeScene(SCENE_ID_RESULT);
 	if (Input::IsKeyDown(DIK_4))sm->ChangeScene(SCENE_ID_TEST);
+
+	if (transform_.position_.y <= 20)sm->ChangeScene(SCENE_ID_RESULT, TID_BLACKOUT);
+
 }
 //•`‰æ
 void TestScene::Draw()
