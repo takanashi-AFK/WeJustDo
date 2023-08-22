@@ -5,7 +5,6 @@
 
 void StandingState::Update(Player* _p)
 {
-
 	//“ü—Íˆ—
 	HandleInput(_p);
 
@@ -21,7 +20,6 @@ void StandingState::Update(Player* _p)
 		//’…’n“_‚ÉˆÊ’u‚ð‡‚í‚¹‚é
 		_p->SetPositionY(_p->GetPosition().y - downData.dist);
 	}
-
 }
 
 void StandingState::Enter(Player* _p)

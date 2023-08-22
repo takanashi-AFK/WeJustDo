@@ -122,17 +122,14 @@ void Player::StageRayCast()
 			XMStoreFloat3(&downData.dir, XMVectorSet(0, -1, 0, 0));
 			Model::RayCast(hGroundModel_,&downData);
 		}
-		//レイの長さが1.0以上だったら...
-		if (downData.dist >= 1.0f) {
-			//位置を重力分
-			//transform_.position_.y -= 0.03f;
-
-			transform_.position_ = Transform::Float3Add(transform_.position_, VectorToFloat3((XMVectorSet(0, -1, 0, 0) / 10) * acceleration_));
-			acceleration_ += GRAVITY_ADDITION;
+		//レイの長さが0.9以上だったら...
+		if (downData.dist >= 0.9f) {
+			//位置を重力分下げる
+			transform_.position_.y -= 0.03f;
 		}
 		else {
+			//立ち状態にする
 			pState_->ChangeState(pState_->pStanding_, this);
-			ONE_ASSIGN(acceleration_);
 		}
 	}
 }
