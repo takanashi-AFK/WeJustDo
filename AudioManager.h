@@ -13,9 +13,11 @@ namespace AudioManager {
 
 	void StopDonSound();
 
-	void PlayTitleMusic();
+	void Play_TitleMusic();
 
 	void PlayConfirmSound();
+
+	void Play_PlayMusic();
 
 	void Release();
 };

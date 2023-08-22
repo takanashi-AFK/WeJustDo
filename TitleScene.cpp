@@ -14,7 +14,7 @@ void TitleScene::Initialize()
 {
 	Instantiate<SkySphere>(this);
 	AudioManager::Initialize();
-	AudioManager::PlayTitleMusic();
+	AudioManager::Play_TitleMusic();
 }
 
 void TitleScene::Update()

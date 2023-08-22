@@ -5,7 +5,8 @@ namespace AudioManager
 {
 	//•Ï”éŒ¾
 	int hDonSound_ ;
-	int hTitleMusic_;
+	int hTitleMusic_;//75db
+	int hPlayMusic_;//75db
 	int hConfirmSound_;
 	void Initialize()
 	{
@@ -18,6 +19,8 @@ namespace AudioManager
 		hConfirmSound_ = Audio::Load("Sounds/Confirm.wav");
 		assert(hConfirmSound_ >= 0);
 
+		hPlayMusic_ = Audio::Load("Sounds/PlayScene.wav");
+		assert(hPlayMusic_ >= 0);
 	}
 
 	void PlayDonSound()
@@ -30,7 +33,7 @@ namespace AudioManager
 		Audio::Stop(hDonSound_);
 	}
 
-	void PlayTitleMusic()
+	void Play_TitleMusic()
 	{
 		Audio::Play(hTitleMusic_);
 	}
@@ -38,6 +41,11 @@ namespace AudioManager
 	void PlayConfirmSound()
 	{
 		Audio::Play(hConfirmSound_);
+	}
+
+	void Play_PlayMusic()
+	{
+		Audio::Play(hPlayMusic_);
 	}
 
 	void Release()

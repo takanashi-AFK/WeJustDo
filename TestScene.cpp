@@ -7,6 +7,7 @@
 #include "Engine/Image.h"
 #include "Engine/Input.h"
 #include "Engine/SceneManager.h"
+#include "AudioManager.h"
 
 //コンストラクタ
 TestScene::TestScene(GameObject * parent)
@@ -17,6 +18,7 @@ TestScene::TestScene(GameObject * parent)
 //初期化
 void TestScene::Initialize()
 {
+	AudioManager::Initialize();
 	//Player
 	ASSIGN(pPlayer_,CreateSolidObject<Player>(this, "Models/ziro2.fbx"));
 	{
@@ -28,6 +30,8 @@ void TestScene::Initialize()
 	ASSIGN(pStage_,CreateSolidObject<Stage>(this, "Models/Stage100.fbx"));
 
 	ASSIGN(hPict_, Image::Load("Image/BackGround4.png"));
+
+	AudioManager::Play_PlayMusic();
 }
 
 //更新
