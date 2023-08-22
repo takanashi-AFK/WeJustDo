@@ -16,13 +16,12 @@ void StandingState::Update(Player* _p)
 		XMStoreFloat3(&downData.dir, XMVectorSet(0, -1, 0, 0));
 		Model::RayCast(_p->GetPlayerOnGround(), &downData);
 	}
-	//レイの長さが1.0f以下なら
-	if (downData.dist <= 1.0f){
-		//めり込み分、位置を戻す
-		XMVECTOR length = { 0, downData.dist,0 };
-		XMFLOAT3 tmpPos = _p->GetPosition();
-		XMStoreFloat3(&tmpPos, XMLoadFloat3(&tmpPos) - (XMVectorSet(0, -1, 0, 0) - length));
-		_p->SetPosition(tmpPos);
+	//レイの長さが1.0fより小さいなら...
+	if (downData.dist < 1.0f){
+		//着地点に位置を合わせる
+		_p->SetPositionY(0.5);
+
+
 	}
 
 }

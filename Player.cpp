@@ -42,6 +42,9 @@ void Player::ChildUpdate()
 	
 	//更新
 	pState_->Update(this);
+
+	if (Input::IsKeyDown(DIK_R))transform_.position_.y = 10;;
+
 }
 
 void Player::ChildRelease()
@@ -120,7 +123,7 @@ void Player::StageRayCast()
 			Model::RayCast(hGroundModel_,&downData);
 		}
 		//レイの長さが0.9以上だったら...
-		if (downData.dist >= 0.9f) {
+		if (downData.dist >= 1.0f) {
 			//位置を重力分
 			transform_.position_.y -= 0.03f;
 

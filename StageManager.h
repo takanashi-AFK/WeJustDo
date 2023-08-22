@@ -7,7 +7,7 @@
 namespace
 {
 	static float BLOCK_SIZE = 1.0f;				    //ブロックのサイズ
-	static XMFLOAT3 PLAYER_MODEL_SIZE = { 1,1,1 };  //PlayerのXのモデルサイズ
+	static XMFLOAT3 PLAYER_MODEL_SIZE = { 1.0f,1.0f,1.0f };  //PlayerのXのモデルサイズ
 }
 
 namespace StageManager	//継承はしない
