@@ -3,6 +3,7 @@
 #include "SkySphere.h"
 #include "Engine/SceneManager.h"
 #include "Engine/Input.h"
+#include "AudioManager.h"
 
 TitleScene::TitleScene(GameObject* parent)
 	:GameObject(parent,"TitleScene")
@@ -12,14 +13,14 @@ TitleScene::TitleScene(GameObject* parent)
 void TitleScene::Initialize()
 {
 	Instantiate<SkySphere>(this);
-
-	
-
+	AudioManager::Initialize();
+	AudioManager::PlayTitleMusic();
 }
 
 void TitleScene::Update()
 {
 	if (Input::IsKeyDown(DIK_SPACE)) {
+		AudioManager::PlayConfirmSound();
 		SceneManager* sm = (SceneManager*)FindObject("SceneManager");
 		sm->ChangeScene(SCENE_ID_TEST, TID_WHITEOUT);
 	}
@@ -35,9 +36,9 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
-	
 }
 
 void TitleScene::Release()
 {
+	AudioManager::Release();
 }

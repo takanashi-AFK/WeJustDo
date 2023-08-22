@@ -14,7 +14,6 @@ void ResultScene::Initialize()
 	ASSIGN(hPict_, Image::Load("Image/ResultImage.png"));
 	assert(hPict_ <= 0);
 
-	AudioManager::Initialize();
 
 	//Text•Ï”‚Ì‰Šú‰»
 	
@@ -76,4 +75,5 @@ void ResultScene::Draw()
 
 void ResultScene::Release()
 {
+	AudioManager::Release();
 }

@@ -21,6 +21,7 @@
 #include "VFX.h"
 #include "../AudioManager.h"
 
+
 #pragma comment(lib,"Winmm.lib")
 
 //定数宣言
@@ -66,7 +67,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//オーディオ（効果音）の準備
 	Audio::Initialize();
 
-	AudioManager::Initialize();
 
 	//トランジションの準備
 	Transition::Initialize();
@@ -122,9 +122,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				//時間計測関連
 				lastUpdateTime = nowTime;	//現在の時間（最後に画面を更新した時間）を覚えておく
 				FPS++;						//画面更新回数をカウントする
-
-
-
 
 				//入力（キーボード、マウス、コントローラー）情報を更新
 				Input::Update();
