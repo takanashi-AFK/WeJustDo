@@ -40,12 +40,12 @@ void StageSelectScene::Initialize()
 //更新
 void StageSelectScene::Update()
 {
-	//A/→　を押したとき
-	if (Input::IsKeyDown(DIK_RIGHT))
+	//A/←　を押したとき
+	if (Input::IsKeyDown(DIK_LEFT))
 	count -= 1;
 
-	//D/←　を押したとき
-	if (Input::IsKeyDown(DIK_LEFT))
+	//D/→　を押したとき
+	if (Input::IsKeyDown(DIK_RIGHT))
 	count += 1;
 
 	switch (count)
@@ -107,8 +107,9 @@ void StageSelectScene::Draw()
 		Image::Draw(hPict_[i]);
 	}
 
-
+	//カーソルを描く
 	Image::Draw(hPict_2);
+
 	//今の値を表示してくれる。いらない。
 	pText->Draw(30, 30, count);
 }
