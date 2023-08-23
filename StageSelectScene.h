@@ -9,9 +9,7 @@ private:
 	int hPict_[4];
 	int	hPict_2;
 	int count;//A,Dキーを押したときに変わる変数
-	int numStage; //ステージの数をここに。
 	XMFLOAT3 posX; //カーソルの移動はここ
-	Transform CursorTransform_;
 
 	Text* pText;
 
