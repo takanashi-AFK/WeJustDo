@@ -4,6 +4,7 @@
 
 #include "../SplashScene.h"
 #include "../TitleScene.h"
+#include "../StageSelectScene.h"
 #include "../PlayScene.h"
 #include "../EndScene.h"
 #include "Model.h"
@@ -23,7 +24,8 @@ void SceneManager::Initialize()
 	//最初のシーンを準備
 	currentSceneID_ = SCENE_ID_SPLASH;
 	nextSceneID_ = currentSceneID_;
-	Instantiate<SplashScene>(this);
+	//Instantiate<SplashScene>(this);
+	Instantiate<StageSelectScene>(this);
 }
 
 //更新
@@ -49,6 +51,7 @@ void SceneManager::Update()
 		case SCENE_ID_TEST: Instantiate<TestScene>(this); break;
 		case SCENE_ID_SPLASH: Instantiate<SplashScene>(this); break;
 		case SCENE_ID_TITLE: Instantiate<TitleScene>(this); break;
+		case SCENE_ID_SELECT: Instantiate<StageSelectScene>(this); break;
 		case SCENE_ID_PLAY: Instantiate<PlayScene>(this); break;
 		case SCENE_ID_END: Instantiate<EndScene>(this); break;
 		}

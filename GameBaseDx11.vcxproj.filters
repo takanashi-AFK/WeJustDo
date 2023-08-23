@@ -149,6 +149,9 @@
     <ClCompile Include="Player\State\RunningState.cpp">
       <Filter>PlayerState</Filter>
     </ClCompile>
+    <ClCompile Include="StageSelectScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -267,6 +270,9 @@
     </ClInclude>
     <ClInclude Include="Player\State\RunningState.h">
       <Filter>PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="StageSelectScene.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
