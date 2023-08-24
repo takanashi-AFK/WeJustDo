@@ -30,11 +30,11 @@ void StageSelectScene::Initialize()
 	}
 	hPict_2 = Image::Load("Cursor.png");
 	transform_.scale_ = { 0.4, 0.4, 0.4 };
-	CursorTransform_.position_ = {0,0,0};
 	
 	//今の数値が分かる文字列。いらない。
 	pText = new Text;
 	pText->Initialize();
+
 }
 
 //更新
@@ -100,21 +100,39 @@ void StageSelectScene::Update()
 //描画
 void StageSelectScene::Draw()
 {
-	for (int i = 0; i < 4; i++) {
-		//transformの計算式　【画面左端(-1)、余白(0.2)、移動量(i*0.5)】
-		transform_.position_.x = -1 + 0.2 + i * 0.5;
-		Image::SetTransform(hPict_[i],transform_);
-		Image::Draw(hPict_[i]);
-	}
+	//for (int i = 0; i < 4; i++) {
+	//	//transformの計算式　【画面左端(-1)、余白(0.2)、移動量(i*0.5)】
+	//	transform_.position_.x = -1 + 0.2 + i * 0.5;
+	//	Image::SetTransform(hPict_[i],transform_);
+	//	Image::Draw(hPict_[i]);
+	//}
 
 	//カーソルを描く
 	Image::Draw(hPict_2);
 
 	//今の値を表示してくれる。いらない。
 	pText->Draw(30, 30, count);
+	pText->Draw(60, 30, screenWidth);
+
 }
 
 //開放
 void StageSelectScene::Release()
 {
 }
+
+void StageSelectScene::CalcPosition(int _num, float* _pos)
+{
+	//画面を均等に分割します
+	float imgPos_ = 0;
+	imgPos_ = (float)screenWidth / (float)_num;
+
+	//分割したサイズ通りに画像を配置します
+	for (int l = 0; l < _num; l++)
+	{
+		transform_.position_.x =0/*ここは、画面の左端を0にした座標が入る*/;
+		Image::SetTransform(hPict_[l], transform_);
+		Image::Draw(hPict_[l]);
+	}
+}
+
