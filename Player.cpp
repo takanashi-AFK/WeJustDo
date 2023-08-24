@@ -40,7 +40,7 @@ void Player::ChildUpdate()
 
 	
 	//更新
-	pState_->Update(this);
+	//pState_->Update(this);
 	StageRayCast();	//ステージとのあたり判定
 
 	if (Input::IsKeyDown(DIK_R))transform_.position_.y = 10;;
@@ -79,12 +79,13 @@ void Player::StageRayCast()
 		}
 	}
 
+
 	//左方向の当たり判定
 	{
 		RayCastData leftData; {
 			//当たっているか確認
 			leftData.start = transform_.position_;
-			leftData.start.x = transform_.position_.x - (float)(PLAYER_MODEL_SIZE.x / 2);
+			leftData.start.x = transform_.position_.x + (float)(PLAYER_MODEL_SIZE.x / 2);
 			XMStoreFloat3(&leftData.dir, XMVectorSet(-1, 0, 0, 0));
 			Model::RayCast(hGroundModel_, &leftData);
 		}
@@ -118,18 +119,25 @@ void Player::StageRayCast()
 		RayCastData downData; {
 			//当たっているか確認
 			downData.start = transform_.position_;
-			downData.start.y = transform_.position_.y - (float)(PLAYER_MODEL_SIZE.y / 2);
+			downData.start.y = transform_.position_.y -(PLAYER_MODEL_SIZE.y / 2.0f);
 			XMStoreFloat3(&downData.dir, XMVectorSet(0, -1, 0, 0));
 			Model::RayCast(hGroundModel_,&downData);
 		}
-		//レイの長さが0.9以上だったら...
-		if (downData.dist >= 0.9f) {
-			//位置を重力分下げる
-			transform_.position_.y -= 0.03f;
+		if (downData.dist <= 1.0f) {
+			//めり込み分、位置を戻す
+			XMVECTOR length = { 0,-downData.dist,0 };
+			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(0, -1, 0, 0) - length));
 		}
-		else {
-			//立ち状態にする
-			pState_->ChangeState(pState_->pStanding_, this);
-		}
+
+
+		////レイの長さが○〇の時(着地点とプレイヤーの足元の位置の距離の長さがn以上の時)
+		//if (downData.dist > 1.0f) {
+		//	//重力を下方向に加える
+		//	transform_.position_.y -= 0.03;
+		//}
+		//else {
+		//	//重力を加えずに、着地点とプレイヤーの足元の位置を合わせる
+		//	transform_.position_.y = transform_.position_.y - (downData.dist + (PLAYER_MODEL_SIZE.y /2.0f));
+		//}
 	}
 }
