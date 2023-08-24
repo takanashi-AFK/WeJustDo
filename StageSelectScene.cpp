@@ -125,14 +125,15 @@ void StageSelectScene::CalcPosition(int _num, float* _pos)
 {
 	//画面を均等に分割します
 	float imgPos_ = 0;
+	_pos = &imgPos_;
 	imgPos_ = (float)screenWidth / (float)_num;
 
 	//分割したサイズ通りに画像を配置します
 	for (int l = 0; l < _num; l++)
 	{
-		transform_.position_.x =0/*ここは、画面の左端を0にした座標が入る*/;
-		Image::SetTransform(hPict_[l], transform_);
-		Image::Draw(hPict_[l]);
+		//ここ↓自信ない
+		*_pos += imgPos_;
+
 	}
 }
 
