@@ -26,7 +26,7 @@ void TestScene::Initialize()
 		pPlayer_->SetRotateY(90);
 	}
 	//Stage
-	ASSIGN(pStage_,CreateSolidObject<Stage>(this, "Models/first_1.fbx"));
+	ASSIGN(pStage_,CreateSolidObject<Stage>(this, "Models/Stage100.fbx"));
 
 	ASSIGN(hPict_, Image::Load("Image/BackGround4.png"));
 }
