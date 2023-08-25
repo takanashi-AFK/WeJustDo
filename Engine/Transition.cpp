@@ -40,7 +40,7 @@ void Transition::Update()
 {
 	if (isActive_) {switch (type_) 
 	{
-	case TID_NONE:	isChange_ = true; break;
+	case TID_NONE:	isChange_ = true; isActive_ = false; break;
 	case TID_BLACKOUT:BlackOut();break;
 	case TID_WHITEOUT:WhiteOut();break;
 	

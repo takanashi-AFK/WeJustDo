@@ -28,7 +28,7 @@ void SplashScene::Update()
 
 
 	if (time/60 >= changeTime) {
-		sm->ChangeScene(SCENE_ID_TITLE,TID_BLACKOUT);
+		sm->ChangeScene(SCENE_ID_TITLE,TID_WHITEOUT);
 	}
 }
 

@@ -62,23 +62,6 @@ void Player::StageRayCast()
 	//ステージのモデル番号を取得
 	hGroundModel_ = dynamic_cast<SolidObject*>((Stage*)FindObject("Stage"))->GetModelHandle();
 
-	//右方向のあたり判定
-	{
-		RayCastData rightData; {
-			//当たっているかを確認
-			rightData.start = transform_.position_;					//発射位置の指定
-			rightData.start.x = transform_.position_.x - (PLAYER_MODEL_SIZE.x / 2);
-			XMStoreFloat3(&rightData.dir, XMVectorSet(1, 0, 0, 0));	//発射方向の指定
-			Model::RayCast(hGroundModel_, &rightData);				//レイを発射
-		}
-		//レイの長さが1.0以下だったら...
-		if (rightData.dist <= 1.0f) {
-			//めり込み分、位置を戻す
-			XMVECTOR length = { rightData.dist,0,0 };
-			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(1, 0, 0, 0) - length));
-		}
-	}
-
 	//左方向の当たり判定
 	{
 		RayCastData leftData; {
@@ -93,6 +76,23 @@ void Player::StageRayCast()
 			//めり込み分、位置を戻す
 			XMVECTOR length = { -leftData.dist,0,0 };
 			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(-1, 0, 0, 0) - length));
+		}
+	}
+
+	//右方向のあたり判定
+	{
+		RayCastData rightData; {
+			//当たっているかを確認
+			rightData.start = transform_.position_;					//発射位置の指定
+			rightData.start.x = transform_.position_.x - (PLAYER_MODEL_SIZE.x / 2);
+			XMStoreFloat3(&rightData.dir, XMVectorSet(1, 0, 0, 0));	//発射方向の指定
+			Model::RayCast(hGroundModel_, &rightData);				//レイを発射
+		}
+		//レイの長さが1.0以下だったら...
+		if (rightData.dist <= 1.0f) {
+			//めり込み分、位置を戻す
+			XMVECTOR length = { rightData.dist,0,0 };
+			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(1, 0, 0, 0) - length));
 		}
 	}
 
@@ -127,6 +127,8 @@ void Player::StageRayCast()
 			XMVECTOR length = { 0,-downData.dist,0 };
 			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(0, -1, 0, 0) - length));
 		}
+
+		//transform_.position_.y -= 0.1;
 
 
 		////レイの長さが○〇の時(着地点とプレイヤーの足元の位置の距離の長さがn以上の時)
