@@ -79,7 +79,6 @@ void Player::StageRayCast()
 		}
 	}
 
-
 	//¶•ûŒü‚Ì“–‚½‚è”»’è
 	{
 		RayCastData leftData; {
