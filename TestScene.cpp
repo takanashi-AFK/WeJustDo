@@ -9,6 +9,7 @@
 #include "Engine/SceneManager.h"
 #include "AudioManager.h"
 
+
 //コンストラクタ
 TestScene::TestScene(GameObject * parent)
 	: GameObject(parent, "TestScene")
@@ -31,7 +32,23 @@ void TestScene::Initialize()
 
 	ASSIGN(hPict_, Image::Load("Image/BackGround4.png"));
 
-	AudioManager::Play_PlayMusic();
+	data.textureFileName = "Effects/cloudA.png";
+	data.position = XMFLOAT3(-4, 4, 4);
+	data.positionRnd = XMFLOAT3(0.1, 0, 0.1);
+	data.delay = 5;
+	data.number = 1;
+	data.lifeTime = 60;
+	data.gravity = -0.002f;
+	data.direction = XMFLOAT3(0, 1, 0);
+	data.directionRnd = XMFLOAT3(0, 0, 0);
+	data.speed = 0.01f;
+	data.speedRnd = 0.0;
+	data.size = XMFLOAT2(1.5, 1.5);
+	data.sizeRnd = XMFLOAT2(0.4, 0.4);
+	data.scale = XMFLOAT2(1.01, 1.01);
+	data.color = XMFLOAT4(1, 1, 0, 1);
+	data.deltaColor = XMFLOAT4(0, -0.03, 0, -0.02);
+	
 }
 
 //更新
@@ -52,6 +69,18 @@ void TestScene::Update()
 	if (Input::IsKey(DIK_W))d += 0.1;
 	if (Input::IsKey(DIK_S))d -= 0.1;
 	*/
+	AudioManager::Play_PlayMusic();
+	//炎
+	if(Input::IsKeyDown(DIK_LSHIFT)){
+		{	
+			hEmit = VFX::Start(data);
+		}
+	}
+	if (Input::IsKeyDown(DIK_M))
+	{
+		VFX::End(hEmit);
+	}
+
 
 	//Camera
 	Camera::SetPosition(pPlayer_->GetPosition().x, 5.4f, -12.7);

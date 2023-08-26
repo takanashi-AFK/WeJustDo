@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine/GameObject.h"
+#include "Engine/VFX.h"
 
 class Player;
 class Stage;
@@ -9,6 +10,10 @@ class TestScene : public GameObject
 	int hPict_;
 	Player* pPlayer_;
 	Stage* pStage_;
+
+	int hEmit;
+	EmitterData data;
+	
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）
