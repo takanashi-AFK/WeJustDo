@@ -57,7 +57,7 @@ void TestScene::Update()
 	Camera::SetPosition(pPlayer_->GetPosition().x, 5.4f, -12.7);
 	Camera::SetTarget(pPlayer_->GetPosition().x, 4.0f, 7.3f);
 
-	if (pPlayer_->GetPosition().y <= -20.0f) {
+	if (pPlayer_->GetPosition().y <= -5.0f) {
 		SceneManager* sM=(SceneManager*)FindObject("SceneManager");
 		sM->ChangeScene(SCENE_ID_RESULT, TID_WHITEOUT);
 	}
@@ -69,7 +69,6 @@ void TestScene::Update()
 	if (Input::IsKeyDown(DIK_3))sm->ChangeScene(SCENE_ID_RESULT);
 	if (Input::IsKeyDown(DIK_4))sm->ChangeScene(SCENE_ID_TEST);
 
-	if (transform_.position_.y <= 20)sm->ChangeScene(SCENE_ID_RESULT, TID_BLACKOUT);
 
 }
 //•`‰æ
