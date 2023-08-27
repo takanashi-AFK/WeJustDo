@@ -37,6 +37,7 @@ void TitleScene::Update()
 	//スペースキーの入力時...
 	if (Input::IsKeyDown(DIK_SPACE)) {
 		//シーン遷移を行う
+		AudioManager::PlayConfirmSound();
 		SceneManager* sm = (SceneManager*)FindObject("SceneManager");
 		sm->ChangeScene(SCENE_ID_PLAY, TID_WHITEOUT);
 	}
