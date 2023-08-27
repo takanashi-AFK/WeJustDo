@@ -56,13 +56,6 @@ void Player::ChildRelease()
 
 void Player::ChildDraw()
 {
-
-	Transform t = transform_;
-	t.position_.y -= 0.5f;
-	Model::SetTransform(PosMarker, t);
-	//Model::Draw(PosMarker);
-
-	//Direct3D::SetShader(Direct3D::SHADER_UNLIT);
 }
 
 
