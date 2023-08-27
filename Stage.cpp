@@ -14,5 +14,5 @@ void Stage::ChildUpdate()
 
 void Stage::ChildDraw()
 {
-	Direct3D::SetShader(Direct3D::SHADER_NOSHADE);
+	Direct3D::SetShader(Direct3D::SHADER_UNLIT);
 }

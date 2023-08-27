@@ -18,7 +18,7 @@ TestScene::TestScene(GameObject * parent)
 void TestScene::Initialize()
 {
 	//Player
-	ASSIGN(pPlayer_,CreateSolidObject<Player>(this, "Models/debugMarkerBox.fbx"));
+	ASSIGN(pPlayer_,CreateSolidObject<Player>(this, "Models/debugMarker.fbx"));
 	{
 		//pPlayer_->SetPositionY(5);
 		//pPlayer_->SetScale(0.15f, 0.15f, 0.15f);
@@ -78,7 +78,7 @@ void TestScene::Draw()
 	//transform_.scale_ = { 1.5,1.5,1 };
 	Image::SetRect(hPict_, 0 - ((0 - pPlayer_->GetPosition().x) * 10), 720, 2048, 720);
 	Image::SetTransform(hPict_, transform_);
-	Image::Draw(hPict_);
+	//Image::Draw(hPict_);
 }
 
 //ŠJ•ú
