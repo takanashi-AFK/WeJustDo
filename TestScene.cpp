@@ -1,8 +1,7 @@
 #include "TestScene.h"
-#include "TestObject.h"
 #include "Player.h"
 #include "Engine/Camera.h"
-#include "StageManager.h"
+
 #include "Stage.h"
 #include "Engine/Image.h"
 #include "Engine/Input.h"

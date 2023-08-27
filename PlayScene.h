@@ -2,20 +2,19 @@
 #include "Engine/GameObject.h"
 
 /// <summary>
-/// ゲーム終了後、結果を表示するシーンオブジェクト
+/// ゲームプレイ画面を表示するシーンオブジェクト
 /// </summary>
-class ResultScene : public GameObject
+class PlayScene : public GameObject
 {
 private:
 	int hPict_;	//画像番号
 public:
 	//コンストラクタ
-	ResultScene(GameObject* parent);
-	
+	PlayScene(GameObject * parent);
+
 	//継承{初期化・更新・描画・開放}
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;
-	void Release() override{}
+	void Release() override;
 };
-

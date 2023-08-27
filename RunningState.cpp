@@ -1,23 +1,21 @@
 #include "RunningState.h"
-#include "Engine/Input.h"
+
+//インクルード
 #include "Player.h"
 
+//更新
 void RunningState::Update(Player* _p)
 {
-	//static float s; s += 0.01f;
-	//_p->SetPositionX(s);
-
 	//入力処理
 	HandleInput(_p);
 }
 
+//開始
 void RunningState::Enter(Player* _p)
 {
 }
 
+//入力処理
 void RunningState::HandleInput(Player* _p)
 {
-	if (Input::IsKeyDown(DIK_SPACE)) {
-		_p->GetState()->ChangeState(_p->GetState()->pStanding_, _p);
-	}
 }

@@ -1,12 +1,15 @@
 #pragma once
 #include "Engine/SolidObject.h"
+
+//インクルード
 #include "PlayerStateManager.h"
 #include "Engine/Model.h"
 
+//前方宣言
 class Stage;
 
 /// <summary>
-/// Playerの基底クラス
+/// ゲーム中、画面上に表示されるプレイヤーオブジェクト
 /// </summary>
 class Player : public SolidObject
 {
@@ -14,22 +17,17 @@ protected:
 	///// 必要な情報 ////////////////////////////////////////
 	PlayerStateManager* pState_;	//Playerの状態管理
 
-	//debug
-	float moveY;
-	bool isJumping;
-	int Deg;
-
-	int PosMarker;
 	///// あたり判定 ////////////////////////////////////////
 	RayCastData underRay_;		//プレイヤーの下に伸びるレイ
-	Stage*		pstage_;		//ステージクラスのポインタ
+	Stage*		pStage_;		//ステージクラスのポインタ
 	int			hGroundModel_;	//ステージのモデル番号を入れる変数
 	float		acceleration_;	//重力の加速度
+
 public:
 	//コンストラクタ
 	Player(GameObject* _parent, string _modelFileName);
 
-	//継承{初期化・更新・開放}
+	//継承{初期化・更新・描画・開放}
 	void ChildInitialize() override;
 	void ChildUpdate() override;
 	void ChildRelease() override;

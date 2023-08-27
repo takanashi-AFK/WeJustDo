@@ -1,39 +1,46 @@
 #include "SplashScene.h"
-#include "Engine/Image.h"
-#include "Engine/Input.h"
-#include "Engine/SceneManager.h"
 
+//インクルード
+#include "Engine/Image.h"	//チームロゴ画像表示の為
+#include "Engine/SceneManager.h"//シーン遷移の為
+
+//フレームレート/60fps
+const float FPS = 60.0f;
+
+//コンストラクタ
 SplashScene::SplashScene(GameObject* parent)
 	:GameObject(parent,"SplashScene"),hPict_(-1)
 {
 }
 
+//初期化
 void SplashScene::Initialize()
 {
-	hPict_ = Image::Load("Image/Splash.png");
+	//画像をロード
+	ASSIGN(hPict_,Image::Load("Image/Splash.png"));
+	assert(hPict_ >= 0);
 }
 
+//更新
 void SplashScene::Update()
 {
+	//必要な変数の宣言・初期化
 	static float time = 0;
 	static float changeTime = 0.7f;
-	time++;
 
-	//debug-SceneMove
-	SceneManager* sm = (SceneManager*)FindObject("SceneManager");
-	if (Input::IsKeyDown(DIK_1))sm->ChangeScene(SCENE_ID_TITLE);
-	if (Input::IsKeyDown(DIK_2))sm->ChangeScene(SCENE_ID_PLAY);
-	if (Input::IsKeyDown(DIK_3))sm->ChangeScene(SCENE_ID_RESULT);
-	if (Input::IsKeyDown(DIK_4))sm->ChangeScene(SCENE_ID_TEST);
-
-
-	if (time/60 >= changeTime) {
+	//0.7秒経過した時に...
+	if (time/FPS >= changeTime) {
+		//シーン遷移を行う
+		SceneManager* sm = (SceneManager*)FindObject("SceneManager");
 		sm->ChangeScene(SCENE_ID_TITLE,TID_WHITEOUT);
 	}
+	time++;//時間を進める
 }
 
+//描画
 void SplashScene::Draw()
 {
+	//画像を描画
 	Image::SetTransform(hPict_,transform_);
 	Image::Draw(hPict_);
 }

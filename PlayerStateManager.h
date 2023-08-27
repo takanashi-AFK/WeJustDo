@@ -1,10 +1,16 @@
 #pragma once
 #include "PlayerState.h"
+
+//インクルード
 #include "StandingState.h"
 #include "RunningState.h"
 
+//前方宣言
 class Player;
 
+/// <summary>
+/// プレイヤーの各状態の遷移を管理するクラス
+/// </summary>
 class PlayerStateManager : public PlayerState
 {
 public:
@@ -20,13 +26,23 @@ public:
 	//更新
 	virtual void Update(Player* _p) override;
 
-	//入力によって状態変化する
+	/// <summary>
+	/// 入力処理
+	/// </summary>
+	/// <param name="player">プレイヤーのポインタ</param>
 	virtual void HandleInput(Player* player)override;
 
-	//状態変化したとき一回だけ呼ばれる関数
+	/// <summary>
+	/// 開始時に一度呼ばれる
+	/// </summary>
+	/// <param name="player">プレイヤーのポインタ</param>
 	virtual void Enter(Player* player)override;
 
-	//状態チェンジ用
+	/// <summary>
+	/// 状態を変更する
+	/// </summary>
+	/// <param name="change">変更後の状態</param>
+	/// <param name="player">変更するプレイヤーのポインタ</param>
 	void ChangeState(PlayerState* change, Player* player);
 };
 

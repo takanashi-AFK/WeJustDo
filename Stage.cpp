@@ -1,18 +1,19 @@
 #include "Stage.h"
-#include "Engine/Input.h"
 
+//コンストラクタ
 Stage::Stage(GameObject* parent, string modelFileName)
 	:SolidObject(parent,modelFileName,"Stage")
 {
 }
 
+//更新
 void Stage::ChildUpdate()
 {
-	/*if (Input::IsKey(DIK_W))transform_.position_.y += 0.1f;
-	if (Input::IsKey(DIK_S))transform_.position_.y -= 0.1f;*/
 }
 
+//描画
 void Stage::ChildDraw()
 {
+	//debug-ワイヤーフレーム表示のシェーダーを適用
 	Direct3D::SetShader(Direct3D::SHADER_UNLIT);
 }

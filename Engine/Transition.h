@@ -8,8 +8,12 @@ enum TRANSITION_ID {
 	TID_MAX,
 };
 
+//前方宣言
 class Sprite;
 
+/// <summary>
+/// シーン遷移を行う
+/// </summary>
 namespace Transition
 {
 	//実行処理

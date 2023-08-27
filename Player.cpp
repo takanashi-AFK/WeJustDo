@@ -1,32 +1,38 @@
 #include "Player.h"
-#include "StageManager.h"
+
+//インクルード
 #include "Engine/Input.h"
 #include "Stage.h"
-#include "Engine/Direct3D.h"
 
 //定数宣言
 namespace {
 	//重力の加算値
 	static const float GRAVITY_ADDITION = 0.03f;
 
-	
+	//Playerのモデルの大きさ
+	static const XMFLOAT3 PLAYER_MODEL_SIZE = { 1.0f,1.0f,1.0f };
 }
 
+//コンストラクタ
 Player::Player(GameObject* _parent, string _modelFileName)
-	:SolidObject(_parent,_modelFileName,"Player")
+	:SolidObject(_parent,_modelFileName,"Player"),
+	pState_(nullptr), underRay_(),pStage_(),hGroundModel_(0),acceleration_(0)
 {
+	//プレイヤーの状態を「立ち状態」で初期化
 	ASSIGN(pState_,new PlayerStateManager);
 }
 
+//初期化
 void Player::ChildInitialize()
 {
 	//状態の初期化
 	ASSIGN(pState_->playerState_, pState_->pStanding_);
-	//pState_->Enter(this);
-
-	PosMarker = Model::Load("Models/debugMarker.fbx");
+	
+	//初期状態の開始処理
+	pState_->Enter(this);
 }
 
+//更新
 void Player::ChildUpdate()
 {
 	{//debug-PlayerMove
@@ -38,31 +44,28 @@ void Player::ChildUpdate()
 	if (Input::IsKey(DIK_LEFT))transform_.rotate_.y += 1;
 	}
 
-	
-	//更新
+	//状態ごとの更新
 	//pState_->Update(this);
 	
 	//ステージとのあたり判定
 	StageRayCast();
-
-	if (Input::IsKeyDown(DIK_R))transform_.position_.y = 10;;
-
 }
 
+//開放
 void Player::ChildRelease()
 {
 	SAFE_DELETE(pState_);
 }
 
+//描画
 void Player::ChildDraw()
 {
 }
 
-
 void Player::StageRayCast()
 {
 	//ステージのモデル番号を取得
-	hGroundModel_ = dynamic_cast<SolidObject*>((Stage*)FindObject("Stage"))->GetModelHandle();
+	ASSIGN(hGroundModel_,dynamic_cast<SolidObject*>((Stage*)FindObject("Stage"))->GetModelHandle());
 
 	//左方向の当たり判定
 	{

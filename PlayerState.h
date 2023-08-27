@@ -1,8 +1,12 @@
 #pragma once
 #include "Engine/Global.h"
 
+//前方宣言
 class Player;
 
+/// <summary>
+/// プレイヤーの状態基底クラス
+/// </summary>
 class PlayerState
 {
 public:

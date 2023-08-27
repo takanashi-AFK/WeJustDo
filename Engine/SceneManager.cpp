@@ -1,9 +1,11 @@
 #include "sceneManager.h"
 
-#include "../TestScene.h"
+//シーンオブジェクト
 #include "../SplashScene.h"
 #include "../TitleScene.h"
+#include "../PlayScene.h"
 #include "../ResultScene.h"
+#include "../TestScene.h"
 
 #include "Model.h"
 #include "Image.h"
@@ -47,6 +49,7 @@ void SceneManager::Update()
 		{
 		case SCENE_ID_TEST: Instantiate<TestScene>(this); break;
 		case SCENE_ID_SPLASH: Instantiate<SplashScene>(this); break;
+		case SCENE_ID_PLAY: Instantiate<PlayScene>(this); break;
 		case SCENE_ID_TITLE: Instantiate<TitleScene>(this); break;
 		case SCENE_ID_RESULT: Instantiate<ResultScene>(this); break;
 		}
