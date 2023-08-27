@@ -24,7 +24,7 @@ void Player::ChildInitialize()
 	ASSIGN(pState_->playerState_, pState_->pStanding_);
 	//pState_->Enter(this);
 
-
+	PosMarker = Model::Load("Models/debugMarker.fbx");
 }
 
 void Player::ChildUpdate()
@@ -41,7 +41,9 @@ void Player::ChildUpdate()
 	
 	//更新
 	//pState_->Update(this);
-	StageRayCast();	//ステージとのあたり判定
+	
+	//ステージとのあたり判定
+	StageRayCast();
 
 	if (Input::IsKeyDown(DIK_R))transform_.position_.y = 10;;
 
@@ -54,6 +56,10 @@ void Player::ChildRelease()
 
 void Player::ChildDraw()
 {
+	Transform t = transform_;
+	t.position_.y -= 0.5f;
+	Model::SetTransform(PosMarker, t);
+	Model::Draw(PosMarker);
 }
 
 

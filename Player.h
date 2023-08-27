@@ -19,6 +19,7 @@ protected:
 	bool isJumping;
 	int Deg;
 
+	int PosMarker;
 	///// あたり判定 ////////////////////////////////////////
 	RayCastData underRay_;		//プレイヤーの下に伸びるレイ
 	Stage*		pstage_;		//ステージクラスのポインタ

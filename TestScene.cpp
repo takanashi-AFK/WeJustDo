@@ -18,12 +18,12 @@ TestScene::TestScene(GameObject * parent)
 void TestScene::Initialize()
 {
 	//Player
-	ASSIGN(pPlayer_,CreateSolidObject<Player>(this, "Models/ziro2.fbx"));
+	ASSIGN(pPlayer_,CreateSolidObject<Player>(this, "Models/debugMarkerBox.fbx"));
 	{
-		pPlayer_->SetPositionY(5);
-		pPlayer_->SetScale(0.15f, 0.15f, 0.15f);
-		//pPlayer_->SetScale(0.5f, 0.5f, 0.5f);
-		pPlayer_->SetRotateY(90);
+		//pPlayer_->SetPositionY(5);
+		//pPlayer_->SetScale(0.15f, 0.15f, 0.15f);
+		////pPlayer_->SetScale(0.5f, 0.5f, 0.5f);
+		//pPlayer_->SetRotateY(90);
 	}
 	//Stage
 	ASSIGN(pStage_,CreateSolidObject<Stage>(this, "Models/stage100.fbx"));
@@ -53,6 +53,10 @@ void TestScene::Update()
 	//Camera
 	Camera::SetPosition(pPlayer_->GetPosition().x, 5.4f, -12.7);
 	Camera::SetTarget(pPlayer_->GetPosition().x, 4.0f, 7.3f);
+
+	//debug-Camera
+	Camera::SetPosition(pPlayer_->GetPosition().x, 2, -20);
+	Camera::SetTarget(pPlayer_->GetPosition().x, 2, 0);
 
 	if (pPlayer_->GetPosition().y <= -20.0f) {
 		SceneManager* sM=(SceneManager*)FindObject("SceneManager");
