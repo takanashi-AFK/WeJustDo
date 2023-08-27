@@ -5,6 +5,8 @@
 #include "Stage.h"
 #include "Engine/Image.h"
 #include "Engine/Camera.h"
+#include "AudioManager.h"
+#include "Engine/SceneManager.h"
 
 //コンストラクタ
 PlayScene::PlayScene(GameObject* parent)
@@ -30,11 +32,19 @@ void PlayScene::Initialize()
 
 	}
 
+	//BGMを再生
+	AudioManager::Initialize();
+	AudioManager::Play_PlayMusic();
 }
 
 //更新
 void PlayScene::Update()
 {
+	static float time; time++;
+	if (time >= 600) {
+		SceneManager* sm = (SceneManager*)FindObject("SceneManager");
+		sm->ChangeScene(SCENE_ID_RESULT,TID_WHITEOUT);
+	}
 }
 
 //描画

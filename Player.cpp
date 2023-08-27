@@ -3,7 +3,7 @@
 //インクルード
 #include "Engine/Input.h"
 #include "Stage.h"
-
+#include "Engine/Transition.h"
 //定数宣言
 namespace {
 	//重力の加算値
@@ -35,14 +35,18 @@ void Player::ChildInitialize()
 //更新
 void Player::ChildUpdate()
 {
-	{//debug-PlayerMove
-	if (Input::IsKey(DIK_W))transform_.position_.y += 0.1;
-	if (Input::IsKey(DIK_A))transform_.position_.x -= 0.1;
-	if (Input::IsKey(DIK_S))transform_.position_.y -= 0.1;
-	if (Input::IsKey(DIK_D))transform_.position_.x += 0.1;
-	if (Input::IsKey(DIK_RIGHT))transform_.rotate_.y -= 1;
-	if (Input::IsKey(DIK_LEFT))transform_.rotate_.y += 1;
+	if (!Transition::IsActive()) {
+		{//debug-PlayerMove
+			if (Input::IsKey(DIK_W))transform_.position_.y += 0.1;
+			if (Input::IsKey(DIK_A))transform_.position_.x -= 0.1;
+			if (Input::IsKey(DIK_S))transform_.position_.y -= 0.1;
+			if (Input::IsKey(DIK_D))transform_.position_.x += 0.1;
+			if (Input::IsKey(DIK_RIGHT))transform_.rotate_.y -= 1;
+			if (Input::IsKey(DIK_LEFT))transform_.rotate_.y += 1;
+		}
 	}
+
+	
 
 	//状態ごとの更新
 	//pState_->Update(this);

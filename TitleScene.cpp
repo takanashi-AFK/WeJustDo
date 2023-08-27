@@ -6,6 +6,7 @@
 #include "Engine/SceneManager.h"	//シーン遷移の為
 #include "Engine/Input.h"	//シーン遷移の為
 #include "Engine/Camera.h"	//カメラの位置更新の為
+#include "AudioManager.h"	//BGMを流す為
 
 //コンストラクタ
 TitleScene::TitleScene(GameObject* parent)
@@ -24,6 +25,10 @@ void TitleScene::Initialize()
 
 	//カメラの初期化
 	Camera::SetPosition(0, 0, -5);Camera::SetTarget(0, 0, 0);
+
+	//BGMを再生
+	AudioManager::Initialize();
+	AudioManager::Play_TitleMusic();
 }
 
 //更新
