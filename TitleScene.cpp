@@ -39,7 +39,7 @@ void TitleScene::Update()
 		//ƒV[ƒ“‘JˆÚ‚ðs‚¤
 		AudioManager::PlayConfirmSound();
 		SceneManager* sm = (SceneManager*)FindObject("SceneManager");
-		sm->ChangeScene(SCENE_ID_PLAY, TID_WHITEOUT);
+		sm->ChangeScene(SCENE_ID_SELECT, TID_WHITEOUT);
 	}
 
 	//SkySphereƒ‚ƒfƒ‹‚ð‰ñ“]‚³‚¹‚é
