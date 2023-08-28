@@ -112,7 +112,6 @@ void StageSelectScene::Draw()
 
 	//今の値を表示してくれる。いらない。
 	pText->Draw(30, 30, count);
-	pText->Draw(60, 30, screenWidth);
 
 }
 
@@ -125,15 +124,8 @@ void StageSelectScene::CalcPosition(int _num, float* _pos)
 {
 	//画面を均等に分割します
 	float imgPos_ = 0;
-	_pos = &imgPos_;
-	imgPos_ = (float)screenWidth / (float)_num;
+	
+	//画面左端を０にする。（初期値は-1）
 
-	//分割したサイズ通りに画像を配置します
-	for (int l = 0; l < _num; l++)
-	{
-		//ここ↓自信ない
-		*_pos += imgPos_;
-
-	}
 }
 

@@ -6,10 +6,6 @@ class StageSelectScene :
     public GameObject
 {
 private:
-	//スクリーンの大きさをとってくる
-	int screenWidth = GetPrivateProfileInt("SCREEN", "Width", 800, ".\\setup.ini");		//スクリーンの幅
-	int screenHeight = GetPrivateProfileInt("SCREEN", "Height", 600, ".\\setup.ini");	//スクリーンの高さ
-
 	int hPict_[4];
 	int	hPict_2;
 	int count;//A,Dキーを押したときに変わる変数
