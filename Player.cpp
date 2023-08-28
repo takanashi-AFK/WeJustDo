@@ -28,11 +28,25 @@ void Player::ChildInitialize()
 {
 	//状態の初期化
 	ASSIGN(pState_->playerState_, pState_->pStanding_);
-	
+
 	//初期状態の開始処理
 	pState_->Enter(this);
-	transform_.scale_ = { 0.15f,0.15f, 0.15f };
+	transform_.scale_ = { 0.1f,0.1f, 0.1f };
 
+	data.textureFileName = "Effects/cloudA.png";
+	data.positionRnd = XMFLOAT3(0.1, 0, 0.1);
+	data.delay = 5;
+	data.number = 1;
+	data.direction = XMFLOAT3(-1, 0, 0);
+	data.directionRnd = XMFLOAT3(0, 0, 0);
+	data.rotate = XMFLOAT3(45, 0, 0);
+	data.speed = 0.01f;
+	data.speedRnd = 0.0;
+	data.size = XMFLOAT2(0.3, 0.3);
+	data.sizeRnd = XMFLOAT2(0.4, 0.4);
+	data.scale = XMFLOAT2(1.01, 1.01);
+	data.color = XMFLOAT4(1, 1, 0, 1);
+	data.deltaColor = XMFLOAT4(0, -0.03, 0, -0.02);
 }
 
 //更新
@@ -51,7 +65,22 @@ void Player::ChildUpdate()
 
 	Camera::SetPosition(transform_.position_.x + 5, 3.5f, -15.0f);
 	Camera::SetTarget(transform_.position_.x + 5, 5.5f, 0.0f);
+
+
+
+	if (Input::IsKey(DIK_LSHIFT))
+	{
+		hFireEffectEmit = VFX::Start(data);
+		VFX::End(hFireEffectEmit);
+
+		data.position = transform_.position_;
+		hFireEffectEmit = VFX::Start(data);
+	}
 	
+	if(Input::IsKeyUp(DIK_LSHIFT))
+		VFX::End(hFireEffectEmit);
+
+
 
 	//状態ごとの更新
 	//pState_->Update(this);
