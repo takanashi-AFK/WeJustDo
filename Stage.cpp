@@ -15,5 +15,5 @@ void Stage::ChildUpdate()
 void Stage::ChildDraw()
 {
 	//debug-ワイヤーフレーム表示のシェーダーを適用
-	Direct3D::SetShader(Direct3D::SHADER_UNLIT);
+	Direct3D::SetShader(Direct3D::SHADER_NOSHADE);
 }

@@ -4,6 +4,7 @@
 #include "Engine/Input.h"
 #include "Stage.h"
 #include "Engine/Transition.h"
+#include "Engine/Camera.h"
 //定数宣言
 namespace {
 	//重力の加算値
@@ -46,6 +47,8 @@ void Player::ChildUpdate()
 		}
 	}
 
+	Camera::SetPosition(transform_.position_.x + 5, 3.5f, -15.0f);
+	Camera::SetTarget(transform_.position_.x + 5, 5.5f, 0.0f);
 	
 
 	//状態ごとの更新
