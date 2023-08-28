@@ -31,6 +31,8 @@ void Player::ChildInitialize()
 	
 	//初期状態の開始処理
 	pState_->Enter(this);
+	transform_.scale_ = { 0.15f,0.15f, 0.15f };
+
 }
 
 //更新
