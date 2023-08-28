@@ -13,6 +13,18 @@ class Stage;
 /// </summary>
 class Player : public SolidObject
 {
+private:
+	//debug
+	int Marker;
+	XMFLOAT3 RayStartPos;
+	XMFLOAT3 downLandingPoint;
+	XMFLOAT3 upLandingPoint;
+	XMFLOAT3 rightLandingPoint;
+	XMFLOAT3 leftLandingPoint;
+
+	//ziro2
+	int ziro;
+
 protected:
 	///// •K—v‚Èî•ñ ////////////////////////////////////////
 	PlayerStateManager* pState_;	//Player‚Ìó‘ÔŠÇ—

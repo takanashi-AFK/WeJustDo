@@ -28,6 +28,10 @@ void Player::ChildInitialize()
 	//状態の初期化
 	ASSIGN(pState_->playerState_, pState_->pStanding_);
 	
+	//モデルのロード
+	ASSIGN(Marker, Model::Load("Models/debugMarker.fbx"));
+	ASSIGN(ziro, Model::Load("Models/ziro2.fbx"));
+
 	//初期状態の開始処理
 	pState_->Enter(this);
 }
@@ -64,6 +68,44 @@ void Player::ChildRelease()
 //描画
 void Player::ChildDraw()
 {
+	//レイのスタート位置を描画
+	Transform t;
+	t.position_ = RayStartPos;
+	t.position_.z -= 0.5f;
+	Model::SetTransform(Marker, t);
+	Model::Draw(Marker);
+
+	//着地点を描画
+	Transform d;
+	d.position_ = downLandingPoint;
+	Model::SetTransform(Marker, d);
+	Model::Draw(Marker);
+
+	Transform up;
+	up.position_ = upLandingPoint;
+	Model::SetTransform(Marker, up);
+	Model::Draw(Marker);
+
+	Transform rg;
+	rg.position_ = rightLandingPoint;
+	Model::SetTransform(Marker, rg);
+	Model::Draw(Marker);
+
+	Transform lf;
+	lf.position_ = leftLandingPoint;
+	Model::SetTransform(Marker, lf);
+	Model::Draw(Marker);
+
+
+	Transform z;
+	z.position_ = transform_.position_;
+	z.position_.y -= 0.5;
+	z.rotate_.y = 90.0f;
+	z.scale_ = { 0.1f,0.1f,0.1f };
+	Model::SetTransform(ziro, z);
+	Model::Draw(ziro);
+
+	Direct3D::SetShader(Direct3D::SHADER_UNLIT);
 }
 
 void Player::StageRayCast()
@@ -73,6 +115,19 @@ void Player::StageRayCast()
 
 	//左方向の当たり判定
 	{
+		RayCastData leftData; {
+			leftData.start = transform_.position_;
+			RayStartPos = leftData.start;
+			XMStoreFloat3(&leftData.dir, XMVectorSet(-1, 0, 0, 0));
+			Model::RayCast(hGroundModel_, &leftData);
+			leftLandingPoint = leftData.pos;
+		}
+		if (leftData.dist <= 1.0f) {
+			//めり込み分、位置を戻す
+			XMVECTOR length = { -leftData.dist,0,0};
+			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(-1, 0, 0, 0) - length));
+		}
+
 		//RayCastData leftData; {
 		//	//当たっているか確認
 		//	leftData.start = transform_.position_;
@@ -90,6 +145,16 @@ void Player::StageRayCast()
 
 	//右方向のあたり判定
 	{
+		RayCastData rightData; {
+			rightData.start = transform_.position_;
+			RayStartPos = rightData.start;
+			XMStoreFloat3(&rightData.dir, XMVectorSet(1,0, 0, 0));
+			Model::RayCast(hGroundModel_, &rightData);
+		}
+		if (rightData.hit) {
+			rightLandingPoint = rightData.pos;
+		}
+
 		//RayCastData rightData; {
 		//	//当たっているかを確認
 		//	rightData.start = transform_.position_;					//発射位置の指定
@@ -107,6 +172,16 @@ void Player::StageRayCast()
 
 	//上方向のあたり判定
 	{
+		RayCastData upData; {
+			upData.start = transform_.position_;
+			RayStartPos = upData.start;
+			XMStoreFloat3(&upData.dir, XMVectorSet(0, 1, 0, 0));
+			Model::RayCast(hGroundModel_, &upData);
+		}
+		if (upData.hit) {
+			upLandingPoint = upData.pos;
+		}
+
 		//RayCastData upData; {
 		//	//当たっているか確認
 		//	upData.start = transform_.position_;
@@ -124,6 +199,17 @@ void Player::StageRayCast()
 
 	//下方向のあたり判定
 	{
+		RayCastData downData; {
+			downData.start = transform_.position_;
+			RayStartPos = downData.start;
+			XMStoreFloat3(&downData.dir, XMVectorSet(0, -1, 0, 0));
+			Model::RayCast(hGroundModel_, &downData);
+		}
+		if (downData.hit) {
+			downLandingPoint = downData.pos;
+		}
+
+
 		//RayCastData downData; {
 		//	//当たっているか確認
 		//	downData.start = transform_.position_;

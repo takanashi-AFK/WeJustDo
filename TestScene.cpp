@@ -17,7 +17,7 @@ TestScene::TestScene(GameObject * parent)
 void TestScene::Initialize()
 {
 	//Player
-	ASSIGN(pPlayer_,CreateSolidObject<Player>(this, "Models/debugMarker.fbx"));
+	ASSIGN(pPlayer_,CreateSolidObject<Player>(this, "DebugCollision/BoxCollider.fbx"));
 	{
 		//pPlayer_->SetPositionY(5);
 		//pPlayer_->SetScale(0.15f, 0.15f, 0.15f);
@@ -54,7 +54,7 @@ void TestScene::Update()
 	Camera::SetTarget(pPlayer_->GetPosition().x, 4.0f, 7.3f);
 
 	//debug-Camera
-	Camera::SetPosition(pPlayer_->GetPosition().x, 2, -20);
+	Camera::SetPosition(pPlayer_->GetPosition().x, 2, -10);
 	Camera::SetTarget(pPlayer_->GetPosition().x, 2, 0);
 
 	if (pPlayer_->GetPosition().y <= -20.0f) {
