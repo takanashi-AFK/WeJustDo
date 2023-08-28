@@ -26,7 +26,7 @@ void StageSelectScene::Initialize()
 		*/
 
 		hPict_[i] = Image::Load("Image/Stage01.png");
-		transform_.scale_ = { 0.4,0.4,0.4 };
+		a.scale_ = { 0.4,0.4,0.4 };
 	}
 	hPict_2 = Image::Load("Image/Cursor.png");
 	transform_.scale_ = { 0.4, 0.4, 0.4 };
@@ -51,7 +51,7 @@ void StageSelectScene::Update()
 	switch (count)
 	{
 	case 0:
-		posX.x = -0.8;
+		posX.x = -0.75;
 		if (Input::IsKeyDown(DIK_SPACE)) {
 			SceneManager* sm = (SceneManager*)FindObject("SceneManager");
 			sm->ChangeScene(SCENE_ID_PLAY, TID_BLACKOUT);
@@ -59,7 +59,7 @@ void StageSelectScene::Update()
 		break;
 
 	case 1:
-		posX.x = -0.3;
+		posX.x = -0.25;
 		if (Input::IsKeyDown(DIK_SPACE)) {
 			SceneManager* sm = (SceneManager*)FindObject("SceneManager");
 			sm->ChangeScene(SCENE_ID_PLAY, TID_BLACKOUT);
@@ -67,7 +67,7 @@ void StageSelectScene::Update()
 		break;
 
 	case 2:
-		posX.x = 0.2;
+		posX.x = 0.25;
 		if (Input::IsKeyDown(DIK_SPACE)) {
 			SceneManager* sm = (SceneManager*)FindObject("SceneManager");
 			sm->ChangeScene(SCENE_ID_PLAY, TID_BLACKOUT);
@@ -75,7 +75,7 @@ void StageSelectScene::Update()
 		break;
 
 	case 3:
-		posX.x = 0.7;
+		posX.x = 0.75;
 		if (Input::IsKeyDown(DIK_SPACE)) {
 			SceneManager* sm = (SceneManager*)FindObject("SceneManager");
 			sm->ChangeScene(SCENE_ID_PLAY, TID_BLACKOUT);
@@ -100,20 +100,19 @@ void StageSelectScene::Update()
 //描画
 void StageSelectScene::Draw()
 {
-	//for (int i = 0; i < 4; i++) {
-	//	//transformの計算式　【画面左端(-1)、余白(0.2)、移動量(i*0.5)】
-	//	transform_.position_.x = -1 + 0.2 + i * 0.5;
-	//	Image::SetTransform(hPict_[i],transform_);
-	//	Image::Draw(hPict_[i]);
-	//}
+	// for (int i = 0; i < 4; i++) {
+	// 	//transformの計算式 【画面左端(-1)、余白(0.2)、移動量(i*0.5)】
+	//transform_.position_.x 	= -1 + 0.2 + i * 0.5;
+	// 	Image::SetTransform(hPict_[i],transform_);
+	// 	Image::Draw(hPict_[i]);
+	// }
+	StageSelectScene::CalcPosition(4);
 
 	//カーソルを描く
 	Image::Draw(hPict_2);
 
 	//今の値を表示してくれる。いらない。
 	pText->Draw(30, 30, count);
-	pText->Draw(60, 30, screenWidth);
-
 }
 
 //開放
@@ -121,19 +120,17 @@ void StageSelectScene::Release()
 {
 }
 
-void StageSelectScene::CalcPosition(int _num, float* _pos)
+//tempPos
+void StageSelectScene::CalcPosition(int _num)
 {
-	//画面を均等に分割します
-	float imgPos_ = 0;
-	_pos = &imgPos_;
-	imgPos_ = (float)screenWidth / (float)_num;
-
+	//画面を分割する。｜-1～+1｜なので、２です。
+	float Pos = (2 / _num) +0.25;
 	//分割したサイズ通りに画像を配置します
 	for (int l = 0; l < _num; l++)
 	{
-		//ここ↓自信ない
-		*_pos += imgPos_;
-
+		a.position_.x = (Pos - 1)+ (l * 0.5);
+		Image::SetTransform(hPict_[l],a);
+		Image::Draw(hPict_[l]);
 	}
 }
 
