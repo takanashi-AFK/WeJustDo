@@ -5,7 +5,7 @@
 #include "PlayerStateManager.h"
 #include "Engine/Model.h"
 #include "Engine/VFX.h"
-
+#include "PolyLine.h"
 //前方宣言
 class Stage;
 
@@ -25,7 +25,8 @@ protected:
 	float		acceleration_;	//重力の加速度
 	EmitterData data;
 	int hFireEffectEmit;
-
+	PolyLine* pLine;
+	XMFLOAT3 PolyEmitPos;
 
 public:
 	//コンストラクタ
@@ -36,6 +37,7 @@ public:
 	void ChildUpdate() override;
 	void ChildRelease() override;
 	void ChildDraw() override;
+	void PolyDraw() override; 
 
 	///// 必要な関数 //////////////////////////////////////// 
 

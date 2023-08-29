@@ -32,6 +32,12 @@ void Player::ChildInitialize()
 	//初期状態の開始処理
 	pState_->Enter(this);
 	transform_.scale_ = { 0.1f,0.1f, 0.1f };
+	transform_.rotate_.y = 90;
+
+	pLine = new PolyLine;
+	pLine->Load("Effects/Fire.png");
+
+
 
 	data.textureFileName = "Effects/cloudA.png";
 	data.positionRnd = XMFLOAT3(0.1, 0, 0.1);
@@ -52,12 +58,14 @@ void Player::ChildInitialize()
 //更新
 void Player::ChildUpdate()
 {
+
+	PolyEmitPos = XMFLOAT3(transform_.position_.x - (PLAYER_MODEL_SIZE.x /4), transform_.position_.y + (PLAYER_MODEL_SIZE.x / 4), transform_.position_.z);
 	if (!Transition::IsActive()) {
 		{//debug-PlayerMove
 			if (Input::IsKey(DIK_W))transform_.position_.y += 0.1;
-			if (Input::IsKey(DIK_A))transform_.position_.x -= 0.1;
+			if (Input::IsKey(DIK_A)) { transform_.position_.x -= 0.1; transform_.rotate_.y = -90; PolyEmitPos.x = PolyEmitPos.x + 0.5; }
 			if (Input::IsKey(DIK_S))transform_.position_.y -= 0.1;
-			if (Input::IsKey(DIK_D))transform_.position_.x += 0.1;
+			if (Input::IsKey(DIK_D)){transform_.position_.x += 0.1; transform_.rotate_.y = 90; }
 			if (Input::IsKey(DIK_RIGHT))transform_.rotate_.y -= 1;
 			if (Input::IsKey(DIK_LEFT))transform_.rotate_.y += 1;
 		}
@@ -68,18 +76,9 @@ void Player::ChildUpdate()
 
 
 
-	if (Input::IsKey(DIK_LSHIFT))
-	{
-		hFireEffectEmit = VFX::Start(data);
-		VFX::End(hFireEffectEmit);
-
-		data.position = transform_.position_;
-		hFireEffectEmit = VFX::Start(data);
-	}
 	
-	if(Input::IsKeyUp(DIK_LSHIFT))
-		VFX::End(hFireEffectEmit);
-
+	//ポリラインに現在の位置を伝える
+	pLine->AddPosition(PolyEmitPos);
 
 
 	//状態ごとの更新
@@ -93,11 +92,23 @@ void Player::ChildUpdate()
 void Player::ChildRelease()
 {
 	SAFE_DELETE(pState_);
+	//ポリライン解放
+	pLine->Release();
 }
 
 //描画
 void Player::ChildDraw()
 {
+
+}
+
+void Player::PolyDraw()
+{
+	if (Input::IsKey(DIK_LSHIFT))
+	{
+		//ポリラインを描画
+		pLine->Draw();
+	}
 }
 
 void Player::StageRayCast()
