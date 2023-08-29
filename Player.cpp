@@ -60,6 +60,15 @@ void Player::ChildUpdate()
 	
 	//ステージとのあたり判定
 	StageRayCast();
+
+	if (Input::IsKey(DIK_K))isAddGravity_ = false;
+
+	//重力を加える
+	if (isAddGravity_) {
+		transform_.position_ =Transform::Float3Add(transform_.position_, VectorToFloat3((XMVectorSet(0,-1,0,0)/ 10) * acceleration_));
+		acceleration_ += GRAVITY_ADDITION;
+	}
+	
 }
 
 //開放
@@ -180,6 +189,16 @@ void Player::StageRayCast()
 			//めり込み分、位置を戻す
 			XMVECTOR length = { 0,(PLAYER_MODEL_SIZE.y/2) - downData.dist,0 };
 			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) + length);
+		}
+
+		//状態善意
+		if (!downData.dist <= (PLAYER_MODEL_SIZE.y / 2)) {
+			isAddGravity_ = true;
+		}
+		else {
+			isAddGravity_ = false;
+			//pState_->ChangeState(pState_->pStanding_, this);
+			acceleration_ = 0;
 		}
 	}
 }

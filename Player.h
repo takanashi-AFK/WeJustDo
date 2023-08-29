@@ -34,6 +34,7 @@ protected:
 	Stage*		pStage_;		//ステージクラスのポインタ
 	int			hGroundModel_;	//ステージのモデル番号を入れる変数
 	float		acceleration_;	//重力の加速度
+	bool		isAddGravity_;	//重力を加えるか否か
 
 public:
 	//コンストラクタ
