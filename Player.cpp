@@ -32,6 +32,9 @@ void Player::ChildInitialize()
 	ASSIGN(Marker, Model::Load("Models/debugMarker.fbx"));
 	ASSIGN(ziro, Model::Load("Models/ziro2.fbx"));
 
+	//位置の初期化
+	transform_.position_.y = 2;
+
 	//初期状態の開始処理
 	pState_->Enter(this);
 }
@@ -122,118 +125,61 @@ void Player::StageRayCast()
 			Model::RayCast(hGroundModel_, &leftData);
 			leftLandingPoint = leftData.pos;
 		}
-		if (leftData.dist <= 1.0f) {
+		if (leftData.dist < (PLAYER_MODEL_SIZE.x / 2)) {
 			//めり込み分、位置を戻す
-			XMVECTOR length = { -leftData.dist,0,0};
+			XMVECTOR length = { -leftData.dist -(PLAYER_MODEL_SIZE.x/2),0,0};
 			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(-1, 0, 0, 0) - length));
 		}
-
-		//RayCastData leftData; {
-		//	//当たっているか確認
-		//	leftData.start = transform_.position_;
-		//	leftData.start.x = transform_.position_.x + (float)(PLAYER_MODEL_SIZE.x / 2);
-		//	XMStoreFloat3(&leftData.dir, XMVectorSet(-1, 0, 0, 0));
-		//	Model::RayCast(hGroundModel_, &leftData);
-		//}
-		////レイの長さが1.0以下だったら...
-		//if (leftData.dist <= 1.0f) {
-		//	//めり込み分、位置を戻す
-		//	XMVECTOR length = { -leftData.dist,0,0 };
-		//	XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(-1, 0, 0, 0) - length));
-		//}
 	}
 
 	//右方向のあたり判定
 	{
+
 		RayCastData rightData; {
-			rightData.start = transform_.position_;
-			RayStartPos = rightData.start;
-			XMStoreFloat3(&rightData.dir, XMVectorSet(1,0, 0, 0));
-			Model::RayCast(hGroundModel_, &rightData);
-		}
-		if (rightData.hit) {
+			//当たっているかを確認
+			rightData.start = transform_.position_;					//発射位置の指定
+			XMStoreFloat3(&rightData.dir, XMVectorSet(1, 0, 0, 0));	//発射方向の指定
+			Model::RayCast(hGroundModel_, &rightData);				//レイを発射
 			rightLandingPoint = rightData.pos;
 		}
-
-		//RayCastData rightData; {
-		//	//当たっているかを確認
-		//	rightData.start = transform_.position_;					//発射位置の指定
-		//	rightData.start.x = transform_.position_.x - (PLAYER_MODEL_SIZE.x / 2);
-		//	XMStoreFloat3(&rightData.dir, XMVectorSet(1, 0, 0, 0));	//発射方向の指定
-		//	Model::RayCast(hGroundModel_, &rightData);				//レイを発射
-		//}
-		////レイの長さが1.0以下だったら...
-		//if (rightData.dist <= 1.0f) {
-		//	//めり込み分、位置を戻す
-		//	XMVECTOR length = { rightData.dist,0,0 };
-		//	XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(1, 0, 0, 0) - length));
-		//}
+		//レイの長さが1.0以下だったら...
+		if (rightData.dist < (PLAYER_MODEL_SIZE.x / 2)) {
+			//めり込み分、位置を戻す
+			XMVECTOR length = { rightData.dist + (PLAYER_MODEL_SIZE.x / 2),0,0 };
+			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(1, 0, 0, 0) - length));
+		}
 	}
 
 	//上方向のあたり判定
 	{
 		RayCastData upData; {
+			//当たっているか確認
 			upData.start = transform_.position_;
-			RayStartPos = upData.start;
 			XMStoreFloat3(&upData.dir, XMVectorSet(0, 1, 0, 0));
-			Model::RayCast(hGroundModel_, &upData);
-		}
-		if (upData.hit) {
+			Model::RayCast(hGroundModel_,&upData);
 			upLandingPoint = upData.pos;
 		}
-
-		//RayCastData upData; {
-		//	//当たっているか確認
-		//	upData.start = transform_.position_;
-		//	upData.start.y = transform_.position_.y + (float)(PLAYER_MODEL_SIZE.y / 2);
-		//	XMStoreFloat3(&upData.dir, XMVectorSet(0, 1, 0, 0));
-		//	Model::RayCast(hGroundModel_,&upData);
-		//}
-		////レイの長さが1.0以下だったら...
-		//if (upData.dist <= 1.0f) {
-		//	//めり込み分、位置を戻す
-		//	XMVECTOR length = {0, upData.dist,0 };
-		//	XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(0, 1, 0, 0) - length));
-		//}
+		//レイの長さが1.0以下だったら...
+		if (upData.dist < (PLAYER_MODEL_SIZE.y / 2)) {
+			//めり込み分、位置を戻す
+			XMVECTOR length = {0, (PLAYER_MODEL_SIZE.y / 2) + upData.dist,0 };
+			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(0, 1, 0, 0) - length));
+		}
 	}
 
 	//下方向のあたり判定
 	{
 		RayCastData downData; {
+			//当たっているか確認
 			downData.start = transform_.position_;
-			RayStartPos = downData.start;
 			XMStoreFloat3(&downData.dir, XMVectorSet(0, -1, 0, 0));
-			Model::RayCast(hGroundModel_, &downData);
-		}
-		if (downData.hit) {
+			Model::RayCast(hGroundModel_,&downData);
 			downLandingPoint = downData.pos;
 		}
-
-
-		//RayCastData downData; {
-		//	//当たっているか確認
-		//	downData.start = transform_.position_;
-		//	downData.start.y = transform_.position_.y -(PLAYER_MODEL_SIZE.y / 2.0f);
-		//	XMStoreFloat3(&downData.dir, XMVectorSet(0, -1, 0, 0));
-		//	Model::RayCast(hGroundModel_,&downData);
-		//}
-		//if (downData.dist <= 1.0f) {
-		//	//めり込み分、位置を戻す
-		//	XMVECTOR length = { 0,-downData.dist,0 };
-		//	XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(0, -1, 0, 0) - length));
-		//}
-
-		//transform_.position_.y -= 0.1;
-
-
-		////レイの長さが○〇の時(着地点とプレイヤーの足元の位置の距離の長さがn以上の時)
-		//if (downData.dist > 1.0f) {
-		//	//重力を下方向に加える
-		//	transform_.position_.y -= 0.03;
-		//}
-		//else {
-		//	//重力を加えずに、着地点とプレイヤーの足元の位置を合わせる
-		//	transform_.position_.y = transform_.position_.y - (downData.dist + (PLAYER_MODEL_SIZE.y /2.0f));
-		//}
+		if (downData.dist < (PLAYER_MODEL_SIZE.y / 2)) {
+			//めり込み分、位置を戻す
+			XMVECTOR length = { 0,(PLAYER_MODEL_SIZE.y/2) - downData.dist,0 };
+			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) + length);
+		}
 	}
 }
