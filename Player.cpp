@@ -111,6 +111,7 @@ void Player::ChildDraw()
 	Direct3D::SetShader(Direct3D::SHADER_UNLIT);
 }
 
+
 void Player::StageRayCast()
 {
 	//ステージのモデル番号を取得
@@ -134,7 +135,6 @@ void Player::StageRayCast()
 
 	//右方向のあたり判定
 	{
-
 		RayCastData rightData; {
 			//当たっているかを確認
 			rightData.start = transform_.position_;					//発射位置の指定
