@@ -46,12 +46,14 @@ void Player::ChildUpdate()
 		}
 	}
 
+	//jump状態にする
 	if (Input::IsKeyDown(DIK_SPACE)) {
 		isJumpNow_ = true;
 	}
 
+	//jump中の処理を行う
 	if (isJumpNow_) {
-		transform_.position_.y += 0.2f;
+		transform_.position_.y += 0.1f;
 	}
 
 	//重力を加える
@@ -182,12 +184,11 @@ void Player::StageRayCast()
 			Model::RayCast(hGroundModel_,&downData);
 			downLandingPoint = downData.pos;
 		}
-
-		
-
 		if (downData.dist < (PLAYER_MODEL_SIZE.y / 2)) {
 			//状態を"Standing"に変更
 			pState_->ChangeState(pState_->pStanding_, this);
+
+			//jump状態を終了
 			isJumpNow_ = false;
 		}
 		else
