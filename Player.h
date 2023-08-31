@@ -8,6 +8,15 @@
 //前方宣言
 class Stage;
 
+//定数宣言
+namespace {
+	//重力の加算値
+	static const float GRAVITY_ADDITION = 0.03f;
+
+	//Playerのモデルの大きさ
+	static const XMFLOAT3 PLAYER_MODEL_SIZE = { 1.0f,1.0f,1.0f };
+}
+
 /// <summary>
 /// ゲーム中、画面上に表示されるプレイヤーオブジェクト
 /// </summary>
@@ -31,10 +40,11 @@ protected:
 
 	///// あたり判定 ////////////////////////////////////////
 	RayCastData underRay_;		//プレイヤーの下に伸びるレイ
-	Stage*		pStage_;		//ステージクラスのポインタ
+	Stage* pStage_;		//ステージクラスのポインタ
 	int			hGroundModel_;	//ステージのモデル番号を入れる変数
 	float		acceleration_;	//重力の加速度
 	bool		isAddGravity_;	//重力を加えるか否か
+	bool		isJumpNow_;
 
 public:
 	//コンストラクタ
@@ -58,7 +68,7 @@ public:
 	/// 状態を取得
 	/// </summary>
 	/// <returns>状態</returns>
-	PlayerStateManager* GetState(){return pState_;};
+	PlayerStateManager* GetState() { return pState_; };
 
 	/// <summary>
 	/// 下に伸びるレイキャスト情報を取得
@@ -75,4 +85,15 @@ public:
 	/// </summary>
 	/// <param name="acceleration">セットしたい重力の値</param>
 	void SetAcceleration(const float& acceleration) { acceleration_ = acceleration; }
+
+	/// <summary>
+	/// 重力を加えるかどうかを設定
+	/// </summary>
+	/// <param name="_flag">加えるならtrue</param>
+	void IsAddGravity(bool _flag) { isAddGravity_ = _flag; }
+
+	/// <summary>
+	/// 重力を加える
+	/// </summary>
+	void AddGravity(Transform* _transform);
 };
