@@ -17,7 +17,7 @@ TestScene::TestScene(GameObject * parent)
 void TestScene::Initialize()
 {
 	//Player
-	ASSIGN(pPlayer_,CreateSolidObject<Player>(this, "Models/debugMarker.fbx"));
+	ASSIGN(pPlayer_,CreateSolidObject<Player>(this, "DebugCollision/BoxCollider.fbx"));
 	{
 		//pPlayer_->SetPositionY(5);
 		//pPlayer_->SetScale(0.15f, 0.15f, 0.15f);
@@ -25,7 +25,7 @@ void TestScene::Initialize()
 		//pPlayer_->SetRotateY(90);
 	}
 	//Stage
-	ASSIGN(pStage_,CreateSolidObject<Stage>(this, "Models/stage100.fbx"));
+	ASSIGN(pStage_,CreateSolidObject<Stage>(this, "Models/TestStageanime.fbx"));
 
 	ASSIGN(hPict_, Image::Load("Image/BackGround4.png"));
 }
@@ -54,12 +54,13 @@ void TestScene::Update()
 	Camera::SetTarget(pPlayer_->GetPosition().x, 4.0f, 7.3f);
 
 	//debug-Camera
-	Camera::SetPosition(pPlayer_->GetPosition().x, 2, -20);
-	Camera::SetTarget(pPlayer_->GetPosition().x, 2, 0);
+	Camera::SetPosition(pPlayer_->GetPosition().x, 2, -15);
+	Camera::SetTarget(pPlayer_->GetPosition().x, 5, 0);
 
 	if (pPlayer_->GetPosition().y <= -20.0f) {
 		SceneManager* sM=(SceneManager*)FindObject("SceneManager");
-		sM->ChangeScene(SCENE_ID_RESULT, TID_WHITEOUT);
+		sM->ChangeScene(SCENE_ID_TEST, TID_WHITEOUT);
+		
 	}
 
 	//debug-SceneMove

@@ -5,7 +5,9 @@ PlayerStateManager::PlayerStateManager()
 {
 	//各状態インスタンスを用意
 	ASSIGN(pStanding_,new StandingState);
-	ASSIGN(pRunning_,new RunningState);
+	ASSIGN(pRunning_, new RunningState);
+	ASSIGN(pJumping_, new JumpingState);
+	ASSIGN(pMovie_,new MovieState);
 
 	//立ち状態で初期化
 	ASSIGN(playerState_,pStanding_);
