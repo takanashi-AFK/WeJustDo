@@ -19,7 +19,7 @@ namespace AudioManager
 		hConfirmSound_ = Audio::Load("Sounds/Confirm.wav");
 		assert(hConfirmSound_ >= 0);
 
-		hPlayMusic_ = Audio::Load("Sounds/PlayScene.wav");
+		hPlayMusic_ = Audio::Load("Sounds/PlayScene.wav",true);
 		assert(hPlayMusic_ >= 0);
 	}
 

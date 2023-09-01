@@ -54,11 +54,6 @@ void Player::ChildUpdate()
 		}
 	}
 
-	static float GoalPosint = 10.0f;
-	if (GetPosition().x >= GoalPosint) {
-		pState_->ChangeState(pState_->pMovie_, this);
-	}
-
 	//jumpèÛë‘Ç…Ç∑ÇÈ
 	if (Input::IsKey(DIK_SPACE)) {isJumpNow_ = true;
 	}
