@@ -47,13 +47,11 @@ void Player::ChildUpdate()
 	}
 
 	//jumpó‘Ô‚É‚·‚é
-	if (Input::IsKeyDown(DIK_SPACE)) {
-		isJumpNow_ = true;
+	if (Input::IsKey(DIK_SPACE)) {isJumpNow_ = true;
 	}
 
 	//jump’†‚Ìˆ—‚ğs‚¤
-	if (isJumpNow_) {
-		transform_.position_.y += 0.1f;
+	if (isJumpNow_) {transform_.position_.y += 0.1f;
 	}
 
 	//d—Í‚ğ‰Á‚¦‚é

@@ -25,7 +25,7 @@ void TestScene::Initialize()
 		//pPlayer_->SetRotateY(90);
 	}
 	//Stage
-	ASSIGN(pStage_,CreateSolidObject<Stage>(this, "Models/stage100.fbx"));
+	ASSIGN(pStage_,CreateSolidObject<Stage>(this, "Models/TestStage.fbx"));
 
 	ASSIGN(hPict_, Image::Load("Image/BackGround4.png"));
 }
@@ -54,12 +54,13 @@ void TestScene::Update()
 	Camera::SetTarget(pPlayer_->GetPosition().x, 4.0f, 7.3f);
 
 	//debug-Camera
-	Camera::SetPosition(pPlayer_->GetPosition().x, 2, -10);
-	Camera::SetTarget(pPlayer_->GetPosition().x, 2, 0);
+	Camera::SetPosition(pPlayer_->GetPosition().x, 2, -15);
+	Camera::SetTarget(pPlayer_->GetPosition().x, 5, 0);
 
 	if (pPlayer_->GetPosition().y <= -20.0f) {
 		SceneManager* sM=(SceneManager*)FindObject("SceneManager");
-		sM->ChangeScene(SCENE_ID_RESULT, TID_WHITEOUT);
+		sM->ChangeScene(SCENE_ID_TEST, TID_WHITEOUT);
+		
 	}
 
 	//debug-SceneMove
