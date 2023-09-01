@@ -53,7 +53,6 @@ void PlayScene::Draw()
 	//”wŒi‰æ‘œ‚ð•`‰æ
 	Image::SetTransform(hPict_, transform_);
 	Image::Draw(hPict_);
-
 }
 
 //ŠJ•ú
