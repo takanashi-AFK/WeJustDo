@@ -10,7 +10,7 @@
 
 //コンストラクタ
 PlayScene::PlayScene(GameObject* parent)
-	:GameObject(parent,"PlayScene"),hPict_(-1),countDown(false)
+	:GameObject(parent,"PlayScene"),hPict_(-1),isCount(false)
 {
 }
 
@@ -47,7 +47,7 @@ void PlayScene::Update()
 	//}
 	if (time >= 180)
 	{
-			countDown = true;
+			isCount = true;
 	}
 }
 
