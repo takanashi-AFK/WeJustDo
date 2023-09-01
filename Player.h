@@ -4,7 +4,7 @@
 //インクルード
 #include "PlayerStateManager.h"
 #include "Engine/Model.h"
-
+#include "PolyLine.h"
 //前方宣言
 class Stage;
 
@@ -30,7 +30,8 @@ private:
 	XMFLOAT3 upLandingPoint;
 	XMFLOAT3 rightLandingPoint;
 	XMFLOAT3 leftLandingPoint;
-
+	PolyLine* pLine;
+	XMFLOAT3 PolyEmitPos;
 	//ziro2
 	int ziro;
 
@@ -56,6 +57,8 @@ public:
 	void ChildUpdate() override;
 	void ChildRelease() override;
 	void ChildDraw() override;
+
+	void PolyDraw() override;
 
 	///// 必要な関数 //////////////////////////////////////// 
 

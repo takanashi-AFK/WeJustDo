@@ -37,6 +37,8 @@ void SolidObject::Draw()
 	Model::SetTransform(hModel_,transform_);
 	Model::Draw(hModel_);
 
+	PolyDraw();
+
 	//シェーダーのリセット
 	Direct3D::SetShader(Direct3D::SHADER_3D);
 }

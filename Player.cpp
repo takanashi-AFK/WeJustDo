@@ -5,6 +5,7 @@
 #include "Stage.h"
 #include "Engine/Transition.h"
 #include "Engine/Debug.h"
+#include "Engine/Camera.h"
 
 //コンストラクタ
 Player::Player(GameObject* _parent, string _modelFileName)
@@ -32,11 +33,18 @@ void Player::ChildInitialize()
 	pState_->Enter(this);
 
 	isMove_ = true;
+
+	transform_.rotate_.y = 90;
+
+	pLine = new PolyLine;
+	pLine->Load("Effects/Fire.png");
 }
 
 //更新
 void Player::ChildUpdate()
 {
+
+	PolyEmitPos = XMFLOAT3(transform_.position_.x - (PLAYER_MODEL_SIZE.x / 4), transform_.position_.y + (PLAYER_MODEL_SIZE.x / 4), transform_.position_.z);
 	if (isMove_) {
 		{//debug-PlayerMove
 			if (Input::IsKey(DIK_UP))transform_.position_.y += 0.1;
@@ -59,11 +67,19 @@ void Player::ChildUpdate()
 	if (isJumpNow_) {transform_.position_.y += 0.1f;
 	}
 
+	Camera::SetPosition(transform_.position_.x + 5, 3.5f, -15.0f);
+	Camera::SetTarget(transform_.position_.x + 5, 5.5f, 0.0f);
+
 	//重力を加える
 	AddGravity(&transform_);
 
 	//ステージとのあたり判定
 	StageRayCast();
+
+
+	//ポリラインに現在の位置を伝える
+	pLine->AddPosition(PolyEmitPos);
+
 
 	//状態ごとの更新
 	pState_->Update(this);
@@ -73,6 +89,8 @@ void Player::ChildUpdate()
 void Player::ChildRelease()
 {
 	SAFE_DELETE(pState_);
+	//ポリライン解放
+	pLine->Release();
 }
 
 //描画
@@ -208,4 +226,13 @@ void Player::AddGravity(Transform* _transform)
 	//重力を加える
 	_transform->position_ = Transform::Float3Add(_transform->position_, VectorToFloat3((XMVectorSet(0, -1, 0, 0) / 10) * acceleration_));
 	acceleration_ += GRAVITY_ADDITION;
+}
+
+void Player::PolyDraw()
+{
+	if (Input::IsKey(DIK_LSHIFT))
+	{
+		//ポリラインを描画
+		pLine->Draw();
+	}
 }

@@ -35,6 +35,8 @@ void PlayScene::Initialize()
 	//BGM‚ðÄ¶
 	AudioManager::Initialize();
 	AudioManager::Play_PlayMusic();
+
+
 }
 
 //XV
@@ -45,6 +47,8 @@ void PlayScene::Update()
 		SceneManager* sm = (SceneManager*)FindObject("SceneManager");
 		sm->ChangeScene(SCENE_ID_RESULT,TID_WHITEOUT);
 	}
+
+
 }
 
 //•`‰æ
