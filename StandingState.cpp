@@ -2,7 +2,8 @@
 
 //インクルード
 #include "Player.h"
-
+#include "PlayerStateManager.h"
+#include "Engine/Input.h"
 
 //更新
 void StandingState::Update(Player* _p)
@@ -32,9 +33,15 @@ void StandingState::Update(Player* _p)
 //開始
 void StandingState::Enter(Player* _p)
 {
+	_p->IsAddGravity(true);
 }
 
 //入力処理
 void StandingState::HandleInput(Player* _p)
 {
+	//ジャンプ状態へ移動
+	if (Input::IsKey(DIK_SPACE)) {
+		_p->IsAddGravity(false);
+		_p->GetState()->ChangeState(_p->GetState()->pJumping_, _p);
+	}
 }

@@ -46,17 +46,10 @@ void Player::ChildUpdate()
 		}
 	}
 
+	//ゴールに地点にたどり着いたらmovie状態に移動
 	static float GoalPosint = 10.0f;
 	if (GetPosition().x >= GoalPosint) {
 		pState_->ChangeState(pState_->pMovie_, this);
-	}
-
-	//jump状態にする
-	if (Input::IsKey(DIK_SPACE)) {isJumpNow_ = true;
-	}
-
-	//jump中の処理を行う
-	if (isJumpNow_) {transform_.position_.y += 0.1f;
 	}
 
 	//重力を加える
@@ -191,13 +184,7 @@ void Player::StageRayCast()
 		if (downData.dist < (PLAYER_MODEL_SIZE.y / 2)) {
 			//状態を"Standing"に変更
 			pState_->ChangeState(pState_->pStanding_, this);
-
-			//jump状態を終了
-			isJumpNow_ = false;
 		}
-		else
-			isAddGravity_ = true;
-
 	}
 }
 
