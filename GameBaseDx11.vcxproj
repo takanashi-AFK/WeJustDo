@@ -152,7 +152,8 @@
     <ClCompile Include="Engine\Text.cpp" />
     <ClCompile Include="Engine\Texture.cpp" />
     <ClCompile Include="Engine\Component\Transform\Transform.cpp" />
-    <ClCompile Include="jumpingState.cpp" />
+    <ClCompile Include="JumpingState.cpp" />
+    <ClCompile Include="MovieState.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="PlayerStateManager.cpp" />
@@ -194,7 +195,8 @@
     <ClInclude Include="Engine\Text.h" />
     <ClInclude Include="Engine\Texture.h" />
     <ClInclude Include="Engine\Component\Transform\Transform.h" />
-    <ClInclude Include="jumpingState.h" />
+    <ClInclude Include="JumpingState.h" />
+    <ClInclude Include="MovieState.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="PlayerStateManager.h" />

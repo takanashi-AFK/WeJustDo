@@ -35,6 +35,12 @@ public:
 	/// </summary>
 	/// <returns>モデル番号</returns>
 	int GetModelHandle() { return hModel_; }
+
+	/// <summary>
+	/// addressを取得
+	/// </summary>
+	/// <returns></returns>
+	Transform* GetTransformAddress() { return &transform_; }
 };
 
 //立体的なオブジェクトの生成

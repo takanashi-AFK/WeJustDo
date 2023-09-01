@@ -4,6 +4,8 @@
 //インクルード
 #include "StandingState.h"
 #include "RunningState.h"
+#include "JumpingState.h"
+#include "MovieState.h"
 
 //前方宣言
 class Player;
@@ -19,6 +21,8 @@ public:
 	//各状態変数
 	StandingState* pStanding_;
 	RunningState* pRunning_;
+	JumpingState* pJumping_;
+	MovieState* pMovie_;
 public:
 	//コンストラクタ
 	PlayerStateManager();

@@ -31,19 +31,24 @@ void Player::ChildInitialize()
 	//初期状態の開始処理
 	pState_->Enter(this);
 
-	
+	isMove_ = true;
 }
 
 //更新
 void Player::ChildUpdate()
 {
-	if (!Transition::IsActive()) {
+	if (isMove_) {
 		{//debug-PlayerMove
 			if (Input::IsKey(DIK_UP))transform_.position_.y += 0.1;
 			if (Input::IsKey(DIK_LEFT))transform_.position_.x -= 0.1;
 			if (Input::IsKey(DIK_DOWN))transform_.position_.y -= 0.1;
 			if (Input::IsKey(DIK_RIGHT))transform_.position_.x += 0.1;
 		}
+	}
+
+	static float GoalPosint = 10.0f;
+	if (GetPosition().x >= GoalPosint) {
+		pState_->ChangeState(pState_->pMovie_, this);
 	}
 
 	//jump状態にする

@@ -9,6 +9,7 @@ Stage::Stage(GameObject* parent, string modelFileName)
 
 void Stage::ChildInitialize()
 {
+	transform_.scale_.x = 2;
 	Model::SetAnimFrame(hModel_, 0, 150, 1);
 }
 

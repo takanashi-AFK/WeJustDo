@@ -44,7 +44,8 @@ protected:
 	int			hGroundModel_;	//ステージのモデル番号を入れる変数
 	float		acceleration_;	//重力の加速度
 	bool		isAddGravity_;	//重力を加えるか否か
-	bool		isJumpNow_;
+	bool		isJumpNow_;		//ジャンプ中か否か
+	bool		isMove_;		//動いていいいか
 
 public:
 	//コンストラクタ
@@ -96,4 +97,17 @@ public:
 	/// 重力を加える
 	/// </summary>
 	void AddGravity(Transform* _transform);
+
+
+	/// <summary>
+	/// 動いていいかどうかを返す
+	/// </summary>
+	/// <returns>動いて良ければtrue</returns>
+	bool IsMove() { return isMove_; }
+
+	/// <summary>
+	/// 動いていいかどうかを設定する
+	/// </summary>
+	/// <param name="_flag">判定</param>
+	void SetIsMove(bool _flag) { isMove_ = _flag; }
 };
