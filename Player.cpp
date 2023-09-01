@@ -30,6 +30,8 @@ void Player::ChildInitialize()
 
 	//初期状態の開始処理
 	pState_->Enter(this);
+
+	
 }
 
 //更新

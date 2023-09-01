@@ -1,9 +1,15 @@
 #include "Stage.h"
+#include "Engine/Model.h"
 
 //コンストラクタ
 Stage::Stage(GameObject* parent, string modelFileName)
 	:SolidObject(parent,modelFileName,"Stage")
 {
+}
+
+void Stage::ChildInitialize()
+{
+	Model::SetAnimFrame(hModel_, 0, 150, 1);
 }
 
 //更新
