@@ -1,24 +1,25 @@
 #pragma once
 #include "Engine/SolidObject.h"
 
-//ƒCƒ“ƒNƒ‹[ƒh
+//ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 #include "PlayerStateManager.h"
 #include "Engine/Model.h"
-
-//‘O•ûéŒ¾
+#include "Engine/VFX.h"
+#include "PolyLine.h"
+//å‰æ–¹å®£è¨€
 class Stage;
 
-//’è”éŒ¾
+//å®šæ•°å®£è¨€
 namespace {
-	//d—Í‚Ì‰ÁZ’l
+	//é‡åŠ›ã®åŠ ç®—å€¤
 	static const float GRAVITY_ADDITION = 0.03f;
 
-	//Player‚Ìƒ‚ƒfƒ‹‚Ì‘å‚«‚³
+	//Playerã®ãƒ¢ãƒ‡ãƒ«ã®å¤§ãã•
 	static const XMFLOAT3 PLAYER_MODEL_SIZE = { 1.0f,1.0f,1.0f };
 }
 
 /// <summary>
-/// ƒQ[ƒ€’†A‰æ–Êã‚É•\¦‚³‚ê‚éƒvƒŒƒCƒ„[ƒIƒuƒWƒFƒNƒg
+/// ã‚²ãƒ¼ãƒ ä¸­ã€ç”»é¢ä¸Šã«è¡¨ç¤ºã•ã‚Œã‚‹ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 /// </summary>
 class Player : public SolidObject
 {
@@ -35,79 +36,87 @@ private:
 	int ziro;
 
 protected:
-	///// •K—v‚Èî•ñ ////////////////////////////////////////
-	PlayerStateManager* pState_;	//Player‚Ìó‘ÔŠÇ—
+	///// å¿…è¦ãªæƒ…å ± ////////////////////////////////////////
+	PlayerStateManager* pState_;	//Playerã®çŠ¶æ…‹ç®¡ç†
 
-	///// ‚ ‚½‚è”»’è ////////////////////////////////////////
-	RayCastData underRay_;		//ƒvƒŒƒCƒ„[‚Ì‰º‚ÉL‚Ñ‚éƒŒƒC
-	Stage* pStage_;		//ƒXƒe[ƒWƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
-	int			hGroundModel_;	//ƒXƒe[ƒW‚Ìƒ‚ƒfƒ‹”Ô†‚ğ“ü‚ê‚é•Ï”
-	float		acceleration_;	//d—Í‚Ì‰Á‘¬“x
-	bool		isAddGravity_;	//d—Í‚ğ‰Á‚¦‚é‚©”Û‚©
-	bool		isJumpNow_;		//ƒWƒƒƒ“ƒv’†‚©”Û‚©
-	bool		isMove_;		//“®‚¢‚Ä‚¢‚¢‚¢‚©
+	///// ã‚ãŸã‚Šåˆ¤å®š ////////////////////////////////////////
+	RayCastData underRay_;		//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä¸‹ã«ä¼¸ã³ã‚‹ãƒ¬ã‚¤
+	Stage* pStage_;		//ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
+	int			hGroundModel_;	//ã‚¹ãƒ†ãƒ¼ã‚¸ã®ãƒ¢ãƒ‡ãƒ«ç•ªå·ã‚’å…¥ã‚Œã‚‹å¤‰æ•°
+	float		acceleration_;	//é‡åŠ›ã®åŠ é€Ÿåº¦
+
+	EmitterData data;
+	int hFireEffectEmit;
+	PolyLine* pLine;
+	XMFLOAT3 PolyEmitPos;
+
+	bool		isAddGravity_;	//é‡åŠ›ã‚’åŠ ãˆã‚‹ã‹å¦ã‹
+	bool		isJumpNow_;		//ã‚¸ãƒ£ãƒ³ãƒ—ä¸­ã‹å¦ã‹
+	bool		isMove_;		//å‹•ã„ã¦ã„ã„ã„ã‹
+
 
 public:
-	//ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Player(GameObject* _parent, string _modelFileName);
 
-	//Œp³{‰Šú‰»EXVE•`‰æEŠJ•ú}
+	//ç¶™æ‰¿{åˆæœŸåŒ–ãƒ»æ›´æ–°ãƒ»æç”»ãƒ»é–‹æ”¾}
 	void ChildInitialize() override;
 	void ChildUpdate() override;
 	void ChildRelease() override;
 	void ChildDraw() override;
+	void PolyDraw() override; 
 
-	///// •K—v‚ÈŠÖ” //////////////////////////////////////// 
+	///// å¿…è¦ãªé–¢æ•° //////////////////////////////////////// 
 
 	/// <summary>
-	/// ƒvƒŒƒCƒ„[‚ª”»’è‚·‚éƒXƒe[ƒW‚Ìƒ‚ƒfƒ‹”Ô†‚ğæ“¾
+	/// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒåˆ¤å®šã™ã‚‹ã‚¹ãƒ†ãƒ¼ã‚¸ã®ãƒ¢ãƒ‡ãƒ«ç•ªå·ã‚’å–å¾—
 	/// </summary>
-	/// <returns>ƒXƒe[ƒW‚Ìƒ‚ƒfƒ‹”Ô†</returns>
+	/// <returns>ã‚¹ãƒ†ãƒ¼ã‚¸ã®ãƒ¢ãƒ‡ãƒ«ç•ªå·</returns>
 	int GetPlayerOnGround() { return hGroundModel_; }
 
 	/// <summary>
-	/// ó‘Ô‚ğæ“¾
+	/// çŠ¶æ…‹ã‚’å–å¾—
 	/// </summary>
-	/// <returns>ó‘Ô</returns>
+	/// <returns>çŠ¶æ…‹</returns>
 	PlayerStateManager* GetState() { return pState_; };
 
 	/// <summary>
-	/// ‰º‚ÉL‚Ñ‚éƒŒƒCƒLƒƒƒXƒgî•ñ‚ğæ“¾
+	/// ä¸‹ã«ä¼¸ã³ã‚‹ãƒ¬ã‚¤ã‚­ãƒ£ã‚¹ãƒˆæƒ…å ±ã‚’å–å¾—
 	/// </summary>
-	/// <returns>ƒŒƒCƒLƒƒƒXƒgî•ñ</returns>
+	/// <returns>ãƒ¬ã‚¤ã‚­ãƒ£ã‚¹ãƒˆæƒ…å ±</returns>
 	RayCastData GetUnderRay() { return underRay_; }
 
 	/// <summary>
-	/// ƒXƒe[ƒW‚Æ‚ÌÚG”»’èˆ—‚ğs‚¤
+	/// ã‚¹ãƒ†ãƒ¼ã‚¸ã¨ã®æ¥è§¦åˆ¤å®šå‡¦ç†ã‚’è¡Œã†
 	/// </summary>
 	void StageRayCast();
 
-	/// d—Í‚ğƒZƒbƒg
+	/// é‡åŠ›ã‚’ã‚»ãƒƒãƒˆ
 	/// </summary>
-	/// <param name="acceleration">ƒZƒbƒg‚µ‚½‚¢d—Í‚Ì’l</param>
+	/// <param name="acceleration">ã‚»ãƒƒãƒˆã—ãŸã„é‡åŠ›ã®å€¤</param>
 	void SetAcceleration(const float& acceleration) { acceleration_ = acceleration; }
 
 	/// <summary>
-	/// d—Í‚ğ‰Á‚¦‚é‚©‚Ç‚¤‚©‚ğİ’è
+	/// é‡åŠ›ã‚’åŠ ãˆã‚‹ã‹ã©ã†ã‹ã‚’è¨­å®š
 	/// </summary>
-	/// <param name="_flag">‰Á‚¦‚é‚È‚çtrue</param>
+	/// <param name="_flag">åŠ ãˆã‚‹ãªã‚‰true</param>
 	void IsAddGravity(bool _flag) { isAddGravity_ = _flag; }
 
 	/// <summary>
-	/// d—Í‚ğ‰Á‚¦‚é
+	/// é‡åŠ›ã‚’åŠ ãˆã‚‹
 	/// </summary>
 	void AddGravity(Transform* _transform);
 
 
 	/// <summary>
-	/// “®‚¢‚Ä‚¢‚¢‚©‚Ç‚¤‚©‚ğ•Ô‚·
+	/// å‹•ã„ã¦ã„ã„ã‹ã©ã†ã‹ã‚’è¿”ã™
 	/// </summary>
-	/// <returns>“®‚¢‚Ä—Ç‚¯‚ê‚Îtrue</returns>
+	/// <returns>å‹•ã„ã¦è‰¯ã‘ã‚Œã°true</returns>
 	bool IsMove() { return isMove_; }
 
 	/// <summary>
-	/// “®‚¢‚Ä‚¢‚¢‚©‚Ç‚¤‚©‚ğİ’è‚·‚é
+	/// å‹•ã„ã¦ã„ã„ã‹ã©ã†ã‹ã‚’è¨­å®šã™ã‚‹
 	/// </summary>
-	/// <param name="_flag">”»’è</param>
+	/// <param name="_flag">åˆ¤å®š</param>
 	void SetIsMove(bool _flag) { isMove_ = _flag; }
 };

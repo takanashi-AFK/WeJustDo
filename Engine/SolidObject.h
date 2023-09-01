@@ -30,6 +30,8 @@ public:
 	virtual void ChildDraw() {};
 	virtual void ChildRelease() {};
 
+	virtual void PolyDraw();
+
 	/// <summary>
 	/// ƒ‚ƒfƒ‹”Ô†‚ğæ“¾‚·‚é
 	/// </summary>

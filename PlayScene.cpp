@@ -40,11 +40,11 @@ void PlayScene::Initialize()
 //XV
 void PlayScene::Update()
 {
-	static float time; time++;
-	if (time >= 600) {
-		SceneManager* sm = (SceneManager*)FindObject("SceneManager");
-		sm->ChangeScene(SCENE_ID_RESULT,TID_WHITEOUT);
-	}
+	//static float time; time++;
+	//if (time >= 600) {
+	//	SceneManager* sm = (SceneManager*)FindObject("SceneManager");
+	//	sm->ChangeScene(SCENE_ID_RESULT,TID_WHITEOUT);
+	//}
 }
 
 //•`‰æ
