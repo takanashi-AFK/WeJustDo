@@ -4,6 +4,7 @@
 //インクルード
 #include "PlayerStateManager.h"
 #include "Engine/Model.h"
+#include "PlayScene.h"
 
 //前方宣言
 class Stage;
@@ -22,6 +23,8 @@ protected:
 	Stage*		pStage_;		//ステージクラスのポインタ
 	int			hGroundModel_;	//ステージのモデル番号を入れる変数
 	float		acceleration_;	//重力の加速度
+	bool canMove ;
+
 
 public:
 	//コンストラクタ

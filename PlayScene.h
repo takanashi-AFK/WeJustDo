@@ -8,6 +8,8 @@ class PlayScene : public GameObject
 {
 private:
 	int hPict_;	//画像番号
+	bool countDown;
+
 public:
 	//コンストラクタ
 	PlayScene(GameObject * parent);
@@ -17,4 +19,7 @@ public:
 	void Update() override;
 	void Draw() override;
 	void Release() override;
+
+	bool CountFinish() { return (countDown); };
+
 };

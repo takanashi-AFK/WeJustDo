@@ -10,7 +10,7 @@
 
 //コンストラクタ
 PlayScene::PlayScene(GameObject* parent)
-	:GameObject(parent,"PlayScene"),hPict_(-1)
+	:GameObject(parent,"PlayScene"),hPict_(-1),countDown(false)
 {
 }
 
@@ -40,10 +40,14 @@ void PlayScene::Initialize()
 //更新
 void PlayScene::Update()
 {
-	static float time; time++;
-	if (time >= 600) {
-		SceneManager* sm = (SceneManager*)FindObject("SceneManager");
-		sm->ChangeScene(SCENE_ID_RESULT,TID_WHITEOUT);
+	static int time; time++;
+	//if (time >= 600) {
+	//	SceneManager* sm = (SceneManager*)FindObject("SceneManager");
+	//	sm->ChangeScene(SCENE_ID_RESULT,TID_WHITEOUT);
+	//}
+	if (time >= 180)
+	{
+			countDown = true;
 	}
 }
 

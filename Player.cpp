@@ -5,6 +5,8 @@
 #include "Stage.h"
 #include "Engine/Transition.h"
 #include "Engine/Camera.h"
+
+
 //定数宣言
 namespace {
 	//重力の加算値
@@ -17,7 +19,7 @@ namespace {
 //コンストラクタ
 Player::Player(GameObject* _parent, string _modelFileName)
 	:SolidObject(_parent,_modelFileName,"Player"),
-	pState_(nullptr), underRay_(),pStage_(),hGroundModel_(0),acceleration_(0)
+	pState_(nullptr), underRay_(),pStage_(),hGroundModel_(0),acceleration_(0),canMove(false)
 {
 	//プレイヤーの状態を「立ち状態」で初期化
 	ASSIGN(pState_,new PlayerStateManager);
@@ -36,17 +38,19 @@ void Player::ChildInitialize()
 //更新
 void Player::ChildUpdate()
 {
-	if (!Transition::IsActive()) {
-		{//debug-PlayerMove
-			if (Input::IsKey(DIK_W))transform_.position_.y += 0.1;
-			if (Input::IsKey(DIK_A))transform_.position_.x -= 0.1;
-			if (Input::IsKey(DIK_S))transform_.position_.y -= 0.1;
-			if (Input::IsKey(DIK_D))transform_.position_.x += 0.1;
-			if (Input::IsKey(DIK_RIGHT))transform_.rotate_.y -= 1;
-			if (Input::IsKey(DIK_LEFT))transform_.rotate_.y += 1;
+	PlayScene* ps = (PlayScene*)FindObject("PlayScene");
+	if (ps->CountFinish()) {
+		if (!Transition::IsActive()) {
+			{//debug-PlayerMove
+				if (Input::IsKey(DIK_W))transform_.position_.y += 0.1;
+				if (Input::IsKey(DIK_A))transform_.position_.x -= 0.1;
+				if (Input::IsKey(DIK_S))transform_.position_.y -= 0.1;
+				if (Input::IsKey(DIK_D))transform_.position_.x += 0.1;
+				if (Input::IsKey(DIK_RIGHT))transform_.rotate_.y -= 1;
+				if (Input::IsKey(DIK_LEFT))transform_.rotate_.y += 1;
+			}
 		}
 	}
-
 	Camera::SetPosition(transform_.position_.x + 5, 3.5f, -15.0f);
 	Camera::SetTarget(transform_.position_.x + 5, 5.5f, 0.0f);
 	
