@@ -37,12 +37,10 @@ void Player::ChildUpdate()
 {
 	if (!Transition::IsActive()) {
 		{//debug-PlayerMove
-			if (Input::IsKey(DIK_W))transform_.position_.y += 0.1;
-			if (Input::IsKey(DIK_A))transform_.position_.x -= 0.1;
-			if (Input::IsKey(DIK_S))transform_.position_.y -= 0.1;
-			if (Input::IsKey(DIK_D))transform_.position_.x += 0.1;
-			if (Input::IsKey(DIK_RIGHT))transform_.rotate_.y -= 1;
-			if (Input::IsKey(DIK_LEFT))transform_.rotate_.y += 1;
+			if (Input::IsKey(DIK_UP))transform_.position_.y += 0.1;
+			if (Input::IsKey(DIK_LEFT))transform_.position_.x -= 0.1;
+			if (Input::IsKey(DIK_DOWN))transform_.position_.y -= 0.1;
+			if (Input::IsKey(DIK_RIGHT))transform_.position_.x += 0.1;
 		}
 	}
 
@@ -166,6 +164,7 @@ void Player::StageRayCast()
 			//ÇﬂÇËçûÇ›ï™ÅAà íuÇñﬂÇ∑
 			XMVECTOR length = {0, (PLAYER_MODEL_SIZE.y / 2) + upData.dist,0 };
 			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(0, 1, 0, 0) - length));
+			SetAcceleration(2);
 		}
 	}
 
