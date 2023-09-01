@@ -11,6 +11,7 @@ public:
 	Stage(GameObject* parent, string modelFileName);
 	
 	//Œp³{XVE•`‰æ}
+	void ChildInitialize() override;
 	void ChildUpdate() override;
 	void ChildDraw() override;
 };

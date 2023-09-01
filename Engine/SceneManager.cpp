@@ -1,6 +1,6 @@
 #include "sceneManager.h"
 
-//ƒV[ƒ“ƒIƒuƒWƒFƒNƒg
+//ã‚·ãƒ¼ãƒ³ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 #include "../SplashScene.h"
 #include "../TitleScene.h"
 #include "../StageSelectScene.h"
@@ -13,39 +13,41 @@
 #include "Audio.h"
 
 
-//ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 SceneManager::SceneManager(GameObject * parent)
 	: GameObject(parent, "SceneManager")
 {
 }
 
-//‰Šú‰»
+//åˆæœŸåŒ–
 void SceneManager::Initialize()
 {
-	//Å‰‚ÌƒV[ƒ“‚ğ€”õ
-	currentSceneID_ = SCENE_ID_PLAY;
+	//æœ€åˆã®ã‚·ãƒ¼ãƒ³ã‚’æº–å‚™
+
+	currentSceneID_ = SCENE_ID_SPLASH;
 	nextSceneID_ = currentSceneID_;
-	Instantiate<PlayScene>(this);
+	Instantiate<SplashScene>(this);
+
 }
 
-//XV
+//æ›´æ–°
 void SceneManager::Update()
 {
-	//ƒgƒ‰ƒ“ƒWƒVƒ‡ƒ“ÀsAƒV[ƒ“Ø‘Ö‚Ìƒ^ƒCƒ~ƒ“ƒO‚ÅƒV[ƒ“‚ğ•ÏX‚·‚é
+	//ãƒˆãƒ©ãƒ³ã‚¸ã‚·ãƒ§ãƒ³å®Ÿè¡Œæ™‚ã€ã‚·ãƒ¼ãƒ³åˆ‡æ›¿ã®ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã§ã‚·ãƒ¼ãƒ³ã‚’å¤‰æ›´ã™ã‚‹
 	if (Transition::IsChangePoint())nextSceneID_ = tmpID_;
 
-	//Ÿ‚ÌƒV[ƒ“‚ªŒ»İ‚ÌƒV[ƒ“‚Æˆá‚¤@@ƒV[ƒ“‚ğØ‚è‘Ö‚¦‚È‚¯‚ê‚Î‚È‚ç‚È‚¢
+	//æ¬¡ã®ã‚·ãƒ¼ãƒ³ãŒç¾åœ¨ã®ã‚·ãƒ¼ãƒ³ã¨é•ã†ã€€ï¼ã€€ã‚·ãƒ¼ãƒ³ã‚’åˆ‡ã‚Šæ›¿ãˆãªã‘ã‚Œã°ãªã‚‰ãªã„
 	if (currentSceneID_ != nextSceneID_)
 	{
-		//‚»‚ÌƒV[ƒ“‚ÌƒIƒuƒWƒFƒNƒg‚ğ‘Síœ
+		//ãã®ã‚·ãƒ¼ãƒ³ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å…¨å‰Šé™¤
 		KillAllChildren();
 
-		//ƒ[ƒh‚µ‚½ƒf[ƒ^‚ğ‘Síœ
+		//ãƒ­ãƒ¼ãƒ‰ã—ãŸãƒ‡ãƒ¼ã‚¿ã‚’å…¨å‰Šé™¤
 		Audio::Release();
 		Model::AllRelease();
 		Image::AllRelease();
 
-		//Ÿ‚ÌƒV[ƒ“‚ğì¬
+		//æ¬¡ã®ã‚·ãƒ¼ãƒ³ã‚’ä½œæˆ
 		switch (nextSceneID_)
 		{
 		case SCENE_ID_TEST: Instantiate<TestScene>(this); break;
@@ -61,28 +63,28 @@ void SceneManager::Update()
 	}
 }
 
-//•`‰æ
+//æç”»
 void SceneManager::Draw()
 {
 }
 
-//ŠJ•ú
+//é–‹æ”¾
 void SceneManager::Release()
 {
 }
 
-//ƒV[ƒ“Ø‚è‘Ö‚¦iÀÛ‚ÉØ‚è‘Ö‚í‚é‚Ì‚Í‚±‚ÌŸ‚ÌƒtƒŒ[ƒ€j
+//ã‚·ãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆï¼ˆå®Ÿéš›ã«åˆ‡ã‚Šæ›¿ã‚ã‚‹ã®ã¯ã“ã®æ¬¡ã®ãƒ•ãƒ¬ãƒ¼ãƒ ï¼‰
 void SceneManager::ChangeScene(SCENE_ID next, TRANSITION_ID _type,float _time)
 {
-	//ƒgƒ‰ƒ“ƒWƒVƒ‡ƒ“‚ª“®ì’†‚ÍƒV[ƒ“‘JˆÚ‚ğs‚í‚È‚¢
+	//ãƒˆãƒ©ãƒ³ã‚¸ã‚·ãƒ§ãƒ³ãŒå‹•ä½œä¸­ã¯ã‚·ãƒ¼ãƒ³é·ç§»ã‚’è¡Œã‚ãªã„
 	if (!Transition::IsActive()) {
-		//ƒgƒ‰ƒ“ƒWƒVƒ‡ƒ“‚ğg‚í‚È‚¢ê‡AƒV[ƒ“ID‚ğƒZƒbƒg
+		//ãƒˆãƒ©ãƒ³ã‚¸ã‚·ãƒ§ãƒ³ã‚’ä½¿ã‚ãªã„å ´åˆã€ã‚·ãƒ¼ãƒ³IDã‚’ã‚»ãƒƒãƒˆ
 		if (!Transition::SetTransition(_type))nextSceneID_ = next;
 		
-		//ŠÔ‚ğƒZƒbƒg
+		//æ™‚é–“ã‚’ã‚»ãƒƒãƒˆ
 		Transition::SetTime(_time);
 
-		//ƒgƒ‰ƒ“ƒWƒVƒ‡ƒ“‚ğŠJn‚µAƒV[ƒ“ID‚ğƒZƒbƒg
+		//ãƒˆãƒ©ãƒ³ã‚¸ã‚·ãƒ§ãƒ³ã‚’é–‹å§‹ã—ã€ã‚·ãƒ¼ãƒ³IDã‚’ã‚»ãƒƒãƒˆ
 		Transition::Start();tmpID_ = next;
 	}
 }

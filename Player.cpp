@@ -1,35 +1,36 @@
 #include "Player.h"
 
-//ƒCƒ“ƒNƒ‹[ƒh
+//ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 #include "Engine/Input.h"
 #include "Stage.h"
 #include "Engine/Transition.h"
+#include "Engine/Debug.h"
 #include "Engine/Camera.h"
-//’è”éŒ¾
+//å®šæ•°å®£è¨€
 namespace {
-	//d—Í‚Ì‰ÁZ’l
+	//é‡åŠ›ã®åŠ ç®—å€¤
 	static const float GRAVITY_ADDITION = 0.03f;
 
-	//Player‚Ìƒ‚ƒfƒ‹‚Ì‘å‚«‚³
+	//Playerã®ãƒ¢ãƒ‡ãƒ«ã®å¤§ãã•
 	static const XMFLOAT3 PLAYER_MODEL_SIZE = { 1.0f,1.0f,1.0f };
 }
 
-//ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 Player::Player(GameObject* _parent, string _modelFileName)
 	:SolidObject(_parent,_modelFileName,"Player"),
 	pState_(nullptr), underRay_(),pStage_(),hGroundModel_(0),acceleration_(0)
 {
-	//ƒvƒŒƒCƒ„[‚Ìó‘Ô‚ğu—§‚¿ó‘Ôv‚Å‰Šú‰»
+	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®çŠ¶æ…‹ã‚’ã€Œç«‹ã¡çŠ¶æ…‹ã€ã§åˆæœŸåŒ–
 	ASSIGN(pState_,new PlayerStateManager);
 }
 
-//‰Šú‰»
+//åˆæœŸåŒ–
 void Player::ChildInitialize()
 {
-	//ó‘Ô‚Ì‰Šú‰»
+	//çŠ¶æ…‹ã®åˆæœŸåŒ–
 	ASSIGN(pState_->playerState_, pState_->pStanding_);
 
-	//‰Šúó‘Ô‚ÌŠJnˆ—
+	//åˆæœŸçŠ¶æ…‹ã®é–‹å§‹å‡¦ç†
 	pState_->Enter(this);
 	transform_.scale_ = { 0.1f,0.1f, 0.1f };
 	transform_.rotate_.y = 90;
@@ -53,23 +54,27 @@ void Player::ChildInitialize()
 	data.scale = XMFLOAT2(1.01, 1.01);
 	data.color = XMFLOAT4(1, 1, 0, 1);
 	data.deltaColor = XMFLOAT4(0, -0.03, 0, -0.02);
+
+	
+	//ãƒ¢ãƒ‡ãƒ«ã®ãƒ­ãƒ¼ãƒ‰
+	ASSIGN(Marker, Model::Load("Models/debugMarker.fbx"));
+	ASSIGN(ziro, Model::Load("Models/ziro2.fbx"));
+
+	//ä½ç½®ã®åˆæœŸåŒ–
+	transform_.position_.y = 2;
+
+	//åˆæœŸçŠ¶æ…‹ã®é–‹å§‹å‡¦ç†
+	pState_->Enter(this);
+
+	isMove_ = true;
 }
 
-//XV
+//æ›´æ–°
 void Player::ChildUpdate()
 {
 
+
 	PolyEmitPos = XMFLOAT3(transform_.position_.x - (PLAYER_MODEL_SIZE.x /4), transform_.position_.y + (PLAYER_MODEL_SIZE.x / 4), transform_.position_.z);
-	if (!Transition::IsActive()) {
-		{//debug-PlayerMove
-			if (Input::IsKey(DIK_W))transform_.position_.y += 0.1;
-			if (Input::IsKey(DIK_A)) { transform_.position_.x -= 0.1; transform_.rotate_.y = -90; PolyEmitPos.x = PolyEmitPos.x + 0.5; }
-			if (Input::IsKey(DIK_S))transform_.position_.y -= 0.1;
-			if (Input::IsKey(DIK_D)){transform_.position_.x += 0.1; transform_.rotate_.y = 90; }
-			if (Input::IsKey(DIK_RIGHT))transform_.rotate_.y -= 1;
-			if (Input::IsKey(DIK_LEFT))transform_.rotate_.y += 1;
-		}
-	}
 
 	Camera::SetPosition(transform_.position_.x + 5, 3.5f, -15.0f);
 	Camera::SetTarget(transform_.position_.x + 5, 5.5f, 0.0f);
@@ -77,28 +82,55 @@ void Player::ChildUpdate()
 
 
 	
-	//ƒ|ƒŠƒ‰ƒCƒ“‚ÉŒ»İ‚ÌˆÊ’u‚ğ“`‚¦‚é
+
+
+
+	if (isMove_) {
+		{//debug-PlayerMove
+			if (Input::IsKey(DIK_UP))transform_.position_.y += 0.1;
+			if (Input::IsKey(DIK_LEFT))transform_.position_.x -= 0.1;
+			if (Input::IsKey(DIK_DOWN))transform_.position_.y -= 0.1;
+			if (Input::IsKey(DIK_RIGHT))transform_.position_.x += 0.1;
+		}
+	}
+
+	static float GoalPosint = 10.0f;
+	if (GetPosition().x >= GoalPosint) {
+		pState_->ChangeState(pState_->pMovie_, this);
+	}
+
+	//jumpçŠ¶æ…‹ã«ã™ã‚‹
+	if (Input::IsKey(DIK_SPACE)) {isJumpNow_ = true;
+	}
+
+	//jumpä¸­ã®å‡¦ç†ã‚’è¡Œã†
+	if (isJumpNow_) {transform_.position_.y += 0.1f;
+	}
+
+	//é‡åŠ›ã‚’åŠ ãˆã‚‹
+	AddGravity(&transform_);
+
+	//ãƒãƒªãƒ©ã‚¤ãƒ³ã«ç¾åœ¨ã®ä½ç½®ã‚’ä¼ãˆã‚‹
 	pLine->AddPosition(PolyEmitPos);
-
-
-	//ó‘Ô‚²‚Æ‚ÌXV
-	//pState_->Update(this);
-	
-	//ƒXƒe[ƒW‚Æ‚Ì‚ ‚½‚è”»’è
+	//ã‚¹ãƒ†ãƒ¼ã‚¸ã¨ã®ã‚ãŸã‚Šåˆ¤å®š
 	StageRayCast();
+
+	//çŠ¶æ…‹ã”ã¨ã®æ›´æ–°
+	pState_->Update(this);
 }
 
-//ŠJ•ú
+//é–‹æ”¾
 void Player::ChildRelease()
 {
 	SAFE_DELETE(pState_);
-	//ƒ|ƒŠƒ‰ƒCƒ“‰ğ•ú
+	//ãƒãƒªãƒ©ã‚¤ãƒ³è§£æ”¾
 	pLine->Release();
 }
 
-//•`‰æ
+//æç”»
 void Player::ChildDraw()
 {
+
 
 }
 
@@ -106,93 +138,139 @@ void Player::PolyDraw()
 {
 	if (Input::IsKey(DIK_LSHIFT))
 	{
-		//ƒ|ƒŠƒ‰ƒCƒ“‚ğ•`‰æ
+		//ãƒãƒªãƒ©ã‚¤ãƒ³ã‚’æç”»
 		pLine->Draw();
 	}
+
+	//ãƒ¬ã‚¤ã®ã‚¹ã‚¿ãƒ¼ãƒˆä½ç½®ã‚’æç”»
+	Transform t;
+	t.position_ = RayStartPos;
+	t.position_.z -= 0.5f;
+	Model::SetTransform(Marker, t);
+	Model::Draw(Marker);
+
+	//ç€åœ°ç‚¹ã‚’æç”»
+	Transform d;
+	d.position_ = downLandingPoint;
+	Model::SetTransform(Marker, d);
+	Model::Draw(Marker);
+
+	Transform up;
+	up.position_ = upLandingPoint;
+	Model::SetTransform(Marker, up);
+	Model::Draw(Marker);
+
+	Transform rg;
+	rg.position_ = rightLandingPoint;
+	Model::SetTransform(Marker, rg);
+	Model::Draw(Marker);
+
+	Transform lf;
+	lf.position_ = leftLandingPoint;
+	Model::SetTransform(Marker, lf);
+	Model::Draw(Marker);
+
+
+	Transform z;
+	z.position_ = transform_.position_;
+	z.position_.y -= 0.5;
+	z.rotate_.y = 90.0f;
+	z.scale_ = { 0.1f,0.1f,0.1f };
+	Model::SetTransform(ziro, z);
+	Model::Draw(ziro);
+
+	Direct3D::SetShader(Direct3D::SHADER_UNLIT);
+
 }
+
 
 void Player::StageRayCast()
 {
-	//ƒXƒe[ƒW‚Ìƒ‚ƒfƒ‹”Ô†‚ğæ“¾
+	//ã‚¹ãƒ†ãƒ¼ã‚¸ã®ãƒ¢ãƒ‡ãƒ«ç•ªå·ã‚’å–å¾—
 	ASSIGN(hGroundModel_,dynamic_cast<SolidObject*>((Stage*)FindObject("Stage"))->GetModelHandle());
 
-	//¶•ûŒü‚Ì“–‚½‚è”»’è
+	//å·¦æ–¹å‘ã®å½“ãŸã‚Šåˆ¤å®š
 	{
-		//RayCastData leftData; {
-		//	//“–‚½‚Á‚Ä‚¢‚é‚©Šm”F
-		//	leftData.start = transform_.position_;
-		//	leftData.start.x = transform_.position_.x + (float)(PLAYER_MODEL_SIZE.x / 2);
-		//	XMStoreFloat3(&leftData.dir, XMVectorSet(-1, 0, 0, 0));
-		//	Model::RayCast(hGroundModel_, &leftData);
-		//}
-		////ƒŒƒC‚Ì’·‚³‚ª1.0ˆÈ‰º‚¾‚Á‚½‚ç...
-		//if (leftData.dist <= 1.0f) {
-		//	//‚ß‚è‚İ•ªAˆÊ’u‚ğ–ß‚·
-		//	XMVECTOR length = { -leftData.dist,0,0 };
-		//	XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(-1, 0, 0, 0) - length));
-		//}
+		RayCastData leftData; {
+			leftData.start = transform_.position_;
+			RayStartPos = leftData.start;
+			XMStoreFloat3(&leftData.dir, XMVectorSet(-1, 0, 0, 0));
+			Model::RayCast(hGroundModel_, &leftData);
+			leftLandingPoint = leftData.pos;
+		}
+		if (leftData.dist < (PLAYER_MODEL_SIZE.x / 2)) {
+			//ã‚ã‚Šè¾¼ã¿åˆ†ã€ä½ç½®ã‚’æˆ»ã™
+			XMVECTOR length = { -leftData.dist -(PLAYER_MODEL_SIZE.x/2),0,0};
+			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(-1, 0, 0, 0) - length));
+		}
 	}
 
-	//‰E•ûŒü‚Ì‚ ‚½‚è”»’è
+	//å³æ–¹å‘ã®ã‚ãŸã‚Šåˆ¤å®š
 	{
-		//RayCastData rightData; {
-		//	//“–‚½‚Á‚Ä‚¢‚é‚©‚ğŠm”F
-		//	rightData.start = transform_.position_;					//”­ËˆÊ’u‚Ìw’è
-		//	rightData.start.x = transform_.position_.x - (PLAYER_MODEL_SIZE.x / 2);
-		//	XMStoreFloat3(&rightData.dir, XMVectorSet(1, 0, 0, 0));	//”­Ë•ûŒü‚Ìw’è
-		//	Model::RayCast(hGroundModel_, &rightData);				//ƒŒƒC‚ğ”­Ë
-		//}
-		////ƒŒƒC‚Ì’·‚³‚ª1.0ˆÈ‰º‚¾‚Á‚½‚ç...
-		//if (rightData.dist <= 1.0f) {
-		//	//‚ß‚è‚İ•ªAˆÊ’u‚ğ–ß‚·
-		//	XMVECTOR length = { rightData.dist,0,0 };
-		//	XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(1, 0, 0, 0) - length));
-		//}
+		RayCastData rightData; {
+			//å½“ãŸã£ã¦ã„ã‚‹ã‹ã‚’ç¢ºèª
+			rightData.start = transform_.position_;					//ç™ºå°„ä½ç½®ã®æŒ‡å®š
+			XMStoreFloat3(&rightData.dir, XMVectorSet(1, 0, 0, 0));	//ç™ºå°„æ–¹å‘ã®æŒ‡å®š
+			Model::RayCast(hGroundModel_, &rightData);				//ãƒ¬ã‚¤ã‚’ç™ºå°„
+			rightLandingPoint = rightData.pos;
+		}
+		//ãƒ¬ã‚¤ã®é•·ã•ãŒ1.0ä»¥ä¸‹ã ã£ãŸã‚‰...
+		if (rightData.dist < (PLAYER_MODEL_SIZE.x / 2)) {
+			//ã‚ã‚Šè¾¼ã¿åˆ†ã€ä½ç½®ã‚’æˆ»ã™
+			XMVECTOR length = { rightData.dist + (PLAYER_MODEL_SIZE.x / 2),0,0 };
+			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(1, 0, 0, 0) - length));
+		}
 	}
 
-	//ã•ûŒü‚Ì‚ ‚½‚è”»’è
+	//ä¸Šæ–¹å‘ã®ã‚ãŸã‚Šåˆ¤å®š
 	{
-		//RayCastData upData; {
-		//	//“–‚½‚Á‚Ä‚¢‚é‚©Šm”F
-		//	upData.start = transform_.position_;
-		//	upData.start.y = transform_.position_.y + (float)(PLAYER_MODEL_SIZE.y / 2);
-		//	XMStoreFloat3(&upData.dir, XMVectorSet(0, 1, 0, 0));
-		//	Model::RayCast(hGroundModel_,&upData);
-		//}
-		////ƒŒƒC‚Ì’·‚³‚ª1.0ˆÈ‰º‚¾‚Á‚½‚ç...
-		//if (upData.dist <= 1.0f) {
-		//	//‚ß‚è‚İ•ªAˆÊ’u‚ğ–ß‚·
-		//	XMVECTOR length = {0, upData.dist,0 };
-		//	XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(0, 1, 0, 0) - length));
-		//}
+		RayCastData upData; {
+			//å½“ãŸã£ã¦ã„ã‚‹ã‹ç¢ºèª
+			upData.start = transform_.position_;
+			XMStoreFloat3(&upData.dir, XMVectorSet(0, 1, 0, 0));
+			Model::RayCast(hGroundModel_,&upData);
+			upLandingPoint = upData.pos;
+		}
+		//ãƒ¬ã‚¤ã®é•·ã•ãŒ1.0ä»¥ä¸‹ã ã£ãŸã‚‰...
+		if (upData.dist < (PLAYER_MODEL_SIZE.y / 2)) {
+			//ã‚ã‚Šè¾¼ã¿åˆ†ã€ä½ç½®ã‚’æˆ»ã™
+			XMVECTOR length = {0, (PLAYER_MODEL_SIZE.y / 2) + upData.dist,0 };
+			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(0, 1, 0, 0) - length));
+			SetAcceleration(2);
+		}
 	}
 
-	//‰º•ûŒü‚Ì‚ ‚½‚è”»’è
+
+	
+
+	//StandingState,RunningStateã¨ãã®ã¿è¡Œã†ã‹ã‚‰Stateå†…ã§å‡¦ç†ã‚’è¡Œã†
+	//ä¸‹æ–¹å‘ã®ã‚ãŸã‚Šåˆ¤å®š
 	{
-		//RayCastData downData; {
-		//	//“–‚½‚Á‚Ä‚¢‚é‚©Šm”F
-		//	downData.start = transform_.position_;
-		//	downData.start.y = transform_.position_.y -(PLAYER_MODEL_SIZE.y / 2.0f);
-		//	XMStoreFloat3(&downData.dir, XMVectorSet(0, -1, 0, 0));
-		//	Model::RayCast(hGroundModel_,&downData);
-		//}
-		//if (downData.dist <= 1.0f) {
-		//	//‚ß‚è‚İ•ªAˆÊ’u‚ğ–ß‚·
-		//	XMVECTOR length = { 0,-downData.dist,0 };
-		//	XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(0, -1, 0, 0) - length));
-		//}
+		RayCastData downData; {
+			//å½“ãŸã£ã¦ã„ã‚‹ã‹ç¢ºèª
+			downData.start = transform_.position_;
+			XMStoreFloat3(&downData.dir, XMVectorSet(0, -1, 0, 0));
+			Model::RayCast(hGroundModel_,&downData);
+			downLandingPoint = downData.pos;
+		}
+		if (downData.dist < (PLAYER_MODEL_SIZE.y / 2)) {
+			//çŠ¶æ…‹ã‚’"Standing"ã«å¤‰æ›´
+			pState_->ChangeState(pState_->pStanding_, this);
 
-		//transform_.position_.y -= 0.1;
+			//jumpçŠ¶æ…‹ã‚’çµ‚äº†
+			isJumpNow_ = false;
+		}
+		else
+			isAddGravity_ = true;
 
-
-		////ƒŒƒC‚Ì’·‚³‚ª›Z‚Ì(’…’n“_‚ÆƒvƒŒƒCƒ„[‚Ì‘«Œ³‚ÌˆÊ’u‚Ì‹——£‚Ì’·‚³‚ªnˆÈã‚Ì)
-		//if (downData.dist > 1.0f) {
-		//	//d—Í‚ğ‰º•ûŒü‚É‰Á‚¦‚é
-		//	transform_.position_.y -= 0.03;
-		//}
-		//else {
-		//	//d—Í‚ğ‰Á‚¦‚¸‚ÉA’…’n“_‚ÆƒvƒŒƒCƒ„[‚Ì‘«Œ³‚ÌˆÊ’u‚ğ‡‚í‚¹‚é
-		//	transform_.position_.y = transform_.position_.y - (downData.dist + (PLAYER_MODEL_SIZE.y /2.0f));
-		//}
 	}
+}
+
+void Player::AddGravity(Transform* _transform)
+{
+	if (!isAddGravity_)return;
+
+	//é‡åŠ›ã‚’åŠ ãˆã‚‹
+	_transform->position_ = Transform::Float3Add(_transform->position_, VectorToFloat3((XMVectorSet(0, -1, 0, 0) / 10) * acceleration_));
+	acceleration_ += GRAVITY_ADDITION;
 }

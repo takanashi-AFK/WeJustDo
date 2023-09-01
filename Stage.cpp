@@ -1,9 +1,16 @@
 #include "Stage.h"
+#include "Engine/Model.h"
 
 //コンストラクタ
 Stage::Stage(GameObject* parent, string modelFileName)
 	:SolidObject(parent,modelFileName,"Stage")
 {
+}
+
+void Stage::ChildInitialize()
+{
+	transform_.scale_.x = 2;
+	Model::SetAnimFrame(hModel_, 0, 150, 1);
 }
 
 //更新
