@@ -21,5 +21,7 @@ namespace AudioManager {
 
 	void Play_DeadSound();
 
+	void Play_JumpSound();
+
 	void Release();
 };

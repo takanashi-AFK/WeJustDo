@@ -67,6 +67,8 @@ void Player::ChildUpdate()
 	//jumpó‘Ô‚É‚·‚é
 	if (Input::IsKey(DIK_SPACE)) {isJumpNow_ = true;
 	}
+	if (Input::IsKeyDown(DIK_SPACE)) {AudioManager::Play_JumpSound();
+	}
 
 	//jump’†‚Ìˆ—‚ğs‚¤
 	if (isJumpNow_) {transform_.position_.y += 0.1f;
