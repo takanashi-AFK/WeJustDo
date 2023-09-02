@@ -5,6 +5,7 @@
 #include "PlayerStateManager.h"
 #include "Engine/Model.h"
 #include "PolyLine.h"
+#include "Engine/VFX.h"
 //前方宣言
 class Stage;
 
@@ -25,13 +26,18 @@ class Player : public SolidObject
 private:
 	//debug
 	int Marker;
+	int DeadEffHandle;
 	XMFLOAT3 RayStartPos;
 	XMFLOAT3 downLandingPoint;
 	XMFLOAT3 upLandingPoint;
 	XMFLOAT3 rightLandingPoint;
 	XMFLOAT3 leftLandingPoint;
-	PolyLine* pLine;
-	XMFLOAT3 PolyEmitPos;
+
+
+	PolyLine* pJet;
+	XMFLOAT3 PolyJetEmitPos;
+	EmitterData  DeadEffectData;
+
 	//ziro2
 	int ziro;
 
@@ -113,4 +119,9 @@ public:
 	/// </summary>
 	/// <param name="_flag">判定</param>
 	void SetIsMove(bool _flag) { isMove_ = _flag; }
+
+	/// <summary>
+	/// 死亡時エフェクトの初期化
+	/// </summary>
+	void InitDeadEffect();
 };

@@ -28,14 +28,14 @@ void PlayScene::Initialize()
 	}
 
 	//ƒvƒŒƒCƒ„[‚ğ¶¬
-	CreateSolidObject<Player>(this,"Models/ziro2.fbx");{
+	CreateSolidObject<Player>(this,"DebugCollision/BoxCollider.fbx");{
 
 	}
 
 	//BGM‚ğÄ¶
 	AudioManager::Initialize();
 	AudioManager::Play_PlayMusic();
-
+	
 
 }
 

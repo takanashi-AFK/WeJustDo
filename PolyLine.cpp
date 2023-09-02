@@ -14,6 +14,14 @@ PolyLine::PolyLine() :
 {
 }
 
+PolyLine::PolyLine(float _width, float _length):
+	WIDTH_(_width),
+	LENGTH_(_length),
+	pVertexBuffer_(nullptr), pConstantBuffer_(nullptr), pTexture_(nullptr)
+
+{
+}
+
 void PolyLine::AddPosition(XMFLOAT3 pos)
 {
 	//ƒŠƒXƒg‚Ìæ“ª‚ÉŒ»İˆÊ’u‚ğ’Ç‰Á

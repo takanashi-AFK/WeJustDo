@@ -8,6 +8,7 @@ namespace AudioManager
 	int hTitleMusic_;//75db
 	int hPlayMusic_;//75db
 	int hConfirmSound_;
+	int hDeadSound_;
 	void Initialize()
 	{
 		hDonSound_ = Audio::Load("Sounds/don.wav",3);
@@ -21,6 +22,8 @@ namespace AudioManager
 
 		hPlayMusic_ = Audio::Load("Sounds/PlayScene.wav",true);
 		assert(hPlayMusic_ >= 0);
+
+		hDeadSound_ = Audio::Load("Sounds/Dead.wav");
 	}
 
 	void PlayDonSound()
@@ -46,6 +49,11 @@ namespace AudioManager
 	void Play_PlayMusic()
 	{
 		Audio::Play(hPlayMusic_);
+	}
+
+	void Play_DeadSound()
+	{
+		Audio::Play(hDeadSound_);
 	}
 
 	void Release()

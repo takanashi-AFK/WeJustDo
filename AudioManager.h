@@ -19,5 +19,7 @@ namespace AudioManager {
 
 	void Play_PlayMusic();
 
+	void Play_DeadSound();
+
 	void Release();
 };

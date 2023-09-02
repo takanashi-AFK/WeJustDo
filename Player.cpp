@@ -4,8 +4,10 @@
 #include "Engine/Input.h"
 #include "Stage.h"
 #include "Engine/Transition.h"
+#include "Engine/Image.h"
 #include "Engine/Debug.h"
 #include "Engine/Camera.h"
+#include "AudioManager.h"
 
 //コンストラクタ
 Player::Player(GameObject* _parent, string _modelFileName)
@@ -34,25 +36,33 @@ void Player::ChildInitialize()
 
 	isMove_ = true;
 
-	transform_.rotate_.y = 90;
+	AudioManager::Initialize;
 
-	pLine = new PolyLine;
-	pLine->Load("Effects/Fire.png");
+	pJet = new PolyLine(0.1,10);
+	pJet->Load("Effects/Fire.png");
+
+	InitDeadEffect();
+
+	//pDead = new PolyLine(1,50);
+	//pDead->Load("Effects/Tex.png");
+
 }
 
 //更新
 void Player::ChildUpdate()
 {
 
-	PolyEmitPos = XMFLOAT3(transform_.position_.x - (PLAYER_MODEL_SIZE.x / 4), transform_.position_.y + (PLAYER_MODEL_SIZE.x / 4), transform_.position_.z);
+	PolyJetEmitPos = XMFLOAT3(transform_.position_.x - (PLAYER_MODEL_SIZE.x / 4), transform_.position_.y + (PLAYER_MODEL_SIZE.x / 4), transform_.position_.z);
 	if (isMove_) {
 		{//debug-PlayerMove
-			if (Input::IsKey(DIK_UP))transform_.position_.y += 0.1;
-			if (Input::IsKey(DIK_LEFT))transform_.position_.x -= 0.1;
-			if (Input::IsKey(DIK_DOWN))transform_.position_.y -= 0.1;
-			if (Input::IsKey(DIK_RIGHT))transform_.position_.x += 0.1;
+			//if (Input::IsKey(DIK_W))transform_.position_.y += 0.1;
+			if (Input::IsKey(DIK_A)) { transform_.position_.x -= 0.1; transform_.rotate_.y = -90; PolyJetEmitPos.x = PolyJetEmitPos.x + 0.5; }
+			//if (Input::IsKey(DIK_S))transform_.position_.y -= 0.1;
+			if (Input::IsKey(DIK_D)) { transform_.position_.x += 0.1; transform_.rotate_.y = 90; }
 		}
 	}
+
+
 
 	//jump状態にする
 	if (Input::IsKey(DIK_SPACE)) {isJumpNow_ = true;
@@ -62,8 +72,14 @@ void Player::ChildUpdate()
 	if (isJumpNow_) {transform_.position_.y += 0.1f;
 	}
 
-	Camera::SetPosition(transform_.position_.x + 5, 3.5f, -15.0f);
-	Camera::SetTarget(transform_.position_.x + 5, 5.5f, 0.0f);
+	//死亡時エフェクト
+	if (transform_.position_.y <= -3 && transform_.position_.y >=-5)
+	{
+		AudioManager::Play_DeadSound();
+		DeadEffectData.position = XMFLOAT3(transform_.position_.x,-2,-1);
+		DeadEffHandle = VFX::Start(DeadEffectData);
+	}
+
 
 	//重力を加える
 	AddGravity(&transform_);
@@ -73,11 +89,12 @@ void Player::ChildUpdate()
 
 
 	//ポリラインに現在の位置を伝える
-	pLine->AddPosition(PolyEmitPos);
-
-
+	pJet->AddPosition(PolyJetEmitPos);
 	//状態ごとの更新
 	pState_->Update(this);
+
+	Camera::SetPosition(transform_.position_.x + 5, 3.5f, -15.0f);
+	Camera::SetTarget(transform_.position_.x + 5, 5.5f, 0.0f);
 }
 
 //開放
@@ -85,7 +102,7 @@ void Player::ChildRelease()
 {
 	SAFE_DELETE(pState_);
 	//ポリライン解放
-	pLine->Release();
+	pJet->Release();
 }
 
 //描画
@@ -123,10 +140,11 @@ void Player::ChildDraw()
 	Transform z;
 	z.position_ = transform_.position_;
 	z.position_.y -= 0.5;
-	z.rotate_.y = 90.0f;
 	z.scale_ = { 0.1f,0.1f,0.1f };
 	Model::SetTransform(ziro, z);
 	Model::Draw(ziro);
+
+
 
 	Direct3D::SetShader(Direct3D::SHADER_UNLIT);
 }
@@ -223,11 +241,35 @@ void Player::AddGravity(Transform* _transform)
 	acceleration_ += GRAVITY_ADDITION;
 }
 
+void Player::InitDeadEffect()
+{
+	
+	DeadEffectData.textureFileName = "Effects/cloudA.png";
+	DeadEffectData.positionRnd = XMFLOAT3(0.1, 0, 0.1);
+	DeadEffectData.delay = 0;
+	DeadEffectData.number = 1;
+	DeadEffectData.lifeTime = 60;
+	DeadEffectData.gravity = -0.002f;
+	DeadEffectData.direction = XMFLOAT3(0, 1, 0);
+	DeadEffectData.directionRnd = XMFLOAT3(0, 0, 0);
+	DeadEffectData.speed = 0.01f;
+	DeadEffectData.speedRnd = 0.0;
+	DeadEffectData.size = XMFLOAT2(1,10);
+	DeadEffectData.sizeRnd = XMFLOAT2(0.4, 0.4);
+	DeadEffectData.scale = XMFLOAT2(1.01, 1.01);
+	DeadEffectData.color = XMFLOAT4(0, 0, 1, 1);
+	DeadEffectData.deltaColor = XMFLOAT4(0, -0.03, 0, -0.02);
+	
+}
+
 void Player::PolyDraw()
 {
 	if (Input::IsKey(DIK_LSHIFT))
 	{
 		//ポリラインを描画
-		pLine->Draw();
+		pJet->Draw();
 	}
+
+	
+
 }

@@ -24,8 +24,8 @@ struct VERTEX1
 
 class PolyLine
 {
-	const float WIDTH_;		//太さ
-	const int LENGTH_;		//長さ
+	 float WIDTH_;		//太さ
+	int LENGTH_;		//長さ
 
 
 
@@ -39,6 +39,13 @@ class PolyLine
 public:
 	//コンストラクタ
 	PolyLine();
+
+	/// <summary>
+	/// 引数つきのコンストラクタ
+	/// </summary>
+	/// <param name="_width">幅</param>
+	/// <param name="_length">長さ</param>
+	PolyLine(float _width, float _length);
 
 
 	//現在の位置を記憶させる
