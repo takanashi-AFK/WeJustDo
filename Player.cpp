@@ -36,12 +36,11 @@ void Player::ChildInitialize()
 
 	isMove_ = true;
 
-	AudioManager::Initialize;
-
 	pJet = new PolyLine(0.1,10);
 	pJet->Load("Effects/Fire.png");
 
 	InitDeadEffect();
+	InitRandEffect();
 
 	//pDead = new PolyLine(1,50);
 	//pDead->Load("Effects/Tex.png");
@@ -80,6 +79,11 @@ void Player::ChildUpdate()
 		AudioManager::Play_DeadSound();
 		DeadEffectData.position = XMFLOAT3(transform_.position_.x,-2,-1);
 		DeadEffHandle = VFX::Start(DeadEffectData);
+	}
+
+	if (Input::IsKeyDown(DIK_O))
+	{
+		VFX::Start(RandEffectData_);
 	}
 
 
@@ -239,6 +243,10 @@ void Player::StageRayCast()
 			isAddGravity_ = true;
 
 	}
+
+	//debug
+	if (Input::IsKeyDown(DIK_P))
+		pState_->ChangeState(pState_->pJumping_, this);
 }
 
 void Player::AddGravity(Transform* _transform)
@@ -270,6 +278,28 @@ void Player::InitDeadEffect()
 	DeadEffectData.deltaColor = XMFLOAT4(0, -0.03, 0, -0.02);
 	
 }
+
+void Player::InitRandEffect()
+{
+	RandEffectData_.textureFileName = "Effects/RandSmoke2.png";
+	RandEffectData_.position = XMFLOAT3(transform_.position_.x, transform_.position_.y - 0.2,0);
+	RandEffectData_.positionRnd = XMFLOAT3(0.1, 0, 0.1);
+	RandEffectData_.delay = 0;
+	RandEffectData_.number = 1;
+	RandEffectData_.lifeTime = 40;
+	RandEffectData_.speed = 0.01f;
+	RandEffectData_.speedRnd = 0.0;
+	RandEffectData_.size = XMFLOAT2(1,0.5);
+	RandEffectData_.scale = XMFLOAT2(1.01, 1.01);
+	RandEffectData_.color = XMFLOAT4(1,1,1,1);
+	RandEffectData_.deltaColor = XMFLOAT4(0, 0, 0, -0.1);
+}
+
+EmitterData Player::GetRandEData()
+{
+	return RandEffectData_;
+}
+
 
 void Player::PolyDraw()
 {

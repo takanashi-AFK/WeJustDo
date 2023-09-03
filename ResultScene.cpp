@@ -17,8 +17,7 @@ void ResultScene::Initialize()
 	//‰æ‘œ‚Ìƒ[ƒh
 	ASSIGN(hPict_, Image::Load("Image/ResultImage.png"));assert(hPict_ <= 0);
 
-	//BGM‚Ì‰Šú‰»
-	AudioManager::Initialize();
+
 
 	//Text•Ï”‚Ì‰Šú‰»
 	{

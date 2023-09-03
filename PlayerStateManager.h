@@ -17,6 +17,8 @@ class PlayerStateManager : public PlayerState
 {
 public:
 	PlayerState* playerState_;
+	PlayerState* prevState_;
+
 
 	//Šeó‘Ô•Ï”
 	StandingState* pStanding_;

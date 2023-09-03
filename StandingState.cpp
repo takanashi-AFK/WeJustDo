@@ -2,7 +2,8 @@
 
 //インクルード
 #include "Player.h"
-
+#include "AudioManager.h"
+#include "Engine/Input.h"
 
 //更新
 void StandingState::Update(Player* _p)
@@ -27,14 +28,22 @@ void StandingState::Update(Player* _p)
 		_p->IsAddGravity(false);
 		_p->SetAcceleration(0);
 	}
+
+
 }
 
 //開始
 void StandingState::Enter(Player* _p)
 {
+	AudioManager::PlayDonSound();
+	_p->InitRandEffect();
+	EmitterData Emit = _p->GetRandEData();
+	VFX::Start(Emit);
 }
 
-//入力処理
+//入力処理	
 void StandingState::HandleInput(Player* _p)
 {
 }
+
+

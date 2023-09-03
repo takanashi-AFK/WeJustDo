@@ -6,6 +6,7 @@
 /// </summary>
 class StandingState : public PlayerState
 {
+
 public:
 	//XV
 	void Update(Player* _p);
@@ -15,5 +16,6 @@ public:
 
 	//“ü—Íˆ—
 	void HandleInput(Player* _p);
+
 };
 

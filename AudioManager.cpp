@@ -11,33 +11,11 @@ namespace AudioManager
 	int hDeadSound_;
 	int hJumpSound_;
 	int hJetSound_;
-	void Initialize()
-	{
-		hDonSound_ = Audio::Load("Sounds/don.wav",3);
-		assert(hDonSound_ >= 0);
-
-		hTitleMusic_ = Audio::Load("Sounds/TitleBGM.wav");
-		assert(hTitleMusic_ >= 0);
-
-		hConfirmSound_ = Audio::Load("Sounds/Confirm.wav");
-		assert(hConfirmSound_ >= 0);
-
-		hPlayMusic_ = Audio::Load("Sounds/PlayScene.wav",true);
-		assert(hPlayMusic_ >= 0);
-
-		hDeadSound_ = Audio::Load("Sounds/Dead.wav");
-		assert(hDeadSound_ >= 0);
-
-		hJumpSound_ = Audio::Load("Sounds/Jump.wav");
-		assert(hJumpSound_ >= 0);
-
-		hJetSound_ = Audio::Load("Sounds/JettPack.wav");
-		assert(hJetSound_ >= 0);
-
-	}
 
 	void PlayDonSound()
 	{
+		hDonSound_ = Audio::Load("Sounds/don.wav",false);
+		assert(hDonSound_ >= 0);
 		Audio::Play(hDonSound_);
 	}
 
@@ -48,31 +26,43 @@ namespace AudioManager
 
 	void Play_TitleMusic()
 	{
+		hTitleMusic_ = Audio::Load("Sounds/TitleBGM.wav");
+		assert(hTitleMusic_ >= 0);
 		Audio::Play(hTitleMusic_);
 	}
 
 	void PlayConfirmSound()
 	{
+		hConfirmSound_ = Audio::Load("Sounds/Confirm.wav");
+		assert(hConfirmSound_ >= 0);
 		Audio::Play(hConfirmSound_);
 	}
 
 	void Play_PlayMusic()
 	{
+		hPlayMusic_ = Audio::Load("Sounds/PlayScene.wav", true);
+		assert(hPlayMusic_ >= 0);
 		Audio::Play(hPlayMusic_);
 	}
 
 	void Play_DeadSound()
 	{
+		hDeadSound_ = Audio::Load("Sounds/Dead.wav");
+		assert(hDeadSound_ >= 0);
 		Audio::Play(hDeadSound_);
 	}
 
 	void Play_JumpSound()
 	{
+		hJumpSound_ = Audio::Load("Sounds/Jump.wav");
+		assert(hJumpSound_ >= 0);
 		Audio::Play(hJumpSound_);
 	}
 
 	void Play_JetSound()
 	{
+		hJetSound_ = Audio::Load("Sounds/JettPack.wav");
+		assert(hJetSound_ >= 0);
 		Audio::Play(hJetSound_);
 	}
 

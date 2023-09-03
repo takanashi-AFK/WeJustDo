@@ -36,7 +36,6 @@ private:
 
 	PolyLine* pJet;
 	XMFLOAT3 PolyJetEmitPos;
-	EmitterData  DeadEffectData;
 
 	//ziro2
 	int ziro;
@@ -55,6 +54,11 @@ protected:
 	bool		isMove_;		//動いていいいか
 
 public:
+	
+	EmitterData  RandEffectData_;
+	
+	EmitterData  DeadEffectData;
+	
 	//コンストラクタ
 	Player(GameObject* _parent, string _modelFileName);
 
@@ -124,4 +128,9 @@ public:
 	/// 死亡時エフェクトの初期化
 	/// </summary>
 	void InitDeadEffect();
+
+	void InitRandEffect();
+
+	EmitterData GetRandEData();
+	
 };

@@ -36,9 +36,13 @@ void PlayerStateManager::Enter(Player* _p)
 //状態遷移
 void PlayerStateManager::ChangeState(PlayerState* change, Player* _p)
 {
+	prevState_ = playerState_;
+	if (prevState_ != change)
+	{
 	//状態を変更する
 	playerState_ = change;
 
 	//開始処理を行う
 	playerState_->Enter(_p);
+	}
 }

@@ -26,8 +26,7 @@ void TitleScene::Initialize()
 	//ƒJƒƒ‰‚Ì‰Šú‰»
 	Camera::SetPosition(0, 0, -5);Camera::SetTarget(0, 0, 0);
 
-	//BGM‚ğÄ¶
-	AudioManager::Initialize();
+	
 	AudioManager::Play_TitleMusic();
 }
 

@@ -151,6 +151,8 @@
     <ClCompile Include="jumpingState.cpp">
       <Filter>State</Filter>
     </ClCompile>
+    <ClCompile Include="MovieState.cpp" />
+    <ClCompile Include="PolyLine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -263,6 +265,8 @@
     <ClInclude Include="jumpingState.h">
       <Filter>State</Filter>
     </ClInclude>
+    <ClInclude Include="MovieState.h" />
+    <ClInclude Include="PolyLine.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">

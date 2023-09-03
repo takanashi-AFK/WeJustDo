@@ -7,6 +7,7 @@
 #include "Engine/Camera.h"
 #include "AudioManager.h"
 #include "Engine/SceneManager.h"
+#include "TestObj.h"
 
 //コンストラクタ
 PlayScene::PlayScene(GameObject* parent)
@@ -31,9 +32,9 @@ void PlayScene::Initialize()
 	CreateSolidObject<Player>(this,"Models/ziro2.fbx");{
 
 	}
-
+	//Instantiate<TestObj>(this);
 	//BGMを再生
-	AudioManager::Initialize();
+
 	AudioManager::Play_PlayMusic();
 	
 
