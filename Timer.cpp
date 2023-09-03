@@ -3,7 +3,7 @@
 static const int FPS = 60;
 
 Timer::Timer(GameObject* obj)
-	: GameObject(obj, "Timer"), frame(0), active(false), drawX(0), drawY(0)
+	: GameObject(obj, "Timer"), frame(0), active(false), drawX(600), drawY(400)
 {
 	num = new Text;
 	num->Initialize();
@@ -31,14 +31,20 @@ void Timer::Update()
 
 void Timer::Draw()
 {
-	num->SetScale(1.0f);
-	num->Draw(drawX, drawY, "Time");
-	if (frame % FPS < 10)
-		num->SetScale((frame%FPS)*0.2f+1.0f);
+	if (!(IsFinished()))
+	{
+		num->SetScale(5.0f);
+		if (frame % FPS < 10)
+			num->SetScale((frame % FPS) * 0.3f + 5.0f);
+		else
+			num->SetScale(5.0f);
+		int sec = (frame / FPS) + 1;
+		num->Draw(drawX+50, drawY, sec);
+	}
 	else
-		num->SetScale(1.0f);
-	int sec = frame / FPS;
-	num->Draw(drawX+100, drawY, sec);
+	{
+
+	}
 }
 
 void Timer::Release()
