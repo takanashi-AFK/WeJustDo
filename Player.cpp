@@ -2,10 +2,10 @@
 
 //インクルード
 #include "Engine/Input.h"
-#include "Stage.h"
 #include "Engine/Transition.h"
 #include "Engine/Camera.h"
-
+#include "Stage.h"
+#include "Timer.h"
 
 //定数宣言
 namespace {
@@ -38,8 +38,8 @@ void Player::ChildInitialize()
 //更新
 void Player::ChildUpdate()
 {
-	PlayScene* ps = (PlayScene*)FindObject("PlayScene");
-	if (ps->CountFinish()) {
+	Timer* pTime = (Timer*)FindObject("Timer");
+	if (pTime->IsFinished()) {
 		if (!Transition::IsActive()) {
 			{//debug-PlayerMove
 				if (Input::IsKey(DIK_W))transform_.position_.y += 0.1;

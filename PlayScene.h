@@ -1,5 +1,9 @@
 #pragma once
+
+#include "Stage.h"
 #include "Engine/GameObject.h"
+
+class Timer;
 
 /// <summary>
 /// ゲームプレイ画面を表示するシーンオブジェクト
@@ -8,7 +12,9 @@ class PlayScene : public GameObject
 {
 private:
 	int hPict_;	//画像番号
-	bool isCount;
+	Timer* pTime;
+	float timeLimit;
+
 
 public:
 	//コンストラクタ
@@ -19,7 +25,4 @@ public:
 	void Update() override;
 	void Draw() override;
 	void Release() override;
-
-	bool CountFinish() { return (isCount); };
-
 };

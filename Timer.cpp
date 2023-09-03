@@ -2,8 +2,8 @@
 
 static const int FPS = 60;
 
-Timer::Timer(GameObject* obj): GameObject(obj, "Timer"), 
-	frame(0), active(false), drawX(0), drawY(0)
+Timer::Timer(GameObject* obj)
+	: GameObject(obj, "Timer"), frame(0), active(false), drawX(0), drawY(0)
 {
 	num = new Text;
 	num->Initialize();

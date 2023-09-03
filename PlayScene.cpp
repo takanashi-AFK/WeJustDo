@@ -2,7 +2,7 @@
 
 //インクルード
 #include "Player.h"
-#include "Stage.h"
+#include "Timer.h"
 #include "Engine/Image.h"
 #include "Engine/Camera.h"
 #include "AudioManager.h"
@@ -10,7 +10,7 @@
 
 //コンストラクタ
 PlayScene::PlayScene(GameObject* parent)
-	:GameObject(parent,"PlayScene"),hPict_(-1),isCount(false)
+	:GameObject(parent,"PlayScene"),hPict_(-1),timeLimit(3.0)
 {
 }
 
@@ -31,6 +31,11 @@ void PlayScene::Initialize()
 	CreateSolidObject<Player>(this,"Models/ziro2.fbx");{
 
 	}
+	pTime = Instantiate<Timer>(this);
+	 
+
+	pTime->Initialize();
+	pTime->SetLimit(timeLimit);
 
 	//BGMを再生
 	AudioManager::Initialize();
@@ -40,15 +45,15 @@ void PlayScene::Initialize()
 //更新
 void PlayScene::Update()
 {
-	static int time; time++;
 	//if (time >= 600) {
 	//	SceneManager* sm = (SceneManager*)FindObject("SceneManager");
 	//	sm->ChangeScene(SCENE_ID_RESULT,TID_WHITEOUT);
 	//}
-	if (time >= 180)
+	if (!(pTime->IsFinished()))
 	{
-			isCount = true;
+		pTime->Start();
 	}
+
 }
 
 //描画
