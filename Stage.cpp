@@ -9,8 +9,6 @@ Stage::Stage(GameObject* parent, string modelFileName)
 
 void Stage::ChildInitialize()
 {
-	transform_.scale_.x = 2;
-	Model::SetAnimFrame(hModel_, 0, 150, 1);
 }
 
 //更新
@@ -22,5 +20,5 @@ void Stage::ChildUpdate()
 void Stage::ChildDraw()
 {
 	//debug-ワイヤーフレーム表示のシェーダーを適用
-	Direct3D::SetShader(Direct3D::SHADER_UNLIT);
+	Direct3D::SetShader(Direct3D::SHADER_NOSHADE);
 }

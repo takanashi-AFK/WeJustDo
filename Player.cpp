@@ -60,6 +60,7 @@ void Player::ChildUpdate()
 
 	//状態ごとの更新
 	pState_->Update(this);
+
 }
 
 //開放
@@ -99,7 +100,6 @@ void Player::ChildDraw()
 	Model::SetTransform(Marker, lf);
 	Model::Draw(Marker);
 
-
 	Transform z;
 	z.position_ = transform_.position_;
 	z.position_.y -= 0.5;
@@ -110,7 +110,6 @@ void Player::ChildDraw()
 
 	Direct3D::SetShader(Direct3D::SHADER_UNLIT);
 }
-
 
 void Player::StageRayCast()
 {
@@ -167,9 +166,6 @@ void Player::StageRayCast()
 			SetAcceleration(2);
 		}
 	}
-
-
-	
 
 	//StandingState,RunningStateときのみ行うからState内で処理を行う
 	//下方向のあたり判定
