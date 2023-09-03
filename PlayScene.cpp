@@ -28,7 +28,7 @@ void PlayScene::Initialize()
 	}
 
 	//ƒvƒŒƒCƒ„[‚ğ¶¬
-	CreateSolidObject<Player>(this,"DebugCollision/BoxCollider.fbx");{
+	CreateSolidObject<Player>(this,"Models/ziro2.fbx");{
 
 	}
 

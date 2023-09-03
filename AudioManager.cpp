@@ -10,6 +10,7 @@ namespace AudioManager
 	int hConfirmSound_;
 	int hDeadSound_;
 	int hJumpSound_;
+	int hJetSound_;
 	void Initialize()
 	{
 		hDonSound_ = Audio::Load("Sounds/don.wav",3);
@@ -30,6 +31,8 @@ namespace AudioManager
 		hJumpSound_ = Audio::Load("Sounds/Jump.wav");
 		assert(hJumpSound_ >= 0);
 
+		hJetSound_ = Audio::Load("Sounds/JettPack.wav");
+		assert(hJetSound_ >= 0);
 
 	}
 
@@ -66,6 +69,16 @@ namespace AudioManager
 	void Play_JumpSound()
 	{
 		Audio::Play(hJumpSound_);
+	}
+
+	void Play_JetSound()
+	{
+		Audio::Play(hJetSound_);
+	}
+
+	void Stop_JetSound()
+	{
+		Audio::Stop(hJetSound_);
 	}
 
 	void Release()

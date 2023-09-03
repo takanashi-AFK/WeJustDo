@@ -23,5 +23,9 @@ namespace AudioManager {
 
 	void Play_JumpSound();
 
+	void Play_JetSound();
+
+	void Stop_JetSound();
+
 	void Release();
 };

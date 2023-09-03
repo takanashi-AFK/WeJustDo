@@ -52,7 +52,7 @@ void Player::ChildInitialize()
 void Player::ChildUpdate()
 {
 
-	PolyJetEmitPos = XMFLOAT3(transform_.position_.x - (PLAYER_MODEL_SIZE.x / 4), transform_.position_.y + (PLAYER_MODEL_SIZE.x / 4), transform_.position_.z);
+	PolyJetEmitPos = XMFLOAT3(transform_.position_.x - (PLAYER_MODEL_SIZE.x / 4), transform_.position_.y - (PLAYER_MODEL_SIZE.x / 4), transform_.position_.z);
 	if (isMove_) {
 		{//debug-PlayerMove
 			//if (Input::IsKey(DIK_W))transform_.position_.y += 0.1;
@@ -146,7 +146,14 @@ void Player::ChildDraw()
 	Model::SetTransform(ziro, z);
 	Model::Draw(ziro);
 
-
+	if (Input::IsKey(DIK_LSHIFT))
+	{
+		AudioManager::Play_JetSound();
+	}
+	if (Input::IsKeyUp(DIK_LSHIFT))
+	{
+		AudioManager::Stop_JetSound();
+	}
 
 	Direct3D::SetShader(Direct3D::SHADER_UNLIT);
 }
@@ -271,7 +278,4 @@ void Player::PolyDraw()
 		//ƒ|ƒŠƒ‰ƒCƒ“‚ð•`‰æ
 		pJet->Draw();
 	}
-
-	
-
 }
