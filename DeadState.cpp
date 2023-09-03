@@ -21,7 +21,7 @@ void DeadState::Enter(Player* _p)
 	
 	EmitterData dead = _p->GetDeadEData();
 	_p->InitDeadEffect();
-	dead.position = XMFLOAT3(ppos.x, -2, -1);
+	dead.position = XMFLOAT3(ppos.x, 0, -1);
 	VFX::Start(dead);
 	AudioManager::Play_DeadSound();
 }
