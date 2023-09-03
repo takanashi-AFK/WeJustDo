@@ -58,9 +58,6 @@ void Player::ChildUpdate()
 	//ステージとのあたり判定
 	StageRayCast();
 
-
-	//ポリラインに現在の位置を伝える
-	pJet->AddPosition(PolyJetEmitPos);
 	//状態ごとの更新
 	pState_->Update(this);
 
