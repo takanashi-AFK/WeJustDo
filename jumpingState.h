@@ -1,8 +1,10 @@
 #pragma once
 #include "PlayerState.h"
+#include "PlayerStateManager.h"
 
 class JumpingState : public PlayerState
 {
+
 public:
 	//XV
 	void Update(Player* _p);

@@ -35,5 +35,6 @@ public:
 	/// <param name="_nextState">•Ï‰»‚µ‚½‚¢ó‘Ô</param>
 	void ChangeState(PlayerState* _currentState, PlayerState* _nextState);
 
+
 };
 

@@ -44,6 +44,8 @@ void Player::ChildInitialize()
 
 	//pDead = new PolyLine(1,50);
 	//pDead->Load("Effects/Tex.png");
+	pJet = new PolyLine(0.1, 10);
+	pJet->Load("Effects/Fire.png");
 
 }
 
@@ -73,13 +75,7 @@ void Player::ChildUpdate()
 	if (isJumpNow_) {transform_.position_.y += 0.1f;
 	}
 
-	//死亡時エフェクト
-	if (transform_.position_.y <= -3 && transform_.position_.y >=-5)
-	{
-		AudioManager::Play_DeadSound();
-		DeadEffectData.position = XMFLOAT3(transform_.position_.x,-2,-1);
-		DeadEffHandle = VFX::Start(DeadEffectData);
-	}
+
 
 	if (Input::IsKeyDown(DIK_O))
 	{
@@ -150,14 +146,7 @@ void Player::ChildDraw()
 	Model::SetTransform(ziro, z);
 	Model::Draw(ziro);
 
-	if (Input::IsKey(DIK_LSHIFT))
-	{
-		AudioManager::Play_JetSound();
-	}
-	if (Input::IsKeyUp(DIK_LSHIFT))
-	{
-		AudioManager::Stop_JetSound();
-	}
+	
 
 	Direct3D::SetShader(Direct3D::SHADER_UNLIT);
 }
@@ -244,9 +233,7 @@ void Player::StageRayCast()
 
 	}
 
-	//debug
-	if (Input::IsKeyDown(DIK_P))
-		pState_->ChangeState(pState_->pJumping_, this);
+
 }
 
 void Player::AddGravity(Transform* _transform)
@@ -295,15 +282,31 @@ void Player::InitRandEffect()
 	RandEffectData_.deltaColor = XMFLOAT4(0, 0, 0, -0.1);
 }
 
+
+EmitterData Player::GetDeadEData()
+{
+	return DeadEffectData;
+}
+
 EmitterData Player::GetRandEData()
 {
 	return RandEffectData_;
 }
 
+PolyLine Player::GetJettPData()
+{
+	return *pJet;
+}
+
+void Player::SetIsJetNow(bool _jet)
+{
+	isJetNow_ = _jet;
+}
+
 
 void Player::PolyDraw()
 {
-	if (Input::IsKey(DIK_LSHIFT))
+	if (isJetNow_ == true)
 	{
 		//ポリラインを描画
 		pJet->Draw();

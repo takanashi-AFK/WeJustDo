@@ -32,11 +32,10 @@ private:
 	XMFLOAT3 upLandingPoint;
 	XMFLOAT3 rightLandingPoint;
 	XMFLOAT3 leftLandingPoint;
-
-
-	PolyLine* pJet;
 	XMFLOAT3 PolyJetEmitPos;
 
+	PolyLine* pJet;
+	
 	//ziro2
 	int ziro;
 
@@ -52,7 +51,7 @@ protected:
 	bool		isAddGravity_;	//重力を加えるか否か
 	bool		isJumpNow_;		//ジャンプ中か否か
 	bool		isMove_;		//動いていいいか
-
+	bool		isJetNow_ = false;
 public:
 	
 	EmitterData  RandEffectData_;
@@ -129,8 +128,29 @@ public:
 	/// </summary>
 	void InitDeadEffect();
 
+	/// <summary>
+	/// 着地時エフェクトの初期化
+	/// </summary>
 	void InitRandEffect();
 
-	EmitterData GetRandEData();
+
+	/// <summary>
+	/// 死亡時エフェクトデータを返す
+	/// </summary>
+	/// <returns>死亡時エフェクトデータを返す</returns>
+	EmitterData GetDeadEData();
 	
+	/// <summary>
+	/// 着地時エフェクトデータを返す
+	/// </summary>
+	/// <returns>着地時エフェクトデータ</returns>
+	EmitterData GetRandEData();
+
+	/// <summary>
+	/// ジェットのpolylineデータを返す
+	/// </summary>
+	/// <returns>ジェットのpolylineデータ</returns>
+	PolyLine GetJettPData();
+	
+	void   SetIsJetNow( bool _jet);
 };

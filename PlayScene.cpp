@@ -7,7 +7,6 @@
 #include "Engine/Camera.h"
 #include "AudioManager.h"
 #include "Engine/SceneManager.h"
-#include "TestObj.h"
 
 //コンストラクタ
 PlayScene::PlayScene(GameObject* parent)
@@ -29,8 +28,8 @@ void PlayScene::Initialize()
 	}
 
 	//プレイヤーを生成
-	CreateSolidObject<Player>(this,"Models/ziro2.fbx");{
-
+	CreateSolidObject<Player>(this, "DebugCollision/BoxCollider.fbx");{
+	
 	}
 	//Instantiate<TestObj>(this);
 	//BGMを再生

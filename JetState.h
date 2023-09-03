@@ -1,11 +1,12 @@
 #pragma once
 #include "PlayerState.h"
-#include "PlayerStateManager.h"
-/// <summary>
-/// プレイヤーの走り状態を管理するクラス
-/// </summary>
-class RunningState : public PlayerState
+#include "PolyLine.h"
+#include"PlayerStateManager.h"
+
+class JetState : public PlayerState
 {
+	PolyLine jett;
+
 public:
 	//更新
 	void Update(Player* _p);

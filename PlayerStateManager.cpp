@@ -3,16 +3,24 @@
 //コンストラクタ
 PlayerStateManager::PlayerStateManager()
 {
-	//各状態インスタンスを用意
-	ASSIGN(pStanding_,new StandingState);
+	ASSIGN(pStanding_, new StandingState);
 	ASSIGN(pRunning_, new RunningState);
 	ASSIGN(pJumping_, new JumpingState);
-	ASSIGN(pMovie_,new MovieState);
-
+	ASSIGN(pMovie_, new MovieState);
+	ASSIGN(pDead_, new DeadState);
+	ASSIGN(pJet_, new JetState);
 	//立ち状態で初期化
 	ASSIGN(playerState_,pStanding_);
 }
-
+PlayerStateManager::~PlayerStateManager()
+{
+	delete pStanding_;
+	delete pRunning_;
+	delete pJumping_;
+	delete pMovie_;
+	delete pDead_;
+	delete pJet_;
+}
 //更新
 void PlayerStateManager::Update(Player* _p)
 {
@@ -34,15 +42,22 @@ void PlayerStateManager::Enter(Player* _p)
 }
 
 //状態遷移
-void PlayerStateManager::ChangeState(PlayerState* change, Player* _p)
+void PlayerStateManager::ChangeState(PlayerState* change, Player* _p, bool flag)
 {
 	prevState_ = playerState_;
 	if (prevState_ != change)
 	{
-	//状態を変更する
-	playerState_ = change;
-
-	//開始処理を行う
-	playerState_->Enter(_p);
+		//状態を変更する
+		playerState_ = change;
+		if (flag) {
+			//開始処理を行う
+			playerState_->Enter(_p);
+		}
 	}
+
+}
+
+void PlayerStateManager::ChangeState(PlayerState* change, Player* player)
+{
+	ChangeState(change, player, true);
 }

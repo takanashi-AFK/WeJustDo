@@ -126,6 +126,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="DeadState.cpp" />
     <ClCompile Include="Engine\Component\Component.cpp" />
     <ClCompile Include="Engine\Audio.cpp" />
     <ClCompile Include="Engine\BillBoard.cpp" />
@@ -152,6 +153,7 @@
     <ClCompile Include="Engine\Text.cpp" />
     <ClCompile Include="Engine\Texture.cpp" />
     <ClCompile Include="Engine\Component\Transform\Transform.cpp" />
+    <ClCompile Include="JetState.cpp" />
     <ClCompile Include="JumpingState.cpp" />
     <ClCompile Include="MovieState.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -170,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AudioManager.h" />
+    <ClInclude Include="DeadState.h" />
     <ClInclude Include="Engine\Component\Component.h" />
     <ClInclude Include="Engine\Audio.h" />
     <ClInclude Include="Engine\BillBoard.h" />
@@ -196,6 +199,7 @@
     <ClInclude Include="Engine\Text.h" />
     <ClInclude Include="Engine\Texture.h" />
     <ClInclude Include="Engine\Component\Transform\Transform.h" />
+    <ClInclude Include="JetState.h" />
     <ClInclude Include="JumpingState.h" />
     <ClInclude Include="MovieState.h" />
     <ClInclude Include="Player.h" />

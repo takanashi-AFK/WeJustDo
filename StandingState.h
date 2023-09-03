@@ -1,12 +1,12 @@
 #pragma once
 #include "PlayerState.h"
+#include "PlayerStateManager.h"
 
 /// <summary>
 /// プレイヤーの待機状態(立ち状態)を管理するクラス
 /// </summary>
 class StandingState : public PlayerState
 {
-
 public:
 	//更新
 	void Update(Player* _p);

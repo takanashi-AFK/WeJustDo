@@ -4,6 +4,8 @@
 #include "Player.h"
 #include "AudioManager.h"
 #include "Engine/Input.h"
+#include "Engine/VFX.h"
+
 
 //更新
 void StandingState::Update(Player* _p)
@@ -29,7 +31,26 @@ void StandingState::Update(Player* _p)
 		_p->SetAcceleration(0);
 	}
 
+	XMFLOAT3 ppos;
+	ppos = _p->GetPosition();
+	EmitterData Dead = _p->GetDeadEData();
 
+	//死亡時エフェクト
+	if (ppos.y <= -3 && ppos.y >= -5)
+	{
+		_p->GetState()->ChangeState(_p->GetState()->pDead_, _p,true);
+	}
+
+	//ジェット使用時
+	if (Input::IsKey(DIK_LSHIFT))
+	{
+		_p->GetState()->ChangeState(_p->GetState()->pJet_, _p, false);
+
+		if (_p->GetState()->playerState_ == _p->GetState()->pStanding_)
+		{
+			_p->GetState()->ChangeState(_p->GetState()->pStanding_, _p, false);
+		}
+	}
 }
 
 //開始
@@ -44,6 +65,7 @@ void StandingState::Enter(Player* _p)
 //入力処理	
 void StandingState::HandleInput(Player* _p)
 {
+	
 }
 
 
