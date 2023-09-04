@@ -26,6 +26,11 @@ void Stage::Initialize()
 	CsvReader csv; csv.Load("Datas/Stage.csv");
 	int a = csv.GetHeight();
 	int b = csv.GetWidth();
+
+	/*ItemPlacement_.resize(, vector<int>(vertical, 0));
+	for (int x = 0; x < horizontal; x++)
+		for (int y = 0; y < vertical; y++)
+			Table_[x][y] = CsvFile_.GetValue(x, ((vertical - 1) - y));*/
 }
 
 void Stage::Update()
