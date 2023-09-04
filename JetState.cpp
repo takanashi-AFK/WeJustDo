@@ -12,6 +12,7 @@ void JetState::Update(Player* _p)
 
 void JetState::Enter(Player* _p)
 {
+
 }
 
 void JetState::HandleInput(Player* _p)
@@ -25,7 +26,14 @@ void JetState::HandleInput(Player* _p)
 	{
 		AudioManager::Stop_JetSound();
 		_p->SetIsJetNow(false);
+		_p->GetState()->ChangeState(_p->GetState()->pRunning_, _p, false);
 	}
-	else
-		_p->SetIsJetNow(false);
+
+	Transform* TRunning = _p->GetTransformAddress();
+	{//debug-PlayerMove
+		//if (Input::IsKey(DIK_W))transform_.position_.y += 0.1;
+		if (Input::IsKey(DIK_A)) { TRunning->position_.x -= 0.1; TRunning->rotate_.y = -90; /*PolyJetEmitPos.x = PolyJetEmitPos.x + 0.5;*/ }
+		//if (Input::IsKey(DIK_S))transform_.position_.y -= 0.1;
+		else if (Input::IsKey(DIK_D)) { TRunning->position_.x += 0.1; TRunning->rotate_.y = 90; }
+	}
 }

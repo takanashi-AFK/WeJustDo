@@ -33,6 +33,7 @@ private:
 	XMFLOAT3 rightLandingPoint;
 	XMFLOAT3 leftLandingPoint;
 	XMFLOAT3 PolyJetEmitPos;
+	RayCastData downData;
 
 	PolyLine* pJet;
 	
@@ -153,4 +154,6 @@ public:
 	PolyLine GetJettPData();
 	
 	void   SetIsJetNow( bool _jet);
+
+	RayCastData GetDownData() { return downData; }
 };

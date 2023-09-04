@@ -35,24 +35,20 @@ void StandingState::Update(Player* _p)
 	ppos = _p->GetPosition();
 	EmitterData Dead = _p->GetDeadEData();
 
-	//死亡時エフェクト
+	
+	//ジャンプ
+	if (Input::IsKeyDown(DIK_SPACE))
+		_p->GetState()->ChangeState(_p->GetState()->pJumping_, _p, true);
+
+	//死亡
 	if (ppos.y <= -3 && ppos.y >= -5)
-	{
-		_p->GetState()->ChangeState(_p->GetState()->pDead_, _p,true);
-	}
+		_p->GetState()->ChangeState(_p->GetState()->pDead_, _p, true);
 
-	//ジェット使用時
-	if (Input::IsKey(DIK_LSHIFT))
-	{
-		_p->GetState()->ChangeState(_p->GetState()->pJet_, _p, false);
+	//移動
+	if (Input::IsKey(DIK_D) || Input::IsKey(DIK_A))
+		_p->GetState()->ChangeState(_p->GetState()->pRunning_, _p, true);
 
-		if (_p->GetState()->playerState_ == _p->GetState()->pStanding_)
-		{
-			_p->GetState()->ChangeState(_p->GetState()->pStanding_, _p, false);
-		}
-	}
 }
-
 //開始
 void StandingState::Enter(Player* _p)
 {

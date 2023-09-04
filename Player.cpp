@@ -54,41 +54,14 @@ void Player::ChildUpdate()
 {
 
 	PolyJetEmitPos = XMFLOAT3(transform_.position_.x - (PLAYER_MODEL_SIZE.x / 4), transform_.position_.y - (PLAYER_MODEL_SIZE.x / 4), transform_.position_.z);
-	if (isMove_) {
-		{//debug-PlayerMove
-			//if (Input::IsKey(DIK_W))transform_.position_.y += 0.1;
-			if (Input::IsKey(DIK_A)) { transform_.position_.x -= 0.1; transform_.rotate_.y = -90; PolyJetEmitPos.x = PolyJetEmitPos.x + 0.5; }
-			//if (Input::IsKey(DIK_S))transform_.position_.y -= 0.1;
-			if (Input::IsKey(DIK_D)) { transform_.position_.x += 0.1; transform_.rotate_.y = 90; }
-		}
-	}
 
-
-
-	//jump状態にする
-	if (Input::IsKey(DIK_SPACE)) {isJumpNow_ = true;
-	}
-	if (Input::IsKeyDown(DIK_SPACE)) {AudioManager::Play_JumpSound();
-	}
-
-	//jump中の処理を行う
-	if (isJumpNow_) {transform_.position_.y += 0.1f;
-	}
-
-
-
-	if (Input::IsKeyDown(DIK_O))
-	{
-		VFX::Start(RandEffectData_);
-	}
-
+	
 
 	//重力を加える
 	AddGravity(&transform_);
 
 	//ステージとのあたり判定
 	StageRayCast();
-
 
 	//ポリラインに現在の位置を伝える
 	pJet->AddPosition(PolyJetEmitPos);
@@ -213,17 +186,17 @@ void Player::StageRayCast()
 
 	//StandingState,RunningStateときのみ行うからState内で処理を行う
 	//下方向のあたり判定
-	{
-		RayCastData downData; {
+	
+		
 			//当たっているか確認
 			downData.start = transform_.position_;
 			XMStoreFloat3(&downData.dir, XMVectorSet(0, -1, 0, 0));
 			Model::RayCast(hGroundModel_,&downData);
 			downLandingPoint = downData.pos;
-		}
+		
 		if (downData.dist < (PLAYER_MODEL_SIZE.y / 2)) {
 			//状態を"Standing"に変更
-			pState_->ChangeState(pState_->pStanding_, this);
+			pState_->ChangeState(pState_->pRunning_, this);
 
 			//jump状態を終了
 			isJumpNow_ = false;
@@ -231,7 +204,7 @@ void Player::StageRayCast()
 		else
 			isAddGravity_ = true;
 
-	}
+	
 
 
 }
