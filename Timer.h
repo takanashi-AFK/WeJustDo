@@ -11,6 +11,8 @@ private:
 	int drawY;
 	int hPict_[4];
 	int hPict2_;
+	bool fin;
+
 
 	Text* num;
 	Transform pictPos;
@@ -42,4 +44,6 @@ public:
 
 	//‰æ‘œ•\Ž¦
 	void CountDown();
+
+	void CountTimer();
 };

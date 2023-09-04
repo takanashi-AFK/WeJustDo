@@ -13,7 +13,7 @@ class PlayScene : public GameObject
 private:
 	int hPict_;	//‰æ‘œ”Ô†
 	Timer* pTime;
-	float timeLimit;
+	float timeLimit ;
 	bool fin = false;
 
 public:

@@ -3,6 +3,7 @@
 //インクルード
 #include "Player.h"
 #include "Timer.h"
+#include "FuelGauge.h"
 #include "Engine/Image.h"
 #include "Engine/Camera.h"
 #include "AudioManager.h"
@@ -29,7 +30,7 @@ void PlayScene::Initialize()
 
 	}
 	pTime = Instantiate<Timer>(this);
-	 
+	FuelGauge* fg = Instantiate<FuelGauge>(this);
 
 	pTime->Initialize();
 	pTime->SetLimit(timeLimit);

@@ -155,6 +155,7 @@
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="FuelGauge.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -271,6 +272,7 @@
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="FuelGauge.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">

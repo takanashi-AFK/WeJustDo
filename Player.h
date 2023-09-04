@@ -25,6 +25,10 @@ protected:
 	float		acceleration_;	//重力の加速度
 	bool canMove ;
 
+	float nowFuel_ = 0;
+	float maxFuel_ = 100;
+
+
 public:
 	//コンストラクタ
 	Player(GameObject* _parent, string _modelFileName);

@@ -33,6 +33,12 @@ void Timer::Update()
 			frame--;
 		}
 	}
+	if (fin)
+	{
+		Image::Draw(hPict_[0]);
+		Image::SetTransform(hPict_[0], pictPos);
+	}
+
 }
 
 void Timer::Draw()
@@ -47,53 +53,52 @@ void Timer::Draw()
 	//	int sec = (frame / FPS) + 1;
 	//	num->Draw(drawX+50, drawY, sec);
 	//}
-		//âÊëúÇÃägèkÇÇµÇ‹Ç∑
-	XMFLOAT3 Scale = { 0.0f,0.0f,0.0f };
+	//âÊëúÇÃägèkÇÇµÇ‹Ç∑
+	static XMFLOAT3 Scale = { 0.0f,0.0f,0.0f };
 	//åªç›ÇÃéûä‘
-	int sec = (frame / FPS) + 1;
-
-
-	if (!(IsFinished()))
+	 int sec = (frame / FPS)+1;
+	
+	switch (sec)
 	{
+	case 0:
+		Scale = { 1,1,1 };
+		Image::Draw(hPict_[3]);
+		Image::SetTransform(hPict_[0], transform_);
 
-		switch (sec)
-		{
-		case 0:
-			Image::Draw(hPict_[0]);
-			pictPos.scale_ = Scale;
-			Image::SetTransform(hPict_[0], pictPos);
-			Scale.x += 0.05f;
-			Scale.y += 0.05f;
-			break;
+		break;
 
-		case 1:
-			Image::Draw(hPict_[1]);
-			pictPos.scale_ = Scale;
-			Image::SetTransform(hPict_[0], pictPos);
-			Scale.x += 0.05f;
-			Scale.y += 0.05f;
-			break;
+	case 1:
+		Scale = { 1,1,1 };
 
-		case 2:
-			Image::Draw(hPict_[2]);
-			pictPos.scale_ = Scale;
-			Image::SetTransform(hPict_[0], pictPos);
-			Scale.x += 0.05f;
-			Scale.y += 0.05f;
-			break;
+		Image::Draw(hPict_[2]);
+		pictPos.scale_ = Scale;
+		Image::SetTransform(hPict_[1], pictPos);
+		Scale.x += 0.05f;
+		Scale.y += 0.05f;
+		fin = true;
+		break;
 
-		case 3:
-			Image::Draw(hPict_[3]);
-			pictPos.scale_ = Scale;
-			Image::SetTransform(hPict_[0], pictPos);
-			Scale.x += 0.05f;
-			Scale.y += 0.05f;
-			break;
+	case 2:
+		Scale = { 1,1,1 };
 
-		default:
-			break;
-		}
+		Image::Draw(hPict_[1]);
+		pictPos.scale_ = Scale;
+		Image::SetTransform(hPict_[2], pictPos);
+		Scale.x += 0.05f;
+		Scale.y += 0.05f;
+		break;
 
+	case 3:
+		Scale = { 1,1,1};
+
+		Image::Draw(hPict_[0]);
+		pictPos.scale_ = Scale;
+		Image::SetTransform(hPict_[3], pictPos);
+		Scale.x += 0.05f;
+		Scale.y += 0.05f;
+		break;
+	default:
+		break;
 	}
 }
 
@@ -124,5 +129,10 @@ bool Timer::IsFinished()
 void Timer::CountDown()
 {
 
+
+}
+
+void Timer::CountTimer()
+{
 
 }

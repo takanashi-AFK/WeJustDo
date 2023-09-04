@@ -6,6 +6,7 @@
 #include "Engine/Camera.h"
 #include "Stage.h"
 #include "Timer.h"
+#include "FuelGauge.h"
 
 //定数宣言
 namespace {
@@ -53,11 +54,31 @@ void Player::ChildUpdate()
 	}
 	Camera::SetPosition(transform_.position_.x + 5, 3.5f, -15.0f);
 	Camera::SetTarget(transform_.position_.x + 5, 5.5f, 0.0f);
-	
 
 	//状態ごとの更新
 	//pState_->Update(this);
 	
+	if (Input::IsKey(DIK_I))
+	{
+		nowFuel_ += 1;
+		if (nowFuel_ > (maxFuel_/2))
+		{
+			nowFuel_ = 50;
+		}
+	}
+
+	if (Input::IsKey(DIK_O))
+	{
+		nowFuel_ -= 1;
+		if (nowFuel_ < 0)
+		{
+			nowFuel_ = 0;
+		}
+	}
+
+	FuelGauge* pFuel = (FuelGauge*)FindObject("FuelGauge");
+	pFuel->SetFuel(nowFuel_, maxFuel_);
+
 	//ステージとのあたり判定
 	StageRayCast();
 }
