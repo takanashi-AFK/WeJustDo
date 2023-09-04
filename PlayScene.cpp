@@ -22,11 +22,6 @@ void PlayScene::Initialize()
 
 	}
 
-	//ステージを生成
-	CreateSolidObject<Stage>(this,"Models/stage100.fbx");{
-
-	}
-
 	//プレイヤーを生成
 	CreateSolidObject<Player>(this,"Models/ziro2.fbx");{
 

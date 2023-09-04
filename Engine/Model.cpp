@@ -191,12 +191,15 @@ namespace Model
 	//レイキャスト（レイを飛ばして当たり判定）
 	void RayCast(int handle, RayCastData *data)
 	{
+
 		RayCastData tmp;
 		tmp.start = data->start;
 		tmp.dir = data->dir;
 		tmp.normal = data->normal;
 		tmp.hit = false;
 		data->dist = 99999.9f;
+		
+		if (!_datas[handle]->isRay)return;
 
 		XMFLOAT3 target = Transform::Float3Add(data->start, data->dir);
 		XMMATRIX matInv = XMMatrixInverse(nullptr, _datas[handle]->transform.GetWorldMatrix());

@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Engine/Camera.h"
 
+#include "DebugObject.h"
 #include "Stage.h"
 #include "Engine/Image.h"
 #include "Engine/Input.h"
@@ -17,20 +18,13 @@ TestScene::TestScene(GameObject * parent)
 void TestScene::Initialize()
 {
 	//Player
-	ASSIGN(pPlayer_,CreateSolidObject<Player>(this, "DebugCollision/BoxCollider.fbx"));
-	{
-		//pPlayer_->SetPositionY(5);
-		//pPlayer_->SetScale(0.15f, 0.15f, 0.15f);
-		////pPlayer_->SetScale(0.5f, 0.5f, 0.5f);
-		//pPlayer_->SetRotateY(90);
-	}
-	//Stage
-	ASSIGN(pStage_,CreateSolidObject<Stage>(this, "Models/Stage300.fbx"));
-	{
-		pStage_->SetRotateY(180);
-	}
+	//ASSIGN(pPlayer_,CreateSolidObject<Player>(this, "DebugCollision/BoxCollider.fbx"));
+	
+	//ASSIGN(hPict_, Image::Load("Image/BackGround4.png"));
 
-	ASSIGN(hPict_, Image::Load("Image/BackGround4.png"));
+	Instantiate<Stage>(this);
+
+	CreateSolidObject<DebugObject>(this, "DebugCollision/BoxCollider.fbx");
 }
 
 //XV
@@ -53,18 +47,18 @@ void TestScene::Update()
 	*/
 
 	//Camera
-	Camera::SetPosition(pPlayer_->GetPosition().x, 5.4f, -12.7);
-	Camera::SetTarget(pPlayer_->GetPosition().x, 4.0f, 7.3f);
+	//Camera::SetPosition(pPlayer_->GetPosition().x, 5.4f, -12.7);
+	//Camera::SetTarget(pPlayer_->GetPosition().x, 4.0f, 7.3f);
 
 	//debug-Camera
 	//Camera::SetPosition(pPlayer_->GetPosition().x, 2, -15);
 	//Camera::SetTarget(pPlayer_->GetPosition().x, 5, 0);
 
-	if (pPlayer_->GetPosition().y <= -20.0f) {
+	/*if (pPlayer_->GetPosition().y <= -20.0f) {
 		SceneManager* sM=(SceneManager*)FindObject("SceneManager");
 		sM->ChangeScene(SCENE_ID_TEST, TID_WHITEOUT);
 		
-	}
+	}*/
 
 	//debug-SceneMove
 	SceneManager* sm = (SceneManager*)FindObject("SceneManager");
@@ -73,14 +67,15 @@ void TestScene::Update()
 	if (Input::IsKeyDown(DIK_3))sm->ChangeScene(SCENE_ID_RESULT);
 	if (Input::IsKeyDown(DIK_4))sm->ChangeScene(SCENE_ID_TEST);
 }
+
 //•`‰æ
 void TestScene::Draw()
 {
 	//BackGround3
 	//Image::SetRect(hPict_, 0 - ((0 - pPlayer_->GetPosition().x) * 10), 512, 2048, 512);
 	//transform_.scale_ = { 1.5,1.5,1 };
-	Image::SetRect(hPict_, 0 - ((0 - pPlayer_->GetPosition().x) * 10), 720, 2048, 720);
-	Image::SetTransform(hPict_, transform_);
+	/*Image::SetRect(hPict_, 0 - ((0 - pPlayer_->GetPosition().x) * 10), 720, 2048, 720);
+	Image::SetTransform(hPict_, transform_);*/
 	//Image::Draw(hPict_);
 }
 

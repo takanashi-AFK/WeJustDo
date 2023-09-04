@@ -1,18 +1,45 @@
 #pragma once
-#include "Engine/SolidObject.h"
+#include "Engine/Gameobject.h"
+#include <vector>
+
+enum ModelName {
+	m_Ground,
+	m_Block,
+};
 
 /// <summary>
 /// プレイ中、ゲーム画面上に表示されるステージオブジェクト
 /// </summary>
-class Stage : public SolidObject
+class Stage : public GameObject
 {
+private:
+	vector<int> StageModelList_;
 public:
 	//コンストラクタ
-	Stage(GameObject* parent, string modelFileName);
-	
+	Stage(GameObject* parent);
 	//継承{更新・描画}
-	void ChildInitialize() override;
-	void ChildUpdate() override;
-	void ChildDraw() override;
+	void Initialize() override;
+	void Update() override;
+	void Draw() override;
+	void Release() override;
+
+	/// <summary>
+	/// ステージに登録されているすべてのモデルを取得する
+	/// </summary>
+	/// <returns>登録ステージ番号リスト</returns>
+	vector<int> GetAllStageModelHandle() { return StageModelList_; }
+
+	/// <summary>
+	/// ステージにモデルを登録する
+	/// </summary>
+	/// <param name="_hModel">登録するモデル番号</param>
+	void SetStageModel(int _hModel) { StageModelList_.push_back(_hModel); }
+
+	/// <summary>
+	/// ステージに登録されている特定のモデル番号を取得する
+	/// </summary>
+	/// <param name="_hModel">モデル</param>
+	/// <returns>モデル番号</returns>
+	int GetStageModelHandle(int _hModel) { return StageModelList_[_hModel]; }
 };
 
