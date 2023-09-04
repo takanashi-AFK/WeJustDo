@@ -13,8 +13,9 @@ class PlayScene : public GameObject
 private:
 	int hPict_;	//画像番号
 	Timer* pTime;
-	float timeLimit ;
-	bool fin = false;
+	int time;
+	int hPict2_[4];
+
 
 public:
 	//コンストラクタ

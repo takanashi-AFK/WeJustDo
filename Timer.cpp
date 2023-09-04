@@ -20,26 +20,16 @@ void Timer::Initialize()
 	frame = 0;
 	active = false;
 
-	hPict_[0] = Image::Load("Image/Count0.png");
-	hPict_[1] = Image::Load("Image/Count1.png");
-	hPict_[2] = Image::Load("Image/Count2.png");
-	hPict_[3] = Image::Load("Image/Count3.png");
 }
 
 void Timer::Update()
 {
-	if (active) {
-		if (frame > 0) {
-			frame--;
-		}
-	}
-	if (fin)
-	{
-		Image::Draw(hPict_[0]);
-		Image::SetTransform(hPict_[0], pictPos);
-	}
+	if(active)
+	frame++;
+
 
 }
+
 
 void Timer::Draw()
 {
@@ -57,50 +47,6 @@ void Timer::Draw()
 	static XMFLOAT3 Scale = { 0.0f,0.0f,0.0f };
 	//åªç›ÇÃéûä‘
 	 int sec = (frame / FPS)+1;
-	
-	switch (sec)
-	{
-	case 0:
-		//Ç±Ç±Ç…óàÇÍÇ»Ç¢
-		Scale = { 1,1,1 };
-		Image::Draw(hPict_[3]);
-		Image::SetTransform(hPict_[0], transform_);
-
-		break;
-
-	case 1:
-		Scale = { 1,1,1 };
-
-		Image::Draw(hPict_[2]);
-		pictPos.scale_ = Scale;
-		Image::SetTransform(hPict_[1], pictPos);
-		Scale.x += 0.05f;
-		Scale.y += 0.05f;
-		fin = true;
-		break;
-
-	case 2:
-		Scale = { 1,1,1 };
-
-		Image::Draw(hPict_[1]);
-		pictPos.scale_ = Scale;
-		Image::SetTransform(hPict_[2], pictPos);
-		Scale.x += 0.05f;
-		Scale.y += 0.05f;
-		break;
-
-	case 3:
-		Scale = { 1,1,1};
-
-		Image::Draw(hPict_[0]);
-		pictPos.scale_ = Scale;
-		Image::SetTransform(hPict_[3], pictPos);
-		Scale.x += 0.05f;
-		Scale.y += 0.05f;
-		break;
-	default:
-		break;
-	}
 }
 
 void Timer::Release()
@@ -127,13 +73,7 @@ bool Timer::IsFinished()
 	return (frame == 0);
 }
 
-void Timer::CountDown()
+bool Timer::IsFin()
 {
-
-
-}
-
-void Timer::CountTimer()
-{
-
+	return false;
 }

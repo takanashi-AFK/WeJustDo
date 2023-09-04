@@ -9,7 +9,6 @@ private:
 	bool active;
 	int drawX;
 	int drawY;
-	int hPict_[4];
 	int hPict2_;
 	bool fin;
 
@@ -41,6 +40,7 @@ public:
 
 	//èIÇÌÇ¡ÇΩéû
 	bool IsFinished();
+	bool IsFin();
 
-	void CountTimer();
+	int GetTime() { return frame/60; };
 };
