@@ -5,6 +5,7 @@
 enum ModelName {
 	m_Ground,
 	m_Block,
+	m_Firewood,
 };
 
 /// <summary>
@@ -15,6 +16,8 @@ class Stage : public GameObject
 private:
 	vector<int> StageModelList_;
 	vector<vector<int>> ItemPlacement_;
+
+	int hFirewood_;
 public:
 	//コンストラクタ
 	Stage(GameObject* parent);

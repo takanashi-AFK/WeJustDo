@@ -20,17 +20,17 @@ void Stage::Initialize()
 	//ステージにセット
 	for (int i = 0; i < arraySize; i++) {
 		SetStageModel(Model::Load(fileNames[i]));
-	}
+	};
+	hFirewood_ = Model::Load("Models/wood.fbx");
 
 	//csvの情報を取得する
-	CsvReader csv; csv.Load("Datas/Stage.csv");
-	int a = csv.GetHeight();
-	int b = csv.GetWidth();
-
-	/*ItemPlacement_.resize(, vector<int>(vertical, 0));
-	for (int x = 0; x < horizontal; x++)
-		for (int y = 0; y < vertical; y++)
-			Table_[x][y] = CsvFile_.GetValue(x, ((vertical - 1) - y));*/
+	CsvReader csv; {
+		csv.Load("Datas/Stage.csv");
+		ItemPlacement_.resize(csv.GetWidth(), vector<int>(csv.GetHeight(), 0));
+		for (int x = 0; x < csv.GetWidth(); x++)
+			for (int y = 0; y < csv.GetHeight(); y++)
+				ItemPlacement_[x][y] = csv.GetValue(x, ((csv.GetHeight() - 1) - y));
+	};
 }
 
 void Stage::Update()
@@ -67,6 +67,18 @@ void Stage::Draw()
 	}
 	//////////////////////////////////////////////////////////////////////
 	
+	//m_Firewood
+	{
+		//位置・角度・大きさ
+		Transform t_Firewood; t_Firewood.SetPosition(0, 5, 0);
+		static float angle; angle++;
+		t_Firewood.SetRotateY(angle);
+		//描画
+		Model::SetTransform(hFirewood_, t_Firewood);
+		Model::Draw(hFirewood_);
+	}
+	//////////////////////////////////////////////////////////////////////
+
 	//シェーダーのリセット
 	SetShader(SHADER_3D);
 }
