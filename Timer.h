@@ -42,8 +42,5 @@ public:
 	//I‚í‚Á‚½
 	bool IsFinished();
 
-	//‰æ‘œ•\¦
-	void CountDown();
-
 	void CountTimer();
 };
