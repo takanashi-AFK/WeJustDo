@@ -8,6 +8,8 @@ enum ModelName {
 	m_Firewood,
 };
 
+class Player;
+
 /// <summary>
 /// プレイ中、ゲーム画面上に表示されるステージオブジェクト
 /// </summary>
@@ -21,6 +23,7 @@ private:
 public:
 	//コンストラクタ
 	Stage(GameObject* parent);
+	
 	//継承{更新・描画}
 	void Initialize() override;
 	void Update() override;

@@ -71,8 +71,8 @@ void Stage::Draw()
 	{
 		//位置・角度・大きさ
 		Transform t_Firewood; t_Firewood.SetPosition(0, 5, 0);
-		static float angle; angle++;
-		t_Firewood.SetRotateY(angle);
+		static float angle; angle++;t_Firewood.SetRotateY(angle);
+
 		//描画
 		Model::SetTransform(hFirewood_, t_Firewood);
 		Model::Draw(hFirewood_);
