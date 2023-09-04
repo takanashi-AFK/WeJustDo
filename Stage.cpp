@@ -1,5 +1,6 @@
 #include "Stage.h"
 #include "Engine/Model.h"
+#include "Engine/CsvReader.h"
 
 Stage::Stage(GameObject* parent)
 	:GameObject(parent,"Stage")
@@ -20,6 +21,11 @@ void Stage::Initialize()
 	for (int i = 0; i < arraySize; i++) {
 		SetStageModel(Model::Load(fileNames[i]));
 	}
+
+	//csv‚Ìî•ñ‚ðŽæ“¾‚·‚é
+	CsvReader csv; csv.Load("Datas/Stage.csv");
+	int a = csv.GetHeight();
+	int b = csv.GetWidth();
 }
 
 void Stage::Update()

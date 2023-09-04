@@ -14,6 +14,7 @@ class Stage : public GameObject
 {
 private:
 	vector<int> StageModelList_;
+	vector<vector<int>> ItemPlacement_;
 public:
 	//コンストラクタ
 	Stage(GameObject* parent);
