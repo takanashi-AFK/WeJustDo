@@ -14,7 +14,7 @@ private:
 	int hPict_;	//画像番号
 	Timer* pTime;
 	float timeLimit;
-
+	bool fin = false;
 
 public:
 	//コンストラクタ

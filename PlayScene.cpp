@@ -18,10 +18,7 @@ PlayScene::PlayScene(GameObject* parent)
 void PlayScene::Initialize()
 {
 	//背景を生成
-	ASSIGN(hPict_, Image::Load("Image/BackGround4.png"));{
-
-	}
-
+	ASSIGN(hPict_, Image::Load("Image/BackGround4.png"));{}
 	//ステージを生成
 	CreateSolidObject<Stage>(this,"Models/stage100.fbx");{
 
@@ -49,11 +46,9 @@ void PlayScene::Update()
 	//	SceneManager* sm = (SceneManager*)FindObject("SceneManager");
 	//	sm->ChangeScene(SCENE_ID_RESULT,TID_WHITEOUT);
 	//}
-	if (!(pTime->IsFinished()))
-	{
-		pTime->Start();
-	}
 
+		pTime->Start();
+		pTime->CountDown();
 }
 
 //描画

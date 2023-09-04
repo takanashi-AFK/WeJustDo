@@ -9,9 +9,11 @@ private:
 	bool active;
 	int drawX;
 	int drawY;
+	int hPict_[4];
+	int hPict2_;
 
 	Text* num;
-
+	Transform pictPos;
 public:
 	Timer(GameObject* obj);
 	~Timer();
@@ -37,4 +39,7 @@ public:
 
 	//I‚í‚Á‚½
 	bool IsFinished();
+
+	//‰æ‘œ•\¦
+	void CountDown();
 };
