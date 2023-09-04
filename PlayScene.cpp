@@ -23,8 +23,9 @@ void PlayScene::Initialize()
 	}
 
 	//ステージを生成
-	CreateSolidObject<Stage>(this,"Models/stage100.fbx");{
-
+	Stage* pStage;
+	ASSIGN(pStage,CreateSolidObject<Stage>(this,"Models/stage300.fbx"));{
+		pStage->SetRotateY(180);
 	}
 
 	//プレイヤーを生成
