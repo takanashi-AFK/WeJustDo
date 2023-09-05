@@ -30,11 +30,10 @@ void PlayScene::Initialize()
 	FuelGauge* fg = Instantiate<FuelGauge>(this);
 
 	pTime->Initialize();
+	pCount = Instantiate<CountDown>(this);
+	pCount->Draw();
 
-	hPict2_[0] = Image::Load("Image/Count0.png");
-	hPict2_[1] = Image::Load("Image/Count1.png");
-	hPict2_[2] = Image::Load("Image/Count2.png");
-	hPict2_[3] = Image::Load("Image/Count3.png");
+
 
 	//BGMÇçƒê∂
 	AudioManager::Initialize();
@@ -62,27 +61,6 @@ void PlayScene::Draw()
 	Image::SetTransform(hPict_, transform_);
 	Image::Draw(hPict_);
 
-	if (time == 1)
-	{
-		Image::SetTransform(hPict2_[3], transform_);
-		Image::Draw(hPict2_[3]);
-	}
-	if (time == 2)
-	{
-		Image::SetTransform(hPict2_[2], transform_);
-		Image::Draw(hPict2_[2]);
-	}
-	if (time == 3)
-	{
-		Image::SetTransform(hPict2_[1], transform_);
-		Image::Draw(hPict2_[1]);
-	}
-	if (time == 4)
-	{
-		Image::SetTransform(hPict2_[0], transform_);
-		Image::Draw(hPict2_[0]);
-
-	}
 }
 
 //äJï˙

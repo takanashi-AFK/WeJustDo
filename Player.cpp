@@ -5,7 +5,7 @@
 #include "Engine/Transition.h"
 #include "Engine/Camera.h"
 #include "Stage.h"
-#include "Timer.h"
+#include "CountDown.h"
 #include "FuelGauge.h"
 
 //’è”éŒ¾
@@ -39,8 +39,8 @@ void Player::ChildInitialize()
 //XV
 void Player::ChildUpdate()
 {
-	Timer* pTime = (Timer*)FindObject("Timer");
-	if (pTime->IsFinished()) {
+	CountDown* pCd = Instantiate<CountDown>(this);
+	if (pCd->IsFinished()) {
 		if (!Transition::IsActive()) {
 			{//debug-PlayerMove
 				if (Input::IsKey(DIK_W))transform_.position_.y += 0.1;

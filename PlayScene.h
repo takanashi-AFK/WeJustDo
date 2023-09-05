@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Stage.h"
+#include "CountDown.h"
 #include "Engine/GameObject.h"
 
 class Timer;
@@ -12,10 +13,12 @@ class PlayScene : public GameObject
 {
 private:
 	int hPict_;	//画像番号
-	Timer* pTime;
 	int time;
 	int hPict2_[4];
+	bool flg =false;
 
+	Timer* pTime;
+	CountDown* pCount;
 
 public:
 	//コンストラクタ
@@ -26,4 +29,6 @@ public:
 	void Update() override;
 	void Draw() override;
 	void Release() override;
+
+	bool IsFinished() { return flg; };
 };
