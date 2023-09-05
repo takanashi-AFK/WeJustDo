@@ -23,10 +23,6 @@ void PlayScene::Initialize()
 	}
 
 	//ステージを生成
-	Stage* pStage;
-	ASSIGN(pStage,CreateSolidObject<Stage>(this,"Models/stage300.fbx"));{
-		pStage->SetRotateY(180);
-	}
 
 	//プレイヤーを生成
 	CreateSolidObject<Player>(this, "DebugCollision/BoxCollider.fbx");{

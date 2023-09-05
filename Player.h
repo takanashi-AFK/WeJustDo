@@ -140,7 +140,6 @@ public:
 	/// </summary>
 	void InitRandEffect();
 
-
 	/// <summary>
 	/// 死亡時エフェクトデータを返す
 	/// </summary>
@@ -159,7 +158,7 @@ public:
 	/// <returns>ジェットのpolylineデータ</returns>
 	PolyLine GetJettPData();
 	
-	void   SetIsJetNow( bool _jet);
+	void SetIsJetNow( bool _jet);
 
 	RayCastData GetDownData() { return downData; }
 };

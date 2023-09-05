@@ -63,6 +63,10 @@ void Player::ChildInitialize()
 	pState_->Update(this);
 }
 
+void Player::ChildUpdate()
+{
+}
+
 //開放
 void Player::ChildRelease()
 {
@@ -110,6 +114,15 @@ void Player::ChildDraw()
 	Model::Draw(ziro);
 
 	Direct3D::SetShader(Direct3D::SHADER_UNLIT);
+}
+
+void Player::PolyDraw()
+{
+	if (isJetNow_ == true)
+	{
+		//ポリラインを描画
+		pJet->Draw();
+	}
 }
 
 void Player::StageRayCast()
@@ -185,6 +198,70 @@ void Player::StageRayCast()
 	}
 }
 
+void Player::AddGravity(Transform* _transform)
+{
+	if (!isAddGravity_)return;
+
+	//重力を加える
+	_transform->position_ = Transform::Float3Add(_transform->position_, VectorToFloat3((XMVectorSet(0, -1, 0, 0) / 10) * acceleration_));
+	acceleration_ += GRAVITY_ADDITION;
+}
+
+void Player::InitDeadEffect()
+{
+	DeadEffectData.textureFileName = "Effects/cloudA.png";
+	DeadEffectData.positionRnd = XMFLOAT3(0.1, 0, 0.1);
+	DeadEffectData.delay = 0;
+	DeadEffectData.number = 1;
+	DeadEffectData.lifeTime = 60;
+	DeadEffectData.gravity = -0.002f;
+	DeadEffectData.direction = XMFLOAT3(0, 1, 0);
+	DeadEffectData.directionRnd = XMFLOAT3(0, 0, 0);
+	DeadEffectData.speed = 0.01f;
+	DeadEffectData.speedRnd = 0.0;
+	DeadEffectData.size = XMFLOAT2(1, 10);
+	DeadEffectData.sizeRnd = XMFLOAT2(0.4, 0.4);
+	DeadEffectData.scale = XMFLOAT2(1.01, 1.01);
+	DeadEffectData.color = XMFLOAT4(0, 0, 1, 1);
+	DeadEffectData.deltaColor = XMFLOAT4(0, -0.03, 0, -0.02);
+}
+
+void Player::InitRandEffect()
+{
+	RandEffectData_.textureFileName = "Effects/RandSmoke2.png";
+	RandEffectData_.position = XMFLOAT3(transform_.position_.x, transform_.position_.y - 0.2, 0);
+	RandEffectData_.positionRnd = XMFLOAT3(0.1, 0, 0.1);
+	RandEffectData_.delay = 0;
+	RandEffectData_.number = 1;
+	RandEffectData_.lifeTime = 40;
+	RandEffectData_.speed = 0.01f;
+	RandEffectData_.speedRnd = 0.0;
+	RandEffectData_.size = XMFLOAT2(1, 0.5);
+	RandEffectData_.scale = XMFLOAT2(1.01, 1.01);
+	RandEffectData_.color = XMFLOAT4(1, 1, 1, 1);
+	RandEffectData_.deltaColor = XMFLOAT4(0, 0, 0, -0.1);
+}
+
+EmitterData Player::GetDeadEData()
+{
+	return DeadEffectData;
+}
+
+EmitterData Player::GetRandEData()
+{
+	return RandEffectData_;
+}
+
+PolyLine Player::GetJettPData()
+{
+	return *pJet;
+}
+
+void Player::SetIsJetNow(bool _jet)
+{
+	isJetNow_ = _jet;
+}
+
 void Player::AllStageRayCast()
 {
 	//ステージのモデル番号リストを取得
@@ -209,104 +286,26 @@ void Player::AllStageRayCast()
 			}
 		}
 
-	
+		//StandingState,RunningStateときのみ行うからState内で処理を行う
+		//下方向のあたり判定
+		{
+			RayCastData downData; {
+				//当たっているか確認
+				downData.start = transform_.position_;
+				XMStoreFloat3(&downData.dir, XMVectorSet(0, -1, 0, 0));
+				Model::RayCast(hGroundModel_, &downData);
+				downLandingPoint = downData.pos;
+			}
+			if (downData.dist < (PLAYER_MODEL_SIZE.y / 2)) {
+				//状態を"Standing"に変更
+				pState_->ChangeState(pState_->pStanding_, this);
 
-	//StandingState,RunningStateときのみ行うからState内で処理を行う
-	//下方向のあたり判定
-	{
-		RayCastData downData; {
-			//当たっているか確認
-			downData.start = transform_.position_;
-			XMStoreFloat3(&downData.dir, XMVectorSet(0, -1, 0, 0));
-			Model::RayCast(hGroundModel_,&downData);
-			downLandingPoint = downData.pos;
+				//jump状態を終了
+				isJumpNow_ = false;
+			}
+			else
+				isAddGravity_ = true;
+
 		}
-		if (downData.dist < (PLAYER_MODEL_SIZE.y / 2)) {
-			//状態を"Standing"に変更
-			pState_->ChangeState(pState_->pStanding_, this);
-
-			//jump状態を終了
-			isJumpNow_ = false;
-		}
-		else
-			isAddGravity_ = true;
-
-	}
-}
-
-void Player::AddGravity(Transform* _transform)
-{
-	if (!isAddGravity_)return;
-
-	//重力を加える
-	_transform->position_ = Transform::Float3Add(_transform->position_, VectorToFloat3((XMVectorSet(0, -1, 0, 0) / 10) * acceleration_));
-	acceleration_ += GRAVITY_ADDITION;
-}
-
-void Player::InitDeadEffect()
-{
-	
-	DeadEffectData.textureFileName = "Effects/cloudA.png";
-	DeadEffectData.positionRnd = XMFLOAT3(0.1, 0, 0.1);
-	DeadEffectData.delay = 0;
-	DeadEffectData.number = 1;
-	DeadEffectData.lifeTime = 60;
-	DeadEffectData.gravity = -0.002f;
-	DeadEffectData.direction = XMFLOAT3(0, 1, 0);
-	DeadEffectData.directionRnd = XMFLOAT3(0, 0, 0);
-	DeadEffectData.speed = 0.01f;
-	DeadEffectData.speedRnd = 0.0;
-	DeadEffectData.size = XMFLOAT2(1,10);
-	DeadEffectData.sizeRnd = XMFLOAT2(0.4, 0.4);
-	DeadEffectData.scale = XMFLOAT2(1.01, 1.01);
-	DeadEffectData.color = XMFLOAT4(0, 0, 1, 1);
-	DeadEffectData.deltaColor = XMFLOAT4(0, -0.03, 0, -0.02);
-	
-}
-
-void Player::InitRandEffect()
-{
-	RandEffectData_.textureFileName = "Effects/RandSmoke2.png";
-	RandEffectData_.position = XMFLOAT3(transform_.position_.x, transform_.position_.y - 0.2,0);
-	RandEffectData_.positionRnd = XMFLOAT3(0.1, 0, 0.1);
-	RandEffectData_.delay = 0;
-	RandEffectData_.number = 1;
-	RandEffectData_.lifeTime = 40;
-	RandEffectData_.speed = 0.01f;
-	RandEffectData_.speedRnd = 0.0;
-	RandEffectData_.size = XMFLOAT2(1,0.5);
-	RandEffectData_.scale = XMFLOAT2(1.01, 1.01);
-	RandEffectData_.color = XMFLOAT4(1,1,1,1);
-	RandEffectData_.deltaColor = XMFLOAT4(0, 0, 0, -0.1);
-}
-
-
-EmitterData Player::GetDeadEData()
-{
-	return DeadEffectData;
-}
-
-EmitterData Player::GetRandEData()
-{
-	return RandEffectData_;
-}
-
-PolyLine Player::GetJettPData()
-{
-	return *pJet;
-}
-
-void Player::SetIsJetNow(bool _jet)
-{
-	isJetNow_ = _jet;
-}
-
-
-void Player::PolyDraw()
-{
-	if (isJetNow_ == true)
-	{
-		//ポリラインを描画
-		pJet->Draw();
 	}
 }
