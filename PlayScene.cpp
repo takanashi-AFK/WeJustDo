@@ -23,11 +23,12 @@ void PlayScene::Initialize()
 	}
 
 	//ステージを生成
+	Instantiate<Stage>(this);
+
 
 	//プレイヤーを生成
-	CreateSolidObject<Player>(this, "DebugCollision/BoxCollider.fbx");{
-	
-	}
+	CreateSolidObject<Player>(this, "DebugCollision/BoxCollider.fbx");
+
 	//Instantiate<TestObj>(this);
 	//BGMを再生
 
