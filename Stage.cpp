@@ -106,14 +106,15 @@ void Stage::Release()
 bool Stage::AtItem(GameObject* _obj, int _hItem) 
 {
 	//‚±‚±‚Ånullcheck‚µ‚½‚¢
-
+	//if (_obj->GetPosition().x < 0 || _obj->GetPosition().x >= iP_Width_)return false;
+	//if (_obj->GetPosition().y < 0 || _obj->GetPosition().y >= iP_Height_)return false;
 
 	return ItemPlacement_[_obj->GetPosition().x][_obj->GetPosition().y] == _hItem;
 }
 
 void Stage::SetItem(int x, int y, int _hItem)
 {
-	NULLCHECK_ARRAY(x, iP_Width_);NULLCHECK_ARRAY(y, iP_Height_);
+	NULLCHECK_ARRAY(x, iP_Width_); NULLCHECK_ARRAY(y, iP_Height_);
 
 	ItemPlacement_[x][y] = _hItem;
 }
