@@ -1,6 +1,8 @@
 #include "Stage.h"
 #include "Engine/Model.h"
 #include "Engine/CsvReader.h"
+#include "Engine/Input.h"
+#include "Engine/Global.h"
 
 Stage::Stage(GameObject* parent)
 	:GameObject(parent,"Stage")
@@ -33,10 +35,16 @@ void Stage::Initialize()
 			for (int y = 0; y < iP_Height_; y++)
 				ItemPlacement_[x][y] = csv.GetValue(x, ((iP_Height_ - 1) - y));
 	};
+	
 }
 
 void Stage::Update()
 {
+	static int i = 0;
+	if (Input::IsKey(DIK_L)) {
+		SetItem(sin(i), i, 1);
+		i++;
+	}
 }
 
 void Stage::Draw()
@@ -98,4 +106,15 @@ void Stage::Release()
 bool Stage::AtItem(GameObject* _obj, int _hItem) {
 	
 	return ItemPlacement_[_obj->GetPosition().x][_obj->GetPosition().y] == _hItem;
+}
+
+void Stage::SetItem(int x, int y, int _hItem)
+{
+	//NullCheck
+	NULLCHECK_ARRAY(x, iP_Width_);
+	NULLCHECK_ARRAY(y, iP_Height_);
+	//if (x < 0 || x >= iP_Width_)return;
+	//if (y < 0 || y >= iP_Height_)return;
+
+	ItemPlacement_[x][y] = _hItem;
 }

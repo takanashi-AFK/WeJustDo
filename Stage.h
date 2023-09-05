@@ -59,6 +59,6 @@ public:
 	/// <returns>èdÇ»Ç¡ÇƒÇ¢ÇΩÇÁtrue</returns>
 	bool AtItem(GameObject* _obj, int _hItem);
 
-	void SetItem(int x, int y, int _hItem) { ItemPlacement_[x][y] = _hItem; }
+	void SetItem(int x, int y, int _hItem);
 };
 

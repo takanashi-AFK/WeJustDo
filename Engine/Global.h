@@ -21,6 +21,8 @@ using namespace std;
 //‚P‚Å‰Šú‰»
 #define ONE_ASSIGN(p){p = 1;}
 
+#define NULLCHECK_ARRAY(p,pMax){if (p < 0 || p >= pMax)return;}
+
 //XMVECTOR‚Ì•Ï”‚ğXMFLOAT3‚É•Ï‚¦‚Ä•Ô‚µ‚Ä‚­‚ê‚é
 static XMFLOAT3 VectorToFloat3(XMVECTOR v)
 {
