@@ -47,13 +47,6 @@ void JetState::Update(Player* _p)
 	float s = 0.1f;
 	if (Input::IsKey(DIK_A)) { t_Player->position_.x -= s; t_Player->rotate_.y = -90; /*PolyJetEmitPos.x = PolyJetEmitPos.x + 0.5;*/ }
 	else if (Input::IsKey(DIK_D)) { t_Player->position_.x += s; t_Player->rotate_.y = 90; }
-	//if (Input::IsKeyDown(DIK_SPACE))_p->SetAcceleration(1);
-
-	//if (Input::IsKey(DIK_SPACE)) {
-	//	t_Player->position_ = Transform::Float3Add(t_Player->position_, VectorToFloat3((XMVectorSet(0, 1, 0, 0) / 10) * (_p->GetAccelaration() * 1.2f)));
-	//}
-	//if (Input::IsKeyUp(DIK_SPACE))_p->SetAcceleration(0);
-
 
 	//SPACEƒL[‚©‚çŽè‚ª—£‚ê‚½‚ç&’n–Ê‚Æ‚Ì‹——£‚ªnˆÈ‰º‚È‚ç
 	float Clearance = (PLAYER_MODEL_SIZE.y / 2);
