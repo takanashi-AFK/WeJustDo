@@ -20,6 +20,8 @@ private:
 	vector<vector<int>> ItemPlacement_;
 
 	int hFirewood_;
+	int iP_Height_;
+	int iP_Width_;
 public:
 	//コンストラクタ
 	Stage(GameObject* parent);
@@ -48,5 +50,7 @@ public:
 	/// <param name="_hModel">モデル</param>
 	/// <returns>モデル番号</returns>
 	int GetStageModelHandle(int _hModel) { return StageModelList_[_hModel]; }
+
+	bool AtItem(GameObject* _obj, int _hItem);
 };
 

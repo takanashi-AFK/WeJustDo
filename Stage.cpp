@@ -26,10 +26,12 @@ void Stage::Initialize()
 	//csv‚Ìî•ñ‚ğæ“¾‚·‚é
 	CsvReader csv; {
 		csv.Load("Datas/Stage.csv");
-		ItemPlacement_.resize(csv.GetWidth(), vector<int>(csv.GetHeight(), 0));
-		for (int x = 0; x < csv.GetWidth(); x++)
-			for (int y = 0; y < csv.GetHeight(); y++)
-				ItemPlacement_[x][y] = csv.GetValue(x, ((csv.GetHeight() - 1) - y));
+		iP_Width_ = csv.GetWidth();
+		iP_Height_ = csv.GetHeight();
+		ItemPlacement_.resize(iP_Width_, vector<int>(iP_Height_, 0));
+		for (int x = 0; x < iP_Width_; x++)
+			for (int y = 0; y < iP_Height_; y++)
+				ItemPlacement_[x][y] = csv.GetValue(x, ((iP_Height_ - 1) - y));
 	};
 }
 
@@ -74,8 +76,14 @@ void Stage::Draw()
 		static float angle; angle++;t_Firewood.SetRotateY(angle);
 
 		//•`‰æ
-		Model::SetTransform(hFirewood_, t_Firewood);
-		Model::Draw(hFirewood_);
+		for (int x = 0; x < iP_Width_; x++)for (int y = 0; y < iP_Height_; y++) {
+		t_Firewood.position_ = { (float)x,(float)y-1,0 };
+
+			if (ItemPlacement_[x][y] == 0){
+				Model::SetTransform(hFirewood_, t_Firewood);
+				Model::Draw(hFirewood_);
+			}
+		}
 	}
 	//////////////////////////////////////////////////////////////////////
 
@@ -85,4 +93,9 @@ void Stage::Draw()
 
 void Stage::Release()
 {
+}
+
+bool Stage::AtItem(GameObject* _obj, int _hItem) {
+	
+	return ItemPlacement_[_obj->GetPosition().x][_obj->GetPosition().y] == _hItem;
 }
