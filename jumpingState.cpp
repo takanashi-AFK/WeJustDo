@@ -7,6 +7,8 @@
 #include "Engine/Input.h"
 #include "Engine/Model.h"
 
+
+
 void JumpingState::Update(Player* _p)
 {
 	Transform* TJumping = _p->GetTransformAddress();
@@ -19,8 +21,8 @@ void JumpingState::Update(Player* _p)
 
 	{//State•Ï‰»
 		
-		//‚±‚±—vŒŸ“¢
-		if (_p->GetAccelaration()>=3.0f)
+		//standing
+		if (_p->GetAccelaration() >= 5.0f)
 			_p->GetState()->ChangeState(_p->GetState()->pStanding_, _p, true);
 		//dead
 		if (ppos.y <= -3 && ppos.y >= -5)
