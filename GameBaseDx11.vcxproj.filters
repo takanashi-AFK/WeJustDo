@@ -146,13 +146,9 @@
       <Filter>State</Filter>
     </ClCompile>
     <ClCompile Include="AudioManager.cpp" />
-    <ClCompile Include="PlayScene.cpp" />
-    <ClCompile Include="StageSelectScene.cpp" />
     <ClCompile Include="jumpingState.cpp">
       <Filter>State</Filter>
     </ClCompile>
-    <ClCompile Include="MovieState.cpp" />
-    <ClCompile Include="PolyLine.cpp" />
     <ClCompile Include="DeadState.cpp">
       <Filter>State</Filter>
     </ClCompile>
@@ -161,6 +157,18 @@
     </ClCompile>
     <ClCompile Include="MovieState.cpp" />
     <ClCompile Include="DebugObject.cpp" />
+    <ClCompile Include="MovieState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="PolyLine.cpp">
+      <Filter>01Engine\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="StageSelectScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -268,9 +276,22 @@
       <Filter>State</Filter>
     </ClInclude>
     <ClInclude Include="AudioManager.h" />
-    <ClInclude Include="PlayScene.h" />
-    <ClInclude Include="StageSelectScene.h" />
     <ClInclude Include="jumpingState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="JetState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="PolyLine.h">
+      <Filter>01Engine\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="StageSelectScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="MovieState.h">
       <Filter>State</Filter>
     </ClInclude>
   </ItemGroup>
