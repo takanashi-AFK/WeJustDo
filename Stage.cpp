@@ -85,7 +85,7 @@ void Stage::Draw()
 
 		//•`‰æ
 		for (int x = 0; x < iP_Width_; x++)for (int y = 0; y < iP_Height_; y++) {
-		t_Firewood.position_ = { (float)x,(float)y-1,0 };
+		t_Firewood.position_ = { (float)x,(float)y,0 };
 
 			if (ItemPlacement_[x][y] == 0){
 				Model::SetTransform(hFirewood_, t_Firewood);
@@ -103,18 +103,17 @@ void Stage::Release()
 {
 }
 
-bool Stage::AtItem(GameObject* _obj, int _hItem) {
-	
+bool Stage::AtItem(GameObject* _obj, int _hItem) 
+{
+	//‚±‚±‚Ånullcheck‚µ‚½‚¢
+
+
 	return ItemPlacement_[_obj->GetPosition().x][_obj->GetPosition().y] == _hItem;
 }
 
 void Stage::SetItem(int x, int y, int _hItem)
 {
-	//NullCheck
-	NULLCHECK_ARRAY(x, iP_Width_);
-	NULLCHECK_ARRAY(y, iP_Height_);
-	//if (x < 0 || x >= iP_Width_)return;
-	//if (y < 0 || y >= iP_Height_)return;
+	NULLCHECK_ARRAY(x, iP_Width_);NULLCHECK_ARRAY(y, iP_Height_);
 
 	ItemPlacement_[x][y] = _hItem;
 }

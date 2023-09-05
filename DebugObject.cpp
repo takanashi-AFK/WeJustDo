@@ -1,6 +1,7 @@
 #include "DebugObject.h"
 #include "Engine/Camera.h"
 #include "Engine/Input.h"
+#include "Stage.h"
 
 DebugObject::DebugObject(GameObject* parent, string modelFileName)
 	:SolidObject(parent,modelFileName,"DebugObject")
@@ -16,6 +17,17 @@ void DebugObject::ChildUpdate()
 {
 	//キー操作
 	HandleInput();
+
+	Stage* pS = dynamic_cast<Stage*>(FindObject("Stage"));
+	if (pS->AtItem(this, 0)) {
+
+		//エフェクト
+
+
+		//エフェクト
+
+		pS->SetItem(transform_.position_.x, transform_.position_.y, 1);
+	}
 
 	//カメラ
 	Camera::SetPosition(transform_.position_.x,transform_.position_.y, -12.7+transform_.position_.z);

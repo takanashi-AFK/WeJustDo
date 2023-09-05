@@ -59,6 +59,12 @@ public:
 	/// <returns>重なっていたらtrue</returns>
 	bool AtItem(GameObject* _obj, int _hItem);
 
+	/// <summary>
+	/// 特定の位置のアイテムを設定する
+	/// </summary>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
+	/// <param name="_hItem"></param>
 	void SetItem(int x, int y, int _hItem);
 };
 
