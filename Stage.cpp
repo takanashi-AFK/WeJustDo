@@ -105,7 +105,7 @@ void Stage::Release()
 
 bool Stage::AtItem(GameObject* _obj, int _hItem) 
 {
-	//‚±‚±‚Ånullcheck‚µ‚½‚¢
+	//‚±‚±‚Ånullcheck
 	if (_obj->GetPosition().x < 0 || _obj->GetPosition().x >= iP_Width_)return false;
 	if (_obj->GetPosition().y < 0 || _obj->GetPosition().y >= iP_Height_)return false;
 

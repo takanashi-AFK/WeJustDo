@@ -22,8 +22,7 @@ void DebugObject::ChildUpdate()
 	if (pS->AtItem(this, 0)) {
 
 		//エフェクト
-
-
+		
 		//エフェクト
 
 		pS->SetItem(transform_.position_.x, transform_.position_.y, 1);
