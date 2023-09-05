@@ -10,6 +10,7 @@
 //更新
 void RunningState::Update(Player* _p)
 {
+
 	RayCastData downData; {
 		//当たっているか確認
 		downData.start = _p->GetPosition();
@@ -27,23 +28,25 @@ void RunningState::Update(Player* _p)
 		_p->IsAddGravity(false);
 		_p->SetAcceleration(0);
 	}
-
-
 	XMFLOAT3 ppos;
 	ppos = _p->GetPosition();
 	//入力処理
 	HandleInput(_p);
-	//死亡時エフェクト
-	if (ppos.y <= -3 && ppos.y >= -5)
-		_p->GetState()->ChangeState(_p->GetState()->pDead_, _p,true);
-	
-	if (!Input::IsKey(DIK_D) && !Input::IsKey(DIK_A))
-		_p->GetState()->ChangeState(_p->GetState()->pStanding_, _p, false);
 
-	if (Input::IsKeyDown(DIK_SPACE))
-		_p->GetState()->ChangeState(_p->GetState()->pJumping_, _p, true);
+	{//State変化
 
-	
+		//standing
+		if (!Input::IsKey(DIK_D) && !Input::IsKey(DIK_A))
+			_p->GetState()->ChangeState(_p->GetState()->pStanding_, _p, true);
+		//dead
+		if (ppos.y <= -3 && ppos.y >= -5)
+			_p->GetState()->ChangeState(_p->GetState()->pDead_, _p, true);
+
+		if(Input::IsKeyDown(DIK_SPACE))
+			_p->GetState()->ChangeState(_p->GetState()->pJumping_, _p, true);
+	}
+
+
 }
 
 //開始
@@ -54,9 +57,8 @@ void RunningState::Enter(Player* _p)
 //入力処理
 void RunningState::HandleInput(Player* _p)
 {
-	Transform * TRunning = _p->GetTransformAddress();
-	
+	Transform* TRunning = _p->GetTransformAddress();
+
 	if (Input::IsKey(DIK_A)) { TRunning->position_.x -= 0.1; TRunning->rotate_.y = -90; /*PolyJetEmitPos.x = PolyJetEmitPos.x + 0.5;*/ }
 	else if (Input::IsKey(DIK_D)) { TRunning->position_.x += 0.1; TRunning->rotate_.y = 90; }
-	
 }

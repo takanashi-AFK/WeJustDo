@@ -52,21 +52,17 @@ void Player::ChildInitialize()
 //更新
 void Player::ChildUpdate()
 {
-
 	PolyJetEmitPos = XMFLOAT3(transform_.position_.x - (PLAYER_MODEL_SIZE.x / 4), transform_.position_.y - (PLAYER_MODEL_SIZE.x / 4), transform_.position_.z);
-
-	
 
 	//重力を加える
 	AddGravity(&transform_);
 
-	//ステージとのあたり判定
-	StageRayCast();
 
-	//ポリラインに現在の位置を伝える
-	pJet->AddPosition(PolyJetEmitPos);
 	//状態ごとの更新
 	pState_->Update(this);
+
+	//ステージとのあたり判定
+	StageRayCast();
 
 	Camera::SetPosition(transform_.position_.x + 5, 3.5f, -15.0f);
 	Camera::SetTarget(transform_.position_.x + 5, 5.5f, 0.0f);
@@ -119,8 +115,6 @@ void Player::ChildDraw()
 	Model::SetTransform(ziro, z);
 	Model::Draw(ziro);
 
-	
-
 	Direct3D::SetShader(Direct3D::SHADER_UNLIT);
 }
 
@@ -128,7 +122,7 @@ void Player::ChildDraw()
 void Player::StageRayCast()
 {
 	//ステージのモデル番号を取得
-	ASSIGN(hGroundModel_,dynamic_cast<SolidObject*>((Stage*)FindObject("Stage"))->GetModelHandle());
+	ASSIGN(hGroundModel_, dynamic_cast<SolidObject*>((Stage*)FindObject("Stage"))->GetModelHandle());
 
 	//左方向の当たり判定
 	{
@@ -141,7 +135,7 @@ void Player::StageRayCast()
 		}
 		if (leftData.dist < (PLAYER_MODEL_SIZE.x / 2)) {
 			//めり込み分、位置を戻す
-			XMVECTOR length = { -leftData.dist -(PLAYER_MODEL_SIZE.x/2),0,0};
+			XMVECTOR length = { -leftData.dist - (PLAYER_MODEL_SIZE.x / 2),0,0 };
 			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(-1, 0, 0, 0) - length));
 		}
 	}
@@ -169,44 +163,37 @@ void Player::StageRayCast()
 			//当たっているか確認
 			upData.start = transform_.position_;
 			XMStoreFloat3(&upData.dir, XMVectorSet(0, 1, 0, 0));
-			Model::RayCast(hGroundModel_,&upData);
+			Model::RayCast(hGroundModel_, &upData);
 			upLandingPoint = upData.pos;
 		}
 		//レイの長さが1.0以下だったら...
 		if (upData.dist < (PLAYER_MODEL_SIZE.y / 2)) {
 			//めり込み分、位置を戻す
-			XMVECTOR length = {0, (PLAYER_MODEL_SIZE.y / 2) + upData.dist,0 };
+			XMVECTOR length = { 0, (PLAYER_MODEL_SIZE.y / 2) + upData.dist,0 };
 			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(0, 1, 0, 0) - length));
 			SetAcceleration(2);
 		}
 	}
 
 
-	
-
 	//StandingState,RunningStateときのみ行うからState内で処理を行う
 	//下方向のあたり判定
-	
-		
-			//当たっているか確認
-			downData.start = transform_.position_;
-			XMStoreFloat3(&downData.dir, XMVectorSet(0, -1, 0, 0));
-			Model::RayCast(hGroundModel_,&downData);
-			downLandingPoint = downData.pos;
-		
+	RayCastData downData; {
+		//当たっているか確認
+		downData.start = transform_.position_;
+		XMStoreFloat3(&downData.dir, XMVectorSet(0, -1, 0, 0));
+		Model::RayCast(hGroundModel_, &downData);
+		downLandingPoint = downData.pos;
+		}
 		if (downData.dist < (PLAYER_MODEL_SIZE.y / 2)) {
 			//状態を"Standing"に変更
-			pState_->ChangeState(pState_->pRunning_, this);
+			pState_->ChangeState(pState_->pStanding_, this);
 
 			//jump状態を終了
 			isJumpNow_ = false;
 		}
 		else
 			isAddGravity_ = true;
-
-	
-
-
 }
 
 void Player::AddGravity(Transform* _transform)

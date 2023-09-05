@@ -8,6 +8,27 @@ void JetState::Update(Player* _p)
 {
 	//入力処理
 	HandleInput(_p);
+	XMFLOAT3 ppos;
+	ppos = _p->GetPosition();
+	Transform* TJumping = _p->GetTransformAddress();
+
+	{//State変化
+
+		////ここ要検討
+		//if (!Input::IsKey(DIK_D) && !Input::IsKey(DIK_A))
+		//	_p->GetState()->ChangeState(_p->GetState()->pStanding_, _p, true);
+
+		//dead
+		if (ppos.y <= -3 && ppos.y >= -5)
+			_p->GetState()->ChangeState(_p->GetState()->pDead_, _p, true);
+
+		if (Input::IsKeyUp(DIK_SPACE)) {
+		
+			_p->GetState()->ChangeState(_p->GetState()->pJumping_, _p, true);
+		}
+
+
+	}
 }
 
 void JetState::Enter(Player* _p)
@@ -17,23 +38,15 @@ void JetState::Enter(Player* _p)
 
 void JetState::HandleInput(Player* _p)
 {
-	if (Input::IsKey(DIK_LSHIFT))
+	Transform* TJet = _p->GetTransformAddress();
+	//ジェットパックの挙動　いったんstandingへの遷移が完成するまで保留
+	if (Input::IsKey(DIK_A)) { TJet->position_.x -= 0.5; TJet->rotate_.y = -90; /*PolyJetEmitPos.x = PolyJetEmitPos.x + 0.5;*/ }
+	else if (Input::IsKey(DIK_D)) { TJet->position_.x += 0.5; TJet->rotate_.y = 90; }
+
+	if (Input::IsKey(DIK_SPACE))
 	{
-		_p->SetIsJetNow(true);
-		AudioManager::Play_JetSound();
-	}
-	else if (Input::IsKeyUp(DIK_LSHIFT))
-	{
-		AudioManager::Stop_JetSound();
-		_p->SetIsJetNow(false);
-		_p->GetState()->ChangeState(_p->GetState()->pRunning_, _p, false);
+		TJet->position_.y += 0.2;
+		
 	}
 
-	Transform* TRunning = _p->GetTransformAddress();
-	{//debug-PlayerMove
-		//if (Input::IsKey(DIK_W))transform_.position_.y += 0.1;
-		if (Input::IsKey(DIK_A)) { TRunning->position_.x -= 0.1; TRunning->rotate_.y = -90; /*PolyJetEmitPos.x = PolyJetEmitPos.x + 0.5;*/ }
-		//if (Input::IsKey(DIK_S))transform_.position_.y -= 0.1;
-		else if (Input::IsKey(DIK_D)) { TRunning->position_.x += 0.1; TRunning->rotate_.y = 90; }
-	}
 }

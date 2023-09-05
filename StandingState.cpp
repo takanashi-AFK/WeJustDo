@@ -30,37 +30,31 @@ void StandingState::Update(Player* _p)
 		_p->IsAddGravity(false);
 		_p->SetAcceleration(0);
 	}
-
 	XMFLOAT3 ppos;
 	ppos = _p->GetPosition();
-	EmitterData Dead = _p->GetDeadEData();
-
+	{//State変化
 	
-	//ジャンプ
-	if (Input::IsKeyDown(DIK_SPACE))
-		_p->GetState()->ChangeState(_p->GetState()->pJumping_, _p, true);
+		//running
+		if (Input::IsKey(DIK_D) || Input::IsKey(DIK_A))
+			_p->GetState()->ChangeState(_p->GetState()->pRunning_, _p, true);
+		//dead
+		if (ppos.y <= -3 && ppos.y >= -5)
+			_p->GetState()->ChangeState(_p->GetState()->pDead_, _p, true);
 
-	//死亡
-	if (ppos.y <= -3 && ppos.y >= -5)
-		_p->GetState()->ChangeState(_p->GetState()->pDead_, _p, true);
+		if (Input::IsKeyDown(DIK_SPACE))
+			_p->GetState()->ChangeState(_p->GetState()->pJumping_, _p, true);
 
-	//移動
-	if (Input::IsKey(DIK_D) || Input::IsKey(DIK_A))
-		_p->GetState()->ChangeState(_p->GetState()->pRunning_, _p, true);
-
+	}
 }
 //開始
 void StandingState::Enter(Player* _p)
 {
-	AudioManager::PlayDonSound();
-	_p->InitRandEffect();
-	EmitterData Emit = _p->GetRandEData();
-	VFX::Start(Emit);
 }
 
 //入力処理	
 void StandingState::HandleInput(Player* _p)
 {
+
 	
 }
 
