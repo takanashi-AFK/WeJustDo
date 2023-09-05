@@ -26,7 +26,9 @@ void Player::ChildInitialize()
 	
 	//モデルのロード
 	ASSIGN(Marker, Model::Load("Models/debugMarker.fbx"));
-	ASSIGN(ziro, Model::Load("Models/ziro2.fbx"));
+	ASSIGN(ziro, Model::Load("Models/ziro_move.fbx"));
+
+	Model::SetAnimFrame(ziro, 0, 44, 1);
 
 	//位置の初期化
 	transform_.position_.y = 2;
@@ -47,25 +49,18 @@ void Player::ChildInitialize()
 	pJet = new PolyLine(0.1, 10);
 	pJet->Load("Effects/Fire.png");
 
-}
-
-//更新
-void Player::ChildUpdate()
-{
-	PolyJetEmitPos = XMFLOAT3(transform_.position_.x - (PLAYER_MODEL_SIZE.x / 4), transform_.position_.y - (PLAYER_MODEL_SIZE.x / 4), transform_.position_.z);
+	//jump中の処理を行う
+	if (isJumpNow_) {transform_.position_.y += 0.1f;
+	}
 
 	//重力を加える
 	AddGravity(&transform_);
 
-
-	//状態ごとの更新
-	pState_->Update(this);
-
 	//ステージとのあたり判定
 	StageRayCast();
 
-	Camera::SetPosition(transform_.position_.x + 5, 3.5f, -15.0f);
-	Camera::SetTarget(transform_.position_.x + 5, 5.5f, 0.0f);
+	//状態ごとの更新
+	pState_->Update(this);
 }
 
 //開放
@@ -107,7 +102,6 @@ void Player::ChildDraw()
 	Model::SetTransform(Marker, lf);
 	Model::Draw(Marker);
 
-
 	Transform z;
 	z.position_ = transform_.position_;
 	z.position_.y -= 0.5;
@@ -118,11 +112,10 @@ void Player::ChildDraw()
 	Direct3D::SetShader(Direct3D::SHADER_UNLIT);
 }
 
-
 void Player::StageRayCast()
 {
 	//ステージのモデル番号を取得
-	ASSIGN(hGroundModel_, dynamic_cast<SolidObject*>((Stage*)FindObject("Stage"))->GetModelHandle());
+	ASSIGN(hGroundModel_,dynamic_cast<SolidObject*>((Stage*)FindObject("Stage"))->GetModelHandle());
 
 	//左方向の当たり判定
 	{
@@ -175,15 +168,58 @@ void Player::StageRayCast()
 		}
 	}
 
+	//StandingState,RunningStateときのみ行うからState内で処理を行う
+	//下方向のあたり判定
+	{
+		RayCastData downData; {
+			//当たっているか確認
+			downData.start = transform_.position_;
+			XMStoreFloat3(&downData.dir, XMVectorSet(0, -1, 0, 0));
+			Model::RayCast(hGroundModel_,&downData);
+			downLandingPoint = downData.pos;
+		}
+		if (downData.dist < (PLAYER_MODEL_SIZE.y / 2)) {
+			//状態を"Standing"に変更
+			pState_->ChangeState(pState_->pStanding_, this);
+		}
+	}
+}
+
+void Player::AllStageRayCast()
+{
+	//ステージのモデル番号リストを取得
+	vector<int> stageList = dynamic_cast<Stage*>((Stage*)FindObject("Stage"))->GetAllStageModelHandle();
+
+	//すべてのモデルとあたり判定を行う
+	for (vector<int>::iterator it = stageList.begin(); it != stageList.end(); ++it) {
+
+		//左方向の当たり判定
+		{
+			RayCastData leftData; {
+				leftData.start = transform_.position_;
+				RayStartPos = leftData.start;
+				XMStoreFloat3(&leftData.dir, XMVectorSet(-1, 0, 0, 0));
+				Model::RayCast(*it, &leftData);
+				leftLandingPoint = leftData.pos;
+			}
+			if (leftData.dist < (PLAYER_MODEL_SIZE.x / 2)) {
+				//めり込み分、位置を戻す
+				XMVECTOR length = { -leftData.dist - (PLAYER_MODEL_SIZE.x / 2),0,0 };
+				XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(-1, 0, 0, 0) - length));
+			}
+		}
+
+	
 
 	//StandingState,RunningStateときのみ行うからState内で処理を行う
 	//下方向のあたり判定
-	RayCastData downData; {
-		//当たっているか確認
-		downData.start = transform_.position_;
-		XMStoreFloat3(&downData.dir, XMVectorSet(0, -1, 0, 0));
-		Model::RayCast(hGroundModel_, &downData);
-		downLandingPoint = downData.pos;
+	{
+		RayCastData downData; {
+			//当たっているか確認
+			downData.start = transform_.position_;
+			XMStoreFloat3(&downData.dir, XMVectorSet(0, -1, 0, 0));
+			Model::RayCast(hGroundModel_,&downData);
+			downLandingPoint = downData.pos;
 		}
 		if (downData.dist < (PLAYER_MODEL_SIZE.y / 2)) {
 			//状態を"Standing"に変更
@@ -194,6 +230,8 @@ void Player::StageRayCast()
 		}
 		else
 			isAddGravity_ = true;
+
+	}
 }
 
 void Player::AddGravity(Transform* _transform)

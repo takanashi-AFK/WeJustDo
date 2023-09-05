@@ -6,7 +6,6 @@
 #include "Engine/Input.h"
 #include "Engine/VFX.h"
 
-
 //更新
 void StandingState::Update(Player* _p)
 {
@@ -49,13 +48,12 @@ void StandingState::Update(Player* _p)
 //開始
 void StandingState::Enter(Player* _p)
 {
+	_p->IsAddGravity(true);
 }
 
 //入力処理	
 void StandingState::HandleInput(Player* _p)
 {
-
-	
 }
 
 

@@ -1,4 +1,5 @@
 #include "JumpingState.h"
+#include "Player.h"
 
 #include "Player.h"
 #include "AudioManager.h"
@@ -9,29 +10,6 @@
 
 void JumpingState::Update(Player* _p)
 {
-	Transform* TJumping = _p->GetTransformAddress();
-
-	TJumping->position_.y += 0.1f;
-	HandleInput(_p);
-
-	XMFLOAT3 ppos;
-	ppos = _p->GetPosition();
-
-	{//State•Ï‰»
-		
-		//‚±‚±—vŒŸ“¢
-		if (!Input::IsKey(DIK_D) && !Input::IsKey(DIK_A))
-			_p->GetState()->ChangeState(_p->GetState()->pStanding_, _p, true);
-
-		//dead
-		if (ppos.y <= -3 && ppos.y >= -5)
-			_p->GetState()->ChangeState(_p->GetState()->pDead_, _p, true);
-
-		if(Input::IsKeyDown(DIK_SPACE))
-			_p->GetState()->ChangeState(_p->GetState()->pJet_, _p, true);
-
-
-	}
 }
 
 void JumpingState::Enter(Player* _p)

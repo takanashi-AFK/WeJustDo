@@ -159,6 +159,8 @@
     <ClCompile Include="JetState.cpp">
       <Filter>State</Filter>
     </ClCompile>
+    <ClCompile Include="MovieState.cpp" />
+    <ClCompile Include="DebugObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -269,14 +271,6 @@
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="StageSelectScene.h" />
     <ClInclude Include="jumpingState.h">
-      <Filter>State</Filter>
-    </ClInclude>
-    <ClInclude Include="MovieState.h" />
-    <ClInclude Include="PolyLine.h" />
-    <ClInclude Include="JetState.h">
-      <Filter>State</Filter>
-    </ClInclude>
-    <ClInclude Include="DeadState.h">
       <Filter>State</Filter>
     </ClInclude>
   </ItemGroup>
