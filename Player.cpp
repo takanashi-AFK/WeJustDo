@@ -128,7 +128,7 @@ void Player::PolyDraw()
 void Player::StageRayCast()
 {
 	//ステージのモデル番号を取得
-	ASSIGN(hGroundModel_,dynamic_cast<SolidObject*>((Stage*)FindObject("Stage"))->GetModelHandle());
+	//ASSIGN(hGroundModel_,dynamic_cast<SolidObject*>((Stage*)FindObject("Stage"))->GetModelHandle());
 
 	//左方向の当たり判定
 	{
