@@ -51,6 +51,14 @@ public:
 	/// <returns>モデル番号</returns>
 	int GetStageModelHandle(int _hModel) { return StageModelList_[_hModel]; }
 
+	/// <summary>
+	/// Objectの位置と特定のアイテムの位置が重なっていたら
+	/// </summary>
+	/// <param name="_obj">オブジェクトのポインタ</param>
+	/// <param name="_hItem">アイテム</param>
+	/// <returns>重なっていたらtrue</returns>
 	bool AtItem(GameObject* _obj, int _hItem);
+
+	void SetItem(int x, int y, int _hItem) { ItemPlacement_[x][y] = _hItem; }
 };
 
