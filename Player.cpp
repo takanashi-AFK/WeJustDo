@@ -12,7 +12,7 @@
 //コンストラクタ
 Player::Player(GameObject* _parent, string _modelFileName)
 	:SolidObject(_parent,_modelFileName,"Player"),
-	pState_(nullptr), underRay_(),pStage_(),hGroundModel_(0),acceleration_(0)
+	pState_(nullptr),pStage_(),hGroundModel_(0),acceleration_(0)
 {
 	//プレイヤーの状態を「立ち状態」で初期化
 	ASSIGN(pState_,new PlayerStateManager);
@@ -175,15 +175,16 @@ void Player::StageRayCast()
 		}
 	}
 
-
 	//StandingState,RunningStateときのみ行うからState内で処理を行う
 	//下方向のあたり判定
-	RayCastData downData; {
-		//当たっているか確認
-		downData.start = transform_.position_;
-		XMStoreFloat3(&downData.dir, XMVectorSet(0, -1, 0, 0));
-		Model::RayCast(hGroundModel_, &downData);
-		downLandingPoint = downData.pos;
+	{
+		RayCastData downData; {
+			//当たっているか確認
+			downData.start = transform_.position_;
+			XMStoreFloat3(&downData.dir, XMVectorSet(0, -1, 0, 0));
+			Model::RayCast(hGroundModel_, &downData);
+			downLandingPoint = downData.pos;
+			downData_ = downData;
 		}
 		if (downData.dist < (PLAYER_MODEL_SIZE.y / 2)) {
 			//状態を"Standing"に変更
@@ -194,6 +195,7 @@ void Player::StageRayCast()
 		}
 		else
 			isAddGravity_ = true;
+	}
 }
 
 void Player::AddGravity(Transform* _transform)
@@ -207,7 +209,6 @@ void Player::AddGravity(Transform* _transform)
 
 void Player::InitDeadEffect()
 {
-	
 	DeadEffectData.textureFileName = "Effects/cloudA.png";
 	DeadEffectData.positionRnd = XMFLOAT3(0.1, 0, 0.1);
 	DeadEffectData.delay = 0;
@@ -242,7 +243,6 @@ void Player::InitRandEffect()
 	RandEffectData_.deltaColor = XMFLOAT4(0, 0, 0, -0.1);
 }
 
-
 EmitterData Player::GetDeadEData()
 {
 	return DeadEffectData;
@@ -263,12 +263,8 @@ void Player::SetIsJetNow(bool _jet)
 	isJetNow_ = _jet;
 }
 
-
 void Player::PolyDraw()
 {
-	if (isJetNow_ == true)
-	{
-		//ポリラインを描画
-		pJet->Draw();
-	}
+	//ポリラインを描画(ジェット噴射effect)
+	//if (pState_->playerState_ == pState_->pJet_)pJet->Draw();
 }

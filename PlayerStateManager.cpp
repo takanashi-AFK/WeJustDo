@@ -59,5 +59,5 @@ void PlayerStateManager::ChangeState(PlayerState* change, Player* _p, bool flag)
 
 void PlayerStateManager::ChangeState(PlayerState* change, Player* player)
 {
-	ChangeState(change, player, true);
+	ChangeState(change, player,true);
 }

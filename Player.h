@@ -33,8 +33,7 @@ private:
 	XMFLOAT3 rightLandingPoint;
 	XMFLOAT3 leftLandingPoint;
 	XMFLOAT3 PolyJetEmitPos;
-	RayCastData downData;
-
+	
 	PolyLine* pJet;
 	
 	//ziro2
@@ -45,7 +44,7 @@ protected:
 	PlayerStateManager* pState_;	//Playerの状態管理
 
 	///// あたり判定 ////////////////////////////////////////
-	RayCastData underRay_;		//プレイヤーの下に伸びるレイ
+	RayCastData downData_;	//プレイヤーの下に伸びるレイ
 	Stage* pStage_;		//ステージクラスのポインタ
 	int			hGroundModel_;	//ステージのモデル番号を入れる変数
 	float		acceleration_;	//重力の加速度
@@ -84,11 +83,6 @@ public:
 	/// <returns>状態</returns>
 	PlayerStateManager* GetState() { return pState_; };
 
-	/// <summary>
-	/// 下に伸びるレイキャスト情報を取得
-	/// </summary>
-	/// <returns>レイキャスト情報</returns>
-	RayCastData GetUnderRay() { return underRay_; }
 
 	/// <summary>
 	/// ステージとの接触判定処理を行う
@@ -155,7 +149,11 @@ public:
 	/// <returns>ジェットのpolylineデータ</returns>
 	PolyLine GetJettPData();
 	
-	void   SetIsJetNow( bool _jet);
+	void SetIsJetNow( bool _jet);
 
-	RayCastData GetDownData() { return downData; }
+	/// <summary>
+	/// 下に伸びるレイキャスト情報を取得
+	/// </summary>
+	/// <returns>レイキャスト情報</returns>
+	RayCastData GetDownData() { return downData_; }
 };

@@ -49,6 +49,7 @@ void StandingState::Update(Player* _p)
 //ŠJn
 void StandingState::Enter(Player* _p)
 {
+	_p->SetIsJetNow(false);
 }
 
 //“ü—Íˆ—	
