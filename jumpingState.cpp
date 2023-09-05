@@ -20,17 +20,14 @@ void JumpingState::Update(Player* _p)
 	{//State•Ï‰»
 		
 		//‚±‚±—vŒŸ“¢
-		if (!Input::IsKey(DIK_D) && !Input::IsKey(DIK_A))
+		if (_p->GetAccelaration()>=3.0f)
 			_p->GetState()->ChangeState(_p->GetState()->pStanding_, _p, true);
-
 		//dead
 		if (ppos.y <= -3 && ppos.y >= -5)
 			_p->GetState()->ChangeState(_p->GetState()->pDead_, _p, true);
 
 		if(Input::IsKeyDown(DIK_SPACE))
 			_p->GetState()->ChangeState(_p->GetState()->pJet_, _p, true);
-
-
 	}
 }
 

@@ -134,6 +134,8 @@ public:
 	/// </summary>
 	void InitRandEffect();
 
+	float GetAccelaration() { return acceleration_; }
+
 
 	/// <summary>
 	/// 死亡時エフェクトデータを返す
