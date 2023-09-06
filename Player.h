@@ -32,9 +32,6 @@ private:
 	XMFLOAT3 upLandingPoint;
 	XMFLOAT3 rightLandingPoint;
 	XMFLOAT3 leftLandingPoint;
-	XMFLOAT3 PolyJetEmitPos;
-	
-	PolyLine* pJet;
 	
 	//ziro2
 	int hBox_;
@@ -52,6 +49,8 @@ protected:
 	bool		isJumpNow_;		//ƒWƒƒƒ“ƒv’†‚©”Û‚©
 	bool		isMove_;		//“®‚¢‚Ä‚¢‚¢‚¢‚©
 	bool		isJetNow_ = false;
+	XMFLOAT3 PolyJetEmitPos;
+	PolyLine* pJet;
 public:
 	
 	EmitterData  RandEffectData_;

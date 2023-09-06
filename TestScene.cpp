@@ -1,6 +1,7 @@
 #include "TestScene.h"
 #include "Stage.h"
 #include "Player.h"
+#include "Engine/Image.h"
 
 //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
 TestScene::TestScene(GameObject * parent)
@@ -11,6 +12,10 @@ TestScene::TestScene(GameObject * parent)
 //‰Šú‰»
 void TestScene::Initialize()
 {
+	//”wŒi‚ğ¶¬
+	ASSIGN(hPict_, Image::Load("Image/BackGround4.png")); {
+
+	}
 	//Stage Create
 	Instantiate<Stage>(this);
 
@@ -25,6 +30,9 @@ void TestScene::Update()
 //•`‰æ
 void TestScene::Draw()
 {
+	//”wŒi‰æ‘œ‚ğ•`‰æ
+	Image::SetTransform(hPict_, transform_);
+	Image::Draw(hPict_);
 }
 
 //ŠJ•ú
