@@ -36,15 +36,14 @@ void Player::ChildInitialize()
 
 	isMove_ = true;
 
-	pJet = new PolyLine(0.1,10);
-	pJet->Load("Effects/Fire.png");
+
 
 	InitDeadEffect();
 	InitRandEffect();
 
 	//pDead = new PolyLine(1,50);
 	//pDead->Load("Effects/Tex.png");
-	pJet = new PolyLine(0.1, 10);
+	pJet = new PolyLine(0.3, 20);
 	pJet->Load("Effects/Fire.png");
 
 }
@@ -57,12 +56,13 @@ void Player::ChildUpdate()
 	//重力を加える
 	AddGravity(&transform_);
 
-
 	//状態ごとの更新
 	pState_->Update(this);
 
 	//ステージとのあたり判定
 	StageRayCast();
+
+	pJet->AddPosition(PolyJetEmitPos);
 
 	Camera::SetPosition(transform_.position_.x + 5, 3.5f, -15.0f);
 	Camera::SetTarget(transform_.position_.x + 5, 5.5f, 0.0f);
@@ -266,5 +266,5 @@ void Player::SetIsJetNow(bool _jet)
 void Player::PolyDraw()
 {
 	//ポリラインを描画(ジェット噴射effect)
-	//if (pState_->playerState_ == pState_->pJet_)pJet->Draw();
+	if (pState_->playerState_ == pState_->pJet_)pJet->Draw();
 }

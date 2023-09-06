@@ -29,7 +29,6 @@ void JetState::Update(Player* _p)
 
 
 	//}
-
 	static float acs = 0 ;
 	//プレイヤーの情報を取得
 	Transform* t_Player = _p->GetTransformAddress();
@@ -42,7 +41,6 @@ void JetState::Update(Player* _p)
 		if (acs < 0.1f)acs += 0.003f;
 	}
 
-
 	//横移動の処理
 	float s = 0.1f;
 	if (Input::IsKey(DIK_A)) { t_Player->position_.x -= s; t_Player->rotate_.y = -90; /*PolyJetEmitPos.x = PolyJetEmitPos.x + 0.5;*/ }
@@ -51,6 +49,9 @@ void JetState::Update(Player* _p)
 	//SPACEキーから手が離れたら&地面との距離がn以下なら
 	float Clearance = (PLAYER_MODEL_SIZE.y / 2);
 	if (Input::IsKeyUp(DIK_SPACE) && (_p->GetDownData().dist < Clearance*1.2)) {
+
+		_p->SetIsJetNow(false);
+
 		_p->SetAcceleration(0);//重力をリセット
 		_p->GetState()->ChangeState(_p->GetState()->pStanding_, _p);//着地状態に移動
 	}
@@ -58,7 +59,8 @@ void JetState::Update(Player* _p)
 
 void JetState::Enter(Player* _p)
 {
-	//_p->SetIsJetNow(true);
+	
+	_p->SetIsJetNow(true);
 }
 
 void JetState::HandleInput(Player* _p)
