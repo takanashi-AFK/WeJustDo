@@ -50,8 +50,6 @@ void JetState::Update(Player* _p)
 	float Clearance = (PLAYER_MODEL_SIZE.y / 2);
 	if (Input::IsKeyUp(DIK_SPACE) && (_p->GetDownData().dist < Clearance*1.2)) {
 
-		_p->SetIsJetNow(false);
-
 		_p->SetAcceleration(0);//重力をリセット
 		_p->GetState()->ChangeState(_p->GetState()->pStanding_, _p);//着地状態に移動
 	}
