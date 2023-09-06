@@ -23,9 +23,7 @@ void PlayScene::Initialize()
 	}
 
 	//ステージを生成
-	Stage* pStage;ASSIGN(pStage,CreateSolidObject<Stage>(this,"Models/stage300.fbx"));{
-		pStage->SetRotateY(180);
-	}
+	Instantiate<Stage>(this);
 
 	//プレイヤーを生成
 	CreateSolidObject<Player>(this, "DebugCollision/BoxCollider.fbx");{
@@ -35,7 +33,6 @@ void PlayScene::Initialize()
 	//BGMを再生
 
 	AudioManager::Play_PlayMusic();
-	
 
 }
 
