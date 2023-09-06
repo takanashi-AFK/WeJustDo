@@ -11,7 +11,8 @@ private:
 
 	float nowFuel_, maxFuel_;
 
-	const float GaugePositon = 0.4f;
+
+	const float GaugePositon = -0.9f;
 public:
 	FuelGauge(GameObject* parent);
 

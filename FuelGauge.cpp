@@ -1,9 +1,10 @@
 #include "FuelGauge.h"
 #include "Player.h"
 #include "Engine/Image.h"
+#include "Engine/Input.h"
 
 FuelGauge::FuelGauge(GameObject* parent)
-	:GameObject(parent, "FuelGauge"), hPictGauge_(-1), hPictFrame_(-1), nowFuel_(20), maxFuel_(100)
+	:GameObject(parent, "FuelGauge"), hPictGauge_(-1), hPictFrame_(-1), nowFuel_(0), maxFuel_(100)
 {
 	hPictGauge_ = Image::Load("Image/Gauge.png");
 	assert(hPictGauge_ >= 0);
@@ -28,7 +29,23 @@ void FuelGauge::Initialize()
 
 void FuelGauge::Update()
 {
+	if (Input::IsKey(DIK_I))
+	{
+		nowFuel_ += 1;
+		if (nowFuel_ > (maxFuel_ / 2))
+		{
+			nowFuel_ = 50;
+		}
+	}
 
+	if (Input::IsKey(DIK_O))
+	{
+		nowFuel_ -= 1;
+		if (nowFuel_ < 0)
+		{
+			nowFuel_ = 0;
+		}
+	}
 }
 
 void FuelGauge::Draw()

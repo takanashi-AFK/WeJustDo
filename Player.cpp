@@ -6,7 +6,6 @@
 #include "Engine/Camera.h"
 #include "Stage.h"
 #include "CountDown.h"
-#include "FuelGauge.h"
 
 //定数宣言
 namespace {
@@ -39,7 +38,7 @@ void Player::ChildInitialize()
 //更新
 void Player::ChildUpdate()
 {
-	CountDown* pCd = Instantiate<CountDown>(this);
+	CountDown* pCd = (CountDown*)FindObject("CountDown");
 	if (pCd->IsFinished()) {
 		if (!Transition::IsActive()) {
 			{//debug-PlayerMove
@@ -58,27 +57,6 @@ void Player::ChildUpdate()
 	//状態ごとの更新
 	//pState_->Update(this);
 	
-	if (Input::IsKey(DIK_I))
-	{
-		nowFuel_ += 1;
-		if (nowFuel_ > (maxFuel_/2))
-		{
-			nowFuel_ = 50;
-		}
-	}
-
-	if (Input::IsKey(DIK_O))
-	{
-		nowFuel_ -= 1;
-		if (nowFuel_ < 0)
-		{
-			nowFuel_ = 0;
-		}
-	}
-
-	FuelGauge* pFuel = (FuelGauge*)FindObject("FuelGauge");
-	pFuel->SetFuel(nowFuel_, maxFuel_);
-
 	//ステージとのあたり判定
 	StageRayCast();
 }

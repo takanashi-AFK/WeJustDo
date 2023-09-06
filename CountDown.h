@@ -1,15 +1,15 @@
 #pragma once
 #include "Engine/GameObject.h"
-#include "Timer.h"
+
+class Timer;
 
 class CountDown :
     public GameObject
 {
 private:
-	int time;
 	int hPict_[4];
-	Timer* pTimer;
 	bool flg_;
+	Timer* pTimer;
 
 public:
 	CountDown(GameObject* obj);
@@ -25,5 +25,5 @@ public:
 	void Release()override;
 
 	bool IsFinished();
+	void Count(int time);
 };
-

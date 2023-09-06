@@ -4,7 +4,6 @@
 #include "CountDown.h"
 #include "Engine/GameObject.h"
 
-class Timer;
 
 /// <summary>
 /// ゲームプレイ画面を表示するシーンオブジェクト
@@ -16,8 +15,6 @@ private:
 	int time;
 	int hPict2_[4];
 	bool flg =false;
-
-	Timer* pTime;
 	CountDown* pCount;
 
 public:

@@ -26,14 +26,10 @@ void PlayScene::Initialize()
 
 	//プレイヤーを生成
 	CreateSolidObject<Player>(this,"Models/ziro2.fbx");{}
-	pTime = Instantiate<Timer>(this);
+
 	FuelGauge* fg = Instantiate<FuelGauge>(this);
 
-	pTime->Initialize();
 	pCount = Instantiate<CountDown>(this);
-	pCount->Draw();
-
-
 
 	//BGMを再生
 	AudioManager::Initialize();
@@ -43,15 +39,11 @@ void PlayScene::Initialize()
 //更新
 void PlayScene::Update()
 {
-	pTime->Start();
-
-	time = pTime->GetTime();
 	
 	//if (time >= 600) {
 	//	SceneManager* sm = (SceneManager*)FindObject("SceneManager");
 	//	sm->ChangeScene(SCENE_ID_RESULT,TID_WHITEOUT);
 	//}
-	
 }
 
 //描画
@@ -60,7 +52,6 @@ void PlayScene::Draw()
 	//背景画像を描画
 	Image::SetTransform(hPict_, transform_);
 	Image::Draw(hPict_);
-
 }
 
 //開放

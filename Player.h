@@ -25,8 +25,7 @@ protected:
 	float		acceleration_;	//èdóÕÇÃâ¡ë¨ìx
 	bool canMove ;
 
-	float nowFuel_ = 0;
-	float maxFuel_ = 100;
+
 
 
 public:
