@@ -28,9 +28,6 @@ void Player::ChildInitialize()
 	ASSIGN(Marker, Model::Load("Models/debugMarker.fbx"));
 	ASSIGN(hBox_, Model::Load("Models/defaultModel.fbx"));
 
-	
-
-
 	//位置の初期化
 	transform_.position_.y = 2;
 	//初期状態の開始処理
@@ -56,7 +53,6 @@ void Player::ChildUpdate()
 
 	//重力を加える
 	AddGravity(&transform_);
-
 
 	//アイテムとの当たり判定
 	GetFirewood();
@@ -87,7 +83,6 @@ void Player::ChildDraw()
 	Transform t_Box; t_Box.position_ = transform_.position_; t_Box.position_.y + 0.5f;
 	Model::SetTransform(hBox_, t_Box);Model::Draw(hBox_);
 }
-
 
 void Player::StageRayCast()
 {
