@@ -3,6 +3,7 @@
 #include "Engine/CsvReader.h"
 #include "Engine/Input.h"
 #include "Engine/Global.h"
+#include <cmath>
 
 Stage::Stage(GameObject* parent)
 	:GameObject(parent,"Stage")
@@ -105,10 +106,14 @@ void Stage::Release()
 
 bool Stage::AtItem(GameObject* _obj, int _hItem) 
 {
-	//‚±‚±‚Ånullcheck
-	if (_obj->GetPosition().x < 0 || _obj->GetPosition().x >= iP_Width_)return false;
-	if (_obj->GetPosition().y < 0 || _obj->GetPosition().y >= iP_Height_)return false;
+	int x = std::round(_obj->GetPosition().x);
+	int y = std::round(_obj->GetPosition().y);
 
+	//‚±‚±‚Ånullcheck
+	if (x < 0 || x >= iP_Width_)return false;
+	if (y < 0 || y >= iP_Height_)return false;
+
+	//return ItemPlacement_[x][y] == _hItem;
 	return ItemPlacement_[_obj->GetPosition().x][_obj->GetPosition().y] == _hItem;
 }
 
