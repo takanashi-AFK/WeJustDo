@@ -8,6 +8,11 @@
 #include "Engine/Debug.h"
 #include "Engine/Camera.h"
 #include "AudioManager.h"
+#include "Engine/VFX.h"
+#include <cmath>
+
+//たかなしめも
+//まきエフェクト->８本レイ->csv作成
 
 //コンストラクタ
 Player::Player(GameObject* _parent, string _modelFileName)
@@ -37,6 +42,7 @@ void Player::ChildInitialize()
 
 	InitDeadEffect();
 	InitRandEffect();
+	InitGetEffect();
 
 	//pDead = new PolyLine(1,50);
 	//pDead->Load("Effects/Tex.png");
@@ -195,7 +201,6 @@ void Player::InitDeadEffect()
 void Player::InitRandEffect()
 {
 	RandEffectData_.textureFileName = "Effects/RandSmoke2.png";
-	RandEffectData_.position = XMFLOAT3(transform_.position_.x, transform_.position_.y - 0.2,0);
 	RandEffectData_.positionRnd = XMFLOAT3(0.1, 0, 0.1);
 	RandEffectData_.delay = 0;
 	RandEffectData_.number = 1;
@@ -208,6 +213,24 @@ void Player::InitRandEffect()
 	RandEffectData_.deltaColor = XMFLOAT4(0, 0, 0, -0.1);
 }
 
+void Player::InitGetEffect()
+{
+	ItemGetEffectData.textureFileName = "Effects/kira.png";
+	ItemGetEffectData.position = XMFLOAT3(transform_.position_.x, transform_.position_.y - 0.2, 0);
+	ItemGetEffectData.positionRnd = XMFLOAT3(0.1, 0, 0.1);
+	ItemGetEffectData.delay = 0;
+	ItemGetEffectData.number = 1;
+	ItemGetEffectData.lifeTime = 40;
+	ItemGetEffectData.speed = 0.01f;
+	ItemGetEffectData.speedRnd = 0.0;
+	ItemGetEffectData.size = XMFLOAT2(1, 0.5);
+	ItemGetEffectData.scale = XMFLOAT2(1.01, 1.01);
+	ItemGetEffectData.color = XMFLOAT4(1, 1, 1, 1);
+	ItemGetEffectData.deltaColor = XMFLOAT4(0, 0, 0, -0.1);
+}
+
+
+
 EmitterData Player::GetDeadEData()
 {
 	return DeadEffectData;
@@ -216,6 +239,11 @@ EmitterData Player::GetDeadEData()
 EmitterData Player::GetRandEData()
 {
 	return RandEffectData_;
+}
+
+EmitterData Player::GetGetEData()
+{
+	return ItemGetEffectData;
 }
 
 PolyLine Player::GetJettPData()
@@ -231,13 +259,16 @@ void Player::SetIsJetNow(bool _jet)
 void Player::GetFirewood()
 {
 	Stage* pS = (Stage*)(FindObject("Stage"));
-	if (pS->AtItem(this, 0)) {
+	if (pS->AtItem(this, 1)) {
 
 		//エフェクト
-		firewoodNum_++;
+
+		firewoodNum_+= 10;//ここを後々firewoodNum_++にしたい
 		//エフェクト
 
-		pS->SetItem(transform_.position_.x, transform_.position_.y, 1);
+		pS->SetItem(transform_.position_.x, transform_.position_.y, 0);
+		ItemGetEffectData.position = transform_.position_;
+		VFX::Start(ItemGetEffectData);
 	}
 }
 

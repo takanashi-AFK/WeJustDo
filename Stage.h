@@ -66,5 +66,10 @@ public:
 	/// <param name="y"></param>
 	/// <param name="_hItem"></param>
 	void SetItem(int x, int y, int _hItem);
+	void SetItem(float x, float y, int _hItem);
+
+
+
+
 };
 

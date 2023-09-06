@@ -57,6 +57,8 @@ public:
 	EmitterData  RandEffectData_;
 	
 	EmitterData  DeadEffectData;
+
+	EmitterData  ItemGetEffectData;
 	
 	//コンストラクタ
 	Player(GameObject* _parent, string _modelFileName);
@@ -128,6 +130,13 @@ public:
 	/// </summary>
 	void InitRandEffect();
 
+	void InitGetEffect();
+
+
+	/// <summary>
+	/// 加速度を返す関数
+	/// </summary>
+	/// <returns>加速度</returns>
 	float GetAccelaration() { return acceleration_; }
 
 
@@ -142,6 +151,12 @@ public:
 	/// </summary>
 	/// <returns>着地時エフェクトデータ</returns>
 	EmitterData GetRandEData();
+
+	/// <summary>
+	/// 薪取得時のエフェクトデータを返す
+	/// </summary>
+	/// <returns>薪取得エフェクト</returns>
+	EmitterData GetGetEData();
 
 	/// <summary>
 	/// ジェットのpolylineデータを返す

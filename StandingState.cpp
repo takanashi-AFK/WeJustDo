@@ -50,7 +50,13 @@ void StandingState::Update(Player* _p)
 void StandingState::Enter(Player* _p)
 {
 	_p->SetIsJetNow(false);
-	Model::SetAnimFrame(_p->GetModelHandle(), 0, 0, 1);
+	Model::SetAnimFrame(_p->GetModelHandle(), 0, 0, 0);
+	XMFLOAT3 ppos;
+	ppos = _p->GetPosition();
+	_p->InitRandEffect();
+	EmitterData  r = _p->GetRandEData();
+	r.position = XMFLOAT3(ppos.x+0.5, ppos.y , -1);
+	VFX::Start(r);
 }
 
 //“ü—Íˆ—	

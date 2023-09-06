@@ -28,7 +28,7 @@ void Stage::Initialize()
 
 	//csvの情報を取得する
 	CsvReader csv; {
-		csv.Load("Datas/Stage.csv");
+		csv.Load("Datas/Test.csv");
 		iP_Width_ = csv.GetWidth();
 		iP_Height_ = csv.GetHeight();
 		ItemPlacement_.resize(iP_Width_, vector<int>(iP_Height_, 0));
@@ -88,7 +88,7 @@ void Stage::Draw()
 		for (int x = 0; x < iP_Width_; x++)for (int y = 0; y < iP_Height_; y++) {
 		t_Firewood.position_ = { (float)x,(float)y,0 };
 
-			if (ItemPlacement_[x][y] == 0){
+			if (ItemPlacement_[x][y] == 1){
 				Model::SetTransform(hFirewood_, t_Firewood);
 				Model::Draw(hFirewood_);
 			}
@@ -118,11 +118,21 @@ bool Stage::AtItem(GameObject* _obj, int _hItem)
 	//return ItemPlacement_[_obj->GetPosition().x][_obj->GetPosition().y] == _hItem;
 }
 
-void Stage::SetItem(int x, int y, int _hItem)
+void Stage::SetItem(int _x, int _y, int _hItem)
 {
 	//NULLチェック
-	if (x < 0 || x >= iP_Width_)return;
-	if (y < 0 || y >= iP_Height_)return;
+	if (_x < 0 || _x >= iP_Width_)return;
+	if (_y < 0 || _y >= iP_Height_)return;
 
-	ItemPlacement_[x][y] = _hItem;
+	ItemPlacement_[_x][_y] = _hItem;
+	
+
+}
+
+void Stage::SetItem(float _x, float _y, int _hItem)
+{
+	int x = std::round(_x);
+	int y = std::round(_y);
+
+	SetItem(x, y, _hItem);
 }
