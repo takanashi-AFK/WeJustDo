@@ -36,12 +36,12 @@ void JetState::Update(Player* _p)
 	if (_p->GetState()->playerState_ != _p->GetState()->pJumping_  && Input::IsKeyDown(DIK_SPACE)) {
 		acs = 0; 
 	}
-	if (_p->GetState()->playerState_ != _p->GetState()->pJumping_ && Input::IsKey(DIK_SPACE)) {
+	if (_p->GetState()->playerState_ != _p->GetState()->pJumping_ && Input::IsKey(DIK_SPACE) && (_p->GetFirewoodNum() > 0)) {
 		_p->SetAcceleration(0);
 		t_Player->position_.y += acs;
 		if (acs < 0.1f)acs += 0.003f;
+		_p->SetFirewoodNum(_p->GetFirewoodNum() - 1);
 	}
-
 
 	//‰¡ˆÚ“®‚Ìˆ—
 	float s = 0.1f;
@@ -59,6 +59,7 @@ void JetState::Update(Player* _p)
 void JetState::Enter(Player* _p)
 {
 	//_p->SetIsJetNow(true);
+	Model::SetAnimFrame(_p->GetModelHandle(), 0, 0, 0);
 }
 
 void JetState::HandleInput(Player* _p)

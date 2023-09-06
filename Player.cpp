@@ -28,6 +28,9 @@ void Player::ChildInitialize()
 	ASSIGN(Marker, Model::Load("Models/debugMarker.fbx"));
 	ASSIGN(hBox_, Model::Load("Models/defaultModel.fbx"));
 
+	
+
+
 	//位置の初期化
 	transform_.position_.y = 2;
 	//初期状態の開始処理
@@ -66,8 +69,8 @@ void Player::ChildUpdate()
 	//ステージとのあたり判定
 	StageRayCast();
 
-	Camera::SetPosition(transform_.position_.x + 5, 3.5f, -15.0f);
-	Camera::SetTarget(transform_.position_.x + 5, 5.5f, 0.0f);
+	Camera::SetPosition(transform_.position_.x + 5, transform_.position_.y+3, -13.0f);
+	Camera::SetTarget(transform_.position_.x + 5, transform_.position_.y+3, 0.0f);
 }
 
 //開放
@@ -238,7 +241,7 @@ void Player::GetFirewood()
 	if (pS->AtItem(this, 0)) {
 
 		//エフェクト
-
+		firewoodNum_++;
 		//エフェクト
 
 		pS->SetItem(transform_.position_.x, transform_.position_.y, 1);

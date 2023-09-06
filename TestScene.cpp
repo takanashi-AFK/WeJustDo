@@ -15,7 +15,7 @@ void TestScene::Initialize()
 	Instantiate<Stage>(this);
 
 	//Player Create
-	CreateSolidObject<Player>(this, "Models/ziro2.fbx");
+	CreateSolidObject<Player>(this, "Models/ziro_move.fbx");
 }
 
 //XV

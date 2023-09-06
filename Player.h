@@ -12,7 +12,7 @@ class Stage;
 //定数宣言
 namespace {
 	//重力の加算値
-	static const float GRAVITY_ADDITION = 0.05f;
+	static const float GRAVITY_ADDITION = 0.06f;
 
 	//Playerのモデルの大きさ
 	static const XMFLOAT3 PLAYER_MODEL_SIZE = { 1.0f,1.0f,1.0f };
@@ -38,7 +38,7 @@ private:
 	
 	//ziro2
 	int hBox_;
-
+	int firewoodNum_;
 protected:
 	///// 必要な情報 ////////////////////////////////////////
 	PlayerStateManager* pState_;	//Playerの状態管理
@@ -158,4 +158,7 @@ public:
 	RayCastData GetDownData() { return downData_; }
 
 	void GetFirewood();
+
+	int GetFirewoodNum() { return firewoodNum_; }
+	void SetFirewoodNum(int _n) { firewoodNum_ = _n; }
 };

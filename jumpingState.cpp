@@ -13,7 +13,7 @@ void JumpingState::Update(Player* _p)
 {
 	Transform* TJumping = _p->GetTransformAddress();
 
-	TJumping->position_.y += 0.1f;
+	TJumping->position_.y += 0.12f;
 	HandleInput(_p);
 
 	XMFLOAT3 ppos;
@@ -28,7 +28,7 @@ void JumpingState::Update(Player* _p)
 		if (ppos.y <= -3 && ppos.y >= -5)
 			_p->GetState()->ChangeState(_p->GetState()->pDead_, _p, true);
 
-		if(Input::IsKeyDown(DIK_SPACE))
+		if(Input::IsKeyDown(DIK_SPACE) && (_p->GetFirewoodNum()>0))
 			_p->GetState()->ChangeState(_p->GetState()->pJet_, _p, true);
 	}
 }

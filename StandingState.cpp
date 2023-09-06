@@ -50,6 +50,7 @@ void StandingState::Update(Player* _p)
 void StandingState::Enter(Player* _p)
 {
 	_p->SetIsJetNow(false);
+	Model::SetAnimFrame(_p->GetModelHandle(), 0, 0, 1);
 }
 
 //“ü—Íˆ—	

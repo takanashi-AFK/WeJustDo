@@ -52,6 +52,7 @@ void RunningState::Update(Player* _p)
 //ŠJn
 void RunningState::Enter(Player* _p)
 {
+	Model::SetAnimFrame(_p->GetModelHandle(), 0, 44, 1);
 }
 
 //“ü—Íˆ—
