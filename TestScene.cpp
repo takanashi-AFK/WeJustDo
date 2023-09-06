@@ -1,6 +1,7 @@
 #include "TestScene.h"
 #include "Stage.h"
 #include "Player.h"
+#include "DebugObject.h"
 
 //コンストラクタ
 TestScene::TestScene(GameObject * parent)
@@ -15,13 +16,18 @@ void TestScene::Initialize()
 	Instantiate<Stage>(this);
 
 	//Player Create
-	CreateSolidObject<Player>(this, "Models/ziro_move.fbx");
+	//CreateSolidObject<Player>(this, "Models/ziro_move.fbx");
+
+	//DebugObject Create
+	CreateSolidObject<DebugObject>(this, "Models/defaultModel.fbx");
+
 }
 
 //更新
 void TestScene::Update()
 {
 }
+
 //描画
 void TestScene::Draw()
 {

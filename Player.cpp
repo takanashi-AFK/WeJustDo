@@ -241,6 +241,7 @@ void Player::GetFirewood()
 	}
 }
 
+
 void Player::PolyDraw()
 {
 	//ポリラインを描画(ジェット噴射effect)
