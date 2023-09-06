@@ -106,15 +106,16 @@ void Stage::Release()
 
 bool Stage::AtItem(GameObject* _obj, int _hItem) 
 {
+	//四捨五入
 	int x = std::round(_obj->GetPosition().x);
 	int y = std::round(_obj->GetPosition().y);
 
-	//ここでnullcheck
+	//NULLチェック
 	if (x < 0 || x >= iP_Width_)return false;
 	if (y < 0 || y >= iP_Height_)return false;
 
-	//return ItemPlacement_[x][y] == _hItem;
-	return ItemPlacement_[_obj->GetPosition().x][_obj->GetPosition().y] == _hItem;
+	return ItemPlacement_[x][y] == _hItem;
+	//return ItemPlacement_[_obj->GetPosition().x][_obj->GetPosition().y] == _hItem;
 }
 
 void Stage::SetItem(int x, int y, int _hItem)
