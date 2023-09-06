@@ -38,15 +38,12 @@ void Player::ChildInitialize()
 
 	isMove_ = true;
 
-	pJet = new PolyLine(0.1,10);
-	pJet->Load("Effects/Fire.png");
-
 	InitDeadEffect();
 	InitRandEffect();
 
 	//pDead = new PolyLine(1,50);
 	//pDead->Load("Effects/Tex.png");
-	pJet = new PolyLine(0.1, 10);
+	pJet = new PolyLine(0.2, 10);
 	pJet->Load("Effects/Fire.png");
 
 }
@@ -55,6 +52,7 @@ void Player::ChildInitialize()
 void Player::ChildUpdate()
 {
 	PolyJetEmitPos = XMFLOAT3(transform_.position_.x - (PLAYER_MODEL_SIZE.x / 4), transform_.position_.y - (PLAYER_MODEL_SIZE.x / 4), transform_.position_.z);
+	pJet->AddPosition(PolyJetEmitPos);
 
 	//重力を加える
 	AddGravity(&transform_);
@@ -251,7 +249,7 @@ void Player::GetFirewood()
 void Player::PolyDraw()
 {
 	//ポリラインを描画(ジェット噴射effect)
-	//if (pState_->playerState_ == pState_->pJet_)pJet->Draw();
+	if (pState_->playerState_ == pState_->pJet_)pJet->Draw();
 }
 
 void Player::SetDrawTransform()
