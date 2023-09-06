@@ -30,11 +30,13 @@ void SolidObject::Update()
 
 void SolidObject::Draw()
 {
+	
 	//Œp³æ‚Ì•`‰æ
 	ChildDraw();
 
 	//ƒ‚ƒfƒ‹‚Ì•`‰æ
 	Model::SetTransform(hModel_,transform_);
+	SetDrawTransform();
 	Model::Draw(hModel_);
 
 	PolyDraw();

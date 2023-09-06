@@ -1,5 +1,6 @@
 #include "TestScene.h"
 #include "Stage.h"
+#include "Player.h"
 
 //コンストラクタ
 TestScene::TestScene(GameObject * parent)
@@ -12,6 +13,9 @@ void TestScene::Initialize()
 {
 	//Stage Create
 	Instantiate<Stage>(this);
+
+	//Player Create
+	CreateSolidObject<Player>(this, "Models/ziro2.fbx");
 }
 
 //更新

@@ -26,11 +26,10 @@ void Player::ChildInitialize()
 	
 	//モデルのロード
 	ASSIGN(Marker, Model::Load("Models/debugMarker.fbx"));
-	ASSIGN(ziro, Model::Load("Models/ziro2.fbx"));
+	ASSIGN(hBox_, Model::Load("Models/defaultModel.fbx"));
 
 	//位置の初期化
 	transform_.position_.y = 2;
-
 	//初期状態の開始処理
 	pState_->Enter(this);
 
@@ -58,6 +57,9 @@ void Player::ChildUpdate()
 	AddGravity(&transform_);
 
 
+	//アイテムとの当たり判定
+	GetFirewood();
+
 	//状態ごとの更新
 	pState_->Update(this);
 
@@ -79,50 +81,17 @@ void Player::ChildRelease()
 //描画
 void Player::ChildDraw()
 {
-	//レイのスタート位置を描画
-	Transform t;
-	t.position_ = RayStartPos;
-	t.position_.z -= 0.5f;
-	Model::SetTransform(Marker, t);
-	Model::Draw(Marker);
-
-	//着地点を描画
-	Transform d;
-	d.position_ = downLandingPoint;
-	Model::SetTransform(Marker, d);
-	Model::Draw(Marker);
-
-	Transform up;
-	up.position_ = upLandingPoint;
-	Model::SetTransform(Marker, up);
-	Model::Draw(Marker);
-
-	Transform rg;
-	rg.position_ = rightLandingPoint;
-	Model::SetTransform(Marker, rg);
-	Model::Draw(Marker);
-
-	Transform lf;
-	lf.position_ = leftLandingPoint;
-	Model::SetTransform(Marker, lf);
-	Model::Draw(Marker);
-
-
-	Transform z;
-	z.position_ = transform_.position_;
-	z.position_.y -= 0.5;
-	z.scale_ = { 0.1f,0.1f,0.1f };
-	Model::SetTransform(ziro, z);
-	Model::Draw(ziro);
-
+	//ボックスを描画
 	Direct3D::SetShader(Direct3D::SHADER_UNLIT);
+	Transform t_Box; t_Box.position_ = transform_.position_; t_Box.position_.y + 0.5f;
+	Model::SetTransform(hBox_, t_Box);Model::Draw(hBox_);
 }
 
 
 void Player::StageRayCast()
 {
 	//ステージのモデル番号を取得
-	ASSIGN(hGroundModel_, dynamic_cast<SolidObject*>((Stage*)FindObject("Stage"))->GetModelHandle());
+	ASSIGN(hGroundModel_, dynamic_cast<Stage*>(FindObject("Stage"))->GetStageModelHandle(m_Ground));
 
 	//左方向の当たり判定
 	{
@@ -263,8 +232,31 @@ void Player::SetIsJetNow(bool _jet)
 	isJetNow_ = _jet;
 }
 
+void Player::GetFirewood()
+{
+	Stage* pS = (Stage*)(FindObject("Stage"));
+	if (pS->AtItem(this, 0)) {
+
+		//エフェクト
+
+		//エフェクト
+
+		pS->SetItem(transform_.position_.x, transform_.position_.y, 1);
+	}
+}
+
 void Player::PolyDraw()
 {
 	//ポリラインを描画(ジェット噴射effect)
 	//if (pState_->playerState_ == pState_->pJet_)pJet->Draw();
+}
+
+void Player::SetDrawTransform()
+{
+	Direct3D::SetShader(Direct3D::SHADER_3D);
+	Transform t_Draw; t_Draw = transform_;
+	t_Draw.position_.y -= 0.5f;
+	t_Draw.scale_ = { 0.1f,0.1f,0.1f };
+
+	Model::SetTransform(hModel_, t_Draw);
 }

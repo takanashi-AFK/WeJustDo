@@ -32,6 +32,7 @@ public:
 
 
 	virtual void PolyDraw() {};
+	virtual void SetDrawTransform(){}
 	/// <summary>
 	/// ƒ‚ƒfƒ‹”Ô†‚ğæ“¾‚·‚é
 	/// </summary>

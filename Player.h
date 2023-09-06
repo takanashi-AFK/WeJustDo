@@ -12,7 +12,7 @@ class Stage;
 //定数宣言
 namespace {
 	//重力の加算値
-	static const float GRAVITY_ADDITION = 0.03f;
+	static const float GRAVITY_ADDITION = 0.05f;
 
 	//Playerのモデルの大きさ
 	static const XMFLOAT3 PLAYER_MODEL_SIZE = { 1.0f,1.0f,1.0f };
@@ -37,7 +37,7 @@ private:
 	PolyLine* pJet;
 	
 	//ziro2
-	int ziro;
+	int hBox_;
 
 protected:
 	///// 必要な情報 ////////////////////////////////////////
@@ -68,7 +68,7 @@ public:
 	void ChildDraw() override;
 
 	void PolyDraw() override;
-
+	void SetDrawTransform() override;
 	///// 必要な関数 //////////////////////////////////////// 
 
 	/// <summary>
@@ -156,4 +156,6 @@ public:
 	/// </summary>
 	/// <returns>レイキャスト情報</returns>
 	RayCastData GetDownData() { return downData_; }
+
+	void GetFirewood();
 };
