@@ -41,7 +41,7 @@ void Player::ChildInitialize()
 
 	//pDead = new PolyLine(1,50);
 	//pDead->Load("Effects/Tex.png");
-	pJet = new PolyLine(0.2, 10);
+	pJet = new PolyLine(0.4, 10);
 	pJet->Load("Effects/Fire.png");
 
 }

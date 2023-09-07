@@ -3,6 +3,9 @@
 #include "Player.h"
 #include "DebugObject.h"
 #include "Engine/Image.h"
+#include "Engine/Input.h"
+#include "Engine/SceneManager.h"
+#include "AudioManager.h"
 
 //コンストラクタ
 TestScene::TestScene(GameObject * parent)
@@ -13,6 +16,7 @@ TestScene::TestScene(GameObject * parent)
 //初期化
 void TestScene::Initialize()
 {
+
 	pText_ = new Text;
 	pText_->Initialize();
 
@@ -33,6 +37,11 @@ void TestScene::Initialize()
 //更新
 void TestScene::Update()
 {
+	if (p_->GetPosition().y <= -20.0f) {
+		//シーン遷移を行う
+		SceneManager* sm = (SceneManager*)FindObject("SceneManager");
+		sm->ChangeScene(SCENE_ID_RESULT, TID_WHITEOUT);
+	}
 }
 
 //描画
