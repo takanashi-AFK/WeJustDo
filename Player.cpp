@@ -119,13 +119,45 @@ void Player::StageRayCast()
 		// レイの長さを適切に設定
 		if (i < 4)
 		{
-			rayData[i].start.x += (i % 2 == 0) ? -(PLAYER_MODEL_SIZE.x / 2) : (PLAYER_MODEL_SIZE.x / 2);
-			rayData[i].start.y += (i < 2) ? PLAYER_MODEL_SIZE.y : -(PLAYER_MODEL_SIZE.y / 2) + 0.03;
+			if (i % 2 == 0)
+			{
+				rayData[i].start.x += -(PLAYER_MODEL_SIZE.x / 2);
+			}
+			else
+			{
+				rayData[i].start.x += (PLAYER_MODEL_SIZE.x / 2);
+			}
+
+			if (i < 2)
+			{
+				rayData[i].start.y += PLAYER_MODEL_SIZE.y;
+			}
+			else
+			{
+				rayData[i].start.y +=  -(PLAYER_MODEL_SIZE.y / 2) + 0.03;
+			}
+			
 		}
 		else
 		{
-			rayData[i].start.x += (i % 2 == 0) ? -(PLAYER_MODEL_SIZE.x / 2) : (PLAYER_MODEL_SIZE.x / 2);
-			rayData[i].start.y += (i < 6) ? PLAYER_MODEL_SIZE.y : -(PLAYER_MODEL_SIZE.y / 2) + 0.03;
+
+			if (i % 2 == 0)
+			{
+				rayData[i].start.x += -(PLAYER_MODEL_SIZE.x / 2);
+			}
+			else
+			{
+				rayData[i].start.x += (PLAYER_MODEL_SIZE.x / 2);
+			}
+
+			if (i < 6)
+			{
+				rayData[i].start.y += PLAYER_MODEL_SIZE.y;
+			}
+			else
+			{
+				rayData[i].start.y += -(PLAYER_MODEL_SIZE.y / 2) + 0.03;
+			}
 		}
 
 		rayData[i].dir = VectorToFloat3( rayDirections[i]);
@@ -134,16 +166,100 @@ void Player::StageRayCast()
 		// レイキャスト結果に基づいて処理を行う
 		if (rayData[i].dist < (PLAYER_MODEL_SIZE.x / 2) || rayData[i].dist < (PLAYER_MODEL_SIZE.y / 2))
 		{
+
+			float posA{}, posB{};
+			if (i % 2 == 0) - rayData[i].dist - (PLAYER_MODEL_SIZE.x / 2);
+			else 0;
+
+			if (i < 4)0;
+			else (PLAYER_MODEL_SIZE.y / 2) + rayData[i].dist;
 			// めり込み分、位置を戻す
 			XMVECTOR length = XMVectorSet(
-				(i % 2 == 0) ? -rayData[i].dist - (PLAYER_MODEL_SIZE.x / 2) : 0,
-				(i < 4) ? 0 : (PLAYER_MODEL_SIZE.y / 2) + rayData[i].dist,
+				posA,
+				posB,
 				0,
 				0
 			);
 			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (rayDirections[i] - length));
 		}
 	}
+
+
+	////ステージのモデル番号を取得
+	//ASSIGN(hGroundModel_, dynamic_cast<Stage*>(FindObject("Stage"))->GetStageModelHandle(m_Ground));
+
+	////左方向の当たり判定
+	//{
+	//	RayCastData leftData; {
+	//		leftData.start = transform_.position_;
+	//		RayStartPos = leftData.start;
+	//		XMStoreFloat3(&leftData.dir, XMVectorSet(-1, 0, 0, 0));
+	//		Model::RayCast(hGroundModel_, &leftData);
+	//		leftLandingPoint = leftData.pos;
+	//	}
+	//	if (leftData.dist < (PLAYER_MODEL_SIZE.x / 2)) {
+	//		//めり込み分、位置を戻す
+	//		XMVECTOR length = { -leftData.dist - (PLAYER_MODEL_SIZE.x / 2),0,0 };
+	//		XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(-1, 0, 0, 0) - length));
+	//	}
+	//}
+
+	////右方向のあたり判定
+	//{
+	//	RayCastData rightData; {
+	//		//当たっているかを確認
+	//		rightData.start = transform_.position_;					//発射位置の指定
+	//		XMStoreFloat3(&rightData.dir, XMVectorSet(1, 0, 0, 0));	//発射方向の指定
+	//		Model::RayCast(hGroundModel_, &rightData);				//レイを発射
+	//		rightLandingPoint = rightData.pos;
+	//	}
+	//	//レイの長さが1.0以下だったら...
+	//	if (rightData.dist < (PLAYER_MODEL_SIZE.x / 2)) {
+	//		//めり込み分、位置を戻す
+	//		XMVECTOR length = { rightData.dist + (PLAYER_MODEL_SIZE.x / 2),0,0 };
+	//		XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(1, 0, 0, 0) - length));
+	//	}
+	//}
+
+	////上方向のあたり判定
+	//{
+	//	RayCastData upData; {
+	//		//当たっているか確認
+	//		upData.start = transform_.position_;
+	//		XMStoreFloat3(&upData.dir, XMVectorSet(0, 1, 0, 0));
+	//		Model::RayCast(hGroundModel_, &upData);
+	//		upLandingPoint = upData.pos;
+	//	}
+	//	//レイの長さが1.0以下だったら...
+	//	if (upData.dist < (PLAYER_MODEL_SIZE.y / 2)) {
+	//		//めり込み分、位置を戻す
+	//		XMVECTOR length = { 0, (PLAYER_MODEL_SIZE.y / 2) + upData.dist,0 };
+	//		XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(0, 1, 0, 0) - length));
+	//		SetAcceleration(2);
+	//	}
+	//}
+
+	////StandingState,RunningStateときのみ行うからState内で処理を行う
+	////下方向のあたり判定
+	//{
+	//	RayCastData downData; {
+	//		//当たっているか確認
+	//		downData.start = transform_.position_;
+	//		XMStoreFloat3(&downData.dir, XMVectorSet(0, -1, 0, 0));
+	//		Model::RayCast(hGroundModel_, &downData);
+	//		downLandingPoint = downData.pos;
+	//		downData_ = downData;
+	//	}
+	//	if (downData.dist < (PLAYER_MODEL_SIZE.y / 2)) {
+	//		//状態を"Standing"に変更
+	//		pState_->ChangeState(pState_->pStanding_, this);
+
+	//		//jump状態を終了
+	//		isJumpNow_ = false;
+	//	}
+	//	else
+	//		isAddGravity_ = true;
+	//}
 
 	// その他の処理を続行
 }
