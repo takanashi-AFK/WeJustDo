@@ -19,13 +19,8 @@ void DebugObject::ChildUpdate()
 	HandleInput();
 
 	Stage* pS = dynamic_cast<Stage*>(FindObject("Stage"));
-	if (pS->AtItem(this, 0)) {
-
-		//エフェクト
-		
-		//エフェクト
-
-		pS->SetItem(transform_.position_.x, transform_.position_.y, 1);
+	if (pS->AtItem(this, 1)) {
+		pS->SetItem(transform_.position_.x, transform_.position_.y, 0);
 	}
 
 	//カメラ

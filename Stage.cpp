@@ -28,7 +28,7 @@ void Stage::Initialize()
 
 	//csvの情報を取得する
 	CsvReader csv; {
-		csv.Load("Datas/Stage.csv");
+		csv.Load("Datas/manual.csv");
 		iP_Width_ = csv.GetWidth();
 		iP_Height_ = csv.GetHeight();
 		ItemPlacement_.resize(iP_Width_, vector<int>(iP_Height_, 0));
@@ -80,6 +80,9 @@ void Stage::Draw()
 	
 	//m_Firewood
 	{
+		//シェーダーを適用
+		SetShader(SHADER_FWOOD);
+
 		//位置・角度・大きさ
 		Transform t_Firewood; t_Firewood.SetPosition(0, 5, 0);
 		static float angle; angle++;t_Firewood.SetRotateY(angle);
@@ -88,7 +91,7 @@ void Stage::Draw()
 		for (int x = 0; x < iP_Width_; x++)for (int y = 0; y < iP_Height_; y++) {
 		t_Firewood.position_ = { (float)x,(float)y,0 };
 
-			if (ItemPlacement_[x][y] == 0){
+			if (ItemPlacement_[x][y] == 1){
 				Model::SetTransform(hFirewood_, t_Firewood);
 				Model::Draw(hFirewood_);
 			}

@@ -152,6 +152,7 @@ public:
 	void SetRotateZ(float z) { SetRotate(transform_.rotate_.x, transform_.rotate_.y, z); }
 
 	void SetScale(XMFLOAT3 scale) { transform_.scale_ = scale; }
+	void SetScale(float scale) { SetScale(scale, scale, scale); }
 	void SetScale(float x, float y, float z) { SetScale(XMFLOAT3(x, y, z)); }
 	void SetScaleX(float x) { SetScale(x, transform_.scale_.y, transform_.scale_.z); }
 	void SetScaleY(float y) { SetScale(transform_.scale_.x, y, transform_.scale_.z); }

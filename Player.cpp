@@ -30,6 +30,7 @@ void Player::ChildInitialize()
 
 	//位置の初期化
 	transform_.position_.y = 2;
+	transform_.rotate_.y = 90;
 	//初期状態の開始処理
 	pState_->Enter(this);
 
@@ -55,16 +56,19 @@ void Player::ChildUpdate()
 	AddGravity(&transform_);
 
 	//アイテムとの当たり判定
-	GetFirewood();
+	if (isMove_) {
+		
+		GetFirewood();
+		
+		//状態ごとの更新
+		pState_->Update(this);
 
-	//状態ごとの更新
-	pState_->Update(this);
+		//ステージとのあたり判定
+		StageRayCast();
 
-	//ステージとのあたり判定
-	StageRayCast();
-
-	Camera::SetPosition(transform_.position_.x + 5, transform_.position_.y+3, -13.0f);
-	Camera::SetTarget(transform_.position_.x + 5, transform_.position_.y+3, 0.0f);
+		Camera::SetPosition(transform_.position_.x + 5, transform_.position_.y + 3, -13.0f);
+		Camera::SetTarget(transform_.position_.x + 5, transform_.position_.y + 3, 0.0f);
+	}
 }
 
 //開放
@@ -231,13 +235,13 @@ void Player::SetIsJetNow(bool _jet)
 void Player::GetFirewood()
 {
 	Stage* pS = (Stage*)(FindObject("Stage"));
-	if (pS->AtItem(this, 0)) {
+	if (pS->AtItem(this, 1)) {
 
 		//エフェクト
-		firewoodNum_++;
+		firewoodNum_+=5;
 		//エフェクト
 
-		pS->SetItem(transform_.position_.x, transform_.position_.y, 1);
+		pS->SetItem(round(transform_.position_.x), round(transform_.position_.y), 0);
 	}
 }
 

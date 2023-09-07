@@ -159,6 +159,7 @@
     <ClCompile Include="JetState.cpp">
       <Filter>State</Filter>
     </ClCompile>
+    <ClCompile Include="DebugObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -279,6 +280,7 @@
     <ClInclude Include="DeadState.h">
       <Filter>State</Filter>
     </ClInclude>
+    <ClInclude Include="DebugObject.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">
@@ -294,6 +296,9 @@
       <Filter>02Shader</Filter>
     </FxCompile>
     <FxCompile Include="Assets\Shader\NoShade.hlsl">
+      <Filter>02Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Assets\Shader\Firewood.hlsl">
       <Filter>02Shader</Filter>
     </FxCompile>
   </ItemGroup>
