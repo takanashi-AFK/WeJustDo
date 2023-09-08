@@ -6,12 +6,11 @@ class Timer : public GameObject
 {
 private:
 	int frame;
+	int flimit;
 	bool active;
+	bool limitActive;
 	int drawX;
 	int drawY;
-	int hPict2_;
-	bool fin;
-
 
 	Text* num;
 	Transform pictPos;
@@ -34,13 +33,15 @@ public:
 
 	//タイマー開始
 	void Start();
+	void TimeLimitStart();
 
 	//タイマー一時停止
 	void Stop();
+	void TimeLimitStop();
 
 	//終わった時
 	bool IsFinished();
-	bool IsFin();
+	bool IsLimitEnd();
 
 	int GetTime() { return frame/60; };
 };

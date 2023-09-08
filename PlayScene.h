@@ -1,9 +1,11 @@
 #pragma once
 
 #include "Stage.h"
-#include "CountDown.h"
 #include "Engine/GameObject.h"
 
+//前方宣言
+class CountDown;
+class Timer;
 
 /// <summary>
 /// ゲームプレイ画面を表示するシーンオブジェクト
@@ -15,7 +17,9 @@ private:
 	int time;
 	int hPict2_[4];
 	bool flg =false;
+
 	CountDown* pCount;
+	Timer* pTimer;
 
 public:
 	//コンストラクタ

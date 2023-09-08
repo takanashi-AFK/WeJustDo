@@ -41,7 +41,6 @@ void CountDown::Release()
 
 bool CountDown::IsFinished()
 {
-	Image::Draw(hPict_[0]);
 	return flg_;
 }
 

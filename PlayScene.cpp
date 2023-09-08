@@ -4,6 +4,9 @@
 #include "Player.h"
 #include "Timer.h"
 #include "FuelGauge.h"
+#include "CountDown.h"
+
+
 #include "Engine/Image.h"
 #include "Engine/Camera.h"
 #include "AudioManager.h"
@@ -30,6 +33,10 @@ void PlayScene::Initialize()
 	FuelGauge* fg = Instantiate<FuelGauge>(this);
 
 	pCount = Instantiate<CountDown>(this);
+	pTimer = Instantiate<Timer>(this);
+
+	//‚±‚±‚Å§ŒÀŽžŠÔ‚ðŒˆ‚ß‚éyZ.Z•bz
+	pTimer->SetLimit(12.0f);
 
 	//BGM‚ðÄ¶
 	AudioManager::Initialize();
@@ -39,11 +46,16 @@ void PlayScene::Initialize()
 //XV
 void PlayScene::Update()
 {
-	
-	//if (time >= 600) {
-	//	SceneManager* sm = (SceneManager*)FindObject("SceneManager");
-	//	sm->ChangeScene(SCENE_ID_RESULT,TID_WHITEOUT);
-	//}
+	if (pCount->IsFinished())
+	{
+		pTimer->TimeLimitStart();
+	} 
+	pTimer->Update();
+
+	if (pTimer->IsLimitEnd()) {
+		SceneManager* sm = (SceneManager*)FindObject("SceneManager");
+		sm->ChangeScene(SCENE_ID_RESULT,TID_WHITEOUT);
+	}
 }
 
 //•`‰æ

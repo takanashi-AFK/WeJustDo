@@ -22,6 +22,15 @@ HRESULT Text::Initialize()
 	return S_OK;
 }
 
+HRESULT Text::InitializeJiyuu()
+{
+	strcpy_s(fileName_,"Fonts/JiyuuFont.png");
+	width_ = 32;
+	height_ = 64;
+	rowLength_ = 94;
+	return Initialize();
+}
+
 //初期化（オリジナルの画像）
 HRESULT Text::Initialize(const char* fileName, const unsigned int charWidth, const unsigned int charHeight, const unsigned int rowLength)
 {

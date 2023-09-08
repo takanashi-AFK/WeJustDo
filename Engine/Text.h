@@ -18,6 +18,8 @@ public:
 	//戻値：成功／失敗
 	HRESULT Initialize();
 
+	HRESULT InitializeJiyuu();
+
 	//初期化（オリジナルの画像を使いたい時）
 	//引数：fileName	画像ファイル名
 	//引数：charWidth	画像の１文字の幅（ピクセル）
@@ -25,7 +27,7 @@ public:
 	//引数：rowLength	画像の中に横に何文字並んでいるか
 	//戻値：成功／失敗
 	HRESULT Initialize(const char* fileName, const unsigned int charWidth, const unsigned int charHeight, const unsigned int rowLength);
-
+	
 
 	//描画（文字列）
 	//引数：x, y	表示位置（左上）

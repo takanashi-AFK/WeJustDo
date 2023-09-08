@@ -7,7 +7,7 @@ Timer::Timer(GameObject* obj)
 	: GameObject(obj, "Timer"), frame(0), active(false), drawX(600), drawY(400)
 {
 	num = new Text;
-	num->Initialize();
+	num->InitializeJiyuu();
 }
 
 Timer::~Timer()
@@ -24,29 +24,27 @@ void Timer::Initialize()
 
 void Timer::Update()
 {
-	if(active)
-	frame++;
+	if (active)
+		frame++;
 
+	if(limitActive)
+		flimit--;
 
 }
 
 
 void Timer::Draw()
 {
-	/*if (!(IsFinished()))
+	if (limitActive)
 	{
-		num->SetScale(5.0f);
-		if (frame % FPS < 10)
-			num->SetScale((frame % FPS) * 0.3f + 5.0f);
+		num->SetScale(1.0f);
+		if (flimit % FPS < 10)
+			num->SetScale((flimit % FPS) * 0.2f + 1.0f);
 		else
-			num->SetScale(5.0f);
-		int sec = (frame / FPS) + 1;
-		num->Draw(drawX+50, drawY, sec);
-	}*/
-	//‰æ‘œ‚ÌŠgk‚ð‚µ‚Ü‚·
-	static XMFLOAT3 Scale = { 0.0f,0.0f,0.0f };
-	//Œ»Ý‚ÌŽžŠÔ
-	 int sec = (frame / FPS)+1;
+			num->SetScale(1.0f);
+		int sec = flimit / FPS;
+		num->Draw(drawX + 100, drawY, sec);
+	}
 }
 
 void Timer::Release()
@@ -55,7 +53,7 @@ void Timer::Release()
 
 void Timer::SetLimit(float seconds)
 {
-	frame = (int)(seconds * FPS);
+	flimit = (int)(seconds * FPS);
 }
 
 void Timer::Start()
@@ -63,9 +61,19 @@ void Timer::Start()
 	active = true;
 }
 
+void Timer::TimeLimitStart()
+{
+	limitActive = true;
+}
+
 void Timer::Stop()
 {
 	active = false;
+}
+
+void Timer::TimeLimitStop()
+{
+	limitActive = false;
 }
 
 bool Timer::IsFinished()
@@ -73,7 +81,8 @@ bool Timer::IsFinished()
 	return (frame == 0);
 }
 
-bool Timer::IsFin()
+bool Timer::IsLimitEnd()
 {
-	return false;
+	return (flimit == 0);
 }
+
