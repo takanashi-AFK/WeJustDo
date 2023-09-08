@@ -52,6 +52,10 @@ void StandingState::Enter(Player* _p)
 	_p->SetIsJetNow(false);
 	_p->SetAcceleration(0);//重力をリセット
 	Model::SetAnimFrame(_p->GetModelHandle(), 0, 0, 1);
+
+	_p->InitRandEffect();
+	EmitterData Emit = _p->GetRandEData();
+	VFX::Start(Emit);
 }
 
 //入力処理	

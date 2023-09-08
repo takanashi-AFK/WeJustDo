@@ -57,18 +57,29 @@ void Player::ChildUpdate()
 
 	//アイテムとの当たり判定
 	if (isMove_) {
-		
+
 		GetFirewood();
-		
+
 		//状態ごとの更新
 		pState_->Update(this);
 
 		//ステージとのあたり判定
 		StageRayCast();
 
-		Camera::SetPosition(transform_.position_.x + 5, transform_.position_.y + 3, -13.0f);
-		Camera::SetTarget(transform_.position_.x + 5, transform_.position_.y + 3, 0.0f);
 	}
+		if (transform_.position_.y >= 0 && transform_.position_.y <= 8) {
+			Camera::SetPosition(transform_.position_.x + 5, transform_.position_.y + 3, -13.0f);
+			Camera::SetTarget(transform_.position_.x + 5, transform_.position_.y + 3, 0.0f);
+		}
+		else if (transform_.position_.y >= 9 && transform_.position_.y <= 15) {
+			Camera::SetPosition(transform_.position_.x + 5, transform_.position_.y + 12, -13.0f);
+			Camera::SetTarget(transform_.position_.x + 5, transform_.position_.y + 12, 0.0f);
+		}
+		else if (transform_.position_.y <= -3 && transform_.position_.y >= -5)
+		{
+			Camera::SetPosition(Camera::GetPosition().x, Camera::GetPosition().y, Camera::GetPosition().z);
+			Camera::SetTarget(Camera::GetTarget());
+		}
 }
 
 //開放

@@ -37,7 +37,7 @@ void RunningState::Update(Player* _p)
 
 		//standing
 		if (!Input::IsKey(DIK_D) && !Input::IsKey(DIK_A))
-			_p->GetState()->ChangeState(_p->GetState()->pStanding_, _p, true);
+			_p->GetState()->ChangeState(_p->GetState()->pStanding_, _p, false);
 		//dead
 		if (ppos.y <= -3 && ppos.y >= -5)
 			_p->GetState()->ChangeState(_p->GetState()->pDead_, _p, true);

@@ -8,9 +8,9 @@ void JetState::Update(Player* _p)
 {
 	////入力処理
 	//HandleInput(_p);
-	//XMFLOAT3 ppos;
-	//ppos = _p->GetPosition();
-	//Transform* TJumping = _p->GetTransformAddress();
+	XMFLOAT3 ppos;
+	ppos = _p->GetPosition();
+	Transform* TJumping = _p->GetTransformAddress();
 
 	//{//State変化
 
@@ -18,9 +18,9 @@ void JetState::Update(Player* _p)
 	//	//if (!Input::IsKey(DIK_D) && !Input::IsKey(DIK_A))
 	//	//	_p->GetState()->ChangeState(_p->GetState()->pStanding_, _p, true);
 
-	//	//dead
-	//	if (ppos.y <= -3 && ppos.y >= -5)
-	//		_p->GetState()->ChangeState(_p->GetState()->pDead_, _p, true);
+		//dead
+		if (ppos.y <= -3 && ppos.y >= -5)
+			_p->GetState()->ChangeState(_p->GetState()->pDead_, _p, true);
 
 	//	if (Input::IsKeyUp(DIK_SPACE)) {
 	//	
@@ -54,6 +54,8 @@ void JetState::Update(Player* _p)
 		_p->SetAcceleration(0);//重力をリセット
 		_p->GetState()->ChangeState(_p->GetState()->pStanding_, _p);//着地状態に移動
 	}
+
+
 }
 
 void JetState::Enter(Player* _p)

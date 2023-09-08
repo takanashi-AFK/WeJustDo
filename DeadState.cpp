@@ -4,18 +4,22 @@
 #include "AudioManager.h"
 #include "Engine/Input.h"
 #include "Engine/VFX.h"
+#include "Engine/Camera.h"
 
 void DeadState::Update(Player* _p)
 {
+
+	ppos = _p->GetPosition();
+
 	//“ü—Íˆ—
 	HandleInput(_p);
 }
 
 void DeadState::Enter(Player* _p)
 {
-	XMFLOAT3 ppos;
-	ppos = _p->GetPosition();
+	
 
+	ppos = _p->GetPosition();
 	EmitterData dead = _p->GetDeadEData();
 	_p->InitDeadEffect();
 	dead.position = XMFLOAT3(ppos.x, 0, -1);

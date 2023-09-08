@@ -3,7 +3,7 @@
 #include "PlayerStateManager.h"
 class DeadState : public PlayerState
 {
-
+	XMFLOAT3 ppos;
 public:
 
 	//XV
