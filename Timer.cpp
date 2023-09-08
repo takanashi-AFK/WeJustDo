@@ -4,7 +4,7 @@
 static const int FPS = 60;
 
 Timer::Timer(GameObject* obj)
-	: GameObject(obj, "Timer"), frame(0), active(false), drawX(600), drawY(400)
+	: GameObject(obj, "Timer"), frame(0), active(false), drawX(1200), drawY(100)
 {
 	num = new Text;
 	num->InitializeJiyuu();
@@ -37,13 +37,22 @@ void Timer::Draw()
 {
 	if (limitActive)
 	{
-		num->SetScale(1.0f);
-		if (flimit % FPS < 10)
-			num->SetScale((flimit % FPS) * 0.2f + 1.0f);
+		if (flimit / FPS <= 10)
+		{
+			num->SetScale(0.8f);
+			if (flimit % FPS < 10)
+				num->SetScale((flimit % FPS) * 0.1f + 1.0f);
+			//else
+			//	num->SetScale(0.8f);
+			int sec = flimit / FPS;
+			num->Draw(drawX, drawY, sec);
+		}
 		else
-			num->SetScale(1.0f);
-		int sec = flimit / FPS;
-		num->Draw(drawX + 100, drawY, sec);
+		{
+			num->SetScale(0.8f);
+			int sec = flimit / FPS;
+			num->Draw(drawX , drawY, sec);
+		}
 	}
 }
 
@@ -83,6 +92,6 @@ bool Timer::IsFinished()
 
 bool Timer::IsLimitEnd()
 {
-	return (flimit == 0);
+	return (flimit <= 0);
 }
 

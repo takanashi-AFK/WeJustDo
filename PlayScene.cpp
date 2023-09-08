@@ -36,7 +36,7 @@ void PlayScene::Initialize()
 	pTimer = Instantiate<Timer>(this);
 
 	//‚±‚±‚Å§ŒÀŽžŠÔ‚ðŒˆ‚ß‚éyZ.Z•bz
-	pTimer->SetLimit(12.0f);
+	pTimer->SetLimit(15.0f);
 
 	//BGM‚ðÄ¶
 	AudioManager::Initialize();
@@ -50,7 +50,6 @@ void PlayScene::Update()
 	{
 		pTimer->TimeLimitStart();
 	} 
-	pTimer->Update();
 
 	if (pTimer->IsLimitEnd()) {
 		SceneManager* sm = (SceneManager*)FindObject("SceneManager");
