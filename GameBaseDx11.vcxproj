@@ -126,6 +126,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="CountDown.cpp" />
     <ClCompile Include="DeadState.cpp" />
     <ClCompile Include="DebugObject.cpp" />
     <ClCompile Include="Engine\Component\Component.cpp" />
@@ -154,6 +155,7 @@
     <ClCompile Include="Engine\Text.cpp" />
     <ClCompile Include="Engine\Texture.cpp" />
     <ClCompile Include="Engine\Component\Transform\Transform.cpp" />
+    <ClCompile Include="FuelGauge.cpp" />
     <ClCompile Include="JetState.cpp" />
     <ClCompile Include="JumpingState.cpp" />
     <ClCompile Include="MovieState.cpp" />
@@ -169,10 +171,12 @@
     <ClCompile Include="StageSelectScene.cpp" />
     <ClCompile Include="StandingState.cpp" />
     <ClCompile Include="TestScene.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AudioManager.h" />
+    <ClInclude Include="CountDown.h" />
     <ClInclude Include="DeadState.h" />
     <ClInclude Include="DebugObject.h" />
     <ClInclude Include="Engine\Component\Component.h" />
@@ -201,6 +205,7 @@
     <ClInclude Include="Engine\Text.h" />
     <ClInclude Include="Engine\Texture.h" />
     <ClInclude Include="Engine\Component\Transform\Transform.h" />
+    <ClInclude Include="FuelGauge.h" />
     <ClInclude Include="JetState.h" />
     <ClInclude Include="JumpingState.h" />
     <ClInclude Include="MovieState.h" />
@@ -216,6 +221,7 @@
     <ClInclude Include="StageSelectScene.h" />
     <ClInclude Include="StandingState.h" />
     <ClInclude Include="TestScene.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="TitleScene.h" />
   </ItemGroup>
   <ItemGroup>
