@@ -44,6 +44,7 @@ void Player::ChildInitialize()
 	pJet = new PolyLine(0.4, 10);
 	pJet->Load("Effects/Fire.png");
 
+	SetFirewoodNum(10000);
 }
 
 //XV
@@ -67,19 +68,21 @@ void Player::ChildUpdate()
 		StageRayCast();
 
 	}
-		if (transform_.position_.y >= 0 && transform_.position_.y <= 8) {
+
+		if (transform_.position_.y >= -1 && transform_.position_.y <= 15) {
 			Camera::SetPosition(transform_.position_.x + 5, transform_.position_.y + 3, -13.0f);
 			Camera::SetTarget(transform_.position_.x + 5, transform_.position_.y + 3, 0.0f);
 		}
-		else if (transform_.position_.y >= 9 && transform_.position_.y <= 15) {
-			Camera::SetPosition(transform_.position_.x + 5, transform_.position_.y + 12, -13.0f);
-			Camera::SetTarget(transform_.position_.x + 5, transform_.position_.y + 12, 0.0f);
+		else if (transform_.position_.y > 15) {
+			Camera::SetPosition(transform_.position_.x + 5, Camera::GetPosition().y, -13.0f);
+			Camera::SetTarget(transform_.position_.x + 5, Camera::GetTarget().y, 0.0f);
 		}
 		else if (transform_.position_.y <= -3 && transform_.position_.y >= -5)
 		{
 			Camera::SetPosition(Camera::GetPosition().x, Camera::GetPosition().y, Camera::GetPosition().z);
 			Camera::SetTarget(Camera::GetTarget());
 		}
+
 }
 
 //ŠJ•ú
