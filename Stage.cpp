@@ -81,7 +81,7 @@ void Stage::Draw()
 	//m_Firewood
 	{
 		//シェーダーを適用
-		SetShader(SHADER_FWOOD);
+		//SetShader(SHADER_FWOOD);
 
 		//位置・角度・大きさ
 		Transform t_Firewood; t_Firewood.SetPosition(0, 5, 0);

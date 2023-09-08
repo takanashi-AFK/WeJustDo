@@ -24,30 +24,30 @@ void TestScene::Initialize()
 	Instantiate<Stage>(this);
 
 	//Player Create
-	p_ = CreateSolidObject<Player>(this, "Models/ziro_move.fbx"); {
+	//p_ = CreateSolidObject<Player>(this, "Models/ziro_move.fbx"); {
 		//p->SetIsMove(false); 
-	}
+	//}
 
 	//DebugObject Create
-	//CreateSolidObject<DebugObject>(this, "Models/defaultModel.fbx");
+	CreateSolidObject<DebugObject>(this, "Models/defaultModel.fbx");
 
-	ASSIGN(hPict_, Image::Load("Image/BackGround4.png"));
+	ASSIGN(hPict_, Image::Load("Image/BackGround3.png"));
 }
 
 //更新
 void TestScene::Update()
 {
-	if (p_->GetPosition().y <= -20.0f) {
-		//シーン遷移を行う
-		SceneManager* sm = (SceneManager*)FindObject("SceneManager");
-		sm->ChangeScene(SCENE_ID_RESULT, TID_WHITEOUT);
-	}
+	//if (p_->GetPosition().y <= -20.0f) {
+	//	//シーン遷移を行う
+	//	SceneManager* sm = (SceneManager*)FindObject("SceneManager");
+	//	sm->ChangeScene(SCENE_ID_RESULT, TID_WHITEOUT);
+	//}
 }
 
 //描画
 void TestScene::Draw()
 {
-	pText_->Draw(30, 30, p_->GetFirewoodNum()/5);
+	//pText_->Draw(30, 30, p_->GetFirewoodNum()/5);
 	//Image::SetRect(hPict_, );
 	Transform t_bg; t_bg.scale_ = { 1.4f,1.4f,1.4f };
 	Image::SetTransform(hPict_, t_bg);
