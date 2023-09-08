@@ -24,12 +24,12 @@ void TestScene::Initialize()
 	Instantiate<Stage>(this);
 
 	//Player Create
-	//p_ = CreateSolidObject<Player>(this, "Models/ziro_move.fbx"); {
+	p_ = CreateSolidObject<Player>(this, "Models/ziro_move.fbx"); {
 		//p->SetIsMove(false); 
-	//}
+	}
 
 	//DebugObject Create
-	CreateSolidObject<DebugObject>(this, "Models/defaultModel.fbx");
+	//CreateSolidObject<DebugObject>(this, "Models/defaultModel.fbx");
 
 	ASSIGN(hPict_, Image::Load("Image/BackGround3.png"));
 }
