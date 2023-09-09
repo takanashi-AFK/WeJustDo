@@ -52,6 +52,8 @@ protected:
 	bool		isJumpNow_;		//ƒWƒƒƒ“ƒv’†‚©”Û‚©
 	bool		isMove_;		//“®‚¢‚Ä‚¢‚¢‚¢‚©
 	bool		isJetNow_ = false;
+/////////////////////////////////////////
+
 public:
 	
 	EmitterData  RandEffectData_;

@@ -100,6 +100,8 @@ void Player::ChildDraw()
 	Direct3D::SetShader(Direct3D::SHADER_UNLIT);
 	Transform t_Box; t_Box.position_ = transform_.position_; t_Box.position_.y + 0.5f;
 	Model::SetTransform(hBox_, t_Box);Model::Draw(hBox_);
+
+
 }
 
 void Player::StageRayCast()
