@@ -1,10 +1,24 @@
 #pragma once
 #include "Engine/GameObject.h"
 
+class StartCount;
+class Timer;
+
 //テストシーンを管理するクラス
 class TestScene : public GameObject
 {
 	bool isGameNow_;
+
+	//必要なオブジェクト
+	StartCount* pStartCount_;//Object-StartCount
+	//UI-ItemCount
+	Timer* pTimer_;//UI-TimeCount
+	//UI-JetpackGauge
+	//Object-Player
+	//Object-Stage
+	//Image-BackGround
+	//Audio-PlaySceneMusic
+
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）

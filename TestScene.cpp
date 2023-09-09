@@ -2,6 +2,7 @@
 
 //インクルード
 #include "Engine/SceneManager.h"
+#include "Timer.h"
 
 //コンストラクタ
 TestScene::TestScene(GameObject * parent)
@@ -14,11 +15,14 @@ void TestScene::Initialize()
 {
 	//Sceneに必要なもの
 	{
-	//Object-StartCount
-
 	//UI-ItemCount
 
 	//UI-TimeCount
+		ASSIGN(pTimer_, Instantiate<Timer>(this)); {
+			pTimer_->SetTime_Seconds(20);
+			pTimer_->Start(true);//タイマーを開始する 
+		}
+	//Object-StartCount
 
 	//UI-JetpackGauge
 
@@ -41,19 +45,18 @@ void TestScene::Update()
 	//ゲームを開始する
 	isGameNow_ = true;
 
-	//タイマーを開始 
 	//スタートカウントを実行する(3..2..1..みたいな)
-	if (true) {/*スタートカウント演出を処理したら*/
+	if (false) {/*スタートカウント演出を処理したら*/
 		//Playerを動作可能にする
 	}
 
 //Play
 	//制限時間になるまでタイマーを動かす
-	if (true) {/*制限時間になったら*/
+	if (pTimer_->IsFinished()) {/*制限時間になったら*/
 		//ゲームを終了する
 		isGameNow_ = false;
 	}
-	if (true) {/*PlayerがDead状態になり死亡演出を処理したら*/
+	if (false) {/*PlayerがDead状態になり死亡演出を処理したら*/
 		//ゲームを終了する
 		isGameNow_ = false;
 	}

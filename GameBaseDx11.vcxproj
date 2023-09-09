@@ -126,7 +126,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AudioManager.cpp" />
-    <ClCompile Include="CountDown.cpp" />
+    <ClCompile Include="StartCount.cpp" />
     <ClCompile Include="DeadState.cpp" />
     <ClCompile Include="DebugObject.cpp" />
     <ClCompile Include="Engine\Component\Component.cpp" />
@@ -176,7 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AudioManager.h" />
-    <ClInclude Include="CountDown.h" />
+    <ClInclude Include="StartCount.h" />
     <ClInclude Include="DeadState.h" />
     <ClInclude Include="DebugObject.h" />
     <ClInclude Include="Engine\Component\Component.h" />

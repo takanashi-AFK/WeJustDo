@@ -3,17 +3,17 @@
 
 class Timer;
 
-class CountDown :
+class StartCount :
     public GameObject
 {
 private:
 	int hPict_[4];
 	bool flg_;
-	Timer* pTimer;
+	Timer* pTimer_;
 
 public:
-	CountDown(GameObject* obj);
-	~CountDown();
+	StartCount(GameObject* obj);
+	~StartCount();
 
 	void Initialize()override;
 

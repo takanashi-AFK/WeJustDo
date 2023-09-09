@@ -1,20 +1,21 @@
-#include "CountDown.h"
+#include "StartCount.h"
 #include "Timer.h"
 #include <string>
+#include "Engine/Image.h"
 
-CountDown::CountDown(GameObject* obj)
-	:GameObject(obj,"CountDown"),flg_(false)
+StartCount::StartCount(GameObject* obj)
+	:GameObject(obj,"StartCount"),flg_(false),hPict_{},pTimer_(nullptr)
 {
 }
 
-CountDown::~CountDown()
+StartCount::~StartCount()
 {
 }
 
-void CountDown::Initialize()
+void StartCount::Initialize()
 {
-	pTimer = Instantiate<Timer>(this);
-	pTimer->Start();
+	pTimer_ = Instantiate<Timer>(this);
+	pTimer_->Start(true);
 
 	string file;
 	file = "Image/Count";
@@ -26,25 +27,25 @@ void CountDown::Initialize()
 	}
 }
 
-void CountDown::Update()
+void StartCount::Update()
 {
 }
 
-void CountDown::Draw()
+void StartCount::Draw()
 {
-	Count(pTimer->GetTime());
+	//Count(pTimer_->GetTime());
 }
 
-void CountDown::Release()
+void StartCount::Release()
 {
 }
 
-bool CountDown::IsFinished()
+bool StartCount::IsFinished()
 {
 	return flg_;
 }
 
-void CountDown::Count(int time)
+void StartCount::Count(int time)
 {
 	if (time == 1)
 	{
