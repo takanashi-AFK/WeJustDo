@@ -29,7 +29,7 @@ void Player::ChildInitialize()
 	ASSIGN(hBox_, Model::Load("Models/defaultModel.fbx"));
 
 	//ˆÊ’u‚Ì‰Šú‰»
-	transform_.position_.y = 2;
+	transform_.position_ = { 0.0f,1.0f,0.0f };
 	transform_.rotate_.y = 90;
 	//‰Šúó‘Ô‚ÌŠJŽnˆ—
 	pState_->Enter(this);
@@ -43,6 +43,9 @@ void Player::ChildInitialize()
 	//pDead->Load("Effects/Tex.png");
 	pJet = new PolyLine(0.4, 10);
 	pJet->Load("Effects/Fire.png");
+
+	Camera::SetPosition(transform_.position_.x + 5, transform_.position_.y + 3, -13.0f);
+	Camera::SetTarget(transform_.position_.x + 5, transform_.position_.y + 3, 0.0f);
 
 }
 

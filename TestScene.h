@@ -3,6 +3,9 @@
 
 class StartCount;
 class Timer;
+class ItemCounter;
+class Stage;
+class Player;
 
 //テストシーンを管理するクラス
 class TestScene : public GameObject
@@ -11,12 +14,12 @@ class TestScene : public GameObject
 
 	//必要なオブジェクト
 	StartCount* pStartCount_;//Object-StartCount
-	//UI-ItemCount
+	ItemCounter* pItemCounter_;//UI-ItemCount
 	Timer* pTimer_;//UI-TimeCount
 	//UI-JetpackGauge
-	//Object-Player
-	//Object-Stage
-	//Image-BackGround
+	Player* pPlayer_;//Object-Player
+	Stage* pStage_;//Object-Stage
+	int hPict_;//Image-BackGround
 	//Audio-PlaySceneMusic
 
 public:
