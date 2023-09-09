@@ -3,6 +3,7 @@
 //インクルード
 #include "Engine/SceneManager.h"
 #include "Timer.h"
+#include "StartCount.h"
 
 //コンストラクタ
 TestScene::TestScene(GameObject * parent)
@@ -15,15 +16,19 @@ void TestScene::Initialize()
 {
 	//Sceneに必要なもの
 	{
+	//Object-StartCount
+		ASSIGN(pStartCount_, Instantiate<StartCount>(this));
+		{
+
+		}
 	//UI-ItemCount
 
 	//UI-TimeCount
-		ASSIGN(pTimer_, Instantiate<Timer>(this)); {
-			pTimer_->SetTime_Seconds(20);
-			pTimer_->Start(true);//タイマーを開始する 
+		ASSIGN(pTimer_, Instantiate<Timer>(this)); 
+		{
+			pTimer_->SetTime_Seconds(120);
+			pTimer_->IsDraw(true);
 		}
-	//Object-StartCount
-
 	//UI-JetpackGauge
 
 	//Object-Player
@@ -46,8 +51,9 @@ void TestScene::Update()
 	isGameNow_ = true;
 
 	//スタートカウントを実行する(3..2..1..みたいな)
-	if (false) {/*スタートカウント演出を処理したら*/
+	if (pStartCount_->IsFinished()) {/*スタートカウント演出を処理したら*/
 		//Playerを動作可能にする
+		pTimer_->Start(true);//タイマーを開始する
 	}
 
 //Play

@@ -1,39 +1,40 @@
 #include "StartCount.h"
 #include "Timer.h"
-#include <string>
 #include "Engine/Image.h"
+#include <string>
 
 StartCount::StartCount(GameObject* obj)
-	:GameObject(obj,"StartCount"),flg_(false),hPict_{},pTimer_(nullptr)
-{
-}
-
-StartCount::~StartCount()
+	:GameObject(obj,"StartCount"),isfinished_(false),hPict_{},pTimer_(nullptr)
 {
 }
 
 void StartCount::Initialize()
 {
-	pTimer_ = Instantiate<Timer>(this);
-	pTimer_->Start(true);
+	//タイマーを生成
+	pTimer_ = Instantiate<Timer>(this); {
+		pTimer_->IsDraw(false);
+		pTimer_->Start(false);
+	}
 
-	string file;
-	file = "Image/Count";
-
-	for (int i = 0; i < 4; i++)
-	{
-		string fileName = file + std::to_string(i) + ".png";
-		hPict_[i] = Image::Load(fileName);
+	//画像をロード
+	for (int i = 0; i < 4; i++){
+		hPict_[i] = Image::Load("Image/Count" + std::to_string(i) + ".png");
 	}
 }
 
 void StartCount::Update()
 {
+	//３．２．１．Start..(4Count)までいったら終了
+	if (pTimer_->IsFinished(4 + 1)) {
+		isfinished_ = true;
+		pTimer_->Stop(false);
+	}
 }
 
 void StartCount::Draw()
 {
-	//Count(pTimer_->GetTime());
+	//画像を描画
+	CountDraw(pTimer_->GetTime_Seconds());
 }
 
 void StartCount::Release()
@@ -42,30 +43,38 @@ void StartCount::Release()
 
 bool StartCount::IsFinished()
 {
-	return flg_;
+	//終了したかどうかを返す
+	return isfinished_;
 }
 
-void StartCount::Count(int time)
+void StartCount::CountDraw(int time)
 {
-	if (time == 1)
-	{
-		Image::SetTransform(hPict_[3], transform_);
-		Image::Draw(hPict_[3]);
+	//終了していたら以後は行わない
+	if (isfinished_)return;
+
+	for (int i = 0; i < 4; i++) {
+		if (time == i) {
+			Image::SetTransform(hPict_[4-i], transform_);
+			Image::Draw(hPict_[4-i]);
+		}
 	}
-	else if (time == 2)
-	{
-		Image::SetTransform(hPict_[3], transform_);
-		Image::Draw(hPict_[2]);
-	}
-	else if (time == 3)
-	{
-		Image::SetTransform(hPict_[3], transform_);
-		Image::Draw(hPict_[1]);
-	}
-	else if (time == 4)
-	{
-		Image::SetTransform(hPict_[0], transform_);
-		Image::Draw(hPict_[0]);
-		flg_ = true;
-	}
+
+
+	////各秒数ごとに画像を描画
+	//if (time == 1){
+	//	Image::SetTransform(hPict_[3], transform_);
+	//	Image::Draw(hPict_[3]);
+	//}
+	//else if (time == 2){
+	//	Image::SetTransform(hPict_[2], transform_);
+	//	Image::Draw(hPict_[2]);
+	//}
+	//else if (time == 3){
+	//	Image::SetTransform(hPict_[1], transform_);
+	//	Image::Draw(hPict_[1]);
+	//}
+	//else if (time == 4){
+	//	Image::SetTransform(hPict_[0], transform_);
+	//	Image::Draw(hPict_[0]);
+	//}
 }

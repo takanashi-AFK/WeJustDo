@@ -12,13 +12,13 @@ private:
 	bool countActive_;//カウントアップ実行中かどうか
 	
 	Text* pText_;	//テキスト
-	int hTimerFlame_;
+	int hTimerFlame_;	//画像
 
 	int drawPosX_;//描画位置X
 	int drawPosY_;//描画位置Y
 	float drawSize_;//描画サイズ
 
-
+	bool isDraw_;	//描画フラグ
 
 public:
 	//コンストラクタ
@@ -82,5 +82,8 @@ public:
 
 	//設定：描画サイズ
 	void SetDrawSize(float _size);
+
+	//設定：タイマーを表示するかどうか
+	void IsDraw(bool _flag) { isDraw_ = _flag; }
 
 };

@@ -12,8 +12,8 @@ namespace {
 }	
 
 Timer::Timer(GameObject* obj)
-	: GameObject(obj, "Timer"), frame_(0), limitActive_(false),countActive_(false), pText_(nullptr),
-	drawPosX_(0),drawPosY_(0)
+	: GameObject(obj, "Timer"), frame_(0), limitActive_(false), countActive_(false), pText_(nullptr),
+	hTimerFlame_(0), drawPosX_(0), drawPosY_(0),drawSize_(0), isDraw_(false)
 {
 }
 
@@ -42,6 +42,8 @@ void Timer::Update()
 
 void Timer::Draw()
 {
+	if (!isDraw_)return;
+
 	//タイマーフレームの表示
 	Transform t_Flame; {
 		t_Flame.scale_ = FLAME_SIZE;
@@ -70,9 +72,6 @@ void Timer::Draw()
 	}
 	else
 		pText_->Draw(drawPosX_, drawPosY_, result.c_str());
-	
-	
-
 }
 
 void Timer::Release()
@@ -106,7 +105,7 @@ bool Timer::IsFinished()
 bool Timer::IsFinished(int _s)
 {
 	//_s 以上になったらtrueを返す
-	return (frame_ >= _s);
+	return (frame_ >= _s*60);
 }
 
 void Timer::SetDrawSize(float _size)
