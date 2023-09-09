@@ -6,6 +6,11 @@
 
 static const int FPS = 60;//フレームレート
 
+namespace {
+	const XMFLOAT3 FLAME_SIZE = { 0.12f,0.12f,1.0f };
+	const XMFLOAT3 FLAME_POSITION = { 0.8f,0.875f,0.0f };
+}	
+
 Timer::Timer(GameObject* obj)
 	: GameObject(obj, "Timer"), frame_(0), limitActive_(false),countActive_(false), pText_(nullptr),
 	drawPosX_(0),drawPosY_(0)
@@ -15,12 +20,15 @@ Timer::Timer(GameObject* obj)
 void Timer::Initialize()
 {
 	//テキストの初期化
-	pText_ = new Text;
-	pText_->Initialize();
+	ASSIGN(pText_, new Text);
+	pText_->Initialize("Fonts/QuizFont_number.png", 64, 68, 15);
+
+	//画像の初期化
+	ASSIGN(hTimerFlame_, Image::Load("Image/TimerFlame2.png"));
 
 	//描画位置.サイズの初期化
-	SetDrawPosition(1150, 100);
-	SetDrawSize(1.5f);
+	SetDrawPosition(1140, 50);
+	SetDrawSize(0.6f);
 }
 
 void Timer::Update()
@@ -34,15 +42,21 @@ void Timer::Update()
 
 void Timer::Draw()
 {
+	//タイマーフレームの表示
+	Transform t_Flame; {
+		t_Flame.scale_ = FLAME_SIZE;
+		t_Flame.position_ = FLAME_POSITION;
+		Image::SetTransform(hTimerFlame_, t_Flame);
+		Image::Draw(hTimerFlame_);
+	}
+	
 	// ゼロ埋めのフォーマット指定子を使用して文字列を生成
 	char buffer[4];//文字数+1分の配列サイズ
 	snprintf(buffer, sizeof(buffer), "%03d", GetTime_Seconds());
 	std::string result = (std::string)buffer;
-	
-	float tx_defaultSize = 1.5f;//テキストサイズ
 
 	//通常時の描画
-	SetDrawSize(tx_defaultSize);
+	SetDrawSize(GetDrawSize());
 
 	//10秒以下になったら
 	if (GetTime_Seconds() <= 10)
@@ -51,12 +65,14 @@ void Timer::Draw()
 		if (frame_ % FPS < 10)
 			SetDrawSize((frame_ % FPS) * 0.1f + 1.0f);
 		else
-			SetDrawSize(tx_defaultSize);
+			SetDrawSize(0.6f);
 		pText_->Draw(drawPosX_, drawPosY_, result.c_str());
 	}
 	else
 		pText_->Draw(drawPosX_, drawPosY_, result.c_str());
 	
+	
+
 }
 
 void Timer::Release()
@@ -95,5 +111,6 @@ bool Timer::IsFinished(int _s)
 
 void Timer::SetDrawSize(float _size)
 {
+	drawSize_ = _size;
 	pText_->SetScale(_size);
 }

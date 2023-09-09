@@ -10,10 +10,15 @@ private:
 	int frame_;	//時間(フレーム)
 	bool limitActive_;//カウントダウン実行中かどうか
 	bool countActive_;//カウントアップ実行中かどうか
+	
 	Text* pText_;	//テキスト
+	int hTimerFlame_;
 
 	int drawPosX_;//描画位置X
 	int drawPosY_;//描画位置Y
+	float drawSize_;//描画サイズ
+
+
 
 public:
 	//コンストラクタ
@@ -72,6 +77,10 @@ public:
 	//設定：描画位置(y座標)
 	void SetDrawPositionY(int _y) { drawPosX_ = _y; }
 
+	//取得：描画サイズ
+	float GetDrawSize() { return drawSize_; }
+
 	//設定：描画サイズ
 	void SetDrawSize(float _size);
+
 };
