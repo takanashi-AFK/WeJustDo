@@ -52,29 +52,21 @@ void StartCount::CountDraw(int time)
 	//I—¹‚µ‚Ä‚¢‚½‚çˆÈŒã‚Ís‚í‚È‚¢
 	if (isfinished_)return;
 
-	for (int i = 0; i < 4; i++) {
-		if (time == i) {
-			Image::SetTransform(hPict_[4-i], transform_);
-			Image::Draw(hPict_[4-i]);
-		}
+	//Še•b”‚²‚Æ‚É‰æ‘œ‚ğ•`‰æ
+	if (time == 1){
+		Image::SetTransform(hPict_[3], transform_);
+		Image::Draw(hPict_[3]);
 	}
-
-
-	////Še•b”‚²‚Æ‚É‰æ‘œ‚ğ•`‰æ
-	//if (time == 1){
-	//	Image::SetTransform(hPict_[3], transform_);
-	//	Image::Draw(hPict_[3]);
-	//}
-	//else if (time == 2){
-	//	Image::SetTransform(hPict_[2], transform_);
-	//	Image::Draw(hPict_[2]);
-	//}
-	//else if (time == 3){
-	//	Image::SetTransform(hPict_[1], transform_);
-	//	Image::Draw(hPict_[1]);
-	//}
-	//else if (time == 4){
-	//	Image::SetTransform(hPict_[0], transform_);
-	//	Image::Draw(hPict_[0]);
-	//}
+	else if (time == 2){
+		Image::SetTransform(hPict_[2], transform_);
+		Image::Draw(hPict_[2]);
+	}
+	else if (time == 3){
+		Image::SetTransform(hPict_[1], transform_);
+		Image::Draw(hPict_[1]);
+	}
+	else if (time == 4){
+		Image::SetTransform(hPict_[0], transform_);
+		Image::Draw(hPict_[0]);
+	}
 }
