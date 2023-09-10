@@ -8,6 +8,7 @@
 #include "Engine/Debug.h"
 #include "Engine/Camera.h"
 #include "AudioManager.h"
+#include "Engine/Audio.h"
 
 //コンストラクタ
 Player::Player(GameObject* _parent, string _modelFileName)
@@ -246,6 +247,8 @@ void Player::OnWoodPickup(Stage* pS)
 		//エフェクト
 		PlusOneEffectData.position = (XMFLOAT3(transform_.position_.x - 0.5, transform_.position_.y + 0.5, 0));
 		VFX::Start(PlusOneEffectData);
+
+		AudioManager::Play_WoodSound();
 
 		//その場所の薪を消して空気に変換
 		pS->SetItem(round(transform_.position_.x), round(transform_.position_.y), 0);

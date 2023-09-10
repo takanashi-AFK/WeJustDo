@@ -57,5 +57,7 @@ namespace AudioManager {
 	/// </summary>
 	void Stop_FootSound();
 
+	void Play_WoodSound();
+
 	void Release();
 };

@@ -5,8 +5,6 @@
 
 class JetState : public PlayerState
 {
-	PolyLine jett;
-
 public:
 	//XV
 	void Update(Player* _p);

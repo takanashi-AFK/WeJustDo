@@ -12,6 +12,7 @@ namespace AudioManager
 	int hJumpSound_;
 	int hJetSound_;
 	int hFootSound_;
+	int hWoodSound_;
 
 	void Play_DonSound()
 	{
@@ -79,6 +80,13 @@ namespace AudioManager
 	void Stop_FootSound()
 	{
 		Audio::Stop(hFootSound_);
+	}
+
+	void Play_WoodSound()
+	{
+		hWoodSound_ = Audio::Load("Sounds/db63fc113271b1a0.wav");
+		assert(hWoodSound_ >= 0);
+		Audio::Play(hWoodSound_);
 	}
 
 	void Stop_JetSound()
