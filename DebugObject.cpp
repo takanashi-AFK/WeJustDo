@@ -22,7 +22,7 @@ void DebugObject::ChildUpdate()
 	if (pS->AtItem(this, 1)) {
 		pS->SetItem(transform_.position_.x, transform_.position_.y, 0);
 	}
-
+	transform_.position_.x += 0.05f;
 	//ÉJÉÅÉâ
 	Camera::SetPosition(transform_.position_.x,transform_.position_.y, -12.7+transform_.position_.z);
 	Camera::SetTarget(transform_.position_.x, transform_.position_.y, 7.3f);
@@ -37,8 +37,8 @@ void DebugObject::HandleInput()
 {
 	if (Input::IsKey(DIK_W))transform_.position_.y += 0.1f;
 	if (Input::IsKey(DIK_S))transform_.position_.y -= 0.1f;
-	if (Input::IsKey(DIK_A))transform_.position_.x -= 0.1f;
-	if (Input::IsKey(DIK_D))transform_.position_.x += 0.1f;
+	//if (Input::IsKey(DIK_A))transform_.position_.x -= 0.1f;
+	//if (Input::IsKey(DIK_D))transform_.position_.x += 0.1f;
 	if (Input::IsKey(DIK_UP))transform_.position_.z += 0.1f;
 	if (Input::IsKey(DIK_DOWN))transform_.position_.z -= 0.1f;
 
