@@ -166,9 +166,6 @@ void Player::StageRayCast()
 		if (downData.dist < (PLAYER_MODEL_SIZE.y / 2)) {
 			//ó‘Ô‚ğ"Standing"‚É•ÏX
 			pState_->ChangeState(pState_->pStanding_, this);
-
-			//jumpó‘Ô‚ğI—¹
-			//isJumpNow_ = false;
 		}
 		else
 			isAddGravity_ = true;

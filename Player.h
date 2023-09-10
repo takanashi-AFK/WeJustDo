@@ -24,25 +24,26 @@ namespace {
 /// </summary>
 class Player : public SolidObject
 {
+///// 必要な情報 ////////////////////////////////////////
 private:
 	int hDebugBox_;	//モデル番号(DebugBox)
 	PolyLine* pJet;//ジェットエフェクトのポリラインデータ
 	int firewoodNum_;//プレイヤーの薪(アイテム)の所持数
-
 protected:
-///// 必要な情報 ////////////////////////////////////////
 	PlayerStateManager*	pState_;	//Playerの状態管理
 	RayCastData	downData_;			//プレイヤーの下に伸びるレイ
 	Stage* pStage_;					//ステージクラスのポインタ
 	int	hGroundModel_;				//ステージのモデル番号を入れる変数
 	float acceleration_;			//重力の加速度
 	bool isAddGravity_;				//重力を加えるか否か
-	//bool isJumpNow_;				//ジャンプ中か否か
 	bool isMove_;					//動いていいいか
 	float speed_;					//移動速度
 public:
-	EmitterData  RandEffectData_;
-	EmitterData  DeadEffectData;
+	EmitterData  RandEffectData_;	//エフェクトデータ(着地時)
+	EmitterData  DeadEffectData;	//エフェクトデータ(死亡時)
+
+/////////////////////////////////////////////////////////
+
 public:
 	//コンストラクタ
 	Player(GameObject* _parent, string _modelFileName);
