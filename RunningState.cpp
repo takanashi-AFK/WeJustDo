@@ -36,14 +36,20 @@ void RunningState::Update(Player* _p)
 	{//State•Ï‰»
 
 		//standing
-		if (!Input::IsKey(DIK_D) && !Input::IsKey(DIK_A))
+		if (!Input::IsKey(DIK_D) && !Input::IsKey(DIK_A)) {
 			_p->GetState()->ChangeState(_p->GetState()->pStanding_, _p, true);
+			AudioManager::Stop_FootSound();
+		}
 		//dead
-		if (ppos.y <= -3 && ppos.y >= -5)
+		if (ppos.y <= -3 && ppos.y >= -5) {
 			_p->GetState()->ChangeState(_p->GetState()->pDead_, _p, true);
+			AudioManager::Stop_FootSound();
+		}
 
-		if(Input::IsKeyDown(DIK_SPACE))
+		if (Input::IsKeyDown(DIK_SPACE)) {
 			_p->GetState()->ChangeState(_p->GetState()->pJumping_, _p, true);
+			AudioManager::Stop_FootSound();
+		}
 	}
 
 
@@ -53,6 +59,7 @@ void RunningState::Update(Player* _p)
 void RunningState::Enter(Player* _p)
 {
 	Model::SetAnimFrame(_p->GetModelHandle(), 0, 44, 1);
+	AudioManager::Play_FootSound();
 }
 
 //“ü—Íˆ—

@@ -21,6 +21,10 @@ namespace AudioManager {
 
 	void Play_JetSound();
 
+	void Play_FootSound();
+
+	void Stop_FootSound();
+
 	void Stop_JetSound();
 
 	void Release();

@@ -11,6 +11,7 @@ namespace AudioManager
 	int hDeadSound_;
 	int hJumpSound_;
 	int hJetSound_;
+	int hFootSound_;
 
 	void PlayDonSound()
 	{
@@ -66,6 +67,18 @@ namespace AudioManager
 		hJetSound_ = Audio::Load("Sounds/JettPack.wav");
 		assert(hJetSound_ >= 0);
 		Audio::Play(hJetSound_);
+	}
+
+	void Play_FootSound()
+	{
+		hFootSound_ = Audio::Load("Sounds/»‚Ìã‚ð‘–‚é.wav",true);
+		assert(hFootSound_ >= 0);
+		Audio::Play(hFootSound_);
+	}
+
+	void Stop_FootSound()
+	{
+		Audio::Stop(hFootSound_);
 	}
 
 	void Stop_JetSound()
