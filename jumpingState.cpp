@@ -35,6 +35,7 @@ void JumpingState::Update(Player* _p)
 
 void JumpingState::Enter(Player* _p)
 {
+	AudioManager::Play_JumpSound();
 }
 
 void JumpingState::HandleInput(Player* _p)
