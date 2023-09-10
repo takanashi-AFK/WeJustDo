@@ -58,17 +58,17 @@ void StartCount::CountDraw(int time)
 	if (time == 1){
 		Image::SetTransform(hPict_[3], transform_);
 		Image::Draw(hPict_[3]);
-		AudioManager::PlayDonSound();
+		AudioManager::Play_DonSound();
 	}
 	else if (time == 2){
 		Image::SetTransform(hPict_[2], transform_);
 		Image::Draw(hPict_[2]);
-		AudioManager::PlayDonSound();
+		AudioManager::Play_DonSound();
 	}
 	else if (time == 3){
 		Image::SetTransform(hPict_[1], transform_);
 		Image::Draw(hPict_[1]);
-		AudioManager::PlayDonSound();
+		AudioManager::Play_DonSound();
 	}
 	else if (time == 4){
 		Image::SetTransform(hPict_[0], transform_);

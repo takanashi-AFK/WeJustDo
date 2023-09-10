@@ -52,21 +52,21 @@ void ResultScene::Draw()
 	{
 		if (frameCount_ >= 30) {
 			if (frameCount_ == 30)
-				AudioManager::PlayDonSound();
+				AudioManager::Play_DonSound();
 
 			tTimeScore_->SetScale(3.0f);
 			tTimeScore_->Draw(700, 270, iTimeScore_);
 		}
 		if (frameCount_ >= 90) {
 			if (frameCount_ == 90)
-				AudioManager::PlayDonSound();
+				AudioManager::Play_DonSound();
 
 			tFirewoodScore_->SetScale(3.0f);
 			tFirewoodScore_->Draw(700, 420, Global::gFireWood/5);
 		}
 		if (frameCount_ >= 150) {
 			if (frameCount_ == 150)
-				AudioManager::PlayDonSound();
+				AudioManager::Play_DonSound();
 
 			tTotalScore_->SetScale(3.0f);
 			tTotalScore_->Draw(700, 570, iTotalScore_);
@@ -74,7 +74,7 @@ void ResultScene::Draw()
 
 		if (frameCount_ >= 200)
 		{
-			AudioManager::StopDonSound();
+			AudioManager::Stop_DonSound();
 		}
 	}
 	

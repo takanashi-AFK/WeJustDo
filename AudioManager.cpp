@@ -13,14 +13,14 @@ namespace AudioManager
 	int hJetSound_;
 	int hFootSound_;
 
-	void PlayDonSound()
+	void Play_DonSound()
 	{
 		hDonSound_ = Audio::Load("Sounds/don.wav",false);
 		assert(hDonSound_ >= 0);
 		Audio::Play(hDonSound_);
 	}
 
-	void StopDonSound()
+	void Stop_DonSound()
 	{
 		Audio::Stop(hDonSound_);
 	}
@@ -34,7 +34,7 @@ namespace AudioManager
 		Audio::Play(hTitleMusic_);
 	}
 
-	void PlayConfirmSound()
+	void Play_ConfirmSound()
 	{
 		hConfirmSound_ = Audio::Load("Sounds/Confirm.wav");
 		assert(hConfirmSound_ >= 0);
