@@ -48,7 +48,7 @@ void TestScene::Initialize()
 	//UI-JetpackGauge
 	}
 	//Object-DebugObject
-		CreateSolidObject<DebugObject>(this,"Models/defaultModel.fbx");
+		//CreateSolidObject<DebugObject>(this,"Models/defaultModel.fbx");
 
 }
 

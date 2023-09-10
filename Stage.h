@@ -1,13 +1,17 @@
 #pragma once
 #include "Engine/Gameobject.h"
+
+//インクルード
 #include <vector>
 
+//モデル番号
 enum ModelName {
 	m_Ground,
 	m_Block,
 	m_Firewood,
 };
 
+//前方宣言
 class Player;
 
 /// <summary>
@@ -16,40 +20,26 @@ class Player;
 class Stage : public GameObject
 {
 private:
+// ステージ情報 //////////////////////////////////
 	vector<int> StageModelList_;
 	vector<vector<int>> ItemPlacement_;
-
-	int hFirewood_;
 	int iP_Height_;
 	int iP_Width_;
+
+// アイテム情報 //////////////////////////////////
+
+	int hFirewood_;	//モデル番号(ステージ情報とは異なるモノの為)
+
 public:
 	//コンストラクタ
 	Stage(GameObject* parent);
 	
-	//継承{更新・描画}
+	//継承{初期化.更新,描画,開放}
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;
 	void Release() override;
 
-	/// <summary>
-	/// ステージに登録されているすべてのモデルを取得する
-	/// </summary>
-	/// <returns>登録ステージ番号リスト</returns>
-	vector<int> GetAllStageModelHandle() { return StageModelList_; }
-
-	/// <summary>
-	/// ステージにモデルを登録する
-	/// </summary>
-	/// <param name="_hModel">登録するモデル番号</param>
-	void SetStageModel(int _hModel) { StageModelList_.push_back(_hModel); }
-
-	/// <summary>
-	/// ステージに登録されている特定のモデル番号を取得する
-	/// </summary>
-	/// <param name="_hModel">モデル</param>
-	/// <returns>モデル番号</returns>
-	int GetStageModelHandle(int _hModel) { return StageModelList_[_hModel]; }
 
 	/// <summary>
 	/// Objectの位置と特定のアイテムの位置が重なっていたら
@@ -62,9 +52,22 @@ public:
 	/// <summary>
 	/// 特定の位置のアイテムを設定する
 	/// </summary>
-	/// <param name="x"></param>
-	/// <param name="y"></param>
-	/// <param name="_hItem"></param>
+	/// <param name="x">座標x</param>
+	/// <param name="y">座標y</param>
+	/// <param name="_hItem">アイテム番号</param>
 	void SetItem(int x, int y, int _hItem);
+
+public:
+// ゲッター・セッター ///////////////////////////////////
+
+	//取得：ステージ情報として登録されているすべてのモデル番号
+	vector<int> GetAllStageModelHandle() { return StageModelList_; }
+
+	//追加：ステージ情報にモデル番号を加える
+	void AddStageModel(int _hModel) { StageModelList_.push_back(_hModel); }
+
+	//取得：ステージ情報として登録されている特定のモデル番号
+	int GetStageModelHandle(int _hModel) { return StageModelList_[_hModel]; }
+
 };
 

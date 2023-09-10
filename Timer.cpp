@@ -15,6 +15,7 @@ Timer::Timer(GameObject* obj)
 	: GameObject(obj, "Timer"), frame_(0), limitActive_(false), countActive_(false), pText_(nullptr),
 	hTimerFlame_(0), drawPosX_(0), drawPosY_(0),drawSize_(0), isDraw_(false)
 {
+
 }
 
 void Timer::Initialize()

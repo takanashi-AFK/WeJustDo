@@ -263,7 +263,6 @@ void Player::TerrainInteraction()
 	else SetSpeed(0.1f);
 }
 
-
 void Player::PolyDraw()
 {
 	//ポリラインを描画(ジェット噴射effect)

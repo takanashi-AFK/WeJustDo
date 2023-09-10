@@ -1,12 +1,14 @@
 #include "Stage.h"
+
+//インクルード
+#include <cmath>
 #include "Engine/Model.h"
 #include "Engine/CsvReader.h"
 #include "Engine/Input.h"
 #include "Engine/Global.h"
-#include <cmath>
 
 Stage::Stage(GameObject* parent)
-	:GameObject(parent,"Stage")
+	:GameObject(parent, "Stage"), StageModelList_{},ItemPlacement_{},iP_Height_(0),iP_Width_(0),hFirewood_(-1)
 {
 }
 
@@ -22,11 +24,10 @@ void Stage::Initialize()
 	//モデルデータ分のモデルをロードし、モデル番号を取得
 	//ステージにセット
 	for (int i = 0; i < arraySize; i++) {
-		SetStageModel(Model::Load(fileNames[i]));
+		AddStageModel(Model::Load(fileNames[i]));
 	};
-	hFirewood_ = Model::Load("Models/wood.fbx");
 
-	//csvの情報を取得する
+	//csvの情報を取得し、格納する
 	CsvReader csv; {
 		csv.Load("Datas/manual.csv");
 		iP_Width_ = csv.GetWidth();
@@ -37,15 +38,19 @@ void Stage::Initialize()
 				ItemPlacement_[x][y] = csv.GetValue(x, ((iP_Height_ - 1) - y));
 	};
 	
+	//アイテム(薪)モデルのロード
+	hFirewood_ = Model::Load("Models/wood.fbx");
+
 }
 
 void Stage::Update()
 {
-	static int i = 0;
-	if (Input::IsKey(DIK_L)) {
+	//debug-SetItem
+	//static int i = 0;
+	/*if (Input::IsKey(DIK_L)) {
 		SetItem(sin(i), i, 1);
 		i++;
-	}
+	}*/
 }
 
 void Stage::Draw()
