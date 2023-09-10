@@ -41,7 +41,7 @@ void JumpingState::HandleInput(Player* _p)
 {
 	Transform* TRunning = _p->GetTransformAddress();
 
-	float s = 0.1f;
+	float s = _p->GetSpeed();
 	if (Input::IsKey(DIK_A)) { TRunning->position_.x -= s; TRunning->rotate_.y = -90; /*PolyJetEmitPos.x = PolyJetEmitPos.x + 0.5;*/ }
 	else if (Input::IsKey(DIK_D)) { TRunning->position_.x += s; TRunning->rotate_.y = 90; }
 }

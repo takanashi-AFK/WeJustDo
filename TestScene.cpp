@@ -27,6 +27,7 @@ void TestScene::Initialize()
 		ASSIGN(pPlayer_, CreateSolidObject<Player>(this, "Models/ziro_move.fbx"));
 		{
 			pPlayer_->SetIsMove(false);
+			pPlayer_->SetSpeed(0.1f);
 			pPlayer_->SetFirewoodNum(20*5);
 		}
 	//Object-Stage

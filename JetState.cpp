@@ -44,7 +44,7 @@ void JetState::Update(Player* _p)
 	}
 
 	//‰¡ˆÚ“®‚Ìˆ—
-	float s = 0.1f;
+	float s = _p->GetSpeed();
 	if (Input::IsKey(DIK_A)) { t_Player->position_.x -= s; t_Player->rotate_.y = -90; /*PolyJetEmitPos.x = PolyJetEmitPos.x + 0.5;*/ }
 	else if (Input::IsKey(DIK_D)) { t_Player->position_.x += s; t_Player->rotate_.y = 90; }
 

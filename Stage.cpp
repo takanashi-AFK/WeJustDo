@@ -91,7 +91,7 @@ void Stage::Draw()
 		for (int x = 0; x < iP_Width_; x++)for (int y = 0; y < iP_Height_; y++) {
 		t_Firewood.position_ = { (float)x,(float)y,0 };
 
-			if (ItemPlacement_[x][y] == 1){
+			if (ItemPlacement_[x][y] == 1 || ItemPlacement_[x][y] == 2){
 				Model::SetTransform(hFirewood_, t_Firewood);
 				Model::Draw(hFirewood_);
 			}

@@ -52,6 +52,8 @@ protected:
 	bool		isJumpNow_;		//ジャンプ中か否か
 	bool		isMove_;		//動いていいいか
 	bool		isJetNow_ = false;
+
+	float speed_;//移動速度
 public:
 	
 	EmitterData  RandEffectData_;
@@ -161,4 +163,15 @@ public:
 
 	int GetFirewoodNum() { return firewoodNum_; }
 	void SetFirewoodNum(int _n) { firewoodNum_ = _n; }
+
+	/// <summary>
+	/// プレイヤーと地形の相互作用を記述する関数
+	/// </summary>
+	void TerrainInteraction();
+
+	//設定：プレイヤーの速度
+	void SetSpeed(float _s) { speed_ = _s; }
+
+	//取得：プレイヤーの速度
+	float GetSpeed() { return speed_; }
 };

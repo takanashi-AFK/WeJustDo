@@ -12,7 +12,7 @@
 //コンストラクタ
 Player::Player(GameObject* _parent, string _modelFileName)
 	:SolidObject(_parent,_modelFileName,"Player"),
-	pState_(nullptr),pStage_(),hGroundModel_(0),acceleration_(0)
+	pState_(nullptr),pStage_(),hGroundModel_(0),acceleration_(0),speed_(0)
 {
 	//プレイヤーの状態を「立ち状態」で初期化
 	ASSIGN(pState_,new PlayerStateManager);
@@ -63,11 +63,14 @@ void Player::ChildUpdate()
 		
 		GetFirewood();
 		
+		TerrainInteraction();
+
 		//状態ごとの更新
 		pState_->Update(this);
 
 		//ステージとのあたり判定
 		StageRayCast();
+
 
 		Camera::SetPosition(transform_.position_.x + 5, transform_.position_.y + 3, -13.0f);
 		Camera::SetTarget(transform_.position_.x + 5, transform_.position_.y + 3, 0.0f);
@@ -238,7 +241,7 @@ void Player::SetIsJetNow(bool _jet)
 void Player::GetFirewood()
 {
 	Stage* pS = (Stage*)(FindObject("Stage"));
-	if (pS->AtItem(this, 1)) {
+	if (pS->AtItem(this, 1) || pS->AtItem(this,2)) {
 
 		//エフェクト
 		firewoodNum_+=5;
@@ -246,6 +249,18 @@ void Player::GetFirewood()
 
 		pS->SetItem(round(transform_.position_.x), round(transform_.position_.y), 0);
 	}
+}
+
+void Player::TerrainInteraction()
+{
+	Stage* pS = (Stage*)(FindObject("Stage"));
+
+	//足場が泥の時
+	if (pS->AtItem(this, 2))
+	{
+		SetSpeed(0.01f);
+	}
+	else SetSpeed(0.1f);
 }
 
 
