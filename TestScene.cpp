@@ -24,6 +24,8 @@ void TestScene::Initialize()
 	{
 	//Image-BackGround
 		ASSIGN(hPict_, Image::Load("Image/BackGround3.png"));
+	//Object-Stage
+		ASSIGN(pStage_, Instantiate<Stage>(this));
 	//Object-Player
 		ASSIGN(pPlayer_, CreateSolidObject<Player>(this, "Models/ziro_move.fbx"));
 		{
@@ -31,8 +33,6 @@ void TestScene::Initialize()
 			pPlayer_->SetSpeed(0.1f);
 			pPlayer_->SetFirewoodNum(20*5);
 		}
-	//Object-Stage
-		ASSIGN(pStage_, Instantiate<Stage>(this));
 	//UI-ItemCount
 		ASSIGN(pItemCounter_, Instantiate<ItemCounter>(this));
 	//UI-TimeCount
