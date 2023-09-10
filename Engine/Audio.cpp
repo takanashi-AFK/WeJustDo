@@ -191,6 +191,20 @@ void Audio::SetPlaybackRate(int ID, float playbackRate)
 	}
 }
 
+void Audio::SetVolume(int ID, float volume)
+{
+	if (ID < 0 || ID >= audioDatas.size())
+	{
+		// 無効なIDが指定された場合は何もしないか、エラー処理を追加することもできます。
+		return;
+	}
+
+	for (int i = 0; i < audioDatas[ID].svNum; i++)
+	{
+		audioDatas[ID].pSourceVoice[i]->SetVolume(volume);
+	}
+}
+
 //シーンごとの解放
 void Audio::Release()
 {

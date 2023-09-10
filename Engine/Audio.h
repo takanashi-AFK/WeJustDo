@@ -28,6 +28,9 @@ namespace Audio
 	// 再生速度を変更する関数
 	void SetPlaybackRate(int ID, float playbackRate);
 
+	// 音量を設定する関数
+	void SetVolume(int ID, float volume);
+
 	//シーンごとの解放（ロードしたサウンドを解放）
 	void Release();
 
