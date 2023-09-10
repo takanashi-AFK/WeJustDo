@@ -139,5 +139,4 @@ public:
 	//取得：JetFireのポリラインデータ
 	PolyLine GetJettPData() { return *pJet; }
 	
-
 };
