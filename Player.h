@@ -25,21 +25,10 @@ namespace {
 class Player : public SolidObject
 {
 private:
-	//debug
-	int Marker;
-	int DeadEffHandle;
-	XMFLOAT3 RayStartPos;
-	XMFLOAT3 downLandingPoint;
-	XMFLOAT3 upLandingPoint;
-	XMFLOAT3 rightLandingPoint;
-	XMFLOAT3 leftLandingPoint;
-	XMFLOAT3 PolyJetEmitPos;
-	
-	PolyLine* pJet;
-	
-	//ziro2
-	int hBox_;
-	int firewoodNum_;
+	int hDebugBox_;	//モデル番号(DebugBox)
+	PolyLine* pJet;//ジェットエフェクトのポリラインデータ
+	int firewoodNum_;//プレイヤーの薪(アイテム)の所持数
+
 protected:
 ///// 必要な情報 ////////////////////////////////////////
 	PlayerStateManager*	pState_;	//Playerの状態管理
@@ -48,9 +37,8 @@ protected:
 	int	hGroundModel_;				//ステージのモデル番号を入れる変数
 	float acceleration_;			//重力の加速度
 	bool isAddGravity_;				//重力を加えるか否か
-	bool isJumpNow_;				//ジャンプ中か否か
+	//bool isJumpNow_;				//ジャンプ中か否か
 	bool isMove_;					//動いていいいか
-	bool isJetNow_;
 	float speed_;					//移動速度
 public:
 	EmitterData  RandEffectData_;
@@ -77,6 +65,21 @@ public:
 	/// </summary>
 	void AddGravity(Transform* _transform);
 
+	/// <summary>
+	/// 動いていいかどうかを返す
+	/// </summary>
+	/// <returns>動いて良ければtrue</returns>
+	bool IsMove() { return isMove_; }
+
+	/// <summary>
+	/// プレイヤーと地形の相互作用を記述する関数
+	/// </summary>
+	void TerrainInteraction();
+
+	/// <summary>
+	/// 薪(アイテム)取得時に起きる処理を行う
+	/// </summary>
+	void OnWoodPickup(Stage* ps);
 
 public:
 // ゲッター・セッター //////////////////////////////
@@ -96,17 +99,25 @@ public:
 	//設定：重力を加えるかどうか(加えるならtrue)
 	void IsAddGravity(bool _flag) { isAddGravity_ = _flag; }
 
-	/// <summary>
-	/// 動いていいかどうかを返す
-	/// </summary>
-	/// <returns>動いて良ければtrue</returns>
-	bool IsMove() { return isMove_; }
-
-	/// <summary>
-	/// 動いていいかどうかを設定する
-	/// </summary>
-	/// <param name="_flag">判定</param>
+	//設定：動いていいかどうか(動いていいならtrue)
 	void SetIsMove(bool _flag) { isMove_ = _flag; }
+
+	//取得：下に伸びるレイキャスト情報
+	RayCastData GetDownData() { return downData_; }
+
+	//取得：プレイヤーの薪(アイテム)の所持数(/5)
+	int GetFirewoodNum() { return firewoodNum_; }
+
+	//設定：プレイヤーの薪(アイテム)の所持数(/5)
+	void SetFirewoodNum(int _n) { firewoodNum_ = _n; }
+
+	//設定：プレイヤーの速度
+	void SetSpeed(float _s) { speed_ = _s; }
+
+	//取得：プレイヤーの速度
+	float GetSpeed() { return speed_; }
+
+// effect ///////////////////////////////////
 
 	/// <summary>
 	/// 死亡時エフェクトの初期化
@@ -118,47 +129,14 @@ public:
 	/// </summary>
 	void InitRandEffect();
 
-
-
-	/// <summary>
-	/// 死亡時エフェクトデータを返す
-	/// </summary>
-	/// <returns>死亡時エフェクトデータを返す</returns>
-	EmitterData GetDeadEData();
+	//取得：死亡時エフェクトデータ
+	EmitterData GetDeadEData() { return DeadEffectData; }
 	
-	/// <summary>
-	/// 着地時エフェクトデータを返す
-	/// </summary>
-	/// <returns>着地時エフェクトデータ</returns>
-	EmitterData GetRandEData();
+	//取得：着地時エフェクトデータ
+	EmitterData GetRandEData() { return RandEffectData_; }
 
-	/// <summary>
-	/// ジェットのpolylineデータを返す
-	/// </summary>
-	/// <returns>ジェットのpolylineデータ</returns>
-	PolyLine GetJettPData();
+	//取得：JetFireのポリラインデータ
+	PolyLine GetJettPData() { return *pJet; }
 	
-	void SetIsJetNow( bool _jet);
 
-	/// <summary>
-	/// 下に伸びるレイキャスト情報を取得
-	/// </summary>
-	/// <returns>レイキャスト情報</returns>
-	RayCastData GetDownData() { return downData_; }
-
-	void GetFirewood();
-
-	int GetFirewoodNum() { return firewoodNum_; }
-	void SetFirewoodNum(int _n) { firewoodNum_ = _n; }
-
-	/// <summary>
-	/// プレイヤーと地形の相互作用を記述する関数
-	/// </summary>
-	void TerrainInteraction();
-
-	//設定：プレイヤーの速度
-	void SetSpeed(float _s) { speed_ = _s; }
-
-	//取得：プレイヤーの速度
-	float GetSpeed() { return speed_; }
 };

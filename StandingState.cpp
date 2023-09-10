@@ -49,7 +49,6 @@ void StandingState::Update(Player* _p)
 //開始
 void StandingState::Enter(Player* _p)
 {
-	_p->SetIsJetNow(false);
 	_p->SetAcceleration(0);//重力をリセット
 	Model::SetAnimFrame(_p->GetModelHandle(), 0, 0, 1);
 }
