@@ -53,6 +53,10 @@ void JetState::Update(Player* _p)
 	if (Input::IsKeyUp(DIK_SPACE) && (_p->GetDownData().dist < Clearance*1.2)) {
 		_p->SetAcceleration(0);//重力をリセット
 		_p->GetState()->ChangeState(_p->GetState()->pStanding_, _p);//着地状態に移動
+		
+	}
+
+	if (Input::IsKeyUp(DIK_SPACE)) {
 		AudioManager::Stop_JetSound();
 	}
 }
