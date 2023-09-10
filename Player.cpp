@@ -44,7 +44,7 @@ void Player::ChildInitialize()
 	pJet = new PolyLine(0.4, 10);
 	pJet->Load("Effects/Fire.png");
 
-	SetFirewoodNum(10000);
+	Global::gFireWood = 10000;
 }
 
 //更新
@@ -254,7 +254,7 @@ void Player::GetFirewood()
 	if (pS->AtItem(this, 1)) {
 
 		//エフェクト
-		firewoodNum_+=5;
+		Global::gFireWood += 5;
 		//エフェクト
 
 		pS->SetItem(round(transform_.position_.x), round(transform_.position_.y), 0);

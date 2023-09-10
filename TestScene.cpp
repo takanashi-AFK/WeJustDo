@@ -47,7 +47,7 @@ void TestScene::Update()
 //•`‰æ
 void TestScene::Draw()
 {
-	pText_->Draw(30, 30, p_->GetFirewoodNum()/5);
+	pText_->Draw(30, 30, Global::gFireWood /5);
 	//Image::SetRect(hPict_, );
 	Transform t_bg; t_bg.scale_ = { 1.4f,1.4f,1.4f };
 	Image::SetTransform(hPict_, t_bg);

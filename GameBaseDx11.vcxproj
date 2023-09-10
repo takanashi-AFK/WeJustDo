@@ -154,6 +154,7 @@
     <ClCompile Include="Engine\Text.cpp" />
     <ClCompile Include="Engine\Texture.cpp" />
     <ClCompile Include="Engine\Component\Transform\Transform.cpp" />
+    <ClCompile Include="Global.cpp" />
     <ClCompile Include="JetState.cpp" />
     <ClCompile Include="JumpingState.cpp" />
     <ClCompile Include="MovieState.cpp" />

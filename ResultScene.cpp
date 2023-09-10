@@ -55,7 +55,7 @@ void ResultScene::Draw()
 				AudioManager::PlayDonSound();
 
 			tFirewoodScore_->SetScale(3.0f);
-			tFirewoodScore_->Draw(700, 420, iFirewoodScore_);
+			tFirewoodScore_->Draw(700, 420, Global::gFireWood/5);
 		}
 		if (frameCount_ >= 150) {
 			if (frameCount_ == 150)

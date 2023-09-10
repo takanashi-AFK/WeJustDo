@@ -1,0 +1,5 @@
+
+namespace Global
+{
+	int gFireWood;
+}

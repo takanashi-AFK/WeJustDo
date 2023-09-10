@@ -36,11 +36,11 @@ void JetState::Update(Player* _p)
 	if (_p->GetState()->playerState_ != _p->GetState()->pJumping_  && Input::IsKeyDown(DIK_SPACE)) {
 		acs = 0; 
 	}
-	if (_p->GetState()->playerState_ != _p->GetState()->pJumping_ && Input::IsKey(DIK_SPACE) && (_p->GetFirewoodNum() > 0)) {
+	if (_p->GetState()->playerState_ != _p->GetState()->pJumping_ && Input::IsKey(DIK_SPACE) && (Global::gFireWood > 0)) {
 		_p->SetAcceleration(0);
 		t_Player->position_.y += acs;
 		if (acs < 0.1f)acs += 0.003f;
-		_p->SetFirewoodNum(_p->GetFirewoodNum() - 1);
+		Global::gFireWood - 1;
 	}
 
 	//‰¡ˆÚ“®‚Ìˆ—

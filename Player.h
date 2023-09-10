@@ -6,6 +6,7 @@
 #include "Engine/Model.h"
 #include "PolyLine.h"
 #include "Engine/VFX.h"
+#include "Engine/Global.h"
 //‘O•ûéŒ¾
 class Stage;
 
@@ -160,7 +161,4 @@ public:
 	RayCastData GetDownData() { return downData_; }
 
 	void GetFirewood();
-
-	int GetFirewoodNum() { return firewoodNum_; }
-	void SetFirewoodNum(int _n) { firewoodNum_ = _n; }
 };
