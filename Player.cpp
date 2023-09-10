@@ -38,6 +38,7 @@ void Player::ChildInitialize()
 
 	InitDeadEffect();
 	InitRandEffect();
+	InitPlusOneEffect();
 
 	//pDead = new PolyLine(1,50);
 	//pDead->Load("Effects/Tex.png");
@@ -228,6 +229,20 @@ void Player::InitRandEffect()
 	RandEffectData_.deltaColor = XMFLOAT4(0, 0, 0, -0.1);
 }
 
+void Player::InitPlusOneEffect()
+{
+	PlusOneEffectData.textureFileName = "Effects/PlusOneR.png";
+	PlusOneEffectData.positionRnd = XMFLOAT3(0.1, 0, 0.1);
+	PlusOneEffectData.delay = 0;
+	PlusOneEffectData.number = 1;
+	PlusOneEffectData.lifeTime = 25;
+	PlusOneEffectData.speed = 0.05f;
+	PlusOneEffectData.speedRnd = 0.0;
+	PlusOneEffectData.size = XMFLOAT2(0.75, 0.75);
+	PlusOneEffectData.scale = XMFLOAT2(1.01, 1.01);
+	PlusOneEffectData.color = XMFLOAT4(1, 1, 1, 1);
+}
+
 EmitterData Player::GetDeadEData()
 {
 	return DeadEffectData;
@@ -256,6 +271,8 @@ void Player::GetFirewood()
 		//エフェクト
 		Global::gFireWood += 5;
 		//エフェクト
+		PlusOneEffectData.position = (XMFLOAT3(transform_.position_.x -	 0.5, transform_.position_.y + 0.5, 0));
+		VFX::Start(PlusOneEffectData);
 
 		pS->SetItem(round(transform_.position_.x), round(transform_.position_.y), 0);
 	}

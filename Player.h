@@ -60,6 +60,8 @@ public:
 	EmitterData  RandEffectData_;
 	
 	EmitterData  DeadEffectData;
+
+	EmitterData PlusOneEffectData;
 	
 	//コンストラクタ
 	Player(GameObject* _parent, string _modelFileName);
@@ -130,6 +132,8 @@ public:
 	/// 着地時エフェクトの初期化
 	/// </summary>
 	void InitRandEffect();
+
+	void InitPlusOneEffect();
 
 	float GetAccelaration() { return acceleration_; }
 
