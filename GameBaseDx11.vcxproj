@@ -165,6 +165,7 @@
     <ClCompile Include="ResultScene.cpp" />
     <ClCompile Include="RunningState.cpp" />
     <ClCompile Include="SplashScene.cpp" />
+    <ClCompile Include="StaffRollScene.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="StageSelectScene.cpp" />
     <ClCompile Include="StandingState.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="ResultScene.h" />
     <ClInclude Include="RunningState.h" />
     <ClInclude Include="SplashScene.h" />
+    <ClInclude Include="StaffRollScene.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="StageSelectScene.h" />
     <ClInclude Include="StandingState.h" />
