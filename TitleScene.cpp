@@ -22,6 +22,7 @@ void TitleScene::Initialize()
 	
 	//画像のロード
 	ASSIGN(hPict_, Image::Load("Image/TitleImage2.png")); assert(hPict_ <= 0);
+	ASSIGN(hPict2_, Image::Load("Image/PleseToSpaceKey.png")); assert(hPict_ <= 0);
 
 	//カメラの初期化
 	Camera::SetPosition(0, 0, -5);Camera::SetTarget(0, 0, 0);
@@ -33,6 +34,18 @@ void TitleScene::Initialize()
 //更新
 void TitleScene::Update()
 {
+	
+	int s = 1;
+	if (increasing_) {
+		opacity_+=s;
+		if (opacity_ >= 255)increasing_ = false; 
+	}
+	else {
+		opacity_-=s;
+		if (opacity_ <= 0)increasing_ = true;
+	}
+	
+
 	//スペースキーの入力時...
 	if (Input::IsKeyDown(DIK_SPACE)) {
 		//シーン遷移を行う
@@ -43,6 +56,9 @@ void TitleScene::Update()
 
 	//SkySphereモデルを回転させる
 	transform_.rotate_.y += 0.05f;
+
+	
+
 }
 
 //描画
@@ -56,9 +72,19 @@ void TitleScene::Draw()
 	Model::Draw(hModel_);
 	
 	//画像を描画
-	Transform t;
-	Image::SetTransform(hPict_, t);
+	Transform t_Title; 
+	t_Title.scale_ = { 0.8f,0.8f,1.0f };
+	t_Title.position_.y = 0.1f;
+	Image::SetTransform(hPict_, t_Title);
 	Image::Draw(hPict_);
+
+	Transform t_Space;
+	t_Space.position_.y = -0.8f;
+	Image::SetAlpha(hPict2_, opacity_);
+	Image::SetTransform(hPict2_, t_Space);
+	Image::Draw(hPict2_);
+
+	
 
 	//シェーダーをリセット
 	Direct3D::SetShader(Direct3D::SHADER_3D);

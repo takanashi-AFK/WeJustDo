@@ -8,6 +8,7 @@
 #include "ItemCounter.h"
 #include "Stage.h"
 #include "Player.h"
+#include "DebugObject.h"
 
 //コンストラクタ
 TestScene::TestScene(GameObject * parent)
@@ -26,7 +27,7 @@ void TestScene::Initialize()
 		ASSIGN(pPlayer_, CreateSolidObject<Player>(this, "Models/ziro_move.fbx"));
 		{
 			pPlayer_->SetIsMove(false);
-			pPlayer_->SetFirewoodNum(100);
+			pPlayer_->SetFirewoodNum(20*5);
 		}
 	//Object-Stage
 		ASSIGN(pStage_, Instantiate<Stage>(this));
@@ -38,19 +39,22 @@ void TestScene::Initialize()
 	//UI-TimeCount
 		ASSIGN(pTimer_, Instantiate<Timer>(this)); 
 		{
-			pTimer_->SetTime_Seconds(120);
+			pTimer_->SetTime_Seconds(1000);
 			pTimer_->IsDraw(true);
 		}
 	//Object-StartCount
 		ASSIGN(pStartCount_, Instantiate<StartCount>(this));
 	//UI-JetpackGauge
 	}
+	//Object-DebugObject
+		CreateSolidObject<DebugObject>(this,"Models/defaultModel.fbx");
+
 }
 
 //更新
 void TestScene::Update()
 {//Sceneの流れ
-
+	if (false)return;
 //Start
 	//ゲームを開始する
 	isGameNow_ = true;
@@ -84,6 +88,7 @@ void TestScene::Update()
 //描画
 void TestScene::Draw()
 {
+	if (false)return;
 //Sceneの描画するもの
 
 	//背景画像
