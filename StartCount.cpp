@@ -1,6 +1,7 @@
 #include "StartCount.h"
 #include "Timer.h"
 #include "Engine/Image.h"
+#include "AudioManager.h"
 #include <string>
 
 StartCount::StartCount(GameObject* obj)
@@ -20,6 +21,7 @@ void StartCount::Initialize()
 	for (int i = 0; i < 4; i++){
 		hPict_[i] = Image::Load("Image/Count" + std::to_string(i) + ".png");
 	}
+	transform_.scale_ = { 0.5f,0.5f,1.0f };
 }
 
 void StartCount::Update()
@@ -56,14 +58,17 @@ void StartCount::CountDraw(int time)
 	if (time == 1){
 		Image::SetTransform(hPict_[3], transform_);
 		Image::Draw(hPict_[3]);
+		AudioManager::PlayDonSound();
 	}
 	else if (time == 2){
 		Image::SetTransform(hPict_[2], transform_);
 		Image::Draw(hPict_[2]);
+		AudioManager::PlayDonSound();
 	}
 	else if (time == 3){
 		Image::SetTransform(hPict_[1], transform_);
 		Image::Draw(hPict_[1]);
+		AudioManager::PlayDonSound();
 	}
 	else if (time == 4){
 		Image::SetTransform(hPict_[0], transform_);

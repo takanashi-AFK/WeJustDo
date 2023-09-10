@@ -23,8 +23,6 @@ private:
 	Text* tFirewoodScore_;
 	Text* tTotalScore_;
 
-
-
 public:
 	//コンストラクタ
 	ResultScene(GameObject* parent);

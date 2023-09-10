@@ -27,6 +27,7 @@ namespace AudioManager
 	void Play_TitleMusic()
 	{
 		hTitleMusic_ = Audio::Load("Sounds/TitleBGM.wav");
+		Audio::SetPlaybackRate(hTitleMusic_, 2.0f);
 		assert(hTitleMusic_ >= 0);
 		Audio::Play(hTitleMusic_);
 	}

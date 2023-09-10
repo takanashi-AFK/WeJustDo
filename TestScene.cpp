@@ -9,6 +9,7 @@
 #include "Stage.h"
 #include "Player.h"
 #include "DebugObject.h"
+#include "AudioManager.h"
 
 //コンストラクタ
 TestScene::TestScene(GameObject * parent)
@@ -32,9 +33,6 @@ void TestScene::Initialize()
 		}
 	//Object-Stage
 		ASSIGN(pStage_, Instantiate<Stage>(this));
-
-	//Audio-PlaySceneMusic
-
 	//UI-ItemCount
 		ASSIGN(pItemCounter_, Instantiate<ItemCounter>(this));
 	//UI-TimeCount
@@ -64,6 +62,7 @@ void TestScene::Update()
 	if (pStartCount_->IsFinished()) {/*スタートカウント演出を処理したら*/
 		pPlayer_->SetIsMove(true);//Playerを動作可能にする
 		pTimer_->Start(true);//タイマーを開始する
+		AudioManager::Play_PlayMusic();//Audio-PlaySceneMusic
 	}
 
 //Play

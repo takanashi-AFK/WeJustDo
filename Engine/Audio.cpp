@@ -164,6 +164,7 @@ void Audio::Play(int ID)
 			break;
 		}
 	}
+
 }
 
 
@@ -173,6 +174,20 @@ void Audio::Stop(int ID)
 	{
 		audioDatas[ID].pSourceVoice[i]->Stop();
 		audioDatas[ID].pSourceVoice[i]->FlushSourceBuffers();
+	}
+}
+
+void Audio::SetPlaybackRate(int ID, float playbackRate)
+{
+	if (ID < 0 || ID >= audioDatas.size())
+	{
+		// 無効なIDが指定された場合は何もしないか、エラー処理を追加することもできます。
+		return;
+	}
+
+	for (int i = 0; i < audioDatas[ID].svNum; i++)
+	{
+		audioDatas[ID].pSourceVoice[i]->SetFrequencyRatio(playbackRate);
 	}
 }
 

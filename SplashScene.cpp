@@ -32,7 +32,7 @@ void SplashScene::Update()
 	if (time/FPS >= changeTime) {
 		//シーン遷移を行う
 		SceneManager* sm = (SceneManager*)FindObject("SceneManager");
-		sm->ChangeScene(SCENE_ID_TITLE,TID_BLACKOUT,1);
+		sm->ChangeScene(SCENE_ID_TITLE,TID_BLACKOUT);
 	}
 	time++;//時間を進める
 }

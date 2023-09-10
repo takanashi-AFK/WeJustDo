@@ -25,6 +25,9 @@ namespace Audio
 	//引数：handle	止めたいサウンドの番号
 	void Stop(int ID);
 
+	// 再生速度を変更する関数
+	void SetPlaybackRate(int ID, float playbackRate);
+
 	//シーンごとの解放（ロードしたサウンドを解放）
 	void Release();
 

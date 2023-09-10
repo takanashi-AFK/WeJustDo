@@ -4,6 +4,8 @@
 #include "Engine/Image.h"
 #include "AudioManager.h"
 #include "Engine/Text.h"
+#include "Engine/SceneManager.h"
+#include "Engine/Input.h"
 
 //コンストラクタ
 ResultScene::ResultScene(GameObject* parent)
@@ -31,6 +33,11 @@ void ResultScene::Initialize()
 void ResultScene::Update()
 {
 	frameCount_++;
+
+	if (Input::IsKeyDown(DIK_SPACE)) {
+		SceneManager* pSm = (SceneManager*)FindObject("SceneManager");
+		pSm->ChangeScene(SCENE_ID_SPLASH, TID_BLACKOUT);
+	}
 
 }
 
