@@ -49,8 +49,16 @@ void StandingState::Update(Player* _p)
 //開始
 void StandingState::Enter(Player* _p)
 {
-	_p->SetAcceleration(0);//重力をリセット
+	//重力をリセット
+	_p->SetAcceleration(0);
+
+	//アニメーションをストップ
 	Model::SetAnimFrame(_p->GetModelHandle(), 0, 0, 1);
+
+	//エフェクト処理
+	_p->InitRandEffect();
+	EmitterData Emit = _p->GetRandEData();
+	VFX::Start(Emit);
 }
 
 //入力処理	

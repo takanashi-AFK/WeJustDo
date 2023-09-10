@@ -28,7 +28,6 @@ class Player : public SolidObject
 private:
 	int hDebugBox_;	//モデル番号(DebugBox)
 	PolyLine* pJet;//ジェットエフェクトのポリラインデータ
-	int firewoodNum_;//プレイヤーの薪(アイテム)の所持数
 protected:
 	PlayerStateManager*	pState_;	//Playerの状態管理
 	RayCastData	downData_;			//プレイヤーの下に伸びるレイ
@@ -41,7 +40,7 @@ protected:
 public:
 	EmitterData  RandEffectData_;	//エフェクトデータ(着地時)
 	EmitterData  DeadEffectData;	//エフェクトデータ(死亡時)
-
+	EmitterData PlusOneEffectData;	//エフェクトデータ(薪(アイテム)取得時)
 /////////////////////////////////////////////////////////
 
 public:
@@ -106,17 +105,14 @@ public:
 	//取得：下に伸びるレイキャスト情報
 	RayCastData GetDownData() { return downData_; }
 
-	//取得：プレイヤーの薪(アイテム)の所持数(/5)
-	int GetFirewoodNum() { return firewoodNum_; }
-
-	//設定：プレイヤーの薪(アイテム)の所持数(/5)
-	void SetFirewoodNum(int _n) { firewoodNum_ = _n; }
-
 	//設定：プレイヤーの速度
 	void SetSpeed(float _s) { speed_ = _s; }
 
 	//取得：プレイヤーの速度
 	float GetSpeed() { return speed_; }
+
+	//設定：薪(アイテムの所持数)
+	void SetFirewoodNum(int _n) { Global::gFireWood = _n; }
 
 // effect ///////////////////////////////////
 
@@ -129,6 +125,11 @@ public:
 	/// 着地時エフェクトの初期化
 	/// </summary>
 	void InitRandEffect();
+
+	/// <summary>
+	/// 薪(アイテム)取得時エフェクトの初期化
+	/// </summary>
+	void InitPlusOneEffect();
 
 	//取得：死亡時エフェクトデータ
 	EmitterData GetDeadEData() { return DeadEffectData; }

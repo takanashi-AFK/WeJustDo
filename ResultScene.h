@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine/GameObject.h"
+#include "Engine/Global.h"
 
 //前方宣言
 class Text;
@@ -21,6 +22,8 @@ private:
 	Text* tTimeScore_;
 	Text* tFirewoodScore_;
 	Text* tTotalScore_;
+
+
 
 public:
 	//コンストラクタ

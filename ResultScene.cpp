@@ -21,7 +21,7 @@ void ResultScene::Initialize()
 
 	//Text•Ï”‚Ì‰Šú‰»
 	{
-		tTimeScore_ = new Text;tTimeScore_->Initialize();
+		tTimeScore_ = new Text; tTimeScore_->Initialize();
 		tFirewoodScore_ = new Text;tFirewoodScore_->Initialize();
 		tTotalScore_ = new Text;tTotalScore_->Initialize();
 	}
@@ -55,7 +55,7 @@ void ResultScene::Draw()
 				AudioManager::PlayDonSound();
 
 			tFirewoodScore_->SetScale(3.0f);
-			tFirewoodScore_->Draw(700, 420, iFirewoodScore_);
+			tFirewoodScore_->Draw(700, 420, Global::gFireWood/5);
 		}
 		if (frameCount_ >= 150) {
 			if (frameCount_ == 150)

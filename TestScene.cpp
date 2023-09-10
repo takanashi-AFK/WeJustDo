@@ -40,7 +40,7 @@ void TestScene::Initialize()
 	//UI-TimeCount
 		ASSIGN(pTimer_, Instantiate<Timer>(this)); 
 		{
-			pTimer_->SetTime_Seconds(1000);
+			pTimer_->SetTime_Seconds(15);
 			pTimer_->IsDraw(true);
 		}
 	//Object-StartCount

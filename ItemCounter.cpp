@@ -35,7 +35,7 @@ void ItemCounter::Draw()
 	{
 		//プレイヤー情報(薪の数)を取得
 		Player* p = (Player*)FindObject("Player");
-		int n_firewood = 0; if (p)n_firewood = p->GetFirewoodNum();
+		int n_firewood = 0; if (p)n_firewood = Global::gFireWood;
 
 		// ゼロ埋めのフォーマット指定子を使用して文字列を生成
 		char buffer[8];//文字数+1分の配列サイズ

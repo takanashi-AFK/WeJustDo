@@ -28,7 +28,7 @@ void JumpingState::Update(Player* _p)
 		if (ppos.y <= -3 && ppos.y >= -5)
 			_p->GetState()->ChangeState(_p->GetState()->pDead_, _p, true);
 
-		if(Input::IsKeyDown(DIK_SPACE) && (_p->GetFirewoodNum()>0))
+		if(Input::IsKeyDown(DIK_SPACE) && (Global::gFireWood > 0))
 			_p->GetState()->ChangeState(_p->GetState()->pJet_, _p, true);
 	}
 }

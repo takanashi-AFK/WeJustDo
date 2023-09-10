@@ -29,3 +29,8 @@ static XMFLOAT3 VectorToFloat3(XMVECTOR v)
 
 	return a;
 }
+
+namespace Global
+{
+	extern int gFireWood;
+}
