@@ -31,6 +31,9 @@ namespace Audio
 	// 音量を設定する関数
 	void SetVolume(int ID, float volume);
 
+	// 音の高さを変更する関数
+	void ChangePitch(int ID, float pitch);
+
 	//シーンごとの解放（ロードしたサウンドを解放）
 	void Release();
 
