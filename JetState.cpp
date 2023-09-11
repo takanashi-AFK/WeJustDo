@@ -8,9 +8,9 @@ void JetState::Update(Player* _p)
 {
 	////“ü—Íˆ—
 	//HandleInput(_p);
-	//XMFLOAT3 ppos;
-	//ppos = _p->GetPosition();
-	//Transform* TJumping = _p->GetTransformAddress();
+	XMFLOAT3 ppos;
+	ppos = _p->GetPosition();
+	Transform* TJumping = _p->GetTransformAddress();
 
 	//{//State•Ï‰»
 
@@ -18,9 +18,9 @@ void JetState::Update(Player* _p)
 	//	//if (!Input::IsKey(DIK_D) && !Input::IsKey(DIK_A))
 	//	//	_p->GetState()->ChangeState(_p->GetState()->pStanding_, _p, true);
 
-	//	//dead
-	//	if (ppos.y <= -3 && ppos.y >= -5)
-	//		_p->GetState()->ChangeState(_p->GetState()->pDead_, _p, true);
+		//dead
+		if (ppos.y <= -3 && ppos.y >= -5)
+			_p->GetState()->ChangeState(_p->GetState()->pDead_, _p, true);
 
 	//	if (Input::IsKeyUp(DIK_SPACE)) {
 	//	
