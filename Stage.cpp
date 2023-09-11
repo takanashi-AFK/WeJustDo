@@ -16,7 +16,7 @@ void Stage::Initialize()
 	string fileNames[] = {
 		"Models/Stage300.fbx",
 		"Models/defaultModel.fbx"
-	};
+	}; 
 	int arraySize = sizeof(fileNames) / sizeof(fileNames[0]);
 
 	//モデルデータ分のモデルをロードし、モデル番号を取得
@@ -28,7 +28,7 @@ void Stage::Initialize()
 
 	//csvの情報を取得する
 	CsvReader csv; {
-		csv.Load("Datas/manual.csv");
+ 		csv.Load("Datas/Stage.csv");
 		iP_Width_ = csv.GetWidth();
 		iP_Height_ = csv.GetHeight();
 		ItemPlacement_.resize(iP_Width_, vector<int>(iP_Height_, 0));
