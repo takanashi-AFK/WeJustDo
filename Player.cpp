@@ -13,6 +13,9 @@
 //コンストラクタ
 Player::Player(GameObject* _parent, string _modelFileName)
 	:SolidObject(_parent,_modelFileName,"Player")
+	,hDebugBox_(-1),pJet(nullptr),pState_(nullptr),hGroundModel_(0)
+	,acceleration_(0),isAddGravity_(false),isMove_(false),speed_(0)
+	,RandEffectData_(),DeadEffectData(),PlusOneEffectData()
 {
 	//プレイヤーの状態を「立ち状態」で初期化
 	ASSIGN(pState_,new PlayerStateManager);
@@ -55,6 +58,10 @@ void Player::ChildInitialize()
 //更新
 void Player::ChildUpdate()
 {
+	//カメラの更新
+	Camera::SetPosition(transform_.position_.x + 5, transform_.position_.y + 3, -13.0f);
+	Camera::SetTarget(transform_.position_.x + 5, transform_.position_.y + 3, 0.0f);
+
 	//falseなら動作処理を行わずreturn
 	if (!isMove_)return;
 
@@ -80,9 +87,7 @@ void Player::ChildUpdate()
 	//ステージとの当たり判定
 	StageRayCast();
 
-	//カメラの更新
-	Camera::SetPosition(transform_.position_.x + 5, transform_.position_.y + 3, -13.0f);
-	Camera::SetTarget(transform_.position_.x + 5, transform_.position_.y + 3, 0.0f);
+	
 	
 }
 

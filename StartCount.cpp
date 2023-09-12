@@ -75,3 +75,10 @@ void StartCount::CountDraw(int time)
 		Image::Draw(hPict_[0]);
 	}
 }
+
+void StartCount::Start()
+{
+	isfinished_ = false;
+	pTimer_->SetTime_Frame(0);
+	pTimer_->Start(false);
+}

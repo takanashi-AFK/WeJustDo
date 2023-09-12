@@ -26,10 +26,15 @@ public:
 	/// <returns>終了したらtrue</returns>
 	bool IsFinished();
 
+	/// <summary>
+	/// タイマーを０にし、再度開始
+	/// </summary>
+	void Start();
 private:
 	/// <summary>
 	/// 開始カウントを描画する
 	/// </summary>
 	/// <param name="time">時間(秒)</param>
 	void CountDraw(int time);
+
 };
