@@ -97,7 +97,6 @@ void Player::ChildUpdate()
 			Camera::SetTarget(Camera::GetTarget());
 		}*/
 	}
-	
 
 	//falseなら動作処理を行わずreturn
 	if (!isMove_)return;
@@ -119,7 +118,6 @@ void Player::ChildUpdate()
 		pScM->ChangeScene(SCENE_ID_RESULT, TID_WHITEOUT);
 	}
 
-	
 	//重力を加える
 	AddGravity(&transform_);
 
@@ -132,8 +130,6 @@ void Player::ChildUpdate()
 	//ステージとの当たり判定
 	StageRayCast();
 
-	
-	
 }
 
 //開放
