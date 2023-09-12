@@ -49,6 +49,7 @@ void Player::ChildInitialize()
 //更新
 void Player::ChildUpdate()
 {
+	static float camMove = 4.5f;
 	PolyJetEmitPos = XMFLOAT3(transform_.position_.x - (PLAYER_MODEL_SIZE.x / 4), transform_.position_.y - (PLAYER_MODEL_SIZE.x / 4), transform_.position_.z);
 	pJet->AddPosition(PolyJetEmitPos);
 
@@ -65,9 +66,22 @@ void Player::ChildUpdate()
 
 		//ステージとのあたり判定
 		StageRayCast();
+		if (!(transform_.position_.y > 9))
+		{
+			if (camMove > 4.5f)
+				camMove -= 0.3f;
+			else camMove = 4.5f;
+		}
+		else
+		{
+			if (camMove < 14)
+				camMove += 0.3f;
+			else 
+				camMove = 14.0f;
+		} 
+		Camera::SetPosition(transform_.position_.x + 5, camMove, -13.0f);
+		Camera::SetTarget(transform_.position_.x + 5, camMove - 0.5f, 0.0f);
 
-		Camera::SetPosition(transform_.position_.x + 5, transform_.position_.y + 3, -13.0f);
-		Camera::SetTarget(transform_.position_.x + 5, transform_.position_.y + 3, 0.0f);
 	}
 }
 
