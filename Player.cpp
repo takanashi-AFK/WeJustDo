@@ -65,7 +65,7 @@ void Player::ChildUpdate()
 	{
 		static float camMove = 4.5f;
 
-		if (!(transform_.position_.y > 9))
+		if (!(transform_.position_.y > 7))
 		{
 			if (camMove > 4.5f)
 				camMove -= 0.3f;
@@ -73,10 +73,10 @@ void Player::ChildUpdate()
 		}
 		else
 		{
-			if (camMove < 14)
+			if (camMove < 13)
 				camMove += 0.3f;
 			else
-				camMove = 14.0f;
+				camMove = 13.0f;
 		}
 		Camera::SetPosition(transform_.position_.x + 5, camMove, -13.0f);
 		Camera::SetTarget(transform_.position_.x + 5, camMove - 0.5f, 0.0f);

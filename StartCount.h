@@ -25,8 +25,7 @@ public:
 	/// </summary>
 	/// <returns>終了したらtrue</returns>
 	bool IsFinished();
-
-	/// <summary>
+ 	/// <summary>
 	/// タイマーを０にし、再度開始
 	/// </summary>
 	void Start();
