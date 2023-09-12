@@ -41,6 +41,7 @@ public:
 	EmitterData  RandEffectData_;	//エフェクトデータ(着地時)
 	EmitterData  DeadEffectData;	//エフェクトデータ(死亡時)
 	EmitterData PlusOneEffectData;	//エフェクトデータ(薪(アイテム)取得時)
+	EmitterData  ItemGetEffectData;
 	EmitterData bombEffectData;
 /////////////////////////////////////////////////////////
 
@@ -142,9 +143,14 @@ public:
 	void InitRandEffect();
 
 	/// <summary>
-	/// 薪(アイテム)取得時エフェクトの初期化
+	/// 薪(アイテム)取得時+1の初期化
 	/// </summary>
 	void InitPlusOneEffect();
+
+	/// <summary>
+	/// アイテム取得時キラキラのエフェクト
+	/// </summary>
+	void InitGetEffect();
 
 	//取得：死亡時エフェクトデータ
 	EmitterData GetDeadEData() { return DeadEffectData; }
