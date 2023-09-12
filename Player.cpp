@@ -109,6 +109,7 @@ void Player::ChildUpdate()
 			transform_.position_.z));							//z
 	}
 
+
 	if (Input::IsKeyDown(DIK_RETURN))
 	{
 		SetIsMove(false);
