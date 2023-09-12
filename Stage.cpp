@@ -29,7 +29,7 @@ void Stage::Initialize()
 
 	//csv‚Ìî•ñ‚ğæ“¾‚µAŠi”[‚·‚é
 	CsvReader csv; {
-		csv.Load("Datas/manual.csv");
+		csv.Load("Datas/uo.csv");
 		iP_Width_ = csv.GetWidth();
 		iP_Height_ = csv.GetHeight();
 		ItemPlacement_.resize(iP_Width_, vector<int>(iP_Height_, 0));

@@ -63,5 +63,7 @@ namespace AudioManager {
 
 	bool isJetPlayNow();
 
+	void SetMasterVol(float vol);
+
 	void Release();
 };
