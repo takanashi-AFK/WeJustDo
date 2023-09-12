@@ -60,19 +60,44 @@ void Player::ChildInitialize()
 //更新
 void Player::ChildUpdate()
 {
-	if (transform_.position_.y >= -1 && transform_.position_.y <= 15) {
-		Camera::SetPosition(transform_.position_.x + 5, transform_.position_.y + 3, -13.0f);
-		Camera::SetTarget(transform_.position_.x + 5, transform_.position_.y + 3, 0.0f);
-	}
-	else if (transform_.position_.y > 15) {
-		Camera::SetPosition(transform_.position_.x + 5, Camera::GetPosition().y, -13.0f);
-		Camera::SetTarget(transform_.position_.x + 5, Camera::GetTarget().y, 0.0f);
-	}
-	else if (transform_.position_.y <= -3 && transform_.position_.y >= -5)
+	//かいだカメラ
 	{
-		Camera::SetPosition(Camera::GetPosition().x, Camera::GetPosition().y, Camera::GetPosition().z);
-		Camera::SetTarget(Camera::GetTarget());
+		static float camMove = 4.5f;
+		if (!(transform_.position_.y > 9))
+		{
+			if (camMove > 4.5f)
+				camMove -= 0.3f;
+			else camMove = 4.5f;
+		}
+		else
+		{
+			if (camMove < 14)
+				camMove += 0.3f;
+			else
+				camMove = 14.0f;
+		}
+		Camera::SetPosition(transform_.position_.x + 5, camMove, -13.0f);
+		Camera::SetTarget(transform_.position_.x + 5, camMove - 0.5f, 0.0f);
 	}
+	
+	//たかなしカメラ
+	{
+		/*
+		if (transform_.position_.y >= -1 && transform_.position_.y <= 15) {
+			Camera::SetPosition(transform_.position_.x + 5, transform_.position_.y + 3, -13.0f);
+			Camera::SetTarget(transform_.position_.x + 5, transform_.position_.y + 3, 0.0f);
+		}
+		else if (transform_.position_.y > 15) {
+			Camera::SetPosition(transform_.position_.x + 5, Camera::GetPosition().y, -13.0f);
+			Camera::SetTarget(transform_.position_.x + 5, Camera::GetTarget().y, 0.0f);
+		}
+		else if (transform_.position_.y <= -3 && transform_.position_.y >= -5)
+		{
+			Camera::SetPosition(Camera::GetPosition().x, Camera::GetPosition().y, Camera::GetPosition().z);
+			Camera::SetTarget(Camera::GetTarget());
+		}*/
+	}
+	
 
 	//falseなら動作処理を行わずreturn
 	if (!isMove_)return;
@@ -83,12 +108,6 @@ void Player::ChildUpdate()
 			transform_.position_.x - (PLAYER_MODEL_SIZE.x / 4),	//x
 			transform_.position_.y - (PLAYER_MODEL_SIZE.x / 4),	//y
 			transform_.position_.z));							//z
-	}
-
-	if (pState_->playerState_ == pState_->pDead_)
-	{
-		SceneManager* pScM = (SceneManager*)FindObject("SceneManager");
-		pScM->ChangeScene(SCENE_ID_RESULT, TID_WHITEOUT);
 	}
 
 	if (Input::IsKeyDown(DIK_RETURN))
@@ -301,6 +320,13 @@ void Player::OnWoodPickup(Stage* pS)
 		//その場所の薪を消して空気に変換
 		pS->SetItem(round(transform_.position_.x), round(transform_.position_.y), 0);
 	}
+}
+
+const float GOAL_POINT = 285.0f;
+
+bool Player::isGoal()
+{
+	return transform_.position_.x >= GOAL_POINT;
 }
 
 void Player::TerrainInteraction()

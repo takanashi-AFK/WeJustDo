@@ -73,6 +73,18 @@ public:
 	bool IsMove() { return isMove_; }
 
 	/// <summary>
+	/// 死んでいるかどうかを返す
+	/// </summary>
+	/// <returns>死んでいればtrue</returns>
+	bool isDead() { return pState_->playerState_ == pState_->pDead_; }
+
+	/// <summary>
+	/// ゴール到達地点に到達しているかどうかを返す
+	/// </summary>
+	/// <returns>ゴール地点に到達していればtrue</returns>
+	bool isGoal();
+
+	/// <summary>
 	/// プレイヤーと地形の相互作用を記述する関数
 	/// </summary>
 	void TerrainInteraction();

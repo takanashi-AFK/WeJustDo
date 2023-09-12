@@ -68,26 +68,26 @@ void TestScene::Update()
 
 //Play
 	//制限時間になるまでタイマーを動かす
+	Global::gTime = pTimer_->GetTime_Seconds();
+
 	if (pTimer_->IsFinished()) {/*制限時間になったら*/
 		//ゲームを終了する
 		isGameNow_ = false;
 	}
-	if (false) {/*PlayerがDead状態になり死亡演出を処理したら*/
+	if (pPlayer_->isDead()) {/*PlayerがDead状態になり死亡演出を処理したら*/
 		//ゲームを終了する
 		isGameNow_ = false;
 	}
 
-	//debug
-	Transform *p = pPlayer_->GetTransformAddress();
-	if (p->position_.x >= 285)
-	{
-		Global::gTime =  pTimer_->GetTime_Seconds();
-		pTimer_->Stop(true);
+	if (pPlayer_->isGoal()) {/*プレイヤーがゴール地点に達したら*/
+		//ゲームを終了する
 		isGameNow_ = false;
 	}
 
 //End
 	if (isGameNow_ == false) {/*ゲームが終了したら*/
+		//タイマーを停止
+		pTimer_->Stop(true);
 		//PlayScene->ResultScene にシーン遷移を行う
 		SceneManager* pScM = (SceneManager*)FindObject("SceneManager");
 		pScM->ChangeScene(SCENE_ID_RESULT, TID_WHITEOUT);
