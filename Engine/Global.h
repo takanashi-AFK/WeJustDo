@@ -33,4 +33,5 @@ static XMFLOAT3 VectorToFloat3(XMVECTOR v)
 namespace Global
 {
 	extern int gFireWood;
+	extern int gTime;
 }

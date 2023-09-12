@@ -76,6 +76,15 @@ void TestScene::Update()
 		isGameNow_ = false;
 	}
 
+	//debug
+	Transform *p = pPlayer_->GetTransformAddress();
+	if (p->position_.x >= 285)
+	{
+		Global::gTime =  pTimer_->GetTime_Seconds();
+		pTimer_->Stop(true);
+		isGameNow_ = false;
+	}
+
 //End
 	if (isGameNow_ == false) {/*ゲームが終了したら*/
 		//PlayScene->ResultScene にシーン遷移を行う

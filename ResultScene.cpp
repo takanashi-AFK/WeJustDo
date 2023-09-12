@@ -55,7 +55,7 @@ void ResultScene::Draw()
 				AudioManager::Play_DonSound();
 
 			tTimeScore_->SetScale(3.0f);
-			tTimeScore_->Draw(700, 270, iTimeScore_);
+			tTimeScore_->Draw(700, 270, Global::gTime);
 		}
 		if (frameCount_ >= 90) {
 			if (frameCount_ == 90)

@@ -65,6 +65,8 @@ void Player::ChildUpdate()
 			transform_.position_.y - (PLAYER_MODEL_SIZE.x / 4),	//y
 			transform_.position_.z));							//z
 	}
+
+
 	
 	//èdóÕÇâ¡Ç¶ÇÈ
 	AddGravity(&transform_);

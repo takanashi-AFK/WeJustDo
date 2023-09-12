@@ -1,6 +1,7 @@
 #include "Timer.h"
 #include "Engine/Image.h"
 #include "Engine/Text.h"
+#include "Engine/Global.h"
 
 #include <cstdio>//フォーマット指定子を使用
 
