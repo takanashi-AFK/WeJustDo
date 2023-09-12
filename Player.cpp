@@ -60,7 +60,7 @@ void Player::ChildInitialize()
 void Player::ChildUpdate()
 {
 	if (transform_.position_.y >= -1 && transform_.position_.y <= 15) {
-		Camera::SetPosition(transform_.position_.x + 5, transform_.position_.y , -13.0f);
+		Camera::SetPosition(transform_.position_.x + 5, transform_.position_.y + 3, -13.0f);
 		Camera::SetTarget(transform_.position_.x + 5, transform_.position_.y + 3, 0.0f);
 	}
 	else if (transform_.position_.y > 15) {
