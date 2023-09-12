@@ -23,9 +23,10 @@ void ResultScene::Initialize()
 
 	//Text•Ï”‚Ì‰Šú‰»
 	{
-		tTimeScore_ = new Text; tTimeScore_->Initialize();
-		tFirewoodScore_ = new Text;tFirewoodScore_->Initialize();
-		tTotalScore_ = new Text;tTotalScore_->Initialize();
+		tTimeScore_ = new Text; tTimeScore_->Initialize("Fonts/Oyamayoumou_number.png",64,68,15);
+
+		tFirewoodScore_ = new Text;tFirewoodScore_->Initialize("Fonts/Oyamayoumou_number.png", 64, 68, 15);
+		tTotalScore_ = new Text;tTotalScore_->Initialize("Fonts/Oyamayoumou_number.png", 64, 68, 15);
 	}
 }
 
@@ -54,22 +55,22 @@ void ResultScene::Draw()
 			if (frameCount_ == 30)
 				AudioManager::Play_DonSound();
 
-			tTimeScore_->SetScale(3.0f);
+			tTimeScore_->SetScale(1.5f);
 			tTimeScore_->Draw(700, 270, Global::gTime);
 		}
 		if (frameCount_ >= 90) {
 			if (frameCount_ == 90)
 				AudioManager::Play_DonSound();
 
-			tFirewoodScore_->SetScale(3.0f);
+			tFirewoodScore_->SetScale(1.5f);
 			tFirewoodScore_->Draw(700, 420, Global::gFireWood/5);
 		}
 		if (frameCount_ >= 150) {
 			if (frameCount_ == 150)
 				AudioManager::Play_DonSound();
 
-			tTotalScore_->SetScale(3.0f);
-			tTotalScore_->Draw(700, 570, (Global::gTime*Global::gFireWood)*1.09);
+			tTotalScore_->SetScale(2.0f);
+			tTotalScore_->Draw(550, 570, (Global::gTime*Global::gFireWood*9.08)+ Global::gFireWood/5);
 		}
 
 		if (frameCount_ >= 200)

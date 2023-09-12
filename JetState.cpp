@@ -20,14 +20,13 @@ void JetState::Update(Player* _p)
 	//	//	_p->GetState()->ChangeState(_p->GetState()->pStanding_, _p, true);
 
 		//dead
-		if (ppos.y <= -3 && ppos.y >= -5)
+		if (ppos.y <= -10 && ppos.y >= -13)
 			_p->GetState()->ChangeState(_p->GetState()->pDead_, _p, true);
 
 	//	if (Input::IsKeyUp(DIK_SPACE)) {
 	//	
 	//		_p->GetState()->ChangeState(_p->GetState()->pJumping_, _p, true);
 	//	}
-
 
 	//}
 
@@ -45,7 +44,7 @@ void JetState::Update(Player* _p)
 	}
 
 	//‰¡ˆÚ“®‚Ìˆ—
-	float s = _p->GetSpeed();
+	float s = _p->GetSpeed()+0.02;
 	if (Input::IsKey(DIK_A)) { t_Player->position_.x -= s; t_Player->rotate_.y = -90; /*PolyJetEmitPos.x = PolyJetEmitPos.x + 0.5;*/ }
 	else if (Input::IsKey(DIK_D)) { t_Player->position_.x += s; t_Player->rotate_.y = 90; }
 

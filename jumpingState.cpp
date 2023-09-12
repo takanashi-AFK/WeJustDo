@@ -25,7 +25,7 @@ void JumpingState::Update(Player* _p)
 		if (_p->GetAccelaration() >= 5.0f)
 			_p->GetState()->ChangeState(_p->GetState()->pStanding_, _p, true);
 		//dead
-		if (ppos.y <= -3 && ppos.y >= -5)
+		if (ppos.y <= -10 && ppos.y >= -13)
 			_p->GetState()->ChangeState(_p->GetState()->pDead_, _p, true);
 
 		if(Input::IsKeyDown(DIK_SPACE) && (Global::gFireWood > 0))

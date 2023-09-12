@@ -51,6 +51,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	//ウィンドウを作成
 	HWND hWnd = InitApp(hInstance, screenWidth, screenHeight, nCmdShow);
+	
 
 	//Direct3D準備
 	Direct3D::Initialize(hWnd, screenWidth, screenHeight);
@@ -270,6 +271,7 @@ void ToggleFullScreen(HWND hWnd, int screenWidth, int screenHeight)
 		SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLong(hWnd, GWL_EXSTYLE) | WS_EX_TOPMOST);
 		ShowWindow(hWnd, SW_MAXIMIZE);
 		SetWindowPos(hWnd, HWND_TOPMOST, 0, 0, GetSystemMetrics(SM_CXMAXIMIZED), GetSystemMetrics(SM_CYMAXIMIZED), SWP_FRAMECHANGED);
+		ShowCursor(false);
 	}
 	else {
 		// ウィンドウモードに切り替える
@@ -277,5 +279,6 @@ void ToggleFullScreen(HWND hWnd, int screenWidth, int screenHeight)
 		SetWindowLong(hWnd, GWL_EXSTYLE, WS_EX_OVERLAPPEDWINDOW);
 		ShowWindow(hWnd, SW_NORMAL);
 		SetWindowPos(hWnd, HWND_NOTOPMOST, 0, 0, screenWidth, screenHeight, SWP_FRAMECHANGED);
+		ShowCursor(true);
 	}
 }

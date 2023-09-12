@@ -41,7 +41,7 @@ void RunningState::Update(Player* _p)
 			AudioManager::Stop_FootSound();
 		}
 		//dead
-		if (ppos.y <= -3 && ppos.y >= -5) {
+		if (ppos.y <= -10 && ppos.y >= -13) {
 			_p->GetState()->ChangeState(_p->GetState()->pDead_, _p, true);
 			AudioManager::Stop_FootSound();
 		}
