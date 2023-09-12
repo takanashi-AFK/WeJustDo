@@ -258,9 +258,9 @@ void Player::GetFirewood()
 		//エフェクト
 
 		//Gauge
-		nowFireWood++;
-		maxFireWood = 100 / nowFireWood;
-		pGauge->SetFuel(nowFireWood, maxFireWood);
+		
+		maxFireWood = 100 /fireWoodNum_;
+		pGauge->SetFuel(fireWoodNum_, maxFireWood);
 
 		pS->SetItem(round(transform_.position_.x), round(transform_.position_.y), 0);
 	}
