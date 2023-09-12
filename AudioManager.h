@@ -59,5 +59,7 @@ namespace AudioManager {
 
 	void Play_WoodSound();
 
+	bool isJetPlayNow();
+
 	void Release();
 };

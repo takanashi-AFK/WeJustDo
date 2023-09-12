@@ -39,6 +39,9 @@
     <Filter Include="State">
       <UniqueIdentifier>{044c7c29-63b4-490a-b14e-a77098cda496}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameUI">
+      <UniqueIdentifier>{6ce05fad-45e2-456d-85ad-9e5d60a2ec13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\BoxCollider.cpp">
@@ -145,14 +148,9 @@
     <ClCompile Include="StandingState.cpp">
       <Filter>State</Filter>
     </ClCompile>
-    <ClCompile Include="AudioManager.cpp" />
-    <ClCompile Include="PlayScene.cpp" />
-    <ClCompile Include="StageSelectScene.cpp" />
     <ClCompile Include="jumpingState.cpp">
       <Filter>State</Filter>
     </ClCompile>
-    <ClCompile Include="MovieState.cpp" />
-    <ClCompile Include="PolyLine.cpp" />
     <ClCompile Include="DeadState.cpp">
       <Filter>State</Filter>
     </ClCompile>
@@ -160,6 +158,36 @@
       <Filter>State</Filter>
     </ClCompile>
     <ClCompile Include="DebugObject.cpp" />
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>01Engine\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="FuelGauge.cpp">
+      <Filter>GameUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Global.cpp">
+      <Filter>01Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemCounter.cpp">
+      <Filter>GameUI</Filter>
+    </ClCompile>
+    <ClCompile Include="MovieState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="StageSelectScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>GameUI</Filter>
+    </ClCompile>
+    <ClCompile Include="StartCount.cpp">
+      <Filter>GameUI</Filter>
+    </ClCompile>
+    <ClCompile Include="PolyLine.cpp">
+      <Filter>01Engine\DirectX</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -266,14 +294,9 @@
     <ClInclude Include="StandingState.h">
       <Filter>State</Filter>
     </ClInclude>
-    <ClInclude Include="AudioManager.h" />
-    <ClInclude Include="PlayScene.h" />
-    <ClInclude Include="StageSelectScene.h" />
     <ClInclude Include="jumpingState.h">
       <Filter>State</Filter>
     </ClInclude>
-    <ClInclude Include="MovieState.h" />
-    <ClInclude Include="PolyLine.h" />
     <ClInclude Include="JetState.h">
       <Filter>State</Filter>
     </ClInclude>
@@ -281,6 +304,33 @@
       <Filter>State</Filter>
     </ClInclude>
     <ClInclude Include="DebugObject.h" />
+    <ClInclude Include="AudioManager.h">
+      <Filter>01Engine\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="FuelGauge.h">
+      <Filter>GameUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemCounter.h">
+      <Filter>GameUI</Filter>
+    </ClInclude>
+    <ClInclude Include="MovieState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="StageSelectScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>GameUI</Filter>
+    </ClInclude>
+    <ClInclude Include="StartCount.h">
+      <Filter>GameUI</Filter>
+    </ClInclude>
+    <ClInclude Include="PolyLine.h">
+      <Filter>01Engine\DirectX</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">

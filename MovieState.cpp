@@ -1,5 +1,6 @@
 #include "MovieState.h"
 #include "Player.h"
+#include "AudioManager.h"
 
 void MovieState::Update(Player* _p)
 {

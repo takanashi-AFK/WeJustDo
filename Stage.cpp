@@ -78,8 +78,8 @@ void Stage::Draw()
 		Model::SetRayFlag(StageModelList_[m_Block],true);
 
 		//•`‰æ
-		Model::SetTransform(StageModelList_[m_Block], t_Block);
-		Model::Draw(StageModelList_[m_Block]);
+		//Model::SetTransform(StageModelList_[m_Block], t_Block);
+		//Model::Draw(StageModelList_[m_Block]);
 	}
 	//////////////////////////////////////////////////////////////////////
 	

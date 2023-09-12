@@ -58,8 +58,12 @@ void RunningState::Update(Player* _p)
 //ŠJn
 void RunningState::Enter(Player* _p)
 {
+	if (AudioManager::isJetPlayNow())
+		AudioManager::Stop_JetSound();
+
 	Model::SetAnimFrame(_p->GetModelHandle(), 0, 44, 1);
 	AudioManager::Play_FootSound();
+
 }
 
 //“ü—Íˆ—

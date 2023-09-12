@@ -14,23 +14,28 @@ namespace AudioManager
 	int hFootSound_;
 	int hWoodSound_;
 
+	bool flag_ = false;
+
+	bool isJetPlayNow() { return flag_; }
+
+
+	//ドンッ：開始
 	void Play_DonSound()
 	{
 		hDonSound_ = Audio::Load("Sounds/don.wav",false);
 		assert(hDonSound_ >= 0);
 		Audio::Play(hDonSound_);
 	}
-
+	//ドンッ：停止
 	void Stop_DonSound()
 	{
 		Audio::Stop(hDonSound_);
 	}
 
+	//タイトル：開始
 	void Play_TitleMusic()
 	{
 		hTitleMusic_ = Audio::Load("Sounds/TitleBGM.wav");
-		Audio::ChangePitch(hTitleMusic_, 5.0f);
-		Audio::SetVolume(hTitleMusic_, 0.5f);
 		assert(hTitleMusic_ >= 0);
 		Audio::Play(hTitleMusic_);
 	}
@@ -46,6 +51,7 @@ namespace AudioManager
 	{
 		hPlayMusic_ = Audio::Load("Sounds/PlayScene.wav", true);
 		assert(hPlayMusic_ >= 0);
+		Audio::SetVolume(hPlayMusic_, 2.0f);
 		Audio::Play(hPlayMusic_);
 	}
 
@@ -65,6 +71,7 @@ namespace AudioManager
 
 	void Play_JetSound()
 	{
+		flag_ = true;
 		hJetSound_ = Audio::Load("Sounds/JettPack.wav");
 		assert(hJetSound_ >= 0);
 		Audio::Play(hJetSound_);
@@ -72,8 +79,11 @@ namespace AudioManager
 
 	void Play_FootSound()
 	{
+		flag_ = false;
 		hFootSound_ = Audio::Load("Sounds/砂の上を走る.wav",true);
 		assert(hFootSound_ >= 0);
+		Audio::SetVolume(hFootSound_, 0.2f);
+		Audio::SetPlaybackRate(hFootSound_,1.2f);
 		Audio::Play(hFootSound_);
 	}
 
@@ -86,6 +96,7 @@ namespace AudioManager
 	{
 		hWoodSound_ = Audio::Load("Sounds/db63fc113271b1a0.wav");
 		assert(hWoodSound_ >= 0);
+		Audio::SetVolume(hWoodSound_,0.3f);
 		Audio::Play(hWoodSound_);
 	}
 

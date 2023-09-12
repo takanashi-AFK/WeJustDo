@@ -49,6 +49,9 @@ void StandingState::Update(Player* _p)
 //開始
 void StandingState::Enter(Player* _p)
 {
+	if(AudioManager::isJetPlayNow())
+	AudioManager::Stop_JetSound();
+
 	//重力をリセット
 	_p->SetAcceleration(0);
 
