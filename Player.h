@@ -8,6 +8,7 @@
 #include "Engine/VFX.h"
 //‘O•ûéŒ¾
 class Stage;
+class FuelGauge;
 
 //’è”éŒ¾
 namespace {
@@ -27,6 +28,8 @@ private:
 	//debug
 	int Marker;
 	int DeadEffHandle;
+	int nowFireWood;
+	int maxFireWood;
 	XMFLOAT3 RayStartPos;
 	XMFLOAT3 downLandingPoint;
 	XMFLOAT3 upLandingPoint;
@@ -35,6 +38,7 @@ private:
 	XMFLOAT3 PolyJetEmitPos;
 	
 	PolyLine* pJet;
+	FuelGauge* pGauge;
 	
 	//ziro2
 	int hBox_;

@@ -154,6 +154,7 @@
     <ClCompile Include="Engine\Text.cpp" />
     <ClCompile Include="Engine\Texture.cpp" />
     <ClCompile Include="Engine\Component\Transform\Transform.cpp" />
+    <ClCompile Include="FuelGauge.cpp" />
     <ClCompile Include="JetState.cpp" />
     <ClCompile Include="JumpingState.cpp" />
     <ClCompile Include="MovieState.cpp" />
@@ -202,6 +203,7 @@
     <ClInclude Include="Engine\Text.h" />
     <ClInclude Include="Engine\Texture.h" />
     <ClInclude Include="Engine\Component\Transform\Transform.h" />
+    <ClInclude Include="FuelGauge.h" />
     <ClInclude Include="JetState.h" />
     <ClInclude Include="JumpingState.h" />
     <ClInclude Include="MovieState.h" />

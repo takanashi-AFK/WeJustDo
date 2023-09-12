@@ -3,6 +3,7 @@
 //インクルード
 #include "Engine/Input.h"
 #include "Stage.h"
+#include "FuelGauge.h"
 #include "Engine/Transition.h"
 #include "Engine/Image.h"
 #include "Engine/Debug.h"
@@ -12,7 +13,7 @@
 //コンストラクタ
 Player::Player(GameObject* _parent, string _modelFileName)
 	:SolidObject(_parent,_modelFileName,"Player"),
-	pState_(nullptr),pStage_(),hGroundModel_(0),acceleration_(0)
+	pState_(nullptr),pStage_(),hGroundModel_(0),acceleration_(0),nowFireWood(0),maxFireWood(0)
 {
 	//プレイヤーの状態を「立ち状態」で初期化
 	ASSIGN(pState_,new PlayerStateManager);
@@ -41,6 +42,7 @@ void Player::ChildInitialize()
 
 	//pDead = new PolyLine(1,50);
 	//pDead->Load("Effects/Tex.png");
+	pGauge = Instantiate<FuelGauge>(this);
 	pJet = new PolyLine(0.4, 10);
 	pJet->Load("Effects/Fire.png");
 
@@ -254,6 +256,11 @@ void Player::GetFirewood()
 		//エフェクト
 		firewoodNum_+=5;
 		//エフェクト
+
+		//Gauge
+		nowFireWood++;
+		maxFireWood = 100 / nowFireWood;
+		pGauge->SetFuel(nowFireWood, maxFireWood);
 
 		pS->SetItem(round(transform_.position_.x), round(transform_.position_.y), 0);
 	}
