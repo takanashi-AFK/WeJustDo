@@ -41,6 +41,7 @@ public:
 	EmitterData  RandEffectData_;	//エフェクトデータ(着地時)
 	EmitterData  DeadEffectData;	//エフェクトデータ(死亡時)
 	EmitterData PlusOneEffectData;	//エフェクトデータ(薪(アイテム)取得時)
+	EmitterData bombEffectData;
 /////////////////////////////////////////////////////////
 
 public:
@@ -120,6 +121,8 @@ public:
 	/// 死亡時エフェクトの初期化
 	/// </summary>
 	void InitDeadEffect();
+
+	void InitBombEffect();
 
 	/// <summary>
 	/// 着地時エフェクトの初期化

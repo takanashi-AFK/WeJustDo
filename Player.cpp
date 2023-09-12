@@ -90,6 +90,12 @@ void Player::ChildUpdate()
 		pScM->ChangeScene(SCENE_ID_RESULT, TID_WHITEOUT);
 	}
 
+	if (Input::IsKeyDown(DIK_RETURN))
+	{
+		SceneManager* pScM = (SceneManager*)FindObject("SceneManager");
+		pScM->ChangeScene(SCENE_ID_RESULT, TID_WHITEOUT);
+
+	}
 
 	
 	//重力を加える
@@ -229,6 +235,21 @@ void Player::InitDeadEffect()
 	
 }
 
+void Player::InitBombEffect()
+{
+	PlusOneEffectData.textureFileName = "Effects/PlusOneR.png";
+	PlusOneEffectData.positionRnd = XMFLOAT3(0.1, 0, 0.1);
+	PlusOneEffectData.delay = 0;
+	PlusOneEffectData.number = 1;
+	PlusOneEffectData.lifeTime = 25;
+	PlusOneEffectData.speed = 0.05f;
+	PlusOneEffectData.speedRnd = 0.0;
+	PlusOneEffectData.size = XMFLOAT2(0.75, 0.75);
+	PlusOneEffectData.scale = XMFLOAT2(1.01, 1.01);
+	PlusOneEffectData.color = XMFLOAT4(1, 1, 1, 1);
+
+}
+
 void Player::InitRandEffect()
 {	
 	//エフェクト情報を設定
@@ -259,6 +280,7 @@ void Player::InitPlusOneEffect()
 	PlusOneEffectData.scale = XMFLOAT2(1.01, 1.01);
 	PlusOneEffectData.color = XMFLOAT4(1, 1, 1, 1);
 }
+
 
 void Player::OnWoodPickup(Stage* pS)
 {
