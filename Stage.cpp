@@ -110,6 +110,12 @@ void Stage::Draw()
 
 void Stage::Release()
 {
+	StageModelList_.clear();
+
+	for (int i = 0; i < ItemPlacement_.size(); ++i) {
+		ItemPlacement_[i].clear();
+	}
+	ItemPlacement_.clear(); 
 }
 
 bool Stage::AtItem(GameObject* _obj, int _hItem) 

@@ -36,6 +36,7 @@ protected:
 	float acceleration_;			//重力の加速度
 	bool isAddGravity_;				//重力を加えるか否か
 	bool isMove_;					//動いていいいか
+	bool isMudNow_;
 	float speed_;					//移動速度
 public:
 	EmitterData  RandEffectData_;	//エフェクトデータ(着地時)
@@ -127,6 +128,10 @@ public:
 
 	//設定：薪(アイテムの所持数)
 	void SetFirewoodNum(int _n) { Global::gFireWood = _n; }
+
+	void SetIsMudNow(bool now) { isMudNow_ = now; }
+
+	bool GetIsMudNow() { return isMudNow_; }
 
 // effect ///////////////////////////////////
 

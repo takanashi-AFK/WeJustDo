@@ -373,12 +373,12 @@ void Player::TerrainInteraction()
 	//d‚ðŽæ“¾‚·‚é
 	OnWoodPickup(pS);
 
-	//‘«ê‚ª“D‚ÌŽž
-	if (pS->AtItem(this, 2))
-	{
-		//¦‚¤‚Ü‚­s‚©‚È‚¢(ŒŸ“¢’†)
-	}
-	else SetSpeed(0.1f);
+	////‘«ê‚ª“D‚ÌŽž
+	//if (pS->AtItem(this, 2))
+	//{
+	//	SetSpeed(0.05);
+	//}
+	//else SetSpeed(0.1f);
 }
 
 void Player::PolyDraw()

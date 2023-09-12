@@ -68,6 +68,5 @@ public:
 
 	//取得：ステージ情報として登録されている特定のモデル番号
 	int GetStageModelHandle(int _hModel) { return StageModelList_[_hModel]; }
-
 };
 
