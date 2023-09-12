@@ -13,6 +13,7 @@ namespace AudioManager
 	int hJetSound_;
 	int hFootSound_;
 	int hWoodSound_;
+	int hBombSound_;
 
 	bool flag_ = false;
 
@@ -90,6 +91,13 @@ namespace AudioManager
 	void Stop_FootSound()
 	{
 		Audio::Stop(hFootSound_);
+	}
+
+	void Play_BombSound()
+	{
+		hBombSound_ = Audio::Load("Sounds/”š”­1.wav");
+		assert(hBombSound_ >= 0);
+		Audio::Play(hBombSound_);
 	}
 
 	void Play_WoodSound()

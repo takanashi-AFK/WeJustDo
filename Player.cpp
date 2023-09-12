@@ -44,8 +44,7 @@ void Player::ChildInitialize()
 		InitRandEffect();
 		InitPlusOneEffect();
 		InitBombEffect();
-		//pDead = new PolyLine(1,50);
-		//pDead->Load("Effects/Tex.png");
+		InitGetEffect();
 
 		pJet = new PolyLine(0.4, 10);
 		pJet->Load("Effects/Fire.png");
@@ -127,6 +126,17 @@ void Player::ChildUpdate()
 			transform_.position_.x - (PLAYER_MODEL_SIZE.x / 4),	//x
 			transform_.position_.y - (PLAYER_MODEL_SIZE.x / 4),	//y
 			transform_.position_.z));							//z
+	}
+
+
+	if (Input::IsKeyDown(DIK_RETURN))
+	{
+		SetIsMove(false);
+		AudioManager::Play_BombSound(); 
+		bombEffectData.position = XMFLOAT3(transform_.position_.x + 5, transform_.position_.y , 0.0f);
+		int a = VFX::Start(bombEffectData);
+		SceneManager* pScM = (SceneManager*)FindObject("SceneManager");
+		pScM->ChangeScene(SCENE_ID_RESULT, TID_WHITEOUT);
 	}
 
 	//重力を加える
@@ -265,7 +275,7 @@ void Player::InitDeadEffect()
 
 void Player::InitBombEffect()
 {
-	bombEffectData.textureFileName = "Effects/cloudA.png";
+	bombEffectData.textureFileName = "Image/bomb.png";
 	bombEffectData.positionRnd = XMFLOAT3(0.1, 0, 0.1);
 	bombEffectData.delay = 0;
 	bombEffectData.number = 1;
@@ -309,6 +319,22 @@ void Player::InitPlusOneEffect()
 	PlusOneEffectData.color = XMFLOAT4(1, 1, 1, 1);
 }
 
+void Player::InitGetEffect()
+{
+	ItemGetEffectData.textureFileName = "Effects/kira.png";
+	ItemGetEffectData.position = XMFLOAT3(transform_.position_.x, transform_.position_.y - 0.2, 0);
+	ItemGetEffectData.positionRnd = XMFLOAT3(0.1, 0, 0.1);
+	ItemGetEffectData.delay = 0;
+	ItemGetEffectData.number = 1;
+	ItemGetEffectData.lifeTime = 40;
+	ItemGetEffectData.speed = 0.01f;
+	ItemGetEffectData.speedRnd = 0.0;
+	ItemGetEffectData.size = XMFLOAT2(1, 0.5);
+	ItemGetEffectData.scale = XMFLOAT2(1.01, 1.01);
+	ItemGetEffectData.color = XMFLOAT4(1, 1, 1, 1);
+	ItemGetEffectData.deltaColor = XMFLOAT4(0, 0, 0, -0.1);
+}
+
 
 void Player::OnWoodPickup(Stage* pS)
 {
@@ -320,7 +346,9 @@ void Player::OnWoodPickup(Stage* pS)
 
 		//エフェクト
 		PlusOneEffectData.position = (XMFLOAT3(transform_.position_.x - 0.5, transform_.position_.y + 0.5, 0));
+		ItemGetEffectData.position = transform_.position_;
 		VFX::Start(PlusOneEffectData);
+		VFX::Start(ItemGetEffectData);
 
 		AudioManager::Play_WoodSound();
 
