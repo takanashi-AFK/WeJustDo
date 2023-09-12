@@ -69,7 +69,7 @@ void ResultScene::Draw()
 				AudioManager::Play_DonSound();
 
 			tTotalScore_->SetScale(3.0f);
-			tTotalScore_->Draw(700, 570, iTotalScore_);
+			tTotalScore_->Draw(700, 570, (Global::gTime*Global::gFireWood)*1.09);
 		}
 
 		if (frameCount_ >= 200)
