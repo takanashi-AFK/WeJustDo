@@ -113,7 +113,8 @@ void Player::ChildUpdate()
 	if (Input::IsKeyDown(DIK_RETURN))
 	{
 		SetIsMove(false);
-		bombEffectData.position = XMFLOAT3(transform_.position_.x, transform_.position_.y, transform_.position_.z -2);
+		AudioManager::Play_BombSound(); 
+		bombEffectData.position = XMFLOAT3(transform_.position_.x + 5, transform_.position_.y , 0.0f);
 		int a = VFX::Start(bombEffectData);
 		SceneManager* pScM = (SceneManager*)FindObject("SceneManager");
 		pScM->ChangeScene(SCENE_ID_RESULT, TID_WHITEOUT);
@@ -255,7 +256,7 @@ void Player::InitDeadEffect()
 
 void Player::InitBombEffect()
 {
-	bombEffectData.textureFileName = "Effects/cloudA.png";
+	bombEffectData.textureFileName = "Image/bomb.png";
 	bombEffectData.positionRnd = XMFLOAT3(0.1, 0, 0.1);
 	bombEffectData.delay = 0;
 	bombEffectData.number = 1;

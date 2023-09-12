@@ -57,6 +57,8 @@ namespace AudioManager {
 	/// </summary>
 	void Stop_FootSound();
 
+	void Play_BombSound();
+
 	void Play_WoodSound();
 
 	bool isJetPlayNow();
