@@ -154,7 +154,9 @@ void Player::ChildUpdate()
 	pState_->Update(this);
 
 	//ステージとの当たり判定
-	StageRayCast();
+	//StageRayCast();
+
+	RayNeo();
 
 }
 
@@ -404,4 +406,118 @@ void Player::InitGetEffect()
 	ItemGetEffectData.scale = XMFLOAT2(1.01, 1.01);
 	ItemGetEffectData.color = XMFLOAT4(1, 1, 1, 1);
 	ItemGetEffectData.deltaColor = XMFLOAT4(0, 0, 0, -0.1);
+}
+
+void Player::RayNeo()
+{
+	//ステージのモデル番号を取得
+	ASSIGN(hGroundModel_, dynamic_cast<Stage*>(FindObject("Stage"))->GetStageModelHandle(m_Ground));
+	Ray.start = transform_.position_;
+
+	//左方向の当たり判定
+	{
+		XMStoreFloat3(&Ray.dir, XMVectorSet(-1, 0, 0, 0));
+		Model::RayCast(hGroundModel_, &Ray);
+
+		if (Ray.dist < (PLAYER_MODEL_SIZE.x / 2)) {
+			//めり込み分、位置を戻す
+			XMVECTOR length = { -Ray.dist - (PLAYER_MODEL_SIZE.x / 2),0,0 };
+			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(-1, 0, 0, 0) - length));
+		}
+	}
+	//左上
+	{
+		XMStoreFloat3(&Ray.dir, XMVectorSet(-1, 1, 0, 0));
+		Model::RayCast(hGroundModel_, &Ray);
+
+		if (Ray.dist < (PLAYER_MODEL_SIZE.x / 2)) {
+			//めり込み分、位置を戻す
+			XMVECTOR length = { -Ray.dist - (PLAYER_MODEL_SIZE.x / 2),0,0 };
+			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(-1, 0, 0, 0) - length));
+		}
+	}
+
+
+	//右方向のあたり判定
+	{
+		XMStoreFloat3(&Ray.dir, XMVectorSet(1, 0, 0, 0));	//発射方向の指定
+		Model::RayCast(hGroundModel_, &Ray);				//レイを発射
+
+		//レイの長さが1.0以下だったら...
+		if (Ray.dist < (PLAYER_MODEL_SIZE.x / 2)) {
+			//めり込み分、位置を戻す
+			XMVECTOR length = { Ray.dist + (PLAYER_MODEL_SIZE.x / 2),0,0 };
+			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(1, 0, 0, 0) - length));
+		}
+	}
+	//右上
+	{
+		XMStoreFloat3(&Ray.dir, XMVectorSet(1, 1, 0, 0));	//発射方向の指定
+		Model::RayCast(hGroundModel_, &Ray);				//レイを発射
+
+		//レイの長さが1.0以下だったら...
+		if (Ray.dist < (PLAYER_MODEL_SIZE.x / 2)) {
+			//めり込み分、位置を戻す
+			XMVECTOR length = { Ray.dist + (PLAYER_MODEL_SIZE.x / 2),0,0 };
+			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(1, 0, 0, 0) - length));
+		}
+	}
+
+	//上方向のあたり判定
+	{
+		//当たっているか確認
+		XMStoreFloat3(&Ray.dir, XMVectorSet(0, 1, 0, 0));
+		Model::RayCast(hGroundModel_, &Ray);
+
+		//レイの長さが1.0以下だったら...
+		if (Ray.dist < (PLAYER_MODEL_SIZE.y / 2)) {
+			//めり込み分、位置を戻す
+			XMVECTOR length = { 0, (PLAYER_MODEL_SIZE.y / 2) + Ray.dist,0 };
+			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(0, 1, 0, 0) - length));
+			SetAcceleration(2);
+		}
+	}
+
+	//StandingState,RunningStateときのみ行うからState内で処理を行う
+	//下方向のあたり判定
+	{
+		//当たっているか確認
+		XMStoreFloat3(&Ray.dir, XMVectorSet(0, -1, 0, 0));
+		Model::RayCast(hGroundModel_, &Ray);
+		downData_ = Ray;
+		if (Ray.dist < (PLAYER_MODEL_SIZE.y / 2)) {
+			//状態を"Standing"に変更
+			pState_->ChangeState(pState_->pStanding_, this);
+		}
+		else
+			isAddGravity_ = true;
+	}	
+	//右下
+	{
+		//当たっているか確認
+		XMStoreFloat3(&Ray.dir, XMVectorSet(1, -1, 0, 0));
+		Model::RayCast(hGroundModel_, &Ray);
+		downData_ = Ray;
+		if (Ray.dist < (PLAYER_MODEL_SIZE.y / 2)) {
+			//状態を"Standing"に変更
+			pState_->ChangeState(pState_->pStanding_, this);
+		}
+		else
+			isAddGravity_ = true;
+	}
+
+	//左下
+	{
+		//当たっているか確認
+		XMStoreFloat3(&Ray.dir, XMVectorSet(-1, -1, 0, 0));
+		Model::RayCast(hGroundModel_, &Ray);
+		downData_ = Ray;
+		if (Ray.dist < (PLAYER_MODEL_SIZE.y / 2)) {
+			//状態を"Standing"に変更
+			pState_->ChangeState(pState_->pStanding_, this);
+		}
+		else
+			isAddGravity_ = true;
+	}
+
 }

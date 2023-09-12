@@ -37,6 +37,7 @@ protected:
 	bool isAddGravity_;				//重力を加えるか否か
 	bool isMove_;					//動いていいいか
 	float speed_;					//移動速度
+	RayCastData Ray;
 public:
 	EmitterData  RandEffectData_;	//エフェクトデータ(着地時)
 	EmitterData  DeadEffectData;	//エフェクトデータ(死亡時)
@@ -160,5 +161,7 @@ public:
 
 	//取得：JetFireのポリラインデータ
 	PolyLine GetJettPData() { return *pJet; }
+
+	void RayNeo();
 	
 };
