@@ -3,6 +3,7 @@
 
 #include "Player.h"
 #include "AudioManager.h"
+#include "Engine/SceneManager.h"
 
 void JetState::Update(Player* _p)
 {

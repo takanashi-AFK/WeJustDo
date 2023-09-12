@@ -4,6 +4,8 @@
 #include "AudioManager.h"
 #include "Engine/Input.h"
 #include "Engine/VFX.h"
+#include "TestScene.h"
+#include"Engine/SceneManager.h"
 
 void DeadState::Update(Player* _p)
 {
@@ -21,6 +23,8 @@ void DeadState::Enter(Player* _p)
 	dead.position = XMFLOAT3(ppos.x, 0, -1);
 	VFX::Start(dead);
 	AudioManager::Play_DeadSound();
+
+	
 }
 
 void DeadState::HandleInput(Player* _p)

@@ -36,6 +36,7 @@ public:
 	//•`‰æ
 	void Draw() override;
 
+	void SetIsGameNow(bool now) { isGameNow_ = now; }
 	//ŠJ•ú
 	void Release() override;
 

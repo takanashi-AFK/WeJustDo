@@ -9,6 +9,7 @@
 #include "Engine/Camera.h"
 #include "AudioManager.h"
 #include "Engine/Audio.h"
+#include "Engine/SceneManager.h"
 
 //コンストラクタ
 Player::Player(GameObject* _parent, string _modelFileName)
@@ -58,9 +59,19 @@ void Player::ChildInitialize()
 //更新
 void Player::ChildUpdate()
 {
-	//カメラの更新
-	Camera::SetPosition(transform_.position_.x + 5, transform_.position_.y + 3, -13.0f);
-	Camera::SetTarget(transform_.position_.x + 5, transform_.position_.y + 3, 0.0f);
+	if (transform_.position_.y >= -1 && transform_.position_.y <= 15) {
+		Camera::SetPosition(transform_.position_.x + 5, transform_.position_.y , -13.0f);
+		Camera::SetTarget(transform_.position_.x + 5, transform_.position_.y + 3, 0.0f);
+	}
+	else if (transform_.position_.y > 15) {
+		Camera::SetPosition(transform_.position_.x + 5, Camera::GetPosition().y, -13.0f);
+		Camera::SetTarget(transform_.position_.x + 5, Camera::GetTarget().y, 0.0f);
+	}
+	else if (transform_.position_.y <= -3 && transform_.position_.y >= -5)
+	{
+		Camera::SetPosition(Camera::GetPosition().x, Camera::GetPosition().y, Camera::GetPosition().z);
+		Camera::SetTarget(Camera::GetTarget());
+	}
 
 	//falseなら動作処理を行わずreturn
 	if (!isMove_)return;
@@ -71,6 +82,12 @@ void Player::ChildUpdate()
 			transform_.position_.x - (PLAYER_MODEL_SIZE.x / 4),	//x
 			transform_.position_.y - (PLAYER_MODEL_SIZE.x / 4),	//y
 			transform_.position_.z));							//z
+	}
+
+	if (pState_->playerState_ == pState_->pDead_)
+	{
+		SceneManager* pScM = (SceneManager*)FindObject("SceneManager");
+		pScM->ChangeScene(SCENE_ID_RESULT, TID_WHITEOUT);
 	}
 
 
