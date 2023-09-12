@@ -34,7 +34,7 @@ public:
 	DeadState* pDead_;
 	JetState* pJet_;
 
-
+	bool isProhibited_;				//Stateを変更可能かどうか
 public:
 	//コンストラクタ
 	PlayerStateManager();
@@ -54,6 +54,11 @@ public:
 	/// </summary>
 	/// <param name="player">プレイヤーのポインタ</param>
 	virtual void Enter(Player* player)override;
+
+	/// <summary>
+	/// Stateの変更を禁ずる
+	/// </summary>
+	void StateChangeProhibited() { isProhibited_ = true; }
 
 	/// <summary>
 	/// 状態を変更する

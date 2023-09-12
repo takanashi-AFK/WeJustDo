@@ -60,9 +60,11 @@ void Player::ChildInitialize()
 //更新
 void Player::ChildUpdate()
 {
+	static float camX = 0;
 	//かいだカメラ
 	{
 		static float camMove = 4.5f;
+
 		if (!(transform_.position_.y > 9))
 		{
 			if (camMove > 4.5f)
@@ -98,8 +100,26 @@ void Player::ChildUpdate()
 		}*/
 	}
 
+	if (Input::IsKeyDown(DIK_RETURN))
+	{
+		SetAcceleration(0);
+		SetIsMove(false);
+		bombEffectData.position = XMFLOAT3(transform_.position_.x, transform_.position_.y, transform_.position_.z -2);
+		int a = VFX::Start(bombEffectData);
+		SceneManager* pScM = (SceneManager*)FindObject("SceneManager");
+		pScM->ChangeScene(SCENE_ID_RESULT, TID_WHITEOUT);
+	}
+
+	//ゴールしたら...
+	if (isGoal()) {
+		//movie状態に移行する
+		pState_->ChangeState(pState_->pMovie_, this);
+	}
+
 	//falseなら動作処理を行わずreturn
 	if (!isMove_)return;
+
+	//camX+= 0.05f;
 
 	//ジェット時のエフェクト位置を調整
 	{
@@ -107,16 +127,6 @@ void Player::ChildUpdate()
 			transform_.position_.x - (PLAYER_MODEL_SIZE.x / 4),	//x
 			transform_.position_.y - (PLAYER_MODEL_SIZE.x / 4),	//y
 			transform_.position_.z));							//z
-	}
-
-
-	if (Input::IsKeyDown(DIK_RETURN))
-	{
-		SetIsMove(false);
-		bombEffectData.position = XMFLOAT3(transform_.position_.x, transform_.position_.y, transform_.position_.z -2);
-		int a = VFX::Start(bombEffectData);
-		SceneManager* pScM = (SceneManager*)FindObject("SceneManager");
-		pScM->ChangeScene(SCENE_ID_RESULT, TID_WHITEOUT);
 	}
 
 	//重力を加える

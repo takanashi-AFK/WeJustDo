@@ -3,6 +3,7 @@
 
 class MovieState : public PlayerState
 {
+	float prevPosX_;
 public:
 	//XV
 	void Update(Player* _p);

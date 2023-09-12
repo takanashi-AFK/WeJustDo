@@ -44,6 +44,8 @@ void PlayerStateManager::Enter(Player* _p)
 //ó‘Ô‘JˆÚ
 void PlayerStateManager::ChangeState(PlayerState* change, Player* _p, bool flag)
 {
+	if (isProhibited_)return;
+
 	prevState_ = playerState_;
 	if (prevState_ != change)
 	{
