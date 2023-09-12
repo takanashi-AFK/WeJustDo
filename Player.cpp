@@ -94,7 +94,7 @@ void Player::ChildUpdate()
 	if (Input::IsKeyDown(DIK_RETURN))
 	{
 		SetIsMove(false);
-		bombEffectData.position =XMFLOAT3(transform_.position_.x, transform_.position_.y, transform_.position_.z -2);
+		bombEffectData.position = XMFLOAT3(transform_.position_.x, transform_.position_.y, transform_.position_.z -2);
 		int a = VFX::Start(bombEffectData);
 		SceneManager* pScM = (SceneManager*)FindObject("SceneManager");
 		pScM->ChangeScene(SCENE_ID_RESULT, TID_WHITEOUT);
