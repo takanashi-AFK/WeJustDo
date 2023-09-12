@@ -204,7 +204,7 @@ HWND InitApp(HINSTANCE hInstance, int screenWidth, int screenHeight, int nCmdSho
 	RegisterClassEx(&wc);
 
 	//ウィンドウサイズの計算
-	RECT winRect = { 0, 0, screenWidth, screenHeight };
+	RECT winRect = { 0, 0, GetSystemMetrics(SM_CXMAXIMIZED), GetSystemMetrics(SM_CYMAXIMIZED) };
 	AdjustWindowRect(&winRect, WS_OVERLAPPEDWINDOW, FALSE);
 
 	//タイトルバーに表示する内容
@@ -215,7 +215,7 @@ HWND InitApp(HINSTANCE hInstance, int screenWidth, int screenHeight, int nCmdSho
 	HWND hWnd = CreateWindow(
 		WIN_CLASS_NAME,					//ウィンドウクラス名
 		caption,						//タイトルバーに表示する内容
-		WS_OVERLAPPEDWINDOW,			//スタイル（普通のウィンドウ）
+		WS_POPUP,						//スタイル（普通のウィンドウ）
 		CW_USEDEFAULT,					//表示位置左（おまかせ）
 		CW_USEDEFAULT,					//表示位置上（おまかせ）
 		winRect.right - winRect.left,	//ウィンドウ幅
@@ -242,6 +242,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	case WM_DESTROY:
 		PostQuitMessage(0);	//プログラム終了
 		return 0;
+	case WM_KEYDOWN:
+		switch (wParam)
+		{
+		case VK_ESCAPE:
+			PostQuitMessage(0);	//プログラム終了
+			break;
+		}
 	//マウスが動いた
 	case WM_MOUSEMOVE:
 		Input::SetMousePosition(LOWORD(lParam), HIWORD(lParam));
