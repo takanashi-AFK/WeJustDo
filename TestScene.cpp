@@ -3,6 +3,7 @@
 //インクルード
 #include "Engine/SceneManager.h"
 #include "Engine/Image.h"
+#include "Engine/Input.h"
 #include "Timer.h"
 #include "StartCount.h"
 #include "ItemCounter.h"
@@ -76,6 +77,10 @@ void TestScene::Update()
 		isGameNow_ = false;
 	}
 
+	//if (pTimer_->isMove()&& Input::IsKeyDown(DIK_0)) {/*０キーで状態をすべてリセット*/
+	//	SceneReset();
+	//}
+
 //End
 	if (isGameNow_ == false) {/*ゲームが終了したら*/
 		//PlayScene->ResultScene にシーン遷移を行う
@@ -102,4 +107,21 @@ void TestScene::Draw()
 void TestScene::Release()
 {
 //Scene開放するもの 無し
+}
+
+void TestScene::SceneReset()
+{
+	//プレイヤーのリセット
+	pPlayer_->SetIsMove(false);
+	pPlayer_->SetSpeed(0.1f);
+	pPlayer_->SetFirewoodNum(0);
+	pPlayer_->SetPosition(0, 1, 0);
+
+	//タイマーのリセット
+	pTimer_->Stop(true);
+	pTimer_->SetTime_Seconds(60);
+	pTimer_->IsDraw(true);
+
+	//スタートカウントのリセット
+	pStartCount_->Start();
 }

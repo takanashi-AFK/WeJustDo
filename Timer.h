@@ -19,7 +19,6 @@ private:
 	float drawSize_;//描画サイズ
 
 	bool isDraw_;	//描画フラグ
-
 public:
 	//コンストラクタ
 	Timer(GameObject* obj);
@@ -55,7 +54,11 @@ public:
 	/// <returns>終了していたらtrue</returns>
 	bool IsFinished(int _s);
 
+
 public:
+	//取得：タイマーの動作状態
+	bool isMove() { return limitActive_ || countActive_; }
+
 	//取得：時間(フレーム)
 	int GetTime_Frame() { return frame_; }
 
