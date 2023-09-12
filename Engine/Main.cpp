@@ -204,8 +204,8 @@ HWND InitApp(HINSTANCE hInstance, int screenWidth, int screenHeight, int nCmdSho
 	RegisterClassEx(&wc);
 
 	//ウィンドウサイズの計算
-	//RECT winRect = { 0, 0, screenWidth, screenHeight };
-	RECT winRect = { 0, 0, GetSystemMetrics(SM_CXMAXIMIZED), GetSystemMetrics(SM_CYMAXIMIZED) };
+	RECT winRect = { 0, 0, screenWidth, screenHeight };
+	//RECT winRect = { 0, 0, GetSystemMetrics(SM_CXMAXIMIZED), GetSystemMetrics(SM_CYMAXIMIZED) };
 	AdjustWindowRect(&winRect, WS_OVERLAPPEDWINDOW, FALSE);
 
 	//タイトルバーに表示する内容
@@ -216,8 +216,8 @@ HWND InitApp(HINSTANCE hInstance, int screenWidth, int screenHeight, int nCmdSho
 	HWND hWnd = CreateWindow(
 		WIN_CLASS_NAME,					//ウィンドウクラス名
 		caption,						//タイトルバーに表示する内容
-		WS_POPUP,						//スタイル（popup）
-		//WS_OVERLAPPEDWINDOW,			//スタイル（普通のウィンドウ）
+		//WS_POPUP,						//スタイル（popup）
+		WS_OVERLAPPEDWINDOW,			//スタイル（普通のウィンドウ）
 		CW_USEDEFAULT,					//表示位置左（おまかせ）
 		CW_USEDEFAULT,					//表示位置上（おまかせ）
 		winRect.right - winRect.left,	//ウィンドウ幅

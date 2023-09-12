@@ -13,6 +13,8 @@
 //コンストラクタ
 Player::Player(GameObject* _parent, string _modelFileName)
 	:SolidObject(_parent,_modelFileName,"Player")
+	,hDebugBox_(-1),pJet(nullptr),pState_(nullptr),hGroundModel_(0)
+	,acceleration_(0),isAddGravity_(false),isMove_(false),speed_(0)
 {
 	//プレイヤーの状態を「立ち状態」で初期化
 	ASSIGN(pState_,new PlayerStateManager);
