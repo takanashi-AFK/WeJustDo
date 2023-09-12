@@ -43,6 +43,7 @@ void Player::ChildInitialize()
 		InitDeadEffect();
 		InitRandEffect();
 		InitPlusOneEffect();
+		InitBombEffect();
 		//pDead = new PolyLine(1,50);
 		//pDead->Load("Effects/Tex.png");
 
@@ -92,9 +93,11 @@ void Player::ChildUpdate()
 
 	if (Input::IsKeyDown(DIK_RETURN))
 	{
+		SetIsMove(false);
+		bombEffectData.position =XMFLOAT3(transform_.position_.x, transform_.position_.y, transform_.position_.z -2);
+		int a = VFX::Start(bombEffectData);
 		SceneManager* pScM = (SceneManager*)FindObject("SceneManager");
 		pScM->ChangeScene(SCENE_ID_RESULT, TID_WHITEOUT);
-
 	}
 
 	
@@ -232,21 +235,20 @@ void Player::InitDeadEffect()
 	DeadEffectData.scale = XMFLOAT2(1.01, 1.01);
 	DeadEffectData.color = XMFLOAT4(0, 0, 1, 1);
 	DeadEffectData.deltaColor = XMFLOAT4(0, -0.03, 0, -0.02);
-	
 }
 
 void Player::InitBombEffect()
 {
-	PlusOneEffectData.textureFileName = "Effects/PlusOneR.png";
-	PlusOneEffectData.positionRnd = XMFLOAT3(0.1, 0, 0.1);
-	PlusOneEffectData.delay = 0;
-	PlusOneEffectData.number = 1;
-	PlusOneEffectData.lifeTime = 25;
-	PlusOneEffectData.speed = 0.05f;
-	PlusOneEffectData.speedRnd = 0.0;
-	PlusOneEffectData.size = XMFLOAT2(0.75, 0.75);
-	PlusOneEffectData.scale = XMFLOAT2(1.01, 1.01);
-	PlusOneEffectData.color = XMFLOAT4(1, 1, 1, 1);
+	bombEffectData.textureFileName = "Effects/cloudA.png";
+	bombEffectData.positionRnd = XMFLOAT3(0.1, 0, 0.1);
+	bombEffectData.delay = 0;
+	bombEffectData.number = 1;
+	bombEffectData.lifeTime = 25;
+	bombEffectData.speed = 0.05f;
+	bombEffectData.speedRnd = 0.0;
+	bombEffectData.size = XMFLOAT2(5,5);
+	bombEffectData.scale = XMFLOAT2(1.01, 1.01);
+	bombEffectData.color = XMFLOAT4(1, 0, 0, 1);
 
 }
 
