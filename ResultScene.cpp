@@ -34,10 +34,12 @@ void ResultScene::Initialize()
 void ResultScene::Update()
 {
 	frameCount_++;
-
+	if (frameCount_ >= 201)
+	{
 	if (Input::IsKeyDown(DIK_SPACE)) {
 		SceneManager* pSm = (SceneManager*)FindObject("SceneManager");
 		pSm->ChangeScene(SCENE_ID_SPLASH, TID_BLACKOUT);
+	}
 	}
 
 }

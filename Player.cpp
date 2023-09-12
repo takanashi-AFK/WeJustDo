@@ -10,6 +10,7 @@
 #include "AudioManager.h"
 #include "Engine/Audio.h"
 #include "Engine/SceneManager.h"
+#include "StartCount.h"
 
 //コンストラクタ
 Player::Player(GameObject* _parent, string _modelFileName)
@@ -98,7 +99,9 @@ void Player::ChildUpdate()
 			Camera::SetTarget(Camera::GetTarget());
 		}*/
 	}
-
+	StartCount pSt = (StartCount*)FindObject("StartCount");
+	if (pSt.IsFinished())
+	{
 	if (Input::IsKeyDown(DIK_RETURN))
 	{
 		SetAcceleration(0);
@@ -108,6 +111,7 @@ void Player::ChildUpdate()
 		AudioManager::Play_BombSound();
 		SceneManager* pScM = (SceneManager*)FindObject("SceneManager");
 		pScM->ChangeScene(SCENE_ID_RESULT, TID_WHITEOUT);
+	}
 	}
 
 	//ゴールしたら...
@@ -254,6 +258,72 @@ void Player::AddGravity(Transform* _transform)
 	acceleration_ += GRAVITY_ADDITION;
 }
 
+
+void Player::OnWoodPickup(Stage* pS)
+{
+	//プレイヤーの位置が１or２なら...
+	if (pS->AtItem(this, 1) || pS->AtItem(this,2)) {
+
+		//薪を1本(*5)取得する
+		Global::gFireWood += 5;
+
+		//エフェクト
+		PlusOneEffectData.position = (XMFLOAT3(transform_.position_.x - 0.5, transform_.position_.y + 0.5, 0));
+		ItemGetEffectData.position = transform_.position_;
+		VFX::Start(PlusOneEffectData);
+		VFX::Start(ItemGetEffectData);
+
+		AudioManager::Play_WoodSound();
+
+		//その場所の薪を消して空気に変換
+		pS->SetItem(round(transform_.position_.x), round(transform_.position_.y), 0);
+	}
+}
+
+const float GOAL_POINT = 285.0f;
+
+bool Player::isGoal()
+{
+	return transform_.position_.x >= GOAL_POINT;
+}
+
+void Player::TerrainInteraction()
+{
+	//ステージ情報を取得
+	Stage* pS = (Stage*)(FindObject("Stage"));
+
+	//薪を取得する
+	OnWoodPickup(pS);
+
+	//足場が泥の時
+	if (pS->AtItem(this, 2))
+	{
+		//※うまく行かない(検討中)
+	}
+	else SetSpeed(0.1f);
+}
+
+void Player::PolyDraw()
+{
+	//ジェット状態の時、ポリラインを描画(ジェット噴射effect)
+	if (pState_->playerState_ == pState_->pJet_)pJet->Draw();
+}
+
+void Player::SetDrawTransform()
+{
+	//シェーダーを設定
+	Direct3D::SetShader(Direct3D::SHADER_3D);
+	
+	//描画位置を修正(ziro_move.fbxの足元の座標が{0,0,0}の為ずらす必要がある)
+	Transform t_Draw; {
+		t_Draw = transform_;
+		t_Draw.position_.y -= 0.5f;
+		t_Draw.scale_ = { 0.1f,0.1f,0.1f };
+	}
+	Model::SetTransform(hModel_, t_Draw);
+}
+
+
 void Player::InitDeadEffect()
 {
 	//エフェクト情報を設定
@@ -334,69 +404,4 @@ void Player::InitGetEffect()
 	ItemGetEffectData.scale = XMFLOAT2(1.01, 1.01);
 	ItemGetEffectData.color = XMFLOAT4(1, 1, 1, 1);
 	ItemGetEffectData.deltaColor = XMFLOAT4(0, 0, 0, -0.1);
-}
-
-
-void Player::OnWoodPickup(Stage* pS)
-{
-	//プレイヤーの位置が１or２なら...
-	if (pS->AtItem(this, 1) || pS->AtItem(this,2)) {
-
-		//薪を1本(*5)取得する
-		Global::gFireWood += 5;
-
-		//エフェクト
-		PlusOneEffectData.position = (XMFLOAT3(transform_.position_.x - 0.5, transform_.position_.y + 0.5, 0));
-		ItemGetEffectData.position = transform_.position_;
-		VFX::Start(PlusOneEffectData);
-		VFX::Start(ItemGetEffectData);
-
-		AudioManager::Play_WoodSound();
-
-		//その場所の薪を消して空気に変換
-		pS->SetItem(round(transform_.position_.x), round(transform_.position_.y), 0);
-	}
-}
-
-const float GOAL_POINT = 285.0f;
-
-bool Player::isGoal()
-{
-	return transform_.position_.x >= GOAL_POINT;
-}
-
-void Player::TerrainInteraction()
-{
-	//ステージ情報を取得
-	Stage* pS = (Stage*)(FindObject("Stage"));
-
-	//薪を取得する
-	OnWoodPickup(pS);
-
-	//足場が泥の時
-	if (pS->AtItem(this, 2))
-	{
-		//※うまく行かない(検討中)
-	}
-	else SetSpeed(0.1f);
-}
-
-void Player::PolyDraw()
-{
-	//ジェット状態の時、ポリラインを描画(ジェット噴射effect)
-	if (pState_->playerState_ == pState_->pJet_)pJet->Draw();
-}
-
-void Player::SetDrawTransform()
-{
-	//シェーダーを設定
-	Direct3D::SetShader(Direct3D::SHADER_3D);
-	
-	//描画位置を修正(ziro_move.fbxの足元の座標が{0,0,0}の為ずらす必要がある)
-	Transform t_Draw; {
-		t_Draw = transform_;
-		t_Draw.position_.y -= 0.5f;
-		t_Draw.scale_ = { 0.1f,0.1f,0.1f };
-	}
-	Model::SetTransform(hModel_, t_Draw);
 }
