@@ -5,7 +5,7 @@
 
 #include "string"
 #include "Texture.h"
-#include "Transform.h"
+#include "Component/Transform/Transform.h"
 
 using namespace DirectX;
 

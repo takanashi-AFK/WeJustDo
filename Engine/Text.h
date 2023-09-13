@@ -4,6 +4,7 @@
 class Text
 {
 	int hPict_;
+	float scale;
 
 	unsigned int width_, height_;	//1•¶š•ª‚Ì•‚Æ‚‚³
 	char fileName_[MAX_PATH];
@@ -38,5 +39,7 @@ public:
 
 	//‰ğ•ú
 	void Release();
+
+	void SetScale(float sc) { scale = sc; }
 };
 
