@@ -46,7 +46,7 @@ protected:
 	const float defCamZ = -13.0f;	//カメラZのデフォルト値【〇m】
 	const float maxCamY = 8.5f;		//カメラY座標の最大値【〇m】
 	const float stageBottom = 1;	//ステージの底【〇m】（この値が大きいとカメラがだいぶ近くなります。）
-	const float camZBottom = 4.5f;	//カメラZを【〇m】必ず足す　カメラを引きすぎてステージの底が見えないようにします。
+	const float camZBottom = 4.5f;	//カメラZを【〇m】必ず足す　カメラを引きすぎて画面がカクつくのを抑えます。
 	const int maxfireWood_ = 100;	//薪の燃やせる数（100％）
 public:
 	EmitterData  RandEffectData_;	//エフェクトデータ(着地時)

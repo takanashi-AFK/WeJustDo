@@ -447,7 +447,7 @@ float Player::CalcCamPositionZ(Transform _plPos)
 		return (result);
 
 	}
-	else
+	else//デフォルトY座標未満ならデフォルトY座標をそのまま使う
 	{
 		result = defCamZ;
 		return (result);
