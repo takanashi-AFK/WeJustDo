@@ -4,6 +4,8 @@
 
 Button::Button(GameObject* _parent)
 	:GameObject(_parent,"Button")
+	,hReleased_(-1),hPressed_(-1),pushed_(false),center_{},size_{}
+	,startPos_{},endPos_{},totalTime_(0),currentTime_(0)
 {
 }
 
@@ -18,15 +20,15 @@ void Button::Update()
 void Button::Draw()
 {
 	if (pushed_) {
-
+		//押されている状態の画像を描画
+		Image::SetTransform(hPressed_, transform_);
+		Image::Draw(hPressed_);
 	}
 	else {
-
+		//押されていない状態の画像を描画
+		Image::SetTransform(hReleased_, transform_);
+		Image::Draw(hReleased_);
 	}
-}
-
-void Button::Release()
-{
 }
 
 void Button::SetImage(std::string _released, std::string _pressed)
@@ -52,10 +54,17 @@ void Button::Push(bool _pushed)
 	pushed_ = _pushed;
 }
 
-void Button::MouseInArea(XMFLOAT3 _mousePos)
+bool Button::MouseInArea(XMFLOAT3 _mousePos)
 {
+	if (abs(_mousePos.x - center_.x) > size_.x / 2)return false;
+	if (abs(_mousePos.y - center_.y) > size_.y / 2)return false;
+	return true;
 }
 
 void Button::SetMovePosition(int _toX, int _toY, float _second)
 {
+	startPos_ = center_;//今の座標をコピー
+	endPos_ = XMFLOAT3((float)_toX, (float)_toY, 0);
+	totalTime_ = _second;
+	currentTime_ = 0.0f;
 }

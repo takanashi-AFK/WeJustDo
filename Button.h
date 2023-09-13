@@ -11,6 +11,12 @@ private:
 	
 	XMFLOAT3 center_;	//画像の中心点
 	XMFLOAT3 size_;		//画像のサイズ
+
+	//動作用変数
+	XMFLOAT3 startPos_;	//動作開始地点
+	XMFLOAT3 endPos_;	//動作終了地点
+	float totalTime_;	//動作にかかる合計時間
+	float currentTime_;	//現時点の動作時間
 public:
 	//コンストラクタ
 	Button(GameObject* _parent);
@@ -18,7 +24,7 @@ public:
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;
-	void Release() override;
+	void Release() override{}
 public:
 	//設定：使用する画像
 	void SetImage(std::string _released, std::string _pressed);
@@ -30,7 +36,7 @@ public:
 	void Push(bool _pushed);
 
 	//判定：マウスカーソルの位置が画像範囲内かどうか
-	void MouseInArea(XMFLOAT3 _mousePos);
+	bool MouseInArea(XMFLOAT3 _mousePos);
 
 	/// <summary>
 	/// 移動させる処理
