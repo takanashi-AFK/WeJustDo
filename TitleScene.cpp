@@ -1,71 +1,61 @@
 #include "TitleScene.h"
-#include "Engine/Image.h"
+#include "Engine/Camera.h"
+#include "Engine/Sprite.h"
 #include "Engine/Input.h"
-#include "Engine/Direct3D.h"
-
-TitleScene::TitleScene(GameObject* parent)
-	:GameObject(parent,"TitleScene")
+#include "Button.h"
+#include "Engine/SceneManager.h"
+//コンストラクタ
+TitleScene::TitleScene(GameObject * parent)
+	: GameObject(parent, "TitleScene")
 {
 }
 
+//初期化
 void TitleScene::Initialize()
 {
-	//画像のロード
-	std::string filename[ImageNum] = {
-		"Buttons/CommonButtonBack.png",
-		"Buttons/CommonButtonBackDisable.png",
-		"Buttons/FoodButtonGive.png",
-		"Buttons/FoodButtonGiveDisable.png"
-	};
-	for (int i = 0; i < ImageNum; i++) {
-		hPict_[i] = Image::Load(filename[i]);
-	}
+	Camera::SetPosition(XMFLOAT3(0, 50, 0));
+	Camera::SetTarget(XMFLOAT3(0, 0, 0));
+	start = Instantiate<Button>(this);
+	start->SetImage("FoodButtonGive", "FoodButtonGiveDisabled");
+	start->SetPosition(640, 360-100);
+	back = Instantiate<Button>(this);
+	back->SetImage("CommonButtonBack", "CommonButtonBackDisable");
+	back->SetPosition(640, 360+100);
 }
 
+//更新
 void TitleScene::Update()
 {
-	if (Input::IsKey(DIK_A)) {
-		Image::SetAlpha(hPict_[FoodButtonGive], 0);
-		Image::SetAlpha(hPict_[CommonButtonBack], 0);
+	if (Input::IsMouseButtonDown(0)) {
+		if (selected == START) {
+			SceneManager* scene = dynamic_cast<SceneManager*>(FindObject("SceneManager"));
+			scene->ChangeScene(SCENE_ID_TEST);
+		}
 	}
-	else{
-		Image::SetAlpha(hPict_[FoodButtonGive], 255);
-		Image::SetAlpha(hPict_[CommonButtonBack], 255);
+	XMFLOAT3 pos = Input::GetMousePosition();
+	if (start->MouseInArea(pos)) {
+		start->Push(true);
+		back->Push(false);
+		selected = START;
 	}
-		
+	else if (back->MouseInArea(pos)) {
+		back->Push(true);
+		start->Push(false);
+		selected = BACK;
+	}
+	else {
+		start->Push(false);
+		back->Push(false);
+		selected = NONE;
+	}
 }
 
+//描画
 void TitleScene::Draw()
 {
-	//描画：CommonButtonBack(あげる)
-	{
-		Transform t_ButtonBack;
-		t_ButtonBack.position_.y = 0.3f;
-		t_ButtonBack.scale_ = { 0.5f,0.5f,1.0f };
-		//押されている状態
-		Image::SetTransform(hPict_[CommonButtonBackDisable], t_ButtonBack);
-		Image::Draw(hPict_[CommonButtonBackDisable]);
-
-		//押されていない状態
-		Image::SetTransform(hPict_[CommonButtonBack], t_ButtonBack);
-		Image::Draw(hPict_[CommonButtonBack]);
-	}
-
-	//描画：CommonButtonBack(戻る)
-	{
-		Transform t_ButtonGive;
-		t_ButtonGive.position_.y = -0.3f;
-		t_ButtonGive.scale_ = { 0.5f,0.5f,1.0f };
-		//押されている状態
-		Image::SetTransform(hPict_[FoodButtonGiveDisable], t_ButtonGive);
-		Image::Draw(hPict_[FoodButtonGiveDisable]);
-
-		//押されていない状態
-		Image::SetTransform(hPict_[FoodButtonGive], t_ButtonGive);
-		Image::Draw(hPict_[FoodButtonGive]);
-	}
 }
 
+//開放
 void TitleScene::Release()
 {
 }

@@ -1,35 +1,23 @@
 #pragma once
 #include "Engine/GameObject.h"
 
-class Button : public GameObject
-{
-private:
-	int hReleased_;		//モデル番号(押されていない状態の画像)
-	int hPressed_;		//モデル番号(押されている状態の画像)
-
-	bool pushed_;		//押されているかどうか
-	
-	XMFLOAT3 center_;	//画像の中心点
-	XMFLOAT3 size_;		//画像のサイズ
+class Button : public GameObject {
 public:
-	//コンストラクタ
-	Button(GameObject* _parent);
-	//継承{初期化,更新,描画,解放}
+	Button(GameObject* parent);
+	~Button();
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;
 	void Release() override;
-public:
-	//設定：使用する画像
-	void SetImage(std::string _released, std::string _pressed);
-
-	//設定：配置する位置
-	void SetPosition(int _x, int _y);
-
-	//設定：押されているかどうか
-	void Push(bool _pushed);
-
-	//判定：マウスカーソルの位置が画像範囲内かどうか
-	void MouseInArea(XMFLOAT3 _mousePos);
+	bool Finished(); // Buttonが終わったらtrue
+	void SetImage(std::string normal, std::string pushed);
+	void SetPosition(int x, int y);
+	void Push(bool pushed);
+	bool MouseInArea(XMFLOAT3 mousePos);
+private:
+	int hImage;
+	int hPush;
+	bool pushed;
+	XMFLOAT3 center;
+	XMFLOAT3 size;
 };
-

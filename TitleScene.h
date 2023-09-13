@@ -1,20 +1,11 @@
 #pragma once
 #include "Engine/GameObject.h"
 
+class Button;
 
-enum {
-	CommonButtonBack,
-	CommonButtonBackDisable,
-	FoodButtonGive,
-	FoodButtonGiveDisable,
-	ImageNum
-};
-
-
-//テストシーンを管理するクラス
+//タイトルシーンを管理するクラス
 class TitleScene : public GameObject
 {
-	int hPict_[ImageNum];
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）
@@ -31,4 +22,13 @@ public:
 
 	//開放
 	void Release() override;
+private:
+	Button* start;
+	Button* back;
+	enum SELECT {
+		NONE = -1,
+		START = 0,
+		BACK,
+	};
+	SELECT selected;
 };
