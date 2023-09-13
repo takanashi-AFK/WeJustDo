@@ -31,5 +31,13 @@ public:
 
 	//判定：マウスカーソルの位置が画像範囲内かどうか
 	void MouseInArea(XMFLOAT3 _mousePos);
+
+	/// <summary>
+	/// 移動させる処理
+	/// </summary>
+	/// <param name="_toX">移動後の座標x</param>
+	/// <param name="_toY">移動後の座標y</param>
+	/// <param name="_second">移動時間(秒)</param>
+	void SetMovePosition(int _toX, int _toY, float _second);
 };
 
