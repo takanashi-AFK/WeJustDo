@@ -13,6 +13,10 @@
 #include "StartCount.h"
 #include "FuelGauge.h"
 
+double easeInOutSine(double x) {
+	return -(std::cos(M_PI * x) - 1) / 2;
+}
+
 //コンストラクタ
 Player::Player(GameObject* _parent, string _modelFileName)
 	:SolidObject(_parent,_modelFileName,"Player")
@@ -55,6 +59,9 @@ void Player::ChildInitialize()
 	//ゲージの初期化
 	pGauge_ = Instantiate<FuelGauge>(this);
 
+	//前フレームの移動量初期化
+	currentPos_.position_ = { 0, 0, 0 };
+
 	//カメラの初期化
 	Camera::SetPosition(transform_.position_.x + 5, transform_.position_.y + 3, -13.0f);
 	Camera::SetTarget(transform_.position_.x + 5, transform_.position_.y + 3, 0.0f);
@@ -68,6 +75,9 @@ void Player::ChildUpdate()
 	//かいだカメラ
 	{
 		static float camMove = 4.5f;
+		static float camTime = 0.0f;
+
+		camTime += 1.0f / 60.0f;	//1フレーム
 
 		//if (transform_.position_.y < 3)
 		//{
@@ -75,24 +85,28 @@ void Player::ChildUpdate()
 		//		camMove -= 0.3f;
 		//	else camMove = 4.5f;
 		//}
-
 		//else
 		//{
 		//	if (transform_.position_.y >=3)
 		//		camMove += transform_.position_.y+3.5f;
 		//}
 
-		if (transform_.position_.y < 3)
+		//前のフレームの位置 - 今のフレームの位置　を常に出し続けられれば酔わないんじゃないか？！
+		//そう考えた我々はジャングルの奥地へと向かった。
+
+		if (transform_.position_.y < 7)	
 		{
 			if (camMove > 4.5f)
 				camMove -= 0.3f;
 			else camMove = 4.5f;
 		}
-		else
-			camMove = (transform_.position_.y - camMove)*0.5+camMove;
+		else if (camMove > 7)
+			transform_.position_.y
 
 		Camera::SetPosition(transform_.position_.x + 5, camMove, -13.0f);
 		Camera::SetTarget(transform_.position_.x + 5, camMove - 0.5f, 0.0f);
+		currentPos_.position_.y = transform_.position_.y;
+
 	}
 	
 	//たかなしカメラ

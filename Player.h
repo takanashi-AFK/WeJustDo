@@ -2,6 +2,9 @@
 #include "Engine/SolidObject.h"
 
 //インクルード
+#include <cmath>		//イージング関数使用のため
+#include <math.h>//円周率使用のため
+#define _USE_MATH_DEFINES//こっちも円周率に
 #include "PlayerStateManager.h"
 #include "Engine/Model.h"
 #include "PolyLine.h"
@@ -29,6 +32,7 @@ class Player : public SolidObject
 private:
 	int hDebugBox_;	//モデル番号(DebugBox)
 	PolyLine* pJet;//ジェットエフェクトのポリラインデータ
+	Transform currentPos_;	//プレイヤーの前フレームの位置
 protected:
 	PlayerStateManager*	pState_;	//Playerの状態管理
 	RayCastData	downData_;			//プレイヤーの下に伸びるレイ
@@ -164,4 +168,8 @@ public:
 	//取得：JetFireのポリラインデータ
 	PolyLine GetJettPData() { return *pJet; }
 	
+	//イージング関数
+	double easeInOutSine(float x) {
+		return -(std::cos(M_PI * x) - 1) / 2;
+	}
 };
