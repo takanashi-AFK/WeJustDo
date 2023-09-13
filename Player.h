@@ -2,9 +2,6 @@
 #include "Engine/SolidObject.h"
 
 //インクルード
-#include <cmath>		//イージング関数使用のため
-#include <math.h>//円周率使用のため
-#define _USE_MATH_DEFINES//こっちも円周率に
 #include "PlayerStateManager.h"
 #include "Engine/Model.h"
 #include "PolyLine.h"
@@ -38,12 +35,19 @@ protected:
 	RayCastData	downData_;			//プレイヤーの下に伸びるレイ
 	Stage* pStage_;					//ステージクラスのポインタ
 	FuelGauge* pGauge_;				//ゲージクラスのポインタ
+	Transform cameraTrans_;			//カメラの座標
 	int	hGroundModel_;				//ステージのモデル番号を入れる変数
 	float acceleration_;			//重力の加速度
 	bool isAddGravity_;				//重力を加えるか否か
 	bool isMove_;					//動いていいいか
 	float speed_;					//移動速度
-	const int maxfireWood_ = 100;			//薪の燃やせる数（100％）
+
+	const float defCamY = 4.5f;		//カメラYのデフォルト値【〇m】
+	const float defCamZ = -13.0f;	//カメラZのデフォルト値【〇m】
+	const float maxCamY = 8.5f;		//カメラY座標の最大値【〇m】
+	const float stageBottom = 1;	//ステージの底【〇m】（この値が大きいとカメラがだいぶ近くなります。）
+	const float camZBottom = 4.5f;	//カメラZを【〇m】必ず足す　カメラを引きすぎてステージの底が見えないようにします。
+	const int maxfireWood_ = 100;	//薪の燃やせる数（100％）
 public:
 	EmitterData  RandEffectData_;	//エフェクトデータ(着地時)
 	EmitterData  DeadEffectData;	//エフェクトデータ(死亡時)
@@ -167,9 +171,14 @@ public:
 
 	//取得：JetFireのポリラインデータ
 	PolyLine GetJettPData() { return *pJet; }
-	
-	//イージング関数
-	double easeInOutSine(float x) {
-		return -(std::cos(M_PI * x) - 1) / 2;
-	}
+
+	/// <summary>
+	/// カメラのY座標を計算します
+	/// </summary>
+	/// <param name="_plPos">プレイヤーのTransform</param>
+	/// /// <param name="_stageBottom">地面の底面</param>
+	/// <returns>positionのY座標に代入してください</returns>
+	float CalcCamPositionY(Transform _plPos);
+
+	float CalcCamPositionZ(Transform _plPos);
 };
