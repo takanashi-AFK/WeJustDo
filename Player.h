@@ -28,7 +28,7 @@ private:
 	//debug
 	int Marker;
 	int DeadEffHandle;
-	int nowFireWood;
+
 	int maxFireWood;
 	XMFLOAT3 RayStartPos;
 	XMFLOAT3 downLandingPoint;
