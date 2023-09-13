@@ -9,8 +9,8 @@ FuelGauge::FuelGauge(GameObject* parent)
 	hPictGauge_ = Image::Load("Image/Gauge.png");
 	assert(hPictGauge_ >= 0);
 
-	hPictFrame_ = Image::Load("Image/GaugeFrame.png");
-	assert(hPictFrame_ >= 0);
+	//hPictFrame_ = Image::Load("Image/GaugeFrame.png");
+	//assert(hPictFrame_ >= 0);
 }
 
 FuelGauge::~FuelGauge()
@@ -53,25 +53,25 @@ void FuelGauge::Draw()
 	Transform frame;
 	Transform gauge;
 
-	gauge.scale_ = {0.5f,1.5f,0.5f};
+	gauge.scale_ = {0.5f,1.0f,0.5f};
 	frame.scale_ = { 0.5f,1.5f,0.5f };
 
 	gauge.position_.x = GaugePositon;
 	frame.position_.x = GaugePositon;
 
-	gauge.position_.y = -0.9f;
-	frame.position_.y= -0.9f;
+	gauge.position_.y = -1.0f;
+	frame.position_.y= -1.0f;
 
 	gauge.scale_.y = nowFuel_/maxFuel_;
 
-	gauge.rotate_.z = 180;
-	frame.rotate_.z = 180;
+	gauge.rotate_.z = 90;
+	frame.rotate_.z = 90;
 
 	Image::SetTransform(hPictGauge_, gauge);
 	Image::Draw(hPictGauge_);
 
-	Image::SetTransform(hPictFrame_, frame);
-	Image::Draw(hPictFrame_);
+	//Image::SetTransform(hPictFrame_, frame);
+	//Image::Draw(hPictFrame_);
 }
 
 void FuelGauge::Release()

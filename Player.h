@@ -164,5 +164,6 @@ public:
 	void GetFirewood();
 
 	int GetFirewoodNum() { return firewoodNum_; }
-	void SetFirewoodNum(int _n) { firewoodNum_ = _n; }
+	void SetFirewoodNum(int _n);
+
 };
