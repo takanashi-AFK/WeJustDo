@@ -68,3 +68,17 @@ void Button::SetMovePosition(int _toX, int _toY, float _second)
 	totalTime_ = _second;
 	currentTime_ = 0.0f;
 }
+
+bool Button::IsMoving()
+{
+	return (currentTime_ <= totalTime_);
+}
+
+void Button::ForceMoveEnd()
+{
+	if (!IsMoving())return;
+
+	//“®‚¢‚Ä‚¢‚ê‚Îˆ—‚ðŽÀs‚·‚é
+	SetPosition(endPos_.x, endPos_.y);
+	currentTime_ = totalTime_;
+}

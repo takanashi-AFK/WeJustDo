@@ -45,5 +45,13 @@ public:
 	/// <param name="_toY">移動後の座標y</param>
 	/// <param name="_second">移動時間(秒)</param>
 	void SetMovePosition(int _toX, int _toY, float _second);
+
+	//取得：動作中かどうか
+	bool IsMoving();
+
+	/// <summary>
+	/// 強制的に移動を終了させる
+	/// </summary>
+	void ForceMoveEnd();
 };
 
