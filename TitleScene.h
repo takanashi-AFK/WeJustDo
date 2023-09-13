@@ -11,6 +11,7 @@ class TitleScene : public GameObject
 private:
 	int hPict_;	//画像番号
 	int hPict2_;//画像番号２
+	int hCreditPict_;
 	int hModel_;//モデル番号
 public:
 	//コンストラクタ

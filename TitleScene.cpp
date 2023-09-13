@@ -22,7 +22,8 @@ void TitleScene::Initialize()
 	
 	//画像のロード
 	ASSIGN(hPict_, Image::Load("Image/TitleImage2.png")); assert(hPict_ <= 0);
-	ASSIGN(hPict2_, Image::Load("Image/PleseToSpaceKey.png")); assert(hPict_ <= 0);
+	ASSIGN(hPict2_, Image::Load("Image/PleseToSpaceKey.png")); 
+	ASSIGN(hCreditPict_, Image::Load("Image/creditUI.png"));
 
 	//カメラの初期化
 	Camera::SetPosition(0, 0, -5);Camera::SetTarget(0, 0, 0);
@@ -54,6 +55,13 @@ void TitleScene::Update()
 		sm->ChangeScene(SCENE_ID_TEST, TID_WHITEOUT,1);
 	}
 
+	if (Input::IsKeyDown(DIK_RETURN))
+	{
+		AudioManager::Play_ConfirmSound();
+		SceneManager* sm = (SceneManager*)FindObject("SceneManager");
+		sm->ChangeScene(SCENE_ID_CREDIT, TID_WHITEOUT, 1);
+	}
+
 	//SkySphereモデルを回転させる
 	transform_.rotate_.y += 0.05f;
 
@@ -83,6 +91,14 @@ void TitleScene::Draw()
 	Image::SetAlpha(hPict2_, opacity_);
 	Image::SetTransform(hPict2_, t_Space);
 	Image::Draw(hPict2_);
+	
+	Transform t_creditUI;
+	t_creditUI.position_.y = 0.8f;
+	t_creditUI.position_.x = 0.7f;
+
+	t_creditUI.scale_ = { 0.2,0.2,0.2 };
+	Image::SetTransform(hCreditPict_, t_creditUI);
+	Image::Draw(hCreditPict_);
 
 	
 
