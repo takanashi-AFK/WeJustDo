@@ -63,7 +63,7 @@ void Player::ChildUpdate()
 	static float camX = 0;
 	//かいだカメラ
 	{
-		static float camMove = 4.5f;
+		/*static float camMove = 4.5f;
 
 		if (!(transform_.position_.y > 7))
 		{
@@ -79,12 +79,12 @@ void Player::ChildUpdate()
 				camMove = 13.0f;
 		}
 		Camera::SetPosition(transform_.position_.x + 5, camMove, -13.0f);
-		Camera::SetTarget(transform_.position_.x + 5, camMove - 0.5f, 0.0f);
+		Camera::SetTarget(transform_.position_.x + 5, camMove - 0.5f, 0.0f);*/
 	}
 	
 	//たかなしカメラ
 	{
-		/*
+		
 		if (transform_.position_.y >= -1 && transform_.position_.y <= 15) {
 			Camera::SetPosition(transform_.position_.x + 5, transform_.position_.y + 3, -13.0f);
 			Camera::SetTarget(transform_.position_.x + 5, transform_.position_.y + 3, 0.0f);
@@ -97,7 +97,7 @@ void Player::ChildUpdate()
 		{
 			Camera::SetPosition(Camera::GetPosition().x, Camera::GetPosition().y, Camera::GetPosition().z);
 			Camera::SetTarget(Camera::GetTarget());
-		}*/
+		}
 	}
 	StartCount pSt = (StartCount*)FindObject("StartCount");
 	if (pSt.IsFinished())
@@ -114,11 +114,11 @@ void Player::ChildUpdate()
 	}
 	}
 
-	//ゴールしたら...
-	if (isGoal()) {
-		//movie状態に移行する
-		pState_->ChangeState(pState_->pMovie_, this);
-	}
+	////ゴールしたら...
+	//if (isGoal()) {
+	//	//movie状態に移行する
+	//	pState_->ChangeState(pState_->pMovie_, this);
+	//}
 
 	//falseなら動作処理を行わずreturn
 	if (!isMove_)return;

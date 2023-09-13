@@ -79,10 +79,10 @@ void TestScene::Update()
 		isGameNow_ = false;
 	}
 
-	//if (pPlayer_->isGoal()) {/*プレイヤーがゴール地点に達したら*/
-	//	//ゲームを終了する
-	//	isGameNow_ = false;
-	//}
+	if (pPlayer_->isGoal()) {/*プレイヤーがゴール地点に達したら*/
+		//ゲームを終了する
+		isGameNow_ = false;
+	}
 
 //End
 	if (isGameNow_ == false) {/*ゲームが終了したら*/
