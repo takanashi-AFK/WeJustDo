@@ -1,32 +1,35 @@
 #pragma once
 #include "Engine/GameObject.h"
 
-enum {
-	CommonButtonBack,
-	CommonButtonBackDisable,
-	FoodButtonGive,
-	FoodButtonGiveDisable,
-	ImageNum
-};
-
 class Button : public GameObject
 {
-	int hPict_[ImageNum];
+private:
+	int hReleased_;		//モデル番号(押されていない状態の画像)
+	int hPressed_;		//モデル番号(押されている状態の画像)
+
+	bool pushed_;		//押されているかどうか
+	
+	XMFLOAT3 center_;	//画像の中心点
+	XMFLOAT3 size_;		//画像のサイズ
 public:
 	//コンストラクタ
-	//引数：parent  親オブジェクト（SceneManager）
-	Button(GameObject* parent);
-
-	//初期化
+	Button(GameObject* _parent);
+	//継承{初期化,更新,描画,解放}
 	void Initialize() override;
-
-	//更新
 	void Update() override;
-
-	//描画
 	void Draw() override;
-
-	//開放
 	void Release() override;
+public:
+	//設定：使用する画像
+	void SetImage(std::string _released, std::string _pressed);
+
+	//設定：配置する位置
+	void SetPosition(int _x, int _y);
+
+	//設定：押されているかどうか
+	void Push(bool _pushed);
+
+	//判定：マウスカーソルの位置が画像範囲内かどうか
+	void MouseInArea(XMFLOAT3 _mousePos);
 };
 

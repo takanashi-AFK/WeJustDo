@@ -1,9 +1,6 @@
 #pragma once
 #include "Engine/GameObject.h"
 
-class Button;
-
-
 //テストシーンを管理するクラス
 class TestScene : public GameObject
 {

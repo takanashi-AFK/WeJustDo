@@ -1,23 +1,14 @@
 #include "Button.h"
 #include "Engine/Image.h"
+#include "Engine/Direct3D.h"
 
-Button::Button(GameObject* parent)
-	:GameObject(parent,"Button")
+Button::Button(GameObject* _parent)
+	:GameObject(_parent,"Button")
 {
 }
 
 void Button::Initialize()
 {
-	//画像のロード
-	std::string filename[ImageNum]={
-		"Buttons/CommonButtonBack.png",
-		"Buttons/CommonButtonBackDisable.png",
-		"Buttons/FoodButtonGive,png",
-		"Buttons/FoodButtonGiveDisable.png"
-	};
-	for (int i = 0; i < ImageNum; i++) {
-		hPict_[i] = Image::Load(filename->c_str());
-	}
 }
 
 void Button::Update()
@@ -26,11 +17,35 @@ void Button::Update()
 
 void Button::Draw()
 {
-	//画像の描画
-	Image::SetTransform(hPict_[CommonButtonBack], transform_);
-	Image::Draw(hPict_[CommonButtonBack]);
 }
 
 void Button::Release()
+{
+}
+
+void Button::SetImage(std::string _released, std::string _pressed)
+{
+	//押されていない状態の画像をロード
+	hReleased_ = Image::Load("Buttons/" + _released + ".png");
+	assert(hReleased_ <= 0);
+
+	//押されている状態の画像をロード
+	hPressed_ = Image::Load("Buttons/"+ _pressed + ".png");
+	assert(hPressed_ <= 0);
+}
+
+
+void Button::SetPosition(int _x, int _y)
+{
+	transform_.position_.x = (_x - Direct3D::screenWidth_ / 2) / Direct3D::screenWidth_;
+	transform_.position_.y = (_y - Direct3D::screenHeight_ / 2) / Direct3D::screenHeight_;
+
+}
+
+void Button::Push(bool _pushed)
+{
+}
+
+void Button::MouseInArea(XMFLOAT3 _mousePos)
 {
 }
