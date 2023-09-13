@@ -1,17 +1,24 @@
 #pragma once
 #include "Engine/GameObject.h"
 
-class Button;
+
+enum {
+	CommonButtonBack,
+	CommonButtonBackDisable,
+	FoodButtonGive,
+	FoodButtonGiveDisable,
+	ImageNum
+};
 
 
 //テストシーンを管理するクラス
-class TestScene : public GameObject
+class TitleScene : public GameObject
 {
-	
+	int hPict_[ImageNum];
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）
-	TestScene(GameObject* parent);
+	TitleScene(GameObject* parent);
 
 	//初期化
 	void Initialize() override;
