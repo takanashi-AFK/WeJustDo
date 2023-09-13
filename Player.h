@@ -9,6 +9,7 @@
 
 //前方宣言
 class Stage;
+class FuelGauge;
 
 //定数宣言
 namespace {
@@ -32,11 +33,13 @@ protected:
 	PlayerStateManager*	pState_;	//Playerの状態管理
 	RayCastData	downData_;			//プレイヤーの下に伸びるレイ
 	Stage* pStage_;					//ステージクラスのポインタ
+	FuelGauge* pGauge_;				//ゲージクラスのポインタ
 	int	hGroundModel_;				//ステージのモデル番号を入れる変数
 	float acceleration_;			//重力の加速度
 	bool isAddGravity_;				//重力を加えるか否か
 	bool isMove_;					//動いていいいか
 	float speed_;					//移動速度
+	const int maxfireWood_ = 100;			//薪の燃やせる数（100％）
 public:
 	EmitterData  RandEffectData_;	//エフェクトデータ(着地時)
 	EmitterData  DeadEffectData;	//エフェクトデータ(死亡時)

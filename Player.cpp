@@ -11,6 +11,7 @@
 #include "Engine/Audio.h"
 #include "Engine/SceneManager.h"
 #include "StartCount.h"
+#include "FuelGauge.h"
 
 //コンストラクタ
 Player::Player(GameObject* _parent, string _modelFileName)
@@ -51,6 +52,9 @@ void Player::ChildInitialize()
 		pJet->Load("Effects/Fire.png");
 	}
 	
+	//ゲージの初期化
+	pGauge_ = Instantiate<FuelGauge>(this);
+
 	//カメラの初期化
 	Camera::SetPosition(transform_.position_.x + 5, transform_.position_.y + 3, -13.0f);
 	Camera::SetTarget(transform_.position_.x + 5, transform_.position_.y + 3, 0.0f);
@@ -65,19 +69,28 @@ void Player::ChildUpdate()
 	{
 		static float camMove = 4.5f;
 
-		if (!(transform_.position_.y > 7))
+		//if (transform_.position_.y < 3)
+		//{
+		//	if (camMove > 4.5f)
+		//		camMove -= 0.3f;
+		//	else camMove = 4.5f;
+		//}
+
+		//else
+		//{
+		//	if (transform_.position_.y >=3)
+		//		camMove += transform_.position_.y+3.5f;
+		//}
+
+		if (transform_.position_.y < 3)
 		{
 			if (camMove > 4.5f)
 				camMove -= 0.3f;
 			else camMove = 4.5f;
 		}
 		else
-		{
-			if (camMove < 13)
-				camMove += 0.3f;
-			else
-				camMove = 13.0f;
-		}
+			camMove = (transform_.position_.y - camMove)*0.5+camMove;
+
 		Camera::SetPosition(transform_.position_.x + 5, camMove, -13.0f);
 		Camera::SetTarget(transform_.position_.x + 5, camMove - 0.5f, 0.0f);
 	}
@@ -113,6 +126,10 @@ void Player::ChildUpdate()
 		pScM->ChangeScene(SCENE_ID_RESULT, TID_WHITEOUT);
 	}
 	}
+
+	//Gauge
+	pGauge_->SetFuel(Global::gFireWood / 5, maxfireWood_);
+
 
 	//ゴールしたら...
 	if (isGoal()) {
