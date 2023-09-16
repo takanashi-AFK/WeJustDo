@@ -181,4 +181,6 @@ public:
 	float CalcCamPositionY(Transform _plPos);
 
 	float CalcCamPositionZ(Transform _plPos);
+
+	void RayNeo();
 };

@@ -28,6 +28,7 @@ void RunningState::Update(Player* _p)
 		_p->IsAddGravity(false);
 		_p->SetAcceleration(0);
 	}
+
 	XMFLOAT3 ppos;
 	ppos = _p->GetPosition();
 	//“ü—Íˆ—
