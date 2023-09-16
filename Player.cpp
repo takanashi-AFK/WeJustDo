@@ -88,7 +88,7 @@ void Player::ChildUpdate()
 	//‚½‚©‚È‚µƒJƒƒ‰
 	{
 		
-		if (transform_.position_.y >= -1 && transform_.position_.y <= 15) {
+		/*if (transform_.position_.y >= -1 && transform_.position_.y <= 15) {
 			Camera::SetPosition(transform_.position_.x + 5, transform_.position_.y + 3, -13.0f);
 			Camera::SetTarget(transform_.position_.x + 5, transform_.position_.y + 3, 0.0f);
 		}
@@ -100,7 +100,7 @@ void Player::ChildUpdate()
 		{
 			Camera::SetPosition(Camera::GetPosition().x, Camera::GetPosition().y, Camera::GetPosition().z);
 			Camera::SetTarget(Camera::GetTarget());
-		}
+		}*/
 	}
 	StartCount pSt = (StartCount*)FindObject("StartCount");
 	if (pSt.IsFinished())
