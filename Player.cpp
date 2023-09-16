@@ -11,6 +11,8 @@
 #include "Engine/Audio.h"
 #include "Engine/SceneManager.h"
 #include "StartCount.h"
+#include "FuelGauge.h"
+
 
 //コンストラクタ
 Player::Player(GameObject* _parent, string _modelFileName)
@@ -51,6 +53,12 @@ void Player::ChildInitialize()
 		pJet->Load("Effects/Fire.png");
 	}
 	
+	//ゲージの初期化
+	pGauge_ = Instantiate<FuelGauge>(this);
+
+	//前フレームの移動量初期化
+	currentPos_.position_ = { 0, 0, 0 };
+
 	//カメラの初期化
 	Camera::SetPosition(transform_.position_.x + 5, transform_.position_.y + 3, -13.0f);
 	Camera::SetTarget(transform_.position_.x + 5, transform_.position_.y + 3, 0.0f);
@@ -63,23 +71,18 @@ void Player::ChildUpdate()
 	static float camX = 0;
 	//かいだカメラ
 	{
-		/*static float camMove = 4.5f;
+		static float camMoveY = defCamY;	//地面の下が見えないギリギリのライン
+		static float camMoveZ = defCamZ;
 
-		if (!(transform_.position_.y > 7))
-		{
-			if (camMove > 4.5f)
-				camMove -= 0.3f;
-			else camMove = 4.5f;
-		}
-		else
-		{
-			if (camMove < 13)
-				camMove += 0.3f;
-			else
-				camMove = 13.0f;
-		}
-		Camera::SetPosition(transform_.position_.x + 5, camMove, -13.0f);
-		Camera::SetTarget(transform_.position_.x + 5, camMove - 0.5f, 0.0f);*/
+		//カメラ座標Zの計算
+		camMoveZ = CalcCamPositionZ(transform_);
+
+		//カメラ座標Yの計算
+		camMoveY = CalcCamPositionY(transform_);
+
+		//カメラ移動
+		Camera::SetPosition(transform_.position_.x + 5, camMoveY, camMoveZ);
+		Camera::SetTarget(transform_.position_.x + 5, camMoveY - 0.5f, 0.0f);
 	}
 	
 	//たかなしカメラ
@@ -114,11 +117,15 @@ void Player::ChildUpdate()
 	}
 	}
 
-	////ゴールしたら...
-	//if (isGoal()) {
-	//	//movie状態に移行する
-	//	pState_->ChangeState(pState_->pMovie_, this);
-	//}
+	//Gauge
+	pGauge_->SetFuel(Global::gFireWood / 5, maxfireWood_);
+
+
+	//ゴールしたら...
+	if (isGoal()) {
+		//movie状態に移行する
+		pState_->ChangeState(pState_->pMovie_, this);
+	}
 
 	//falseなら動作処理を行わずreturn
 	if (!isMove_)return;
@@ -404,4 +411,45 @@ void Player::InitGetEffect()
 	ItemGetEffectData.scale = XMFLOAT2(1.01, 1.01);
 	ItemGetEffectData.color = XMFLOAT4(1, 1, 1, 1);
 	ItemGetEffectData.deltaColor = XMFLOAT4(0, 0, 0, -0.1);
+}
+
+float Player::CalcCamPositionY(Transform _plPos)
+{
+	float result = 0.0f;
+	//Player と床の平均をとる。で、平均が、デフォルト設定値以上なら動かす
+	if ((_plPos.position_.y + stageBottom / 2) >= defCamY)
+	{
+		//Player と床の平均がカメラの最大高度以上ならば
+		if (_plPos.position_.y + stageBottom / 2 >= maxCamY)
+		{
+			//カメラ高度は最大に
+			return (maxCamY) - 2;//なぜか2を引かないとガクガクする。
+		}
+		else
+		{
+			//そうでなければPlayerと床の平均値を高さに
+			result = ((_plPos.position_.y + stageBottom) / 2 ) + 2;//なぜか2を足さないとガクガクする。
+			return(result);
+		}
+	}
+	else{//平均がデフォルト位置よりも小さかった時はデフォルト値を返す
+		return (defCamY);
+	}
+}
+
+float Player::CalcCamPositionZ(Transform _plPos)
+{
+	float result = 0.0f;
+	//Playerの座標がカメラのデフォルトY座標以上だった時、その分カメラを引かせる
+	if (_plPos.position_.y >= defCamY)
+	{
+		result = (camZBottom - _plPos.position_.y) + defCamZ;
+		return (result);
+
+	}
+	else//デフォルトY座標未満ならデフォルトY座標をそのまま使う
+	{
+		result = defCamZ;
+		return (result);
+	}
 }
