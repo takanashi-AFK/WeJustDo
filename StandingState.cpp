@@ -13,16 +13,28 @@ void StandingState::Update(Player* _p)
 	//入力処理
 	HandleInput(_p);
 
-	RayCastData downData; {
+	XMFLOAT3 ppos;
+	ppos = _p->GetPosition();
+	RayCastData downDataL; {
 		//当たっているか確認
-		downData.start = _p->GetPosition();
-		XMStoreFloat3(&downData.dir, XMVectorSet(0, -1, 0, 0));
-		Model::RayCast(_p->GetPlayerOnGround(), &downData);
+		downDataL.start = XMFLOAT3(ppos.x - (PLAYER_MODEL_SIZE.x / 2),
+			ppos.y,
+			ppos.z);
+		XMStoreFloat3(&downDataL.dir, XMVectorSet(0, -1, 0, 0));
+		Model::RayCast(_p->GetPlayerOnGround(), &downDataL);
 	}
-	if (downData.dist < (PLAYER_MODEL_SIZE.y / 2)) {
+	RayCastData downDataR; {
+		//当たっているか確認
+		downDataR.start = XMFLOAT3(ppos.x + (PLAYER_MODEL_SIZE.x / 2),
+			ppos.y - (PLAYER_MODEL_SIZE.y / 2),
+			ppos.z);
+		XMStoreFloat3(&downDataL.dir, XMVectorSet(0, -1, 0, 0));
+		Model::RayCast(_p->GetPlayerOnGround(), &downDataR);
+	}
+	if (downDataL.dist < (PLAYER_MODEL_SIZE.y / 2) && downDataR.dist < (PLAYER_MODEL_SIZE.y / 2)) {
 
 		//めり込み分、位置を戻す
-		XMVECTOR length = { 0,(PLAYER_MODEL_SIZE.y / 2) - downData.dist,0 };
+		XMVECTOR length = { 0,(PLAYER_MODEL_SIZE.y / 2) - ((downDataL.dist + downDataR.dist) / 2) - 0.25 ,0 };
 		XMFLOAT3 tmpPos = _p->GetPosition();
 		XMStoreFloat3(&tmpPos, XMLoadFloat3(&tmpPos) + length); _p->SetPosition(tmpPos);
 
@@ -30,10 +42,8 @@ void StandingState::Update(Player* _p)
 		_p->IsAddGravity(false);
 		_p->SetAcceleration(0);
 	}
-	XMFLOAT3 ppos;
-	ppos = _p->GetPosition();
 	{//State変化
-	
+
 		//running
 		if (Input::IsKey(DIK_D) || Input::IsKey(DIK_A))
 			_p->GetState()->ChangeState(_p->GetState()->pRunning_, _p, true);

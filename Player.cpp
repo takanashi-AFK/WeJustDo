@@ -541,7 +541,4 @@ void Player::RayNeo()
 			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(1, 0, 0, 0) - length));
 		}
 	}
-
-	
-
 }
