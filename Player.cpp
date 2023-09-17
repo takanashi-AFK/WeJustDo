@@ -30,7 +30,7 @@ void Player::ChildInitialize()
 {
 	//状態の初期化
 	ASSIGN(pState_->playerState_, pState_->pStanding_);
-	
+
 	//モデルのロード-debug用
 	ASSIGN(hDebugBox_, Model::Load("Models/defaultModel.fbx"));
 
@@ -52,19 +52,19 @@ void Player::ChildInitialize()
 		pJet = new PolyLine(0.4, 10);
 		pJet->Load("Effects/Fire.png");
 	}
-	
+
 	//ゲージの初期化
 	pGauge_ = Instantiate<FuelGauge>(this);
 
 	//前フレームの移動量初期化
 	currentPos_.position_ = { 0, 0, 0 };
 
+
+
 	//カメラの初期化
 	Camera::SetPosition(transform_.position_.x + 5, transform_.position_.y + 3, -13.0f);
 	Camera::SetTarget(transform_.position_.x + 5, transform_.position_.y + 3, 0.0f);
-
 }
-
 //更新
 void Player::ChildUpdate()
 {
@@ -85,23 +85,7 @@ void Player::ChildUpdate()
 		Camera::SetTarget(transform_.position_.x + 5, camMoveY - 0.5f, 0.0f);
 	}
 	
-	//たかなしカメラ
-	{
-		
-		/*if (transform_.position_.y >= -1 && transform_.position_.y <= 15) {
-			Camera::SetPosition(transform_.position_.x + 5, transform_.position_.y + 3, -13.0f);
-			Camera::SetTarget(transform_.position_.x + 5, transform_.position_.y + 3, 0.0f);
-		}
-		else if (transform_.position_.y > 15) {
-			Camera::SetPosition(transform_.position_.x + 5, Camera::GetPosition().y, -13.0f);
-			Camera::SetTarget(transform_.position_.x + 5, Camera::GetTarget().y, 0.0f);
-		}
-		else if (transform_.position_.y <= -3 && transform_.position_.y >= -5)
-		{
-			Camera::SetPosition(Camera::GetPosition().x, Camera::GetPosition().y, Camera::GetPosition().z);
-			Camera::SetTarget(Camera::GetTarget());
-		}*/
-	}
+	
 	StartCount pSt = (StartCount*)FindObject("StartCount");
 	if (pSt.IsFinished())
 	{
@@ -181,6 +165,7 @@ void Player::ChildDraw()
 		/*Direct3D::SetShader(Direct3D::SHADER_UNLIT);
 		Transform t_Box; t_Box.position_ = transform_.position_; t_Box.position_.y + 0.5f;
 		Model::SetTransform(hBox_, t_Box);Model::Draw(hBox_);*/
+
 	}
 	
 }
@@ -331,7 +316,6 @@ void Player::SetDrawTransform()
 	Model::SetTransform(hModel_, t_Draw);
 }
 
-
 void Player::InitDeadEffect()
 {
 	//エフェクト情報を設定
@@ -464,31 +448,23 @@ void Player::RayNeo()
 		RayCastData upDataL; {
 			//当たっているか確認
 			upDataL.start = XMFLOAT3(transform_.position_.x - (PLAYER_MODEL_SIZE.x / 2), 
-									 transform_.position_.y + (PLAYER_MODEL_SIZE.x / 2), 
+									 transform_.position_.y + (PLAYER_MODEL_SIZE.y / 2), 
 									 transform_.position_.z);
 			XMStoreFloat3(&upDataL.dir, XMVectorSet(0, 1, 0, 0));
 			Model::RayCast(hGroundModel_, &upDataL);
 		}
-		//レイの長さが1.0以下だったら...
-		if (upDataL.dist < (PLAYER_MODEL_SIZE.y / 2)) {
-			//めり込み分、位置を戻す
-			XMVECTOR length = { 0, (PLAYER_MODEL_SIZE.y / 2) + upDataL.dist,0 };
-			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(0, 1, 0, 0) - length));
-			SetAcceleration(2);
-		}
-
 		RayCastData upDataR; {
 			//当たっているか確認
 			upDataR.start = XMFLOAT3(transform_.position_.x + (PLAYER_MODEL_SIZE.x / 2), 
-									 transform_.position_.y + (PLAYER_MODEL_SIZE.x / 2),
+									 transform_.position_.y + (PLAYER_MODEL_SIZE.y / 2),
 									 transform_.position_.z);
 			XMStoreFloat3(&upDataR.dir, XMVectorSet(0, 1, 0, 0));
 			Model::RayCast(hGroundModel_, &upDataR);
 		}
 		//レイの長さが1.0以下だったら...
-		if (upDataR.dist < (PLAYER_MODEL_SIZE.y / 2)) {
+		if (upDataR.dist < (PLAYER_MODEL_SIZE.y / 2)&& upDataL.dist < (PLAYER_MODEL_SIZE.y / 2)) {
 			//めり込み分、位置を戻す
-			XMVECTOR length = { 0, (PLAYER_MODEL_SIZE.y / 2) + upDataR.dist,0 };
+			XMVECTOR length = { 0, (PLAYER_MODEL_SIZE.y / 2) + ((upDataR.dist + upDataL.dist)/2),0 };
 			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(0, 1, 0, 0) - length));
 			SetAcceleration(2);
 		}
@@ -499,23 +475,14 @@ void Player::RayNeo()
 	{
 		RayCastData downDataL; {
 			//当たっているか確認
-			downDataL.start = XMFLOAT3(transform_.position_.x - (PLAYER_MODEL_SIZE.x / 2),
-									   transform_.position_.y - (PLAYER_MODEL_SIZE.x / 2),
+			downDataL.start = XMFLOAT3(transform_.position_.x,
+								       transform_.position_.y ,
 									   transform_.position_.z);
 			XMStoreFloat3(&downDataL.dir, XMVectorSet(0, -1, 0, 0));
 			Model::RayCast(hGroundModel_, &downDataL);
 			downData_ = downDataL;
 		}
-		RayCastData downDataR; {
-			//当たっているか確認
-			downDataR.start = XMFLOAT3(transform_.position_.x + (PLAYER_MODEL_SIZE.x / 2),
-									   transform_.position_.y - (PLAYER_MODEL_SIZE.x / 2),
-									   transform_.position_.z);
-			XMStoreFloat3(&downDataR.dir, XMVectorSet(0, -1, 0, 0));
-			Model::RayCast(hGroundModel_, &downDataR);
-			downData_ = downDataR;
-		}
-		if (downDataL.dist < (PLAYER_MODEL_SIZE.y / 2) && downDataR.dist < (PLAYER_MODEL_SIZE.y / 2)) {
+		if (downDataL.dist < (PLAYER_MODEL_SIZE.y / 2) ) {
 			//状態を"Standing"に変更
 			pState_->ChangeState(pState_->pStanding_, this);
 		}
@@ -533,12 +500,6 @@ void Player::RayNeo()
 			XMStoreFloat3(&leftDataTop.dir, XMVectorSet(-1, 0, 0, 0));
 			Model::RayCast(hGroundModel_, &leftDataTop);
 		}
-		if (leftDataTop.dist < (PLAYER_MODEL_SIZE.x / 2)) {
-			//めり込み分、位置を戻す
-			XMVECTOR length = { -leftDataTop.dist - (PLAYER_MODEL_SIZE.x / 2),0,0 };
-			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(-1, 0, 0, 0) - length));
-		}
-
 		RayCastData leftDataBottom; {
 			leftDataBottom.start = XMFLOAT3(transform_.position_.x - (PLAYER_MODEL_SIZE.x / 2), 
 											transform_.position_.y - (PLAYER_MODEL_SIZE.x / 2),
@@ -546,9 +507,9 @@ void Player::RayNeo()
 			XMStoreFloat3(&leftDataBottom.dir, XMVectorSet(-1, 0, 0, 0));
 			Model::RayCast(hGroundModel_, &leftDataBottom);
 		}
-		if (leftDataBottom.dist < (PLAYER_MODEL_SIZE.x / 2)) {
+		if (leftDataBottom.dist < (PLAYER_MODEL_SIZE.x / 2)&& leftDataTop.dist < (PLAYER_MODEL_SIZE.x / 2)) {
 			//めり込み分、位置を戻す
-			XMVECTOR length = { -leftDataBottom.dist - (PLAYER_MODEL_SIZE.x / 2),0,0 };
+			XMVECTOR length = { (((-leftDataBottom.dist + -leftDataTop.dist)/2 - (PLAYER_MODEL_SIZE.x / 2))-0.1),0,0};
 			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(-1, 0, 0, 0) - length));
 		}
 	}
@@ -563,13 +524,6 @@ void Player::RayNeo()
 			XMStoreFloat3(&rightDataTop.dir, XMVectorSet(1, 0, 0, 0));	//発射方向の指定
 			Model::RayCast(hGroundModel_, &rightDataTop);				//レイを発射
 		}
-		//レイの長さが1.0以下だったら...
-		if (rightDataTop.dist < (PLAYER_MODEL_SIZE.x / 2)) {
-			//めり込み分、位置を戻す
-			XMVECTOR length = { rightDataTop.dist + (PLAYER_MODEL_SIZE.x / 2),0,0 };
-			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(1, 0, 0, 0) - length));
-		}
-		
 		RayCastData rightDataBottom; {
 			//当たっているかを確認
 			rightDataBottom.start = XMFLOAT3(transform_.position_.x + (PLAYER_MODEL_SIZE.x / 2),
@@ -579,9 +533,11 @@ void Player::RayNeo()
 			Model::RayCast(hGroundModel_, &rightDataBottom);				//レイを発射
 		}
 		//レイの長さが1.0以下だったら...
-		if (rightDataBottom.dist < (PLAYER_MODEL_SIZE.x / 2)) {
+		if (rightDataBottom.dist < (PLAYER_MODEL_SIZE.x / 2)&& rightDataTop.dist < (PLAYER_MODEL_SIZE.x / 2)) {
 			//めり込み分、位置を戻す
-			XMVECTOR length = { rightDataBottom.dist + (PLAYER_MODEL_SIZE.x / 2),0,0 };
+			//戻し分をちょっと増やすために+0.1する
+			//0.1以上になると、角にスナップするようになってしまう
+			XMVECTOR length = { ((rightDataBottom.dist +rightDataTop.dist)/2 + (PLAYER_MODEL_SIZE.x / 2)+0.1),0,0 };
 			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(1, 0, 0, 0) - length));
 		}
 	}

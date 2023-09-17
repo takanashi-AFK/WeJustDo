@@ -6,6 +6,7 @@
 #include "Engine/Model.h"
 #include "PolyLine.h"
 #include "Engine/VFX.h"
+#include "Engine/Text.h"
 
 //‘O•ûéŒ¾
 class Stage;
