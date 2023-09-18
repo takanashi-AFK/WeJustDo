@@ -12,7 +12,8 @@ void StandingState::Update(Player* _p)
 {
 	//入力処理
 	HandleInput(_p);
-
+	//重力をリセット
+	_p->IsAddGravity(false);
 	XMFLOAT3 ppos;
 	ppos = _p->GetPosition();
 	RayCastData downDataL; {
@@ -37,9 +38,6 @@ void StandingState::Update(Player* _p)
 		XMVECTOR length = { 0,(PLAYER_MODEL_SIZE.y / 2) - ((downDataL.dist + downDataR.dist) / 2) - 0.25 ,0 };
 		XMFLOAT3 tmpPos = _p->GetPosition();
 		XMStoreFloat3(&tmpPos, XMLoadFloat3(&tmpPos) + length); _p->SetPosition(tmpPos);
-
-		//重力をリセット
-		_p->IsAddGravity(false);
 		_p->SetAcceleration(0);
 	}
 	{//State変化

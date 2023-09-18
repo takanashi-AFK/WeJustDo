@@ -10,11 +10,13 @@
 //更新
 void RunningState::Update(Player* _p)
 {
+	HandleInput(_p);
+	//重力をリセット
+	_p->IsAddGravity(false);
 
 	XMFLOAT3 ppos;
 	ppos = _p->GetPosition();
 	//入力処理
-	HandleInput(_p);
 
 	RayCastData downDataL; {
 		//当たっているか確認
@@ -39,8 +41,6 @@ void RunningState::Update(Player* _p)
 			XMFLOAT3 tmpPos = _p->GetPosition();
 			XMStoreFloat3(&tmpPos, XMLoadFloat3(&tmpPos) + length); _p->SetPosition(tmpPos);
 
-			//重力をリセット
-			_p->IsAddGravity(false);
 			_p->SetAcceleration(0);
 		}
 
