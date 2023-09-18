@@ -13,34 +13,62 @@ void StandingState::Update(Player* _p)
 	//入力処理
 	HandleInput(_p);
 
-	RayCastData downData; {
-		//当たっているか確認
-		downData.start = _p->GetPosition();
-		XMStoreFloat3(&downData.dir, XMVectorSet(0, -1, 0, 0));
-		Model::RayCast(_p->GetPlayerOnGround(), &downData);
-	}
-	if (downData.dist < (PLAYER_MODEL_SIZE.y / 2)) {
+	//プレイヤーのトランスフォーム情報を取得
+	Transform* pt_Player = _p->GetTransformAddress();
 
+	RayCastData downDataRight; {
+		//レイの開始地点を設定
+		downDataRight.start = pt_Player->position_;
+		downDataRight.start.x += ((PLAYER_MODEL_SIZE.x) - 0.1f);
+
+		//レイの発射方向を設定
+		XMStoreFloat3(&downDataRight.dir, XMVectorSet(0, -1, 0, 0));
+
+		//レイを発射
+		Model::RayCast(_p->GetPlayerOnGround(), &downDataRight);
+	}
+	if (downDataRight.dist <= (PLAYER_MODEL_SIZE.y / 2)) {
 		//めり込み分、位置を戻す
-		XMVECTOR length = { 0,(PLAYER_MODEL_SIZE.y / 2) - downData.dist,0 };
-		XMFLOAT3 tmpPos = _p->GetPosition();
-		XMStoreFloat3(&tmpPos, XMLoadFloat3(&tmpPos) + length); _p->SetPosition(tmpPos);
+		XMVECTOR length = { 0,(PLAYER_MODEL_SIZE.y / 2) - std::abs(downDataRight.dist),0 };
+		XMStoreFloat3(&pt_Player->position_, XMLoadFloat3(&pt_Player->position_) + length);
 
 		//重力をリセット
 		_p->IsAddGravity(false);
 		_p->SetAcceleration(0);
 	}
+
+
+	//RayCastData downData; {
+	//	//当たっているか確認
+	//	downData.start = _p->GetPosition();
+	//	XMStoreFloat3(&downData.dir, XMVectorSet(0, -1, 0, 0));
+	//	Model::RayCast(_p->GetPlayerOnGround(), &downData);
+	//}
+	//if (downData.dist < (PLAYER_MODEL_SIZE.y / 2)) {
+
+	//	//めり込み分、位置を戻す
+	//	XMVECTOR length = { 0,(PLAYER_MODEL_SIZE.y / 2) - downData.dist,0 };
+	//	XMFLOAT3 tmpPos = _p->GetPosition();
+	//	XMStoreFloat3(&tmpPos, XMLoadFloat3(&tmpPos) + length); _p->SetPosition(tmpPos);
+
+	//	//重力をリセット
+	//	_p->IsAddGravity(false);
+	//	_p->SetAcceleration(0);
+	//}
 	XMFLOAT3 ppos;
 	ppos = _p->GetPosition();
-	{//State変化
-	
-		//running
+
+	//State変化
+	{
+		//Running->
 		if (Input::IsKey(DIK_D) || Input::IsKey(DIK_A))
 			_p->GetState()->ChangeState(_p->GetState()->pRunning_, _p, true);
-		//dead
+
+		//Dead->
 		if (ppos.y <= -10 && ppos.y >= -13)
 			_p->GetState()->ChangeState(_p->GetState()->pDead_, _p, true);
 
+		//Jumping->
 		if (Input::IsKeyDown(DIK_SPACE))
 			_p->GetState()->ChangeState(_p->GetState()->pJumping_, _p, true);
 

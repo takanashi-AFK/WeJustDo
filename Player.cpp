@@ -186,72 +186,149 @@ void Player::ChildDraw()
 
 void Player::StageRayCast()
 {
-	//ステージのモデル番号を取得
 	ASSIGN(hGroundModel_, dynamic_cast<Stage*>(FindObject("Stage"))->GetStageModelHandle(m_Ground));
+
+	//上方向
+	{
+		//UpRight
+		RayCastData upDataRight; {
+			//レイの開始地点を設定
+			upDataRight.start = transform_.position_;
+			upDataRight.start.x += ((PLAYER_MODEL_SIZE.x / 2) - 0.1f);
+
+			//レイの発射方向を設定
+			XMStoreFloat3(&upDataRight.dir, XMVectorSet(0, 1, 0, 0));
+
+			//レイを発射
+			Model::RayCast(hGroundModel_, &upDataRight);
+		}
+		if (upDataRight.dist <= (PLAYER_MODEL_SIZE.y / 2)) {
+			//めり込み分戻す処理
+			XMVECTOR length = { 0,(PLAYER_MODEL_SIZE.y / 2) - std::abs(upDataRight.dist),0 };
+			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - length);
+
+		}
+
+		//Up+eft
+		RayCastData upDataLeft; {
+			//レイの開始地点を設定
+			upDataLeft.start = transform_.position_;
+			upDataLeft.start.x -= ((PLAYER_MODEL_SIZE.x / 2) - 0.1f);
+
+			//レイの発射方向を設定
+			XMStoreFloat3(&upDataLeft.dir, XMVectorSet(0, 1, 0, 0));
+
+			//レイを発射
+			Model::RayCast(hGroundModel_, &upDataLeft);
+		}
+		if (upDataLeft.dist <= (PLAYER_MODEL_SIZE.y / 2)) {
+			//めり込み分戻す処理
+			XMVECTOR length = { 0,(PLAYER_MODEL_SIZE.y / 2) - std::abs(upDataLeft.dist),0 };
+			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - length);
+
+		}
+	}
+
+	//StandingState,RunningStateときのみ行うからState内で処理を行う
+	//下方向
+	{
+		//downRight
+		RayCastData downDataRight; {
+			//レイの開始地点を設定
+			downDataRight.start = transform_.position_;
+			downDataRight.start.x += ((PLAYER_MODEL_SIZE.x / 2) - 0.1f);
+
+			//レイの発射方向を設定
+			XMStoreFloat3(&downDataRight.dir, XMVectorSet(0, -1, 0, 0));
+
+			//レイを発射
+			Model::RayCast(hGroundModel_, &downDataRight);
+		}
+		if (downDataRight.dist < (PLAYER_MODEL_SIZE.y / 2)) {
+			//状態遷移：->Standing
+			pState_->ChangeState(pState_->pStanding_, this);
+		}
+		else
+			IsAddGravity(true);
+
+	}
 
 	//左方向の当たり判定
 	{
-		RayCastData leftData; {
-			leftData.start = transform_.position_;
-			XMStoreFloat3(&leftData.dir, XMVectorSet(-1, 0, 0, 0));
-			Model::RayCast(hGroundModel_, &leftData);
+		//LeftTop
+		RayCastData leftDataTop; {
+			//レイの開始地点を設定
+			leftDataTop.start = transform_.position_;
+			leftDataTop.start.y += ((PLAYER_MODEL_SIZE.y / 2) - 0.1f);
+
+			//レイの発射方向を設定
+			XMStoreFloat3(&leftDataTop.dir, XMVectorSet(-1, 0, 0, 0));
+
+			//レイを発射
+			Model::RayCast(hGroundModel_, &leftDataTop);
 		}
-		if (leftData.dist < (PLAYER_MODEL_SIZE.x / 2)) {
-			//めり込み分、位置を戻す
-			XMVECTOR length = { -leftData.dist - (PLAYER_MODEL_SIZE.x / 2),0,0 };
-			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(-1, 0, 0, 0) - length));
+		if (leftDataTop.dist <= (PLAYER_MODEL_SIZE.x / 2)) {
+			//めり込み分戻す処理
+			XMVECTOR length = { (PLAYER_MODEL_SIZE.x / 2) - std::abs(leftDataTop.dist),0,0 };
+			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) + length);
+		}
+
+		//LeftBottom
+		RayCastData leftDataBottom; {
+			//レイの開始地点を設定
+			leftDataBottom.start = transform_.position_;
+			leftDataBottom.start.y -= ((PLAYER_MODEL_SIZE.y / 2) - 0.1f);
+
+			//レイの発射方向を設定
+			XMStoreFloat3(&leftDataBottom.dir, XMVectorSet(-1, 0, 0, 0));
+
+			//レイを発射
+			Model::RayCast(hGroundModel_, &leftDataBottom);
+		}
+		if (leftDataBottom.dist <= (PLAYER_MODEL_SIZE.x / 2)) {
+			//めり込み分戻す処理
+			XMVECTOR length = { (PLAYER_MODEL_SIZE.x / 2) - std::abs(leftDataBottom.dist),0,0 };
+			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) + length);
 		}
 	}
 
 	//右方向のあたり判定
 	{
-		RayCastData rightData; {
-			//当たっているかを確認
-			rightData.start = transform_.position_;					//発射位置の指定
-			XMStoreFloat3(&rightData.dir, XMVectorSet(1, 0, 0, 0));	//発射方向の指定
-			Model::RayCast(hGroundModel_, &rightData);				//レイを発射
-		}
-		//レイの長さが1.0以下だったら...
-		if (rightData.dist < (PLAYER_MODEL_SIZE.x / 2)) {
-			//めり込み分、位置を戻す
-			XMVECTOR length = { rightData.dist + (PLAYER_MODEL_SIZE.x / 2),0,0 };
-			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(1, 0, 0, 0) - length));
-		}
-	}
+		//RightTop
+		RayCastData rightDataTop; {
+			//レイの開始地点を設定
+			rightDataTop.start = transform_.position_;
+			rightDataTop.start.y += ((PLAYER_MODEL_SIZE.y / 2) - 0.1f);
 
-	//上方向のあたり判定
-	{
-		RayCastData upData; {
-			//当たっているか確認
-			upData.start = transform_.position_;
-			XMStoreFloat3(&upData.dir, XMVectorSet(0, 1, 0, 0));
-			Model::RayCast(hGroundModel_, &upData);
-		}
-		//レイの長さが1.0以下だったら...
-		if (upData.dist < (PLAYER_MODEL_SIZE.y / 2)) {
-			//めり込み分、位置を戻す
-			XMVECTOR length = { 0, (PLAYER_MODEL_SIZE.y / 2) + upData.dist,0 };
-			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - (XMVectorSet(0, 1, 0, 0) - length));
-			SetAcceleration(2);
-		}
-	}
+			//レイの発射方向を設定
+			XMStoreFloat3(&rightDataTop.dir, XMVectorSet(1, 0, 0, 0));
 
-	//StandingState,RunningStateときのみ行うからState内で処理を行う
-	//下方向のあたり判定
-	{
-		RayCastData downData; {
-			//当たっているか確認
-			downData.start = transform_.position_;
-			XMStoreFloat3(&downData.dir, XMVectorSet(0, -1, 0, 0));
-			Model::RayCast(hGroundModel_, &downData);
-			downData_ = downData;
+			//レイを発射
+			Model::RayCast(hGroundModel_, &rightDataTop);
 		}
-		if (downData.dist < (PLAYER_MODEL_SIZE.y / 2)) {
-			//状態を"Standing"に変更
-			pState_->ChangeState(pState_->pStanding_, this);
+		if (rightDataTop.dist <= (PLAYER_MODEL_SIZE.x / 2)) {
+			//めり込み分戻す処理
+			XMVECTOR length = { (PLAYER_MODEL_SIZE.x / 2) - std::abs(rightDataTop.dist),0,0 };
+			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - length);
 		}
-		else
-			isAddGravity_ = true;
+
+		//RightBottom
+		RayCastData rightDataBottom; {
+			//レイの開始地点を設定
+			rightDataBottom.start = transform_.position_;
+			rightDataBottom.start.y -= ((PLAYER_MODEL_SIZE.y / 2) - 0.1f);
+
+			//レイの発射方向を設定
+			XMStoreFloat3(&rightDataBottom.dir, XMVectorSet(1, 0, 0, 0));
+
+			//レイを発射
+			Model::RayCast(hGroundModel_, &rightDataBottom);
+		}
+		if (rightDataBottom.dist <= (PLAYER_MODEL_SIZE.x / 2)) {
+			//めり込み分戻す処理
+			XMVECTOR length = { (PLAYER_MODEL_SIZE.x / 2) - std::abs(rightDataBottom.dist),0,0 };
+			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - length);
+		}
 	}
 }
 
