@@ -267,7 +267,7 @@ void Player::StageRayCast()
 			//レイを発射
 			Model::RayCast(hGroundModel_, &leftDataTop);
 		}
-		if (leftDataTop.dist <= (PLAYER_MODEL_SIZE.x / 2)) {
+		if (leftDataTop.dist <= (PLAYER_MODEL_SIZE.x / 2) + 0.1f) {
 			//めり込み分戻す処理
 			XMVECTOR length = { (PLAYER_MODEL_SIZE.x / 2) - std::abs(leftDataTop.dist),0,0 };
 			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) + length);
@@ -285,7 +285,7 @@ void Player::StageRayCast()
 			//レイを発射
 			Model::RayCast(hGroundModel_, &leftDataBottom);
 		}
-		if (leftDataBottom.dist <= (PLAYER_MODEL_SIZE.x / 2)) {
+		if (leftDataBottom.dist <= (PLAYER_MODEL_SIZE.x / 2)+0.1f) {
 			//めり込み分戻す処理
 			XMVECTOR length = { (PLAYER_MODEL_SIZE.x / 2) - std::abs(leftDataBottom.dist),0,0 };
 			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) + length);
@@ -306,7 +306,7 @@ void Player::StageRayCast()
 			//レイを発射
 			Model::RayCast(hGroundModel_, &rightDataTop);
 		}
-		if (rightDataTop.dist <= (PLAYER_MODEL_SIZE.x / 2)) {
+		if (rightDataTop.dist <= (PLAYER_MODEL_SIZE.x / 2) + 0.1f) {
 			//めり込み分戻す処理
 			XMVECTOR length = { (PLAYER_MODEL_SIZE.x / 2) - std::abs(rightDataTop.dist),0,0 };
 			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - length);
@@ -324,7 +324,7 @@ void Player::StageRayCast()
 			//レイを発射
 			Model::RayCast(hGroundModel_, &rightDataBottom);
 		}
-		if (rightDataBottom.dist <= (PLAYER_MODEL_SIZE.x / 2)) {
+		if (rightDataBottom.dist <= (PLAYER_MODEL_SIZE.x / 2) + 0.1f) {
 			//めり込み分戻す処理
 			XMVECTOR length = { (PLAYER_MODEL_SIZE.x / 2) - std::abs(rightDataBottom.dist),0,0 };
 			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - length);

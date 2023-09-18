@@ -37,6 +37,27 @@ void StandingState::Update(Player* _p)
 		_p->SetAcceleration(0);
 	}
 
+		RayCastData downDataLeft; {
+		//レイの開始地点を設定
+			downDataLeft.start = pt_Player->position_;
+			downDataLeft.start.x -= ((PLAYER_MODEL_SIZE.x) - 0.1f);
+
+		//レイの発射方向を設定
+		XMStoreFloat3(&downDataLeft.dir, XMVectorSet(0, -1, 0, 0));
+
+		//レイを発射
+		Model::RayCast(_p->GetPlayerOnGround(), &downDataLeft);
+	}
+	if (downDataLeft.dist <= (PLAYER_MODEL_SIZE.y / 2)) {
+		//めり込み分、位置を戻す
+		XMVECTOR length = { 0,(PLAYER_MODEL_SIZE.y / 2) - std::abs(downDataLeft.dist),0 };
+		XMStoreFloat3(&pt_Player->position_, XMLoadFloat3(&pt_Player->position_) + length);
+
+		//重力をリセット
+		_p->IsAddGravity(false);
+		_p->SetAcceleration(0);
+	}
+
 
 	//RayCastData downData; {
 	//	//当たっているか確認
