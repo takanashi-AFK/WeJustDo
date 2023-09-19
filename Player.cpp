@@ -236,7 +236,7 @@ void Player::StageRayCast()
 		RayCastData downDataRight; {
 			//レイの開始地点を設定
 			downDataRight.start = transform_.position_;
-			downDataRight.start.x += ((PLAYER_MODEL_SIZE.x / 2) - 0.1f);
+			downDataRight.start.x += ((PLAYER_MODEL_SIZE.x / 2));
 
 			//レイの発射方向を設定
 			XMStoreFloat3(&downDataRight.dir, XMVectorSet(0, -1, 0, 0));
@@ -245,6 +245,25 @@ void Player::StageRayCast()
 			Model::RayCast(hGroundModel_, &downDataRight);
 		}
 		if (downDataRight.dist < (PLAYER_MODEL_SIZE.y / 2)) {
+			//状態遷移：->Standing
+			pState_->ChangeState(pState_->pStanding_, this);
+		}
+		else
+			IsAddGravity(true);
+		
+		//downRight
+		RayCastData downDataLeft; {
+			//レイの開始地点を設定
+			downDataLeft.start = transform_.position_;
+			downDataLeft.start.x -= ((PLAYER_MODEL_SIZE.x / 2));
+
+			//レイの発射方向を設定
+			XMStoreFloat3(&downDataLeft.dir, XMVectorSet(0, -1, 0, 0));
+
+			//レイを発射
+			Model::RayCast(hGroundModel_, &downDataLeft);
+		}
+		if (downDataLeft.dist < (PLAYER_MODEL_SIZE.y / 2)) {
 			//状態遷移：->Standing
 			pState_->ChangeState(pState_->pStanding_, this);
 		}

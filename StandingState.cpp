@@ -19,7 +19,7 @@ void StandingState::Update(Player* _p)
 	RayCastData downDataRight; {
 		//レイの開始地点を設定
 		downDataRight.start = pt_Player->position_;
-		downDataRight.start.x += ((PLAYER_MODEL_SIZE.x) - 0.1f);
+		downDataRight.start.x += ((PLAYER_MODEL_SIZE.x));
 
 		//レイの発射方向を設定
 		XMStoreFloat3(&downDataRight.dir, XMVectorSet(0, -1, 0, 0));
