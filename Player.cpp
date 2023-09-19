@@ -288,7 +288,7 @@ void Player::StageRayCast()
 		}
 		if (leftDataTop.dist <= (PLAYER_MODEL_SIZE.x / 2) + 0.1f) {
 			//‚ß‚èž‚Ý•ª–ß‚·ˆ—
-			XMVECTOR length = { (PLAYER_MODEL_SIZE.x / 2) - std::abs(leftDataTop.dist),0,0 };
+			XMVECTOR length = { (PLAYER_MODEL_SIZE.x / 2) - leftDataTop.dist+0.1,0,0 };
 			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) + length);
 		}
 
@@ -306,7 +306,7 @@ void Player::StageRayCast()
 		}
 		if (leftDataBottom.dist <= (PLAYER_MODEL_SIZE.x / 2)+0.1f) {
 			//‚ß‚èž‚Ý•ª–ß‚·ˆ—
-			XMVECTOR length = { (PLAYER_MODEL_SIZE.x / 2) - std::abs(leftDataBottom.dist),0,0 };
+			XMVECTOR length = { (PLAYER_MODEL_SIZE.x / 2) - leftDataBottom.dist+0.1,0,0 };
 			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) + length);
 		}
 	}
@@ -327,7 +327,7 @@ void Player::StageRayCast()
 		}
 		if (rightDataTop.dist <= (PLAYER_MODEL_SIZE.x / 2) + 0.1f) {
 			//‚ß‚èž‚Ý•ª–ß‚·ˆ—
-			XMVECTOR length = { (PLAYER_MODEL_SIZE.x / 2) - std::abs(rightDataTop.dist),0,0 };
+			XMVECTOR length = { (PLAYER_MODEL_SIZE.x / 2) - std::abs(rightDataTop.dist) + 0.1f,0,0 };
 			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - length);
 		}
 
@@ -345,7 +345,7 @@ void Player::StageRayCast()
 		}
 		if (rightDataBottom.dist <= (PLAYER_MODEL_SIZE.x / 2) + 0.1f) {
 			//‚ß‚èž‚Ý•ª–ß‚·ˆ—
-			XMVECTOR length = { (PLAYER_MODEL_SIZE.x / 2) - std::abs(rightDataBottom.dist),0,0 };
+			XMVECTOR length = { (PLAYER_MODEL_SIZE.x / 2) - std::abs(rightDataBottom.dist) + 0.1f,0,0 };
 			XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) - length);
 		}
 	}
