@@ -127,6 +127,7 @@
   <ItemGroup>
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="ItemCounter.cpp" />
+    <ClCompile Include="StaffRollScene.cpp" />
     <ClCompile Include="StartCount.cpp" />
     <ClCompile Include="DeadState.cpp" />
     <ClCompile Include="DebugObject.cpp" />
@@ -179,6 +180,7 @@
   <ItemGroup>
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="ItemCounter.h" />
+    <ClInclude Include="StaffRollScene.h" />
     <ClInclude Include="StartCount.h" />
     <ClInclude Include="DeadState.h" />
     <ClInclude Include="DebugObject.h" />

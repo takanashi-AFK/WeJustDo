@@ -11,6 +11,7 @@ class TitleScene : public GameObject
 private:
 	int hPict_;	//画像番号
 	int hPict2_;//画像番号２
+	int hPict3_;//クレジットのPless CのUI
 	int hModel_;//モデル番号
 public:
 	//コンストラクタ
