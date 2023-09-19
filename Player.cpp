@@ -236,7 +236,7 @@ void Player::StageRayCast()
 		RayCastData downDataRight; {
 			//レイの開始地点を設定
 			downDataRight.start = transform_.position_;
-			downDataRight.start.x += ((PLAYER_MODEL_SIZE.x / 2));
+			downDataRight.start.x += ((PLAYER_MODEL_SIZE.x / 2) - 0.1f);
 
 			//レイの発射方向を設定
 			XMStoreFloat3(&downDataRight.dir, XMVectorSet(0, -1, 0, 0));
@@ -255,7 +255,7 @@ void Player::StageRayCast()
 		RayCastData downDataLeft; {
 			//レイの開始地点を設定
 			downDataLeft.start = transform_.position_;
-			downDataLeft.start.x -= ((PLAYER_MODEL_SIZE.x / 2));
+			downDataLeft.start.x -= ((PLAYER_MODEL_SIZE.x / 2) - 0.1f);
 
 			//レイの発射方向を設定
 			XMStoreFloat3(&downDataLeft.dir, XMVectorSet(0, -1, 0, 0));
