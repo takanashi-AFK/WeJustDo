@@ -75,10 +75,10 @@ void Player::ChildUpdate()
 		static float camMoveZ = defCamZ;
 
 		//カメラ座標Zの計算
-		camMoveZ = CalcCamPositionZ(transform_);
+		camMoveZ = CamPositionZ(transform_);
 
 		//カメラ座標Yの計算
-		camMoveY = CalcCamPositionY(transform_);
+		camMoveY = CamPositionY(transform_);
 
 		//カメラ移動
 		Camera::SetPosition(transform_.position_.x + 5, camMoveY, camMoveZ);
@@ -413,7 +413,7 @@ void Player::InitGetEffect()
 	ItemGetEffectData.deltaColor = XMFLOAT4(0, 0, 0, -0.1);
 }
 
-float Player::CalcCamPositionY(Transform _plPos)
+float Player::CamPositionY(Transform _plPos)
 {
 	float result = 0.0f;
 	//Player と床の平均をとる。で、平均が、デフォルト設定値以上なら動かす
@@ -437,7 +437,7 @@ float Player::CalcCamPositionY(Transform _plPos)
 	}
 }
 
-float Player::CalcCamPositionZ(Transform _plPos)
+float Player::CamPositionZ(Transform _plPos)
 {
 	float result = 0.0f;
 	//Playerの座標がカメラのデフォルトY座標以上だった時、その分カメラを引かせる
