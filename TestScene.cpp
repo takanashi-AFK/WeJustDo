@@ -39,7 +39,7 @@ void TestScene::Initialize()
 	//UI-TimeCount
 		ASSIGN(pTimer_, Instantiate<Timer>(this)); 
 		{
-			pTimer_->SetTime_Seconds(90);
+			pTimer_->SetTime_Seconds(80);
 			pTimer_->IsDraw(true);
 		}
 	//Object-StartCount
@@ -124,7 +124,7 @@ void TestScene::SceneReset()
 
 	//タイマーのリセット
 	pTimer_->Stop(true);
-	pTimer_->SetTime_Seconds(60);
+	pTimer_->SetTime_Seconds(80);
 	pTimer_->IsDraw(true);
 
 	//スタートカウントのリセット
