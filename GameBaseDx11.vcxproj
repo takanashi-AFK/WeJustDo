@@ -126,6 +126,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="EndScene.cpp" />
     <ClCompile Include="ItemCounter.cpp" />
     <ClCompile Include="StartCount.cpp" />
     <ClCompile Include="DeadState.cpp" />
@@ -178,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AudioManager.h" />
+    <ClInclude Include="EndScene.h" />
     <ClInclude Include="ItemCounter.h" />
     <ClInclude Include="StartCount.h" />
     <ClInclude Include="DeadState.h" />

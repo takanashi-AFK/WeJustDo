@@ -7,6 +7,7 @@
 #include "../PlayScene.h"
 #include "../ResultScene.h"
 #include "../TestScene.h"
+#include "../EndScene.h"
 
 #include "Model.h"
 #include "Image.h"
@@ -54,6 +55,7 @@ void SceneManager::Update()
 		case SCENE_ID_SELECT: Instantiate<StageSelectScene>(this); break;
 		case SCENE_ID_TITLE: Instantiate<TitleScene>(this); break;
 		case SCENE_ID_RESULT: Instantiate<ResultScene>(this); break;
+		case SCENE_ID_END: Instantiate<EndScene>(this); break;
 		}
 
 		Audio::Initialize();

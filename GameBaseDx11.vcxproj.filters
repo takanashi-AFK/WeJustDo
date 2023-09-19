@@ -188,6 +188,7 @@
     <ClCompile Include="PolyLine.cpp">
       <Filter>01Engine\DirectX</Filter>
     </ClCompile>
+    <ClCompile Include="EndScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -331,6 +332,7 @@
     <ClInclude Include="PolyLine.h">
       <Filter>01Engine\DirectX</Filter>
     </ClInclude>
+    <ClInclude Include="EndScene.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">
