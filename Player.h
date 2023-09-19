@@ -176,9 +176,13 @@ public:
 	/// カメラのY座標を計算します
 	/// </summary>
 	/// <param name="_plPos">プレイヤーのTransform</param>
-	/// /// <param name="_stageBottom">地面の底面</param>
-	/// <returns>positionのY座標に代入してください</returns>
-	float CalcCamPositionY(Transform _plPos);
+	/// <returns>float型のｙ座標</returns>
+	float CamPositionY(Transform _plPos);
 
-	float CalcCamPositionZ(Transform _plPos);
+	/// <summary>
+	/// カメラのZ座標を計算し、座標を返す
+	/// </summary>
+	/// <param name="_plPos">PlayerのTransform</param>
+	/// <returns>float型のｚ座標</returns>
+	float CamPositionZ(Transform _plPos);
 };
