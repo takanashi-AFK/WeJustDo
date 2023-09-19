@@ -25,6 +25,7 @@ private:
 	vector<vector<int>> ItemPlacement_;
 	int iP_Height_;
 	int iP_Width_;
+	int hGoalPaul_;
 
 // ƒAƒCƒeƒ€î•ñ //////////////////////////////////
 

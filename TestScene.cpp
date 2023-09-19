@@ -39,7 +39,7 @@ void TestScene::Initialize()
 	//UI-TimeCount
 		ASSIGN(pTimer_, Instantiate<Timer>(this)); 
 		{
-			pTimer_->SetTime_Seconds(60);
+			pTimer_->SetTime_Seconds(90);
 			pTimer_->IsDraw(true);
 		}
 	//Object-StartCount
@@ -79,10 +79,10 @@ void TestScene::Update()
 		isGameNow_ = false;
 	}
 
-	//if (pPlayer_->isGoal()) {/*プレイヤーがゴール地点に達したら*/
-	//	//ゲームを終了する
-	//	isGameNow_ = false;
-	//}
+	if (pPlayer_->isGoal()) {/*プレイヤーがゴール地点に達したら*/
+		//ゲームを終了する
+		isGameNow_ = false;
+	}
 
 //End
 	if (isGameNow_ == false) {/*ゲームが終了したら*/

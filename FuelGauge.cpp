@@ -38,7 +38,7 @@ void FuelGauge::Draw()
 
 	gauge.position_.y = -1.0f;
 
-	gauge.scale_.y = nowFuel_/maxFuel_;
+	gauge.scale_.y = nowFuel_*3/maxFuel_;
 
 	gauge.rotate_.z = 90;
 

@@ -121,11 +121,11 @@ void Player::ChildUpdate()
 	pGauge_->SetFuel(Global::gFireWood / 5, maxfireWood_);
 
 
-	//ゴールしたら...
-	if (isGoal()) {
-		//movie状態に移行する
-		pState_->ChangeState(pState_->pMovie_, this);
-	}
+	////ゴールしたら...
+	//if (isGoal()) {
+	//	//movie状態に移行する
+	//	pState_->ChangeState(pState_->pMovie_, this);
+	//}
 
 	//falseなら動作処理を行わずreturn
 	if (!isMove_)return;

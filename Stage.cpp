@@ -41,6 +41,8 @@ void Stage::Initialize()
 	//アイテム(薪)モデルのロード
 	hFirewood_ = Model::Load("Models/wood.fbx");
 
+	hGoalPaul_ = Model::Load("Models/Goal_Paul.fbx");
+
 }
 
 void Stage::Update()
@@ -103,6 +105,15 @@ void Stage::Draw()
 		}
 	}
 	//////////////////////////////////////////////////////////////////////
+
+	//GoalPole
+	{
+		Transform t_GoalPole; t_GoalPole.SetPosition(285.0f, -0.5, 0);
+		t_GoalPole.rotate_.y = 270;
+		Model::SetTransform(hGoalPaul_, t_GoalPole);
+		Model::Draw(hGoalPaul_);
+
+	}
 
 	//シェーダーのリセット
 	SetShader(SHADER_3D);
