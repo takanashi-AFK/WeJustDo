@@ -19,7 +19,7 @@ void EndScene::Initialize()
 {
 	scroll = -7.9f;
 	//‰æ‘œ‚ðƒ[ƒh
-	ASSIGN(hPict_, Image::Load("Image/StaffRoll.png"));
+	ASSIGN(hPict_, Image::Load("Image/523_20230919225415.png"));
 	assert(hPict_ >= 0);
 	transform_.scale_ = { 0.8f,0.8f,0.8f };
 	transform_.position_.x = -0.1f;
