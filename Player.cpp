@@ -49,7 +49,7 @@ void Player::ChildInitialize()
 		InitBombEffect();
 		InitGetEffect();
 
-		pJet = new PolyLine(0.4, 10);
+		pJet = new PolyLine(0.3, 10);
 		pJet->Load("Effects/Fire.png");
 	}
 	
