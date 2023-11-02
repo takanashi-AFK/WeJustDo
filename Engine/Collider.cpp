@@ -2,7 +2,7 @@
 #include "SphereCollider.h"
 #include "GameObject.h"
 #include "Model.h"
-#include "Transform.h"
+#include "Component/Transform/Transform.h"
 
 //コンストラクタ
 Collider::Collider():

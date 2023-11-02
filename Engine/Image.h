@@ -5,7 +5,7 @@
 #include <vector>
 #include <string>
 #include "Sprite.h"
-#include "Transform.h"
+#include "Component/Transform/Transform.h"
 
 //-----------------------------------------------------------
 //2D‰æ‘œ‚ğŠÇ—‚·‚é
