@@ -1,6 +1,6 @@
 #include "gameObject.h"
 #include <assert.h>
-#include "global.h"
+
 
 //コンストラクタ（親も名前もなし）
 GameObject::GameObject(void) :
@@ -39,6 +39,12 @@ GameObject::~GameObject()
 		SAFE_DELETE(*it);
 	}
 	colliderList_.clear();
+
+	//コンポーネントリストを解放
+	for (auto it = ComponentList_.begin(); it != ComponentList_.end(); it++) {
+		if ((*it))SAFE_DELETE(*it);
+	}
+	ComponentList_.clear();
 }
 
 // 削除するかどうか
@@ -241,11 +247,11 @@ void GameObject::Collision(GameObject * pTarget)
 
 	//自分とpTargetのコリジョン情報を使って当たり判定
 	//1つのオブジェクトが複数のコリジョン情報を持ってる場合もあるので二重ループ
-	for (auto i = this->colliderList_.begin(); i != this->colliderList_.end(); i++)
+	for (auto i : colliderList_)
 	{
-		for (auto j = pTarget->colliderList_.begin(); j != pTarget->colliderList_.end(); j++)
+		for (auto j : pTarget->colliderList_)
 		{
-			if ((*i)->IsHit(*j))
+			if (i->IsHit(j))
 			{
 				//当たった
 				this->OnCollision(pTarget);
@@ -253,14 +259,10 @@ void GameObject::Collision(GameObject * pTarget)
 		}
 	}
 
-	//子供がいないなら終わり
-	if (pTarget->childList_.empty())
-		return;
-
 	//子供も当たり判定
-	for (auto i = pTarget->childList_.begin(); i != pTarget->childList_.end(); i++)
+	for (auto i : pTarget->childList_)
 	{
-		Collision(*i);
+		Collision(i);
 	}
 }
 
@@ -296,6 +298,13 @@ void GameObject::UpdateSub()
 	Update();
 	Transform();
 
+	//コンポーネントの更新処理
+	for (auto it = ComponentList_.begin(); it != ComponentList_.end(); it++)
+	{
+		(*it)->Update();
+	}
+
+	//子供の更新処理
 	for (auto it = childList_.begin(); it != childList_.end(); it++)
 	{
 		(*it)->UpdateSub();
@@ -313,7 +322,7 @@ void GameObject::UpdateSub()
 		{
 			//当たり判定
 			(*it)->Collision(GetParent());
-			it++;
+			it++;			
 		}
 	}
 }
@@ -332,6 +341,12 @@ void GameObject::DrawSub()
 	}
 #endif
 
+	//コンポーネントの更新処理
+	for (auto it = ComponentList_.begin(); it != ComponentList_.end(); it++)
+	{
+		(*it)->Draw();
+	}
+
 	//その子オブジェクトの描画処理
 	for (auto it = childList_.begin(); it != childList_.end(); it++)
 	{
@@ -344,6 +359,12 @@ void GameObject::ReleaseSub()
 	//コライダーを削除
 	ClearCollider();
 
+	//コンポーネントリストを解放
+	for (auto it = ComponentList_.begin(); it != ComponentList_.end(); it++)
+	{
+		if ((*it))SAFE_DELETE(*it);
+	}
+	ComponentList_.clear();
 
 	for (auto it = childList_.begin(); it != childList_.end(); it++)
 	{

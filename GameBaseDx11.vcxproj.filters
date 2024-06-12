@@ -24,6 +24,21 @@
       <UniqueIdentifier>{47a6a3f5-8cfd-436b-8d58-beccd108f3f3}</UniqueIdentifier>
       <Extensions>hlsl</Extensions>
     </Filter>
+    <Filter Include="01Engine\Base">
+      <UniqueIdentifier>{c7dfde10-5c30-4478-ae6e-1b0dbf39b2f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{ff2bccf7-1f4e-4295-89be-774408b3da28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01Engine\Component">
+      <UniqueIdentifier>{d6da072f-736b-46cf-bffd-0560d9fb28cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01Engine\Component\Transform">
+      <UniqueIdentifier>{979a0ea7-0fde-4855-9c9a-1799ff203359}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="State">
+      <UniqueIdentifier>{044c7c29-63b4-490a-b14e-a77098cda496}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\BoxCollider.cpp">
@@ -71,16 +86,9 @@
     <ClCompile Include="Engine\Main.cpp">
       <Filter>01Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\SceneManager.cpp">
-      <Filter>01Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Texture.cpp">
       <Filter>01Engine\DirectX</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Transform.cpp">
-      <Filter>01Engine\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="Engine\Audio.cpp">
       <Filter>01Engine\ResourceManager</Filter>
     </ClCompile>
@@ -96,6 +104,62 @@
     <ClCompile Include="Engine\VFX.cpp">
       <Filter>01Engine\ResourceManager</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\SolidObject.cpp">
+      <Filter>01Engine\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="SplashScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Transition.cpp">
+      <Filter>01Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Component\Component.cpp">
+      <Filter>01Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\SceneManager.cpp">
+      <Filter>01Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Component\Transform\Transform.cpp">
+      <Filter>01Engine\Component\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Stage.cpp" />
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStateManager.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="RunningState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="StandingState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="PlayScene.cpp" />
+    <ClCompile Include="StageSelectScene.cpp" />
+    <ClCompile Include="jumpingState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="MovieState.cpp" />
+    <ClCompile Include="PolyLine.cpp" />
+    <ClCompile Include="DeadState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="JetState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -149,10 +213,6 @@
     <ClInclude Include="Engine\Texture.h">
       <Filter>01Engine\DirectX</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Transform.h">
-      <Filter>01Engine\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="TestScene.h" />
     <ClInclude Include="Engine\Audio.h">
       <Filter>01Engine\ResourceManager</Filter>
     </ClInclude>
@@ -168,6 +228,59 @@
     <ClInclude Include="Engine\VFX.h">
       <Filter>01Engine\ResourceManager</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\SolidObject.h">
+      <Filter>01Engine\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SplashScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Transition.h">
+      <Filter>01Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Component\Component.h">
+      <Filter>01Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Component\Transform\Transform.h">
+      <Filter>01Engine\Component\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Stage.h" />
+    <ClInclude Include="TitleScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStateManager.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="RunningState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="StandingState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioManager.h" />
+    <ClInclude Include="PlayScene.h" />
+    <ClInclude Include="StageSelectScene.h" />
+    <ClInclude Include="jumpingState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="MovieState.h" />
+    <ClInclude Include="PolyLine.h" />
+    <ClInclude Include="JetState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="DeadState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugObject.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">
@@ -182,5 +295,14 @@
     <FxCompile Include="Assets\Shader\BillBoard.hlsl">
       <Filter>02Shader</Filter>
     </FxCompile>
+    <FxCompile Include="Assets\Shader\NoShade.hlsl">
+      <Filter>02Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Assets\Shader\Firewood.hlsl">
+      <Filter>02Shader</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>
