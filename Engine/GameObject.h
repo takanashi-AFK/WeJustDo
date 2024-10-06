@@ -5,9 +5,9 @@
 #include <assert.h>
 #include "SphereCollider.h"
 #include "BoxCollider.h"
-#include "Transform.h"
-
-
+#include "Component/Transform/Transform.h"
+#include "Component/Component.h"
+#include "global.h"
 
 
 using namespace DirectX;
@@ -42,9 +42,9 @@ public:
 
 	//各オブジェクトで必ず作る関数
 	virtual void Initialize(void) = 0;
-	virtual void Update(void) = 0;
-	virtual void Draw() = 0;
-	virtual void Release(void) = 0;
+	virtual void Update(void) {};
+	virtual void Draw() {};
+	virtual void Release(void) {};
 
 	//自分の該当関数を読んだ後、子供の関数も呼ぶ
 	void UpdateSub();
@@ -152,6 +152,7 @@ public:
 	void SetRotateZ(float z) { SetRotate(transform_.rotate_.x, transform_.rotate_.y, z); }
 
 	void SetScale(XMFLOAT3 scale) { transform_.scale_ = scale; }
+	void SetScale(float scale) { SetScale(scale, scale, scale); }
 	void SetScale(float x, float y, float z) { SetScale(XMFLOAT3(x, y, z)); }
 	void SetScaleX(float x) { SetScale(x, transform_.scale_.y, transform_.scale_.z); }
 	void SetScaleY(float y) { SetScale(transform_.scale_.x, y, transform_.scale_.z); }
@@ -181,6 +182,66 @@ private:
 
 	//子オブジェクトリスト
 	std::list<GameObject*> childList_;
+
+	//コンポーネントリスト
+	std::list<Component*> ComponentList_;
+
+public:
+	//コンポーネントを追加するテンプレート
+	template<class T>
+	T* AddComponent() 
+	{
+		T* buff = new T();
+		buff->parent_ = this;
+		ComponentList_.push_back(buff);
+		buff->Start();
+		return buff;
+	}
+
+	//コンポーネントを削除するテンプレート
+	template<class T>
+	T* DeleteComponent()
+	{
+		for (list<Component*>::iterator 
+			com = ComponentList_.begin();com != ComponentList_.end();com++)
+		{
+			T* buff = dynamic_cast<T*>(com);
+			//リスト内から見つけたら削除
+			if (buff) {
+				ComponentList_.remove(buff);
+				delete buff;
+			}
+		}
+		return nullptr;
+	}
+
+	//コンポーネントを取得するテンプレート
+	template<class T>T* GetComponent()
+	{
+		list<T*> l;
+		for (list<Component*>::iterator 
+			com = ComponentList_.begin();com != ComponentList_.end();com++)
+		{
+			T* buff = dynamic_cast<T*>(com);
+			if (buff != nullptr)
+				return buff;
+		}
+	}
+
+	//コンポーネントリストを取得するテンプレート
+	template<class T*>
+	list<T*> GetComponentList()
+	{
+		list<T*> l;
+		for (list<Component*>::iterator 
+			com = ComponentList_.begin();com != ComponentList_.end();com++) 
+		{
+			T* buff = dynamic_cast<T*>(com);
+			if (buff != nullptr)
+			l.push_back(buff);
+		}
+		return l;
+	}
 };
 
 
